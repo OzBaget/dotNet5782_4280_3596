@@ -59,11 +59,39 @@ namespace IDAL
 
                 return $"Drone ID: {Id}.\n" +
                     $"Modle: {Model}\n" +
-                    $"Max Weight: {MaxWeight}\n" +
-                    $"Status :{Status}" +
+                    $"Max Weight: {WeightToStr(MaxWeight)}\n" +
+                    $"Status :{StatusToStr(Status)}" +
                     $"Battery Mode: {Battery}";
             }
-    }
+            private static string WeightToStr(WeightCategories weight)
+            {
+                switch (weight)
+                {
+                    case WeightCategories.Light:
+                        return "Light";
+                    case WeightCategories.Middle:
+                        return "Middle";
+                    case WeightCategories.Heavy:
+                        return "Heavy";
+                    default:
+                        return "ERROR";
+                }
+            }
+            private static string StatusToStr(DroneStatuses statuses)
+            {
+                switch(statuses)
+                {
+                    case DroneStatuses.Available:
+                        return "Available";
+                    case DroneStatuses.UnderMaintenance:
+                        return "UnderMaintenance";
+                    case DroneStatuses.Delivery:
+                        return "Delivery";
+                    default:
+                        return "ERROR";
+                }
+            }
+        }
         public struct Parcel
         {
             int Id { get; set; }
@@ -116,7 +144,7 @@ namespace IDAL
         }
             
         public enum WeightCategories { Light, Middle, Heavy }
-        public enum DroneStatuses { available, UnderMaintenance, delivery  }
+        public enum DroneStatuses {Available, UnderMaintenance, Delivery  }
         public enum Priorities { Normal, Fast, Urgent }
     }
 }
