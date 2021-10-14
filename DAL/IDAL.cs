@@ -79,7 +79,39 @@ namespace IDAL
 
             public override string ToString()
             {
-                return $"Parcel ID:{Id}\n Sender ID:";
+                return $"Parcel ID :{Id}\n" +
+                    $"Sender ID :{SenderId}\n" +
+                    $"Target ID :{TargetId}\n" +
+                    $"Wight: {WeightToStr(Weight)}";
+            }
+            private static string WeightToStr(WeightCategories weight)
+            {
+                switch (weight)
+                {
+                    case WeightCategories.Light:
+                        return "Light";
+                    case WeightCategories.Middle:
+                        return "Middle";
+                    case WeightCategories.Heavy:
+                        return "Heavy";
+                    default:
+                        return "ERROR";
+                }
+            }
+            private static string PriortyToStr(Priorities priority)
+            {
+                switch (priority)
+                {
+                    case Priorities.Normal:
+                        return "Normal";
+                       
+                    case Priorities.Fast:
+                        return "Fast";
+                    case Priorities.Urgent:
+                        return "Urgent";
+                    default:
+                        return "ERROR";
+                }
             }
         }
             
