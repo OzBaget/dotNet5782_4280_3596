@@ -51,14 +51,25 @@ namespace IDAL
         {
             public int Id { get; set; }
             public string Model { get; set; }
-            public Weight
-        }
+            public WeightCategories MaxWeight { get; set; }
+            public DroneStatuses Status { get; set; }
+            public double Battery { get; set; }
+            public override string ToString()
+            {
+
+                return $"Drone ID: {Id}.\n" +
+                    $"Modle: {Model}\n" +
+                    $"Max Weight: {MaxWeight}\n" +
+                    $"Status :{Status}" +
+                    $"Battery Mode: {Battery}";
+            }
+    }
         public struct Parcel
         {
             int Id { get; set; }
             int SenderId { get; set; }
             int TargetId { get; set; }
-            WhightCategories Whight { get; set; }
+            WeightCategories Weight { get; set; }
             Priorities Priority { get; set; }
             DateTime Requsted { get; set; }
             int DroneId { get; set; } //TODO: default: 0
@@ -71,8 +82,9 @@ namespace IDAL
                 return $"Parcel ID:{Id}\n Sender ID:";
             }
         }
-
-        public enum WhightCategories { Light, Middle, Heavy }
+            
+        public enum WeightCategories { Light, Middle, Heavy }
+        public enum DroneStatuses { available, UnderMaintenance, delivery  }
         public enum Priorities { Normal, Fast, Urgent }
     }
 }
