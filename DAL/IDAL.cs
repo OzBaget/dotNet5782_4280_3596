@@ -14,7 +14,7 @@ namespace IDAL
 
             public override string ToString()
             {
-                return $"Customer ID: {Id}.\n" +
+                return $"Customer ID: {Id}\n" +
                     $"Name: {Name}\n" +
                     $"Phone Number: {Phone}\n" +
                     $"Position: {lng},{lat}";
@@ -26,7 +26,7 @@ namespace IDAL
             public int Stationld { get; set; }
             public override string ToString()
             {
-                return $"Droneld: {Droneld}.\n" +
+                return $"Droneld: {Droneld}\n" +
                     $"Stationld: {Stationld}\n";
             }
 
@@ -40,10 +40,10 @@ namespace IDAL
             public int ChargeSlots { get; set; }
             public override string ToString()
             {
-                return $"Station Id: {Id}.\n" +
+                return $"Station Id: {Id}\n" +
                     $"Name: {Name}\n"+
-                   $"Position: {Lng},{Lat}"+
-                    $"ChargeSlots: {ChargeSlots}.\n";
+                   $"Position: {Lng},{Lat}\n"+
+                    $"ChargeSlots: {ChargeSlots}";
             }
 
         }
@@ -61,7 +61,7 @@ namespace IDAL
                     $"Modle: {Model}\n" +
                     $"Max Weight: {WeightToStr(MaxWeight)}\n" +
                     $"Status :{StatusToStr(Status)}" +
-                    $"Battery Mode: {Battery}";
+                    $"Battery : {Battery}%";
             }
             private static string WeightToStr(WeightCategories weight)
             {
@@ -77,14 +77,14 @@ namespace IDAL
                         return "ERROR";
                 }
             }
-            private static string StatusToStr(DroneStatuses statuses)
+            private static string StatusToStr(DroneStatuses status)
             {
-                switch(statuses)
+                switch(status)
                 {
                     case DroneStatuses.Available:
                         return "Available";
                     case DroneStatuses.UnderMaintenance:
-                        return "UnderMaintenance";
+                        return "Under Maintenance";
                     case DroneStatuses.Delivery:
                         return "Delivery";
                     default:
@@ -107,10 +107,16 @@ namespace IDAL
 
             public override string ToString()
             {
-                return $"Parcel ID :{Id}\n" +
-                    $"Sender ID :{SenderId}\n" +
-                    $"Target ID :{TargetId}\n" +
-                    $"Wight: {WeightToStr(Weight)}";
+                return $"Parcel ID: {Id}\n" +
+                    $"Sender ID: {SenderId}\n" +
+                    $"Target ID:{TargetId}\n" +
+                    $"Weight: {WeightToStr(Weight)}\n" +
+                    $"Priority: {PriortyToStr(Priority)}\n" +
+                    $"Assigned Drone ID: {DroneId}\n" +
+                    $"Requsted Time: {Requsted.ToString("dd/MM/yyyy HH:mm:ss")}" +
+                    $"Scheduled Time: {Scheduled.ToString("dd/MM/yyyy HH:mm:ss")}" +
+                    $"PickedUp Time: {PickedUp.ToString("dd/MM/yyyy HH:mm:ss")}" +
+                    $"Delivered Time: {Delivered.ToString("dd/MM/yyyy HH:mm:ss")}";
             }
             private static string WeightToStr(WeightCategories weight)
             {
