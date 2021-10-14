@@ -58,7 +58,7 @@ namespace IDAL
             int Id { get; set; }
             int SenderId { get; set; }
             int TargetId { get; set; }
-            WhightCategories Whight { get; set; }
+            WeightCategories Weight { get; set; }
             Priorities Priority { get; set; }
             DateTime Requsted { get; set; }
             int DroneId { get; set; } //TODO: default: 0
@@ -68,11 +68,43 @@ namespace IDAL
 
             public override string ToString()
             {
-                return $"Parcel ID:{Id}\n Sender ID:";
+                return $"Parcel ID :{Id}\n" +
+                    $"Sender ID :{SenderId}\n" +
+                    $"Target ID :{TargetId}\n" +
+                    $"Wight: {WeightToStr(Weight)}";
+            }
+            private static string WeightToStr(WeightCategories weight)
+            {
+                switch (weight)
+                {
+                    case WeightCategories.Light:
+                        return "Light";
+                    case WeightCategories.Middle:
+                        return "Middle";
+                    case WeightCategories.Heavy:
+                        return "Heavy";
+                    default:
+                        return "ERROR";
+                }
+            }
+            private static string PriortyToStr(Priorities priority)
+            {
+                switch (priority)
+                {
+                    case Priorities.Normal:
+                        return "Normal";
+                       
+                    case Priorities.Fast:
+                        return "Fast";
+                    case Priorities.Urgent:
+                        return "Urgent";
+                    default:
+                        return "ERROR";
+                }
             }
         }
+        public enum WeightCategories { Light, Middle, Heavy }
 
-        public enum WhightCategories { Light, Middle, Heavy }
         public enum Priorities { Normal, Fast, Urgent }
     }
 }
