@@ -12,50 +12,66 @@ namespace DalObject
         static void Initialize()
         {
             Random r = new Random();
-            BaseStations[0] = new IDAL.DO.Station();
-            BaseStations[0].Id = r.Next();
-            BaseStations[0].Name = "The First Station";
-            BaseStations[0].Lng = 34.21;
-            BaseStations[0].Lat = 33.56;
 
-            BaseStations[1] = new IDAL.DO.Station();
-            BaseStations[1].Id = r.Next();
-            BaseStations[1].Name = "The Second Station";
-            BaseStations[1].Lng = 28.23;
-            BaseStations[1].Lat = -12.54;
+            //Initialize BaseStations
+            int[] baseIds = { r.Next(), r.Next() };
+            string[] baseNames = { "Jerusalem", "Tel-Aviv" };
+            double[] baseLngs = { 31.765975, 32.083333 };
+            double[] baseLats = { 35.212140, 34.8 };
 
-            Drones[0].Id = r.Next();
-            Drones[0].Model = "MK1";
-            Drones[0].MaxWeight = IDAL.DO.WeightCategories.Light;
-            Drones[0].Status = IDAL.DO.DroneStatuses.Available;
+            for (int i = 0; i < 2; i++)
+            {
+                BaseStations[i] = new IDAL.DO.Station();
+                BaseStations[i].Id = baseIds[i];
+                BaseStations[i].Name=baseNames[i];
+                BaseStations[i].Lng = baseLngs[i];
+                BaseStations[i].Lat = baseLats[i];
+            }
 
-            Drones[1].Id = r.Next();
-            Drones[1].Model = "MK1";
-            Drones[1].MaxWeight = IDAL.DO.WeightCategories.Light;
-            Drones[1].Status = IDAL.DO.DroneStatuses.Delivery;
+            //Initialize Drone
+            int[] droneIds = { r.Next(), r.Next(), r.Next(), r.Next(), r.Next() };
+            string[] models = { "MK1", "MK1", "MK2", "MK2", "MK3" };
+            IDAL.DO.WeightCategories[] maxWeights = { 
+                IDAL.DO.WeightCategories.Light,
+                IDAL.DO.WeightCategories.Light,
+                IDAL.DO.WeightCategories.Middle,
+                IDAL.DO.WeightCategories.Middle,
+                IDAL.DO.WeightCategories.Heavy
+            };
 
-            Drones[2].Id = r.Next();
-            Drones[2].Model = "MK2";
-            Drones[2].MaxWeight = IDAL.DO.WeightCategories.Middle;
-            Drones[2].Status = IDAL.DO.DroneStatuses.Available;
+            IDAL.DO.DroneStatuses[] statuss = {
+                IDAL.DO.DroneStatuses.Delivery,
+                IDAL.DO.DroneStatuses.Available,
+                IDAL.DO.DroneStatuses.Delivery,
+                IDAL.DO.DroneStatuses.Available,
+                IDAL.DO.DroneStatuses.Delivery
+            };
 
-            Drones[3].Id = r.Next();
-            Drones[3].Model = "MK2";
-            Drones[3].MaxWeight = IDAL.DO.WeightCategories.Middle;
-            Drones[3].Status = IDAL.DO.DroneStatuses.UnderMaintenance;
+            for (int i = 0; i < 5; i++)
+            {
+                Drones[i].Id = droneIds[i];
+                Drones[i].Model = models[i];
+                Drones[i].MaxWeight = maxWeights[i];
+                Drones[i].Status = statuss[i];
+                Drones[i].Battery = r.Next(0, 100);
+            }
 
-            Drones[4].Id = r.Next();
-            Drones[4].Model = "MK3";
-            Drones[4].MaxWeight = IDAL.DO.WeightCategories.Heavy;
-            Drones[4].Status = IDAL.DO.DroneStatuses.Available;
+            //Initialize Customer
+            int[] customersIds = { r.Next(), r.Next(), r.Next(), r.Next(), r.Next(), r.Next(), r.Next(), r.Next(), r.Next(), r.Next() };
+            string[] names = { "Ohad", "Oz", "Joshf", "Yizeck", "Abraham", "Haim", "Shimon", "Reuven", "Jecobe", "David" };
 
-            Customers[0].Id = r.Next();
-            Customers[0].Name = "Ohad";
-            Customers[0].Phone = "+972585161171";
-            Customers[0].lng = 32.45;
-            Customers[0].lat = 34.65;
-            //TODO: Add more 4 customers
-            //TODO: Add 5 parcels
+            for (int i = 0; i < 10; i++)
+            {
+                Customers[i].Id = customersIds[i];
+                Customers[i].Name = names[i];
+                Customers[i].Phone = "+972" + r.Next(100000000, 999999999).ToString();//ten digit phone number
+                Customers[i].lng = (double)r.Next(3200, 3400) / 100;
+                Customers[i].lat = (double)r.Next(3100, 3500) / 100;//somewhere in Israel
+            }
+            //TODO: Add 10 parcels
+
+
+
         }
     }
 
