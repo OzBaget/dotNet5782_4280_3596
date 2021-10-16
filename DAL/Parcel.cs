@@ -10,16 +10,16 @@ namespace IDAL
     {
         public struct Parcel
         {
-            int Id { get; set; }
-            int SenderId { get; set; }
-            int TargetId { get; set; }
-            WeightCategories Weight { get; set; }
-            Priorities Priority { get; set; }
-            DateTime Requsted { get; set; }
-            int DroneId { get; set; } //TODO: default: 0
-            DateTime Scheduled { get; set; }
-            DateTime PickedUp { get; set; }
-            DateTime Delivered { get; set; }
+            public int Id { get; set; }
+            public int SenderId { get; set; }
+            public int TargetId { get; set; }
+            public WeightCategories Weight { get; set; }
+            public Priorities Priority { get; set; }
+            public DateTime Requsted { get; set; }
+            public int DroneId { get; set; }  //TODO: default: 0
+            public DateTime Scheduled { get; set; }
+            public DateTime PickedUp { get; set; }
+            public DateTime Delivered { get; set; }
 
             public override string ToString()
             {
@@ -29,9 +29,9 @@ namespace IDAL
                     $"Weight: {WeightToStr(Weight)}\n" +
                     $"Priority: {PriortyToStr(Priority)}\n" +
                     $"Assigned Drone ID: {DroneId}\n" +
-                    $"Requsted Time: {Requsted.ToString("dd/MM/yyyy HH:mm:ss")}" +
-                    $"Scheduled Time: {Scheduled.ToString("dd/MM/yyyy HH:mm:ss")}" +
-                    $"PickedUp Time: {PickedUp.ToString("dd/MM/yyyy HH:mm:ss")}" +
+                    $"Requsted Time: {Requsted.ToString("dd/MM/yyyy HH:mm:ss")}\n" +
+                    $"Scheduled Time: {Scheduled.ToString("dd/MM/yyyy HH:mm:ss")}\n" +
+                    $"PickedUp Time: {PickedUp.ToString("dd/MM/yyyy HH:mm:ss")}\n" +
                     $"Delivered Time: {Delivered.ToString("dd/MM/yyyy HH:mm:ss")}";
             }
             private static string WeightToStr(IDAL.DO.WeightCategories weight)
