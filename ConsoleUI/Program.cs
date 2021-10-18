@@ -1,5 +1,5 @@
 ﻿using System;
-
+using IDAL.DO;
 namespace ConsoleUI
 {
     class Program
@@ -11,11 +11,11 @@ namespace ConsoleUI
             bool exit = false;
             while (!exit)
             {
-                exit = MainMenu();
+                exit = mainMenu();
             }
         }
 
-        private static bool MainMenu()
+        private static bool mainMenu()
         {
             Console.WriteLine("Choose one of the following:");
             Console.WriteLine("1. Add\n2. Update\n3. Get\n4. List\n5. Exit");
@@ -25,16 +25,19 @@ namespace ConsoleUI
             {
                 case 1:
                     while (!back)
-                        back = AddMenu();
+                        back = addMenu();
                     break;
                 case 2:
-                    UpdateMenu();
+                    while (!back)
+                        back = updateMenu();
                     break;
                 case 3:
-                    GetMenu();
+                    while (!back)
+                        back = getMenu();
                     break;
                 case 4:
-                    ListMenu();
+                    while (!back)
+                        back = listMenu();
                     break;
                 case 5:
                     Console.WriteLine("Exiting...");
@@ -46,24 +49,24 @@ namespace ConsoleUI
             return false;
         }
 
-        private static bool AddMenu()
+        private static bool addMenu()
         {
             Console.WriteLine("What do you want to add?");
-            Console.WriteLine("1. Base station\n2. Drone\n3. Costumer\n4. Parcel\n5. Back");
+            Console.WriteLine("1. Base station\n2. Drone\n3. Customer\n4. Parcel\n5. Back");
             int userChoose = getUserSelection(5);
             switch (userChoose)
             {
                 case 1:
-                    AddBaseStationMenu();
+                    addBaseStationMenu();
                     break;
                 case 2:
-                    AddDroneMenu();
+                    addDroneMenu();
                     break;
                 case 3:
-                    AddCostumerMenu();
+                    addCustomerMenu();
                     break;
                 case 4:
-                    AddParcelMenu();
+                    addParcelMenu();
                     break;
                 case 5:
                     return true;
@@ -74,12 +77,10 @@ namespace ConsoleUI
             return false;
         }
 
-        private static void AddBaseStationMenu()
+        private static void addBaseStationMenu()
         {
             Console.WriteLine("Enter station name: ");
             string name = Console.ReadLine();
-
-            
 
             Console.WriteLine("Enter lattitude (as decimal): ");
             double lat;
@@ -107,19 +108,19 @@ namespace ConsoleUI
                 Console.WriteLine("Not Valid Input!");
                 input = Console.ReadLine();
             }
-            db.AddBase(new IDAL.DO.Station(name, lat, lng, slots));
+            db.AddBase(new Station(name, lat, lng, slots));
         }
-        private static void AddDroneMenu()
+        private static void addDroneMenu()
         {
             Console.WriteLine("Enter drone model: ");
             string model = Console.ReadLine();
 
             Console.WriteLine("Choose MaxWeight of drone:");
             Console.WriteLine("1. Light\n2. Middle\n3. Heavy");
-            IDAL.DO.WeightCategories maxWeight= (IDAL.DO.WeightCategories)getUserSelection(3) - 1;
-            db.AddDrone(new IDAL.DO.Drone(model,maxWeight));
+            WeightCategories maxWeight= (WeightCategories)getUserSelection(3) - 1;
+            db.AddDrone(new Drone(model,maxWeight));
         }
-        private static void AddCostumerMenu()
+        private static void addCustomerMenu()
         {
             Console.WriteLine("Enter customer name:");
             string name = Console.ReadLine();
@@ -147,9 +148,9 @@ namespace ConsoleUI
                 input = Console.ReadLine();
             }
 
-            db.AddCustomer(new IDAL.DO.Customer(name, phone, lat, lng));
+            db.AddCustomer(new Customer(name, phone, lat, lng));
         }
-        private static void AddParcelMenu()
+        private static void addParcelMenu()
         {
             Console.WriteLine("Enter sender ID:");
             int senderId;
@@ -171,25 +172,234 @@ namespace ConsoleUI
 
             Console.WriteLine("Choose parcel weight:");
             Console.WriteLine("1. Light\n2. Middle\n3. Heavy");
-            IDAL.DO.WeightCategories weight = (IDAL.DO.WeightCategories)getUserSelection(3) - 1;
+            WeightCategories weight = (WeightCategories)getUserSelection(3) - 1;
 
             Console.WriteLine("Choose parcel priority:");
             Console.WriteLine("1. Normal\n2. Fast\n3. Urgent");
-            IDAL.DO.Priorities priority = (IDAL.DO.Priorities)getUserSelection(3) - 1;
+            Priorities priority = (Priorities)getUserSelection(3) - 1;
 
-            db.AddParcel(new IDAL.DO.Parcel(senderId, targetId, weight, priority));
+            db.AddParcel(new Parcel(senderId, targetId, weight, priority));
         }
-        private static void UpdateMenu()
+        private static bool updateMenu()
         {
+            Console.WriteLine("What action do you want to do?");
+            Console.WriteLine("1. Link parcel to drone\n2. Pick up parcel by drone\n3. Deliver parcel to customer\n4. Back");
+            int userChoose = getUserSelection(4);
+            switch (userChoose)
+            {
+                case 1:
+                    linkParcelMenu();
+                    break;
+                case 2:
+                    pickUpParcelMenu();
+                    break;
+                case 3:
+                    deliverParcel();
+                    break;
+                case 4:
+                    return true;
+                default:
+                    Console.WriteLine("An Error Accurd!");
+                    break;
+            }
+            return false;
 
         }
-        private static void GetMenu()
+
+        private static void linkParcelMenu()
         {
+            Console.WriteLine("Enter parcel ID:");
+            int parcelId;
+            string input = Console.ReadLine();
+            while (!int.TryParse(input, out parcelId))
+            {
+                Console.WriteLine("Not Valid Input!");
+                input = Console.ReadLine();
+            }
+
+            Console.WriteLine("Enter drone  ID:");
+            int dronelId;
+            input = Console.ReadLine();
+            while (!int.TryParse(input, out dronelId))
+            {
+                Console.WriteLine("Not Valid Input!");
+                input = Console.ReadLine();
+            }
+            db.linkParcel(parcelId, dronelId);
+        }
+        private static void pickUpParcelMenu()
+        {
+            Console.WriteLine("Enter parcel ID:");
+            int parcelId;
+            string input = Console.ReadLine();
+            while (!int.TryParse(input, out parcelId))
+            {
+                Console.WriteLine("Not Valid Input!");
+                input = Console.ReadLine();
+            }
+            db.PickParcel(parcelId);
+        }
+        private static void deliverParcel()
+        {
+            Console.WriteLine("Enter parcel ID:");
+            int parcelId;
+            string input = Console.ReadLine();
+            while (!int.TryParse(input, out parcelId))
+            {
+                Console.WriteLine("Not Valid Input!");
+                input = Console.ReadLine();
+            }
+            db.ParcelToCustomer(parcelId);
+        }
+
+
+        private static bool getMenu()
+        {
+            Console.WriteLine("What  do you want to view?");
+            Console.WriteLine("1. Base station\n2. Drone\n3. Customer\n4. Parcel\n5. Back");
+            int userChoose = getUserSelection(5);
+            switch (userChoose)
+            {
+                case 1:
+                    getBaseStationMenu();
+                    break;
+                case 2:
+                    getDroneMenu();
+                    break;
+                case 3:
+                    GetCustomerMenu();
+                    break;
+                case 4:
+                    getParcelMenu();
+                    break;
+                case 5:
+                    return true;
+                default:
+                    Console.WriteLine("An Error Accurd!");
+                    break;
+            }
+            return false;
 
         }
-        private static void ListMenu()
+        private static void getBaseStationMenu()
         {
+            Console.WriteLine("Enter station ID:");
+            int stationId;
+            string input = Console.ReadLine();
+            while (!int.TryParse(input, out stationId))
+            {
+                Console.WriteLine("Not Valid Input!");
+                input = Console.ReadLine();
+            }
+            Console.WriteLine(db.GetStation(stationId));
+        }
+        private static void getDroneMenu()
+        {
+            Console.WriteLine("Enter drone ID:");
+            int droneId;
+            string input = Console.ReadLine();
+            while (!int.TryParse(input, out droneId))
+            {
+                Console.WriteLine("Not Valid Input!");
+                input = Console.ReadLine();
+            }
+            Console.WriteLine(db.GetDrone(droneId));
+        }
 
+        private static void GetCustomerMenu()
+        {
+            Console.WriteLine("Enter customer ID:");
+            int customerId;
+            string input = Console.ReadLine();
+            while (!int.TryParse(input, out customerId))
+            {
+                Console.WriteLine("Not Valid Input!");
+                input = Console.ReadLine();
+            }
+            Console.WriteLine(db.GetCustomer(customerId));
+        }
+
+        private static void getParcelMenu()
+        {
+            Console.WriteLine("Enter parcel ID:");
+            int parcelId;
+            string input = Console.ReadLine();
+            while (!int.TryParse(input, out parcelId))
+            {
+                Console.WriteLine("Not Valid Input!");
+                input = Console.ReadLine();
+            }
+            Console.WriteLine(db.GetParcerl(parcelId));
+        }
+
+
+        private static bool listMenu()
+        {
+            Console.WriteLine("What  do you want to view?");
+            Console.WriteLine("1. Base stations\n2. Drones\n3. Customers\n4. Parcels\n5. Back");
+            int userChoose = getUserSelection(5);
+            switch (userChoose)
+            {
+                case 1:
+                    printAllStations();
+                    break;
+                case 2:
+                    printAllDrones();
+                    break;
+                case 3:
+                    printAllCustomers();
+                    break;
+                case 4:
+                    printAllParcels();
+                    break;
+                case 5:
+                    return true;
+                default:
+                    Console.WriteLine("An Error Accurd!");
+                    break;
+            }
+            return false;
+
+        }
+
+        private static void printAllStations()
+        {
+            Station[] stations = db.GetAllStations();
+            foreach (Station station in stations)
+            {
+                Console.WriteLine(station);
+                Console.WriteLine("======================");
+            }
+        }
+
+        private static void printAllDrones()
+        {
+            Drone[] drones = db.GetAllDrones();
+            foreach (Drone drone in drones)
+            {
+                Console.WriteLine(drone);
+                Console.WriteLine("======================");
+            }
+        }
+
+        private static void printAllCustomers()
+        {
+            Customer[] customers = db.GetAllCustomers();
+            foreach (Customer customer in customers)
+            {
+                Console.WriteLine(customer);
+                Console.WriteLine("======================");
+            }
+        }
+
+        private static void printAllParcels()
+        {
+            Parcel[] parcels = db.GetAllParcels();
+            foreach (Parcel parcel in parcels)
+            {
+                Console.WriteLine(parcel);
+                Console.WriteLine("======================");
+            }
         }
 
         private static int getUserSelection(int numOptions)
