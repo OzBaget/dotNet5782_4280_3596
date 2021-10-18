@@ -23,16 +23,23 @@ namespace IDAL
 
             public override string ToString()
             {
-                return $"Parcel ID: {Id}\n" +
+                string details = $"Parcel ID: {Id}\n" +
                     $"Sender ID: {SenderId}\n" +
-                    $"Target ID:{TargetId}\n" +
+                    $"Target ID: {TargetId}\n" +
                     $"Weight: {Weight}\n" +
                     $"Priority: {Priority}\n" +
-                    $"Assigned Drone ID: {DroneId}\n" +
-                    $"Requsted Time: {Requsted.ToString("dd/MM/yyyy HH:mm:ss")}\n" +
-                    $"Scheduled Time: {Scheduled.ToString("dd/MM/yyyy HH:mm:ss")}\n" +
-                    $"PickedUp Time: {PickedUp.ToString("dd/MM/yyyy HH:mm:ss")}\n" +
-                    $"Delivered Time: {Delivered.ToString("dd/MM/yyyy HH:mm:ss")}";
+                    $"Assigned Drone ID: {DroneId}\n"+            
+                    $"Requsted Time: {Requsted.ToString("dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.GetCultureInfo("en-us", "en"))}";
+                if (Scheduled != DateTime.MinValue) //Scheduled !=null
+                    details += $"\nScheduled Time: {Scheduled.ToString("dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.GetCultureInfo("en-us", "en"))}";
+
+                if (PickedUp != DateTime.MinValue) //PickedUp !=null
+                    details += $"\nPickedUp Time: {PickedUp.ToString("dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.GetCultureInfo("en-us", "en"))}";
+
+                if (Delivered != DateTime.MinValue) //Delivered !=null
+                    details += $"\nDelivered Time: {Delivered.ToString("dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.GetCultureInfo("en-us", "en"))}";
+                
+                return details;
             }
         }
     }

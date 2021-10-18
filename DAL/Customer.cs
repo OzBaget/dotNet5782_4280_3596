@@ -29,8 +29,8 @@ namespace IDAL
             /// <returns>deg°min'sec"E/W, deg°min'sec"E/W</returns>
             private static string coordsToSexag(double lat, double lng)
             {
-                char signLng = lng < 0 ? 'S' : 'N';
-                char signLat = lat < 0 ? 'W' : 'E';
+                char signLng = lng < 0 ? 'W' : 'E';
+                char signLat = lat < 0 ? 'S' : 'N';
 
                 return $"{decToDegMinSec(Math.Abs(lat))}{signLat}, {decToDegMinSec(Math.Abs(lng))}{signLng}";
             }
