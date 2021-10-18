@@ -6,6 +6,15 @@ namespace IDAL
     {
         public struct Customer
         {
+            public Customer(string name, string phone, double lat, double lng)
+            {
+                Random r = new Random();
+                Id = r.Next();
+                Name = name;
+                Phone = phone;
+                Lat = lat;
+                Lng = lng;
+            }
             public int Id { get; set; }
             public string Name { get; set; }
             public string Phone { get; set; }

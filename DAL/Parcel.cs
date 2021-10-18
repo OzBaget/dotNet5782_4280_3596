@@ -10,6 +10,17 @@ namespace IDAL
     {
         public struct Parcel
         {
+            public Parcel(int senderId, int targetId, WeightCategories weight, Priorities priority) : this()
+            {
+                SenderId = senderId;
+                TargetId = targetId;
+                Weight = weight;
+                Priority = priority;
+
+                Requsted = DateTime.Now;
+                DroneId = 0;
+            }
+
             public int Id { get; set; }
             public int SenderId { get; set; }
             public int TargetId { get; set; }
