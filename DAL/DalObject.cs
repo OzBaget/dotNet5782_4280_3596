@@ -1,4 +1,5 @@
 ﻿using System;
+using IDAL.DO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,23 +13,24 @@ namespace DalObject
         {
             DataSource.Initialize();
         }
-        public void AddBase(IDAL.DO.Station station) { }
-        public void AddDrone(IDAL.DO.Drone drone) { }
-        public void AddCustomer(IDAL.DO.Customer customer) { }
-        public void AddParcel(IDAL.DO.Parcel parcel) { }
+        public void AddBase(Station station) { Console.WriteLine(station); }
+        public void AddDrone(Drone drone) { Console.WriteLine(drone); }
+        public void AddCustomer(Customer customer) { Console.WriteLine(customer); }
+        public void AddParcel(Parcel parcel) { Console.WriteLine(parcel); }
         public void linkParcel(int parcel, int drone) { }
         public void PickParcel(int parcel) { }
         public void ParcelToCustomer(int parcel) { }
         public void DroneToBase(int station,int drone) { }
         public void FreeDrone(int drone) { }
-        public IDAL.DO.Station GetStation(int station) { return new IDAL.DO.Station(); }
-        public IDAL.DO.Drone GetDrone(int drone) { return new IDAL.DO.Drone(); }
-        public IDAL.DO.Customer GetCustomer(int customer) { return new IDAL.DO.Customer(); }
-        public IDAL.DO.Parcel GetParcerl(int parcel) { return new IDAL.DO.Parcel(); }
-        public IDAL.DO.Station[] GetAllStations() { return DataSource.BaseStations; }
-
-        public IDAL.DO.Drone[] GetAllDrones() { return DataSource.Drones; }
-        public IDAL.DO.Customer[] GetAllCustomers() { return DataSource.Customers; }
-        public IDAL.DO.Parcel[] GetAllParcerls() { return DataSource.Parcels; }
+        public Station GetStation(int station) { return new Station(); }
+        public Drone GetDrone(int drone) { return new Drone(); }
+        public Customer GetCustomer(int customer) { return new Customer(); }
+        public Parcel GetParcerl(int parcel) { return new Parcel(); }
+        public Station[] GetAllStations() { return DataSource.BaseStations; }
+        public Drone[] GetAllDrones() { return DataSource.Drones; }
+        public Customer[] GetAllCustomers() { return DataSource.Customers; }
+        public Parcel[] GetAllParcels() { return DataSource.Parcels; }
+        public Parcel[] GetUnoccupiedParcels() { return DataSource.Parcels; }
+        public Station[] GetNotFullStations() { return DataSource.BaseStations; }
     }
 }

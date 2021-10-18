@@ -10,15 +10,13 @@ namespace ConsoleUI
             Console.WriteLine("Welcome To DeliverManger!");
             bool exit = false;
             while (!exit)
-            {
                 exit = mainMenu();
-            }
         }
 
         private static bool mainMenu()
         {
             Console.WriteLine("Choose one of the following:");
-            Console.WriteLine("1. Add\n2. Update\n3. Get\n4. List\n5. Exit");
+            Console.WriteLine("1. Add\n2. Update\n3. View by ID\n4. View List\n5. Exit");
             int userChoose = getUserSelection(5);
             bool back = false;
             switch (userChoose)
@@ -33,11 +31,11 @@ namespace ConsoleUI
                     break;
                 case 3:
                     while (!back)
-                        back = getMenu();
+                        back = viewMenu();
                     break;
                 case 4:
                     while (!back)
-                        back = listMenu();
+                        back = viewListMenu();
                     break;
                 case 5:
                     Console.WriteLine("Exiting...");
@@ -253,9 +251,9 @@ namespace ConsoleUI
         }
 
 
-        private static bool getMenu()
+        private static bool viewMenu()
         {
-            Console.WriteLine("What  do you want to view?");
+            Console.WriteLine("What do you want to view?");
             Console.WriteLine("1. Base station\n2. Drone\n3. Customer\n4. Parcel\n5. Back");
             int userChoose = getUserSelection(5);
             switch (userChoose)
@@ -333,7 +331,7 @@ namespace ConsoleUI
         }
 
 
-        private static bool listMenu()
+        private static bool viewListMenu()
         {
             Console.WriteLine("What  do you want to view?");
             Console.WriteLine("1. Base stations\n2. Drones\n3. Customers\n4. Parcels\n5. Back");
