@@ -103,8 +103,47 @@ namespace DalObject
         internal static int StationsIndex = 0;
         internal static int CustomersIndex = 0;
         internal static int ParcelIndex = 0;
+        //TODO: Function parcelId
+        //Get drones index
+        public int GetDronesIndex() { return DronesIndex; }
+        //Get statiobs index
+        public int GetStationsIndex() { return StationsIndex; }
+        //Get customer index
+        public int GetCustomersIndex() { return CustomersIndex; }
+        //Get parcels index
+        public int GetParceslIndex() { return ParcelIndex; }
+        
+        //++DroneIndex
+        public void PromoteDroneslIndex()
+        {
+            if (DronesIndex == 10)
+                throw new ArgumentException("execption: too many drones", "arg");
+            DronesIndex++;
+        }
+        //++StationsIndex
 
-        public int parcelId { get; set; }
+        public void PromoteStationsIndex()
+        {
+            if (StationsIndex == 5)
+                throw new ArgumentException("execption: too many stations", "arg");
+            StationsIndex++;
+        }
+        //++CustomersIndex
+
+        public void PromoteCustomerslIndex()
+        {
+            if (CustomersIndex == 1000)
+                throw new ArgumentException("execption: too many customers", "arg");
+            CustomersIndex++;
+        }
+        //++ParcelsIndex
+        public void PromoteParcelsIndex()
+        {
+            if (ParcelIndex == 1000)
+                throw new ArgumentException("execption: too many parcels", "arg");
+            ParcelIndex++;
+        }
+        
 
     }
 }

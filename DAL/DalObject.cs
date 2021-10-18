@@ -13,7 +13,16 @@ namespace DalObject
         {
             DataSource.Initialize();
         }
-        public void AddBase(Station station) { Console.WriteLine(station); }
+        public void AddBase(Station station) 
+        {
+            DataSource.BaseStations[DataSource.config.] == new IDAL.DO.Station();
+            BaseStations[i].Id = r.Next();
+            BaseStations[i].Name = baseNames[i];
+            BaseStations[i].Lng = baseLngs[i];
+            BaseStations[i].Lat = baseLats[i];
+            BaseStations[i].FreeChargeSlots = r.Next(5);
+            Console.WriteLine(station); 
+        }
         public void AddDrone(Drone drone) { Console.WriteLine(drone); }
         public void AddCustomer(Customer customer) { Console.WriteLine(customer); }
         public void AddParcel(Parcel parcel) { Console.WriteLine(parcel); }
