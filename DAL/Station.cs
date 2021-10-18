@@ -10,6 +10,16 @@ namespace IDAL
     {
         public struct Station
         {
+            public Station(string name, double lat, double lng,int chargSlots)
+            {
+                Random r = new Random();
+                Id = r.Next();
+                Name = name;
+                Lat = lat;
+                Lng = lng;
+                FreeChargeSlots = chargSlots;
+            }
+
             public int Id { get; set; }
             public string Name { get; set; }
             public double Lat { get; set; }
