@@ -15,6 +15,7 @@ namespace DalObject
         public void AddBase(IDAL.DO.Station station) { }
         public void AddDrone(IDAL.DO.Drone drone) { }
         public void AddCustomer(IDAL.DO.Customer customer) { }
+        public void AddParcel(IDAL.DO.Parcel parcel) { }
         public void linkParcel(int parcel, int drone) { }
         public void PickParcel(int parcel) { }
         public void ParcelToCustomer(int parcel) { }
