@@ -15,7 +15,7 @@ namespace IDAL
             public override string ToString()
             {
                 return $"Droneld: {Droneld}\n" +
-                    $"Stationld: {Stationld}\n";
+                    $"Stationld: {Stationld}";
             }
 
         }

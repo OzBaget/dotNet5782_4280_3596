@@ -18,39 +18,11 @@ namespace IDAL
             public override string ToString()
             {
 
-                return $"Drone ID: {Id}.\n" +
+                return $"Drone ID: {Id}\n" +
                     $"Modle: {Model}\n" +
-                    $"Max Weight: {WeightToStr(MaxWeight)}\n" +
-                    $"Status :{StatusToStr(Status)}" +
+                    $"Max Weight: {MaxWeight}\n" +
+                    $"Status :{Status}\n" +
                     $"Battery : {Battery}%";
-            }
-            private static string WeightToStr(WeightCategories weight)
-            {
-                switch (weight)
-                {
-                    case WeightCategories.Light:
-                        return "Light";
-                    case WeightCategories.Middle:
-                        return "Middle";
-                    case WeightCategories.Heavy:
-                        return "Heavy";
-                    default:
-                        return "ERROR";
-                }
-            }
-            private static string StatusToStr(DroneStatuses status)
-            {
-                switch (status)
-                {
-                    case DroneStatuses.Available:
-                        return "Available";
-                    case DroneStatuses.UnderMaintenance:
-                        return "Under Maintenance";
-                    case DroneStatuses.Delivery:
-                        return "Delivery";
-                    default:
-                        return "ERROR";
-                }
             }
         }
     }

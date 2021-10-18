@@ -26,42 +26,13 @@ namespace IDAL
                 return $"Parcel ID: {Id}\n" +
                     $"Sender ID: {SenderId}\n" +
                     $"Target ID:{TargetId}\n" +
-                    $"Weight: {WeightToStr(Weight)}\n" +
-                    $"Priority: {PriortyToStr(Priority)}\n" +
+                    $"Weight: {Weight}\n" +
+                    $"Priority: {Priority}\n" +
                     $"Assigned Drone ID: {DroneId}\n" +
                     $"Requsted Time: {Requsted.ToString("dd/MM/yyyy HH:mm:ss")}\n" +
                     $"Scheduled Time: {Scheduled.ToString("dd/MM/yyyy HH:mm:ss")}\n" +
                     $"PickedUp Time: {PickedUp.ToString("dd/MM/yyyy HH:mm:ss")}\n" +
                     $"Delivered Time: {Delivered.ToString("dd/MM/yyyy HH:mm:ss")}";
-            }
-            private static string WeightToStr(IDAL.DO.WeightCategories weight)
-            {
-                switch (weight)
-                {
-                    case WeightCategories.Light:
-                        return "Light";
-                    case WeightCategories.Middle:
-                        return "Middle";
-                    case WeightCategories.Heavy:
-                        return "Heavy";
-                    default:
-                        return "ERROR";
-                }
-            }
-            private static string PriortyToStr(Priorities priority)
-            {
-                switch (priority)
-                {
-                    case Priorities.Normal:
-                        return "Normal";
-
-                    case Priorities.Fast:
-                        return "Fast";
-                    case Priorities.Urgent:
-                        return "Urgent";
-                    default:
-                        return "ERROR";
-                }
             }
         }
     }

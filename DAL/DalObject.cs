@@ -46,8 +46,8 @@ namespace DalObject
                 Customers[i].Id = r.Next();
                 Customers[i].Name = names[i];
                 Customers[i].Phone = "+972" + r.Next(100000000, 999999999).ToString();//ten digits phone number
-                Customers[i].lng = (double)r.Next(34500, 35500) / 1000;//v  
-                Customers[i].lat = (double)r.Next(31500, 33000) / 1000;//somewhere in Israel
+                Customers[i].Lng = (double)r.Next(34500, 35500) / 1000;//v  
+                Customers[i].Lat = (double)r.Next(31500, 33000) / 1000;//somewhere in Israel
             }
 
 
