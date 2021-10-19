@@ -224,7 +224,7 @@ namespace ConsoleUI
         {
             Console.WriteLine("Enter drone ID:");
             int droneId = getIdFromUser();
-            Console.WriteLine("====Available Stations====");
+
             printAvailableStations();
             Console.WriteLine("Enter station ID:");
             int stationId = getIdFromUser();
@@ -337,6 +337,7 @@ namespace ConsoleUI
 
         private static void PrintAllStations()
         {
+            Console.WriteLine("=======Stations=======");
             foreach (var station in db.GetAllStations())
             {
                 Console.WriteLine(station);
@@ -346,6 +347,7 @@ namespace ConsoleUI
 
         private static void PrintAllDrones()
         {
+            Console.WriteLine("========Drones========");
             foreach (var drone in db.GetAllDrones())
             {
                 Console.WriteLine(drone);
@@ -355,6 +357,8 @@ namespace ConsoleUI
 
         private static void PrintAllCustomers()
         {
+            Console.WriteLine("======Customers=======");
+
             foreach (var customer in db.GetAllCustomers())
             {
                 Console.WriteLine(customer);
@@ -364,6 +368,7 @@ namespace ConsoleUI
 
         private static void printAllParcels()
         {
+            Console.WriteLine("=======Parcels========");
             foreach (var parcel in db.GetAllParcels())
             {
                 Console.WriteLine(parcel);
@@ -373,6 +378,7 @@ namespace ConsoleUI
 
         private static void printUnassignedParcels()
         {
+            Console.WriteLine("==Unassigned Parcels==");
             foreach (var parcel in db.GetUnassignedParcels())
             {
                 Console.WriteLine(parcel);
@@ -382,6 +388,7 @@ namespace ConsoleUI
 
         private static void printAvailableStations()
         {
+            Console.WriteLine("==Available Stations==");
             foreach (var parcel in db.GetAvailableStations())
             {
                 Console.WriteLine(parcel);
