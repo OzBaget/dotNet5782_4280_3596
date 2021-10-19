@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 namespace ConsoleUI
 {
     class Program
@@ -51,6 +52,10 @@ namespace ConsoleUI
             Console.WriteLine("What do you want to add?");
             Console.WriteLine("1. Base station\n2. Drone\n3. Customer\n4. Parcel\n5. Back");
             int userChoose = getUserSelection(5);
+            if (userChoose == 5)
+            {
+                return true;
+            }
             switch (userChoose)
             {
                 case 1:
@@ -82,7 +87,7 @@ namespace ConsoleUI
             Tuple<double, double> location = getCoordsFromUser();
 
             Console.WriteLine("How many charge slots are in the station?");
-            int slots=getIntFromUser();
+            int slots = getIntFromUser();
             db.AddBase(name, location.Item1, location.Item2, slots);
         }
         private static void addDroneMenu()
@@ -92,7 +97,7 @@ namespace ConsoleUI
 
             Console.WriteLine("Choose MaxWeight of drone:");
             Console.WriteLine("1. Light\n2. Middle\n3. Heavy");
-            int maxWeightInt= getUserSelection(3) - 1;
+            int maxWeightInt = getUserSelection(3) - 1;
             db.AddDrone(model, maxWeightInt);
         }
         private static void addCustomerMenu()
@@ -162,7 +167,7 @@ namespace ConsoleUI
             int parcelId = getIntFromUser();
 
             Console.WriteLine("Enter drone  ID:");
-            int dronelId=getIntFromUser();
+            int dronelId = getIntFromUser();
             db.linkParcel(parcelId, dronelId);
         }
         private static void pickUpParcelMenu()
@@ -182,7 +187,7 @@ namespace ConsoleUI
             Console.WriteLine("Enter drone ID:");
             int droneId = getIntFromUser();
 
-            printAvailableStations();
+            printListOf(printType.AvailableStation);
             Console.WriteLine("Enter station ID:");
             int stationId = getIntFromUser();
             db.DroneToBase(stationId, droneId);
@@ -193,7 +198,7 @@ namespace ConsoleUI
             int droneId = getIntFromUser();
             db.FreeDrone(droneId);
         }
-        
+
         private static bool viewMenu()
         {
             Console.WriteLine("What do you want to view?");
@@ -255,96 +260,67 @@ namespace ConsoleUI
             Console.WriteLine("What list do you want to view?");
             Console.WriteLine("1. Base stations\n2. Drones\n3. Customers\n4. Parcels\n5. Unassigned parcels\n6. Available stations\n7. Back");
             int userChoose = getUserSelection(7);
-            switch (userChoose)
+            if (userChoose==7)//back..
             {
-                case 1:
-                    PrintAllStations();
-                    break;
-                case 2:
-                    PrintAllDrones();
-                    break;
-                case 3:
-                    PrintAllCustomers();
-                    break;
-                case 4:
-                    printAllParcels();
-                    break;
-                case 5:
-                    printUnassignedParcels();
-                    break;
-                case 6:
-                    printAvailableStations();
-                    break;
-                case 7:
-                    return true;
-                default:
-                    Console.WriteLine("An Error Accurd!");
-                    break;
+                return true;
             }
+            printListOf((printType)userChoose - 1);
             return false;
-
         }
-
-        
-
-        private static void PrintAllStations()
+        private static void printListOf(printType type)
         {
-            Console.WriteLine("=======Stations=======");
-            foreach (var station in db.GetAllStations())
+            switch (type)
             {
-                Console.WriteLine(station);
-                Console.WriteLine("======================");
-            }
-        }
-
-        private static void PrintAllDrones()
-        {
-            Console.WriteLine("========Drones========");
-            foreach (var drone in db.GetAllDrones())
-            {
-                Console.WriteLine(drone);
-                Console.WriteLine("======================");
-            }
-        }
-
-        private static void PrintAllCustomers()
-        {
-            Console.WriteLine("======Customers=======");
-
-            foreach (var customer in db.GetAllCustomers())
-            {
-                Console.WriteLine(customer);
-                Console.WriteLine("======================");
-            }
-        }
-
-        private static void printAllParcels()
-        {
-            Console.WriteLine("=======Parcels========");
-            foreach (var parcel in db.GetAllParcels())
-            {
-                Console.WriteLine(parcel);
-                Console.WriteLine("======================");
-            }
-        }
-
-        private static void printUnassignedParcels()
-        {
-            Console.WriteLine("==Unassigned Parcels==");
-            foreach (var parcel in db.GetUnassignedParcels())
-            {
-                Console.WriteLine(parcel);
-                Console.WriteLine("======================");
-            }
-        }
-
-        private static void printAvailableStations()
-        {
-            Console.WriteLine("==Available Stations==");
-            foreach (var parcel in db.GetAvailableStations())
-            {
-                Console.WriteLine(parcel);
-                Console.WriteLine("======================");
+                case printType.BaseStation:
+                    Console.WriteLine("=======Stations=======");
+                    foreach (var station in db.GetAllStations())
+                    {
+                        Console.WriteLine(station);
+                        Console.WriteLine("======================");
+                    }
+                    break;
+                case printType.Drone:
+                    Console.WriteLine("========Drones========");
+                    foreach (var drone in db.GetAllDrones())
+                    {
+                        Console.WriteLine(drone);
+                        Console.WriteLine("======================");
+                    }
+                    break;
+                case printType.Customer:
+                    Console.WriteLine("======Customers=======");
+                    foreach (var customer in db.GetAllCustomers())
+                    {
+                        Console.WriteLine(customer);
+                        Console.WriteLine("======================");
+                    }
+                    break;
+                case printType.Parcel:
+                    Console.WriteLine("=======Parcels========");
+                    foreach (var parcel in db.GetAllParcels())
+                    {
+                        Console.WriteLine(parcel);
+                        Console.WriteLine("======================");
+                    }
+                    break;
+                case printType.UnassignedParcel:
+                    Console.WriteLine("==Unassigned Parcels==");
+                    foreach (var parcel in db.GetUnassignedParcels())
+                    {
+                        Console.WriteLine(parcel);
+                        Console.WriteLine("======================");
+                    }
+                    break;
+                case printType.AvailableStation:
+                    Console.WriteLine("==Available Stations==");
+                    foreach (var parcel in db.GetAvailableStations())
+                    {
+                        Console.WriteLine(parcel);
+                        Console.WriteLine("======================");
+                    }
+                    break;
+                default:
+                    break;
             }
         }
 
@@ -400,5 +376,6 @@ namespace ConsoleUI
             }
             return Tuple.Create(lat, lng);
         }
+        enum printType { BaseStation, Drone, Customer, Parcel, UnassignedParcel, AvailableStation};
     }
 }
