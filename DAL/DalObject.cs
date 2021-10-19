@@ -30,7 +30,7 @@ namespace DalObject
         public List<Drone> GetAllDrones() { return DataSource.Drones; }
         public List<Customer> GetAllCustomers() { return DataSource.Customers; }
         public List<Parcel> GetAllParcels() { return DataSource.Parcels; }
-        public List<Parcel> GetUnoccupiedParcels() { return DataSource.Parcels; }
-        public List<Station> GetNotFullStations() { return DataSource.BaseStations; }
+        public List<Parcel> GetUnassignedParcels() { return DataSource.Parcels; }
+        public List<Station> GetAvailableStations() { return DataSource.BaseStations; }
     }
 }

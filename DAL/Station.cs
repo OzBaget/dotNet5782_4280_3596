@@ -29,8 +29,8 @@ namespace IDAL
             {
                 return $"Station Id: {Id}\n" +
                     $"Name: {Name}\n" +
-                   $"Position: {coordsToSexag(Lat,Lng)}\n" +
-                    $"ChargeSlots: {FreeChargeSlots}";
+                    $"Position: {coordsToSexag(Lat,Lng)}\n" +
+                    $"Free Charge Slots: {FreeChargeSlots}";
             }
 
 

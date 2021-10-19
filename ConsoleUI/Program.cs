@@ -17,7 +17,7 @@ namespace ConsoleUI
         private static bool mainMenu()
         {
             Console.WriteLine("Choose one of the following:");
-            Console.WriteLine("1. Add\n2. Update\n3. Get\n4. List\n5. Exit");
+            Console.WriteLine("1. Add\n2. Update\n3. View\n4. View list\n5. Exit");
             int userChoose = getUserSelection(5);
             bool back = false;
             switch (userChoose)
@@ -32,11 +32,11 @@ namespace ConsoleUI
                     break;
                 case 3:
                     while (!back)
-                        back = GetMenu();
+                        back = viewMenu();
                     break;
                 case 4:
                     while (!back)
-                        back = ListMenu();
+                        back = viewListMenu();
                     break;
                 case 5:
                     Console.WriteLine("Exiting...");
@@ -78,10 +78,10 @@ namespace ConsoleUI
 
         private static void addBaseStationMenu()
         {
-            Console.WriteLine("Enter station name: ");
+            Console.WriteLine("Enter station name:");
             string name = Console.ReadLine();
 
-            Console.WriteLine("Enter lattitude (as decimal): ");
+            Console.WriteLine("Enter lattitude (as decimal):");
             double lat;
             string input = Console.ReadLine();
             while (!double.TryParse(input, out lat))
@@ -90,7 +90,7 @@ namespace ConsoleUI
                 input = Console.ReadLine();
             }
 
-            Console.WriteLine("Enter longitude (as decimal): ");
+            Console.WriteLine("Enter longitude (as decimal):");
             double lng;
             input = Console.ReadLine();
             while (!double.TryParse(input, out lng))
@@ -152,22 +152,10 @@ namespace ConsoleUI
         private static void addParcelMenu()
         {
             Console.WriteLine("Enter sender ID:");
-            int senderId;
-            string input = Console.ReadLine();
-            while (!int.TryParse(input, out senderId))
-            {
-                Console.WriteLine("Not Valid Input!");
-                input = Console.ReadLine();
-            }
+            int senderId = getIdFromUser();
 
             Console.WriteLine("Enter target ID:");
-            int targetId;
-            input = Console.ReadLine();
-            while (!int.TryParse(input, out targetId))
-            {
-                Console.WriteLine("Not Valid Input!");
-                input = Console.ReadLine();
-            }
+            int targetId = getIdFromUser();
 
             Console.WriteLine("Choose parcel weight:");
             Console.WriteLine("1. Light\n2. Middle\n3. Heavy");
@@ -182,8 +170,8 @@ namespace ConsoleUI
         private static bool updateMenu()
         {
             Console.WriteLine("What action do you want to do?");
-            Console.WriteLine("1. Link parcel to drone\n2. Pick up parcel by drone\n3. Deliver parcel to customer\n4. Back");
-            int userChoose = getUserSelection(4);
+            Console.WriteLine("1. Link parcel to drone\n2. Pick up parcel by drone\n3. Deliver parcel to customer\n4. Send drone to charge\n5. Release drone from charger\n6. Back");
+            int userChoose = getUserSelection(6);
             switch (userChoose)
             {
                 case 1:
@@ -193,9 +181,15 @@ namespace ConsoleUI
                     pickUpParcelMenu();
                     break;
                 case 3:
-                    DeliverParcel();
+                    deliverParcel();
                     break;
                 case 4:
+                    sendDroneToCharge();
+                    break;
+                case 5:
+                    releaseDroneFromCharger();
+                    break;
+                case 6:
                     return true;
                 default:
                     Console.WriteLine("An Error Accurd!");
@@ -208,51 +202,47 @@ namespace ConsoleUI
         private static void linkParcelMenu()
         {
             Console.WriteLine("Enter parcel ID:");
-            int parcelId;
-            string input = Console.ReadLine();
-            while (!int.TryParse(input, out parcelId))
-            {
-                Console.WriteLine("Not Valid Input!");
-                input = Console.ReadLine();
-            }
+            int parcelId = getIdFromUser();
 
             Console.WriteLine("Enter drone  ID:");
-            int dronelId;
-            input = Console.ReadLine();
-            while (!int.TryParse(input, out dronelId))
-            {
-                Console.WriteLine("Not Valid Input!");
-                input = Console.ReadLine();
-            }
+            int dronelId=getIdFromUser();
             db.linkParcel(parcelId, dronelId);
         }
         private static void pickUpParcelMenu()
         {
             Console.WriteLine("Enter parcel ID:");
-            int parcelId;
-            string input = Console.ReadLine();
-            while (!int.TryParse(input, out parcelId))
-            {
-                Console.WriteLine("Not Valid Input!");
-                input = Console.ReadLine();
-            }
+            int parcelId = getIdFromUser();
             db.PickParcel(parcelId);
         }
-        private static void DeliverParcel()
+        private static void deliverParcel()
         {
             Console.WriteLine("Enter parcel ID:");
-            int parcelId;
-            string input = Console.ReadLine();
-            while (!int.TryParse(input, out parcelId))
-            {
-                Console.WriteLine("Not Valid Input!");
-                input = Console.ReadLine();
-            }
+            int parcelId = getIdFromUser();
             db.ParcelToCustomer(parcelId);
+        }
+        private static void sendDroneToCharge()
+        {
+            Console.WriteLine("Enter drone ID:");
+            int droneId = getIdFromUser();
+            Console.WriteLine("====Available Stations====");
+            printAvailableStations();
+            Console.WriteLine("Enter station ID:");
+            int stationId = getIdFromUser();
+            db.DroneToBase(stationId, droneId);
+        }
+        private static void releaseDroneFromCharger()
+        {
+            Console.WriteLine("Enter drone ID:");
+            int droneId = getIdFromUser();
+            db.FreeDrone(droneId);
         }
 
 
-        private static bool GetMenu()
+
+
+
+
+        private static bool viewMenu()
         {
             Console.WriteLine("What do you want to view?");
             Console.WriteLine("1. Base station\n2. Drone\n3. Customer\n4. Parcel\n5. Back");
@@ -283,60 +273,36 @@ namespace ConsoleUI
         private static void GetBaseStationMenu()
         {
             Console.WriteLine("Enter station ID:");
-            int stationId;
-            string input = Console.ReadLine();
-            while (!int.TryParse(input, out stationId))
-            {
-                Console.WriteLine("Not Valid Input!");
-                input = Console.ReadLine();
-            }
+            int stationId = getIdFromUser();
             Console.WriteLine(db.GetStation(stationId));
         }
         private static void GetDroneMenu()
         {
             Console.WriteLine("Enter drone ID:");
-            int droneId;
-            string input = Console.ReadLine();
-            while (!int.TryParse(input, out droneId))
-            {
-                Console.WriteLine("Not Valid Input!");
-                input = Console.ReadLine();
-            }
+            int droneId = getIdFromUser();
             Console.WriteLine(db.GetDrone(droneId));
         }
 
         private static void GetCustomerMenu()
         {
             Console.WriteLine("Enter customer ID:");
-            int customerId;
-            string input = Console.ReadLine();
-            while (!int.TryParse(input, out customerId))
-            {
-                Console.WriteLine("Not Valid Input!");
-                input = Console.ReadLine();
-            }
+            int customerId = getIdFromUser();
             Console.WriteLine(db.GetCustomer(customerId));
         }
 
         private static void GetParcelMenu()
         {
             Console.WriteLine("Enter parcel ID:");
-            int parcelId;
-            string input = Console.ReadLine();
-            while (!int.TryParse(input, out parcelId))
-            {
-                Console.WriteLine("Not Valid Input!");
-                input = Console.ReadLine();
-            }
+            int parcelId = getIdFromUser();
             Console.WriteLine(db.GetParcerl(parcelId));
         }
 
 
-        private static bool ListMenu()
+        private static bool viewListMenu()
         {
-            Console.WriteLine("What  do you want to view?");
-            Console.WriteLine("1. Base stations\n2. Drones\n3. Customers\n4. Parcels\n5. Back");
-            int userChoose = getUserSelection(5);
+            Console.WriteLine("What list do you want to view?");
+            Console.WriteLine("1. Base stations\n2. Drones\n3. Customers\n4. Parcels\n5. Unassigned parcels\n6. Available stations\n7. Back");
+            int userChoose = getUserSelection(7);
             switch (userChoose)
             {
                 case 1:
@@ -352,6 +318,12 @@ namespace ConsoleUI
                     printAllParcels();
                     break;
                 case 5:
+                    printUnassignedParcels();
+                    break;
+                case 6:
+                    printAvailableStations();
+                    break;
+                case 7:
                     return true;
                 default:
                     Console.WriteLine("An Error Accurd!");
@@ -360,6 +332,8 @@ namespace ConsoleUI
             return false;
 
         }
+
+        
 
         private static void PrintAllStations()
         {
@@ -397,6 +371,24 @@ namespace ConsoleUI
             }
         }
 
+        private static void printUnassignedParcels()
+        {
+            foreach (var parcel in db.GetUnassignedParcels())
+            {
+                Console.WriteLine(parcel);
+                Console.WriteLine("======================");
+            }
+        }
+
+        private static void printAvailableStations()
+        {
+            foreach (var parcel in db.GetAvailableStations())
+            {
+                Console.WriteLine(parcel);
+                Console.WriteLine("======================");
+            }
+        }
+
         private static int getUserSelection(int numOptions)
         {
             string input = Console.ReadLine();
@@ -416,6 +408,17 @@ namespace ConsoleUI
                     return true;
             }
             return false;
+        }
+        private static int getIdFromUser()
+        {
+            int Id;
+            string input = Console.ReadLine();
+            while (!int.TryParse(input, out Id))
+            {
+                Console.WriteLine("Not Valid ID!");
+                input = Console.ReadLine();
+            }
+            return Id;
         }
     }
 }

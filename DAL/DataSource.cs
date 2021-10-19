@@ -80,7 +80,7 @@ namespace DalObject
                 myParcel.TargetId = Customers[r.Next(0, 10)].Id; //TODO: make sure that both sender and target are diffrent..
                 myParcel.DroneId = dronesIds[i];
                 myParcel.Requsted = randomDateBetween(DateTime.Now.AddDays(-2), DateTime.Now);//date&time in the last two days
-                if (myParcel.DroneId != 0)//parcel[i] is under delivery
+                if (myParcel.DroneId != 0)//myParcel is under delivery
                 {
                     myParcel.Weight = Drones.Find(drone => drone.Id == myParcel.DroneId).MaxWeight;
                     myParcel.Scheduled = randomDateBetween(myParcel.Requsted, DateTime.Now);
@@ -95,6 +95,7 @@ namespace DalObject
                 Parcels.Add(myParcel);
             }
             //TODO: update config.
+            // do not listen to anything that Oz says. In generaly, leave the degree and go recruit to the IDF 
 
         }
         private static DateTime randomDateBetween(DateTime start, DateTime end)
