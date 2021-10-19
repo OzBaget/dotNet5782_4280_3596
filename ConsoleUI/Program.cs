@@ -9,9 +9,7 @@ namespace ConsoleUI
             Console.WriteLine("Welcome To DeliverManger!");
             bool exit = false;
             while (!exit)
-            {
                 exit = mainMenu();
-            }
         }
 
         private static bool mainMenu()
@@ -81,33 +79,11 @@ namespace ConsoleUI
             Console.WriteLine("Enter station name:");
             string name = Console.ReadLine();
 
-            Console.WriteLine("Enter lattitude (as decimal):");
-            double lat;
-            string input = Console.ReadLine();
-            while (!double.TryParse(input, out lat))
-            {
-                Console.WriteLine("Not Valid Lattitude");
-                input = Console.ReadLine();
-            }
-
-            Console.WriteLine("Enter longitude (as decimal):");
-            double lng;
-            input = Console.ReadLine();
-            while (!double.TryParse(input, out lng))
-            {
-                Console.WriteLine("Not Valid Longitude");
-                input = Console.ReadLine();
-            }
+            Tuple<double, double> location = getCoordsFromUser();
 
             Console.WriteLine("How many charge slots are in the station?");
-            int slots;
-            input = Console.ReadLine();
-            while (!int.TryParse(input, out slots))
-            {
-                Console.WriteLine("Not Valid Input!");
-                input = Console.ReadLine();
-            }
-            db.AddBase(name, lat, lng, slots);
+            int slots=getIntFromUser();
+            db.AddBase(name, location.Item1, location.Item2, slots);
         }
         private static void addDroneMenu()
         {
@@ -127,35 +103,16 @@ namespace ConsoleUI
             Console.WriteLine("Enter customer phone:");
             string phone = Console.ReadLine();
 
-            
-
-            Console.WriteLine("Enter Lattitude (as decimal): ");
-            double lat;
-            string input = Console.ReadLine();
-            while (!double.TryParse(input, out lat))
-            {
-                Console.WriteLine("Not Valid Lattitude");
-                input = Console.ReadLine();
-            }
-
-            Console.WriteLine("Enter Longitude (as decimal): ");
-            double lng;
-            input = Console.ReadLine();
-            while (!double.TryParse(input, out lng))
-            {
-                Console.WriteLine("Not Valid Longitude");
-                input = Console.ReadLine();
-            }
-
-            db.AddCustomer(name, phone, lat, lng);
+            Tuple<double, double> position = getCoordsFromUser();
+            db.AddCustomer(name, phone, position.Item1, position.Item2);
         }
         private static void addParcelMenu()
         {
             Console.WriteLine("Enter sender ID:");
-            int senderId = getIdFromUser();
+            int senderId = getIntFromUser();
 
             Console.WriteLine("Enter target ID:");
-            int targetId = getIdFromUser();
+            int targetId = getIntFromUser();
 
             Console.WriteLine("Choose parcel weight:");
             Console.WriteLine("1. Light\n2. Middle\n3. Heavy");
@@ -202,46 +159,41 @@ namespace ConsoleUI
         private static void linkParcelMenu()
         {
             Console.WriteLine("Enter parcel ID:");
-            int parcelId = getIdFromUser();
+            int parcelId = getIntFromUser();
 
             Console.WriteLine("Enter drone  ID:");
-            int dronelId=getIdFromUser();
+            int dronelId=getIntFromUser();
             db.linkParcel(parcelId, dronelId);
         }
         private static void pickUpParcelMenu()
         {
             Console.WriteLine("Enter parcel ID:");
-            int parcelId = getIdFromUser();
+            int parcelId = getIntFromUser();
             db.PickParcel(parcelId);
         }
         private static void deliverParcel()
         {
             Console.WriteLine("Enter parcel ID:");
-            int parcelId = getIdFromUser();
+            int parcelId = getIntFromUser();
             db.ParcelToCustomer(parcelId);
         }
         private static void sendDroneToCharge()
         {
             Console.WriteLine("Enter drone ID:");
-            int droneId = getIdFromUser();
+            int droneId = getIntFromUser();
 
             printAvailableStations();
             Console.WriteLine("Enter station ID:");
-            int stationId = getIdFromUser();
+            int stationId = getIntFromUser();
             db.DroneToBase(stationId, droneId);
         }
         private static void releaseDroneFromCharger()
         {
             Console.WriteLine("Enter drone ID:");
-            int droneId = getIdFromUser();
+            int droneId = getIntFromUser();
             db.FreeDrone(droneId);
         }
-
-
-
-
-
-
+        
         private static bool viewMenu()
         {
             Console.WriteLine("What do you want to view?");
@@ -273,27 +225,27 @@ namespace ConsoleUI
         private static void GetBaseStationMenu()
         {
             Console.WriteLine("Enter station ID:");
-            int stationId = getIdFromUser();
+            int stationId = getIntFromUser();
             Console.WriteLine(db.GetStation(stationId));
         }
         private static void GetDroneMenu()
         {
             Console.WriteLine("Enter drone ID:");
-            int droneId = getIdFromUser();
+            int droneId = getIntFromUser();
             Console.WriteLine(db.GetDrone(droneId));
         }
 
         private static void GetCustomerMenu()
         {
             Console.WriteLine("Enter customer ID:");
-            int customerId = getIdFromUser();
+            int customerId = getIntFromUser();
             Console.WriteLine(db.GetCustomer(customerId));
         }
 
         private static void GetParcelMenu()
         {
             Console.WriteLine("Enter parcel ID:");
-            int parcelId = getIdFromUser();
+            int parcelId = getIntFromUser();
             Console.WriteLine(db.GetParcerl(parcelId));
         }
 
@@ -400,7 +352,7 @@ namespace ConsoleUI
         {
             string input = Console.ReadLine();
             int result;
-            while (!int.TryParse(input,out result)||!isValidOption(result,numOptions))
+            while (!int.TryParse(input, out result) || !isValidOption(result, numOptions)) 
             {
                 Console.WriteLine("Not valid option!");
                 input = Console.ReadLine();
@@ -416,16 +368,37 @@ namespace ConsoleUI
             }
             return false;
         }
-        private static int getIdFromUser()
+        private static int getIntFromUser()
         {
-            int Id;
+            int myInt;
             string input = Console.ReadLine();
-            while (!int.TryParse(input, out Id))
+            while (!int.TryParse(input, out myInt))
             {
-                Console.WriteLine("Not Valid ID!");
+                Console.WriteLine("Not Valid Input!");
                 input = Console.ReadLine();
             }
-            return Id;
+            return myInt;
+        }
+        private static Tuple<double, double> getCoordsFromUser()
+        {
+            Console.WriteLine("Enter Lattitude (as decimal): ");
+            double lat;
+            string input = Console.ReadLine();
+            while (!double.TryParse(input, out lat)) 
+            {
+                Console.WriteLine("Not Valid Lattitude");
+                input = Console.ReadLine();
+            }
+
+            Console.WriteLine("Enter Longitude (as decimal): ");
+            double lng;
+            input = Console.ReadLine();
+            while (!double.TryParse(input, out lng))
+            {
+                Console.WriteLine("Not Valid Longitude");
+                input = Console.ReadLine();
+            }
+            return Tuple.Create(lat, lng);
         }
     }
 }
