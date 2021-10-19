@@ -1,62 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
+using IDAL.DO;
 
 namespace DalObject
 {
     class DataSource
     {
-        internal static IDAL.DO.Drone[] Drones = new IDAL.DO.Drone[10];
-        internal static IDAL.DO.Station[] BaseStations = new IDAL.DO.Station[5];
-        internal static IDAL.DO.Customer[] Customers = new IDAL.DO.Customer[100];
-        internal static IDAL.DO.Parcel[] Parcels = new IDAL.DO.Parcel[1000];
+        internal static List<Drone>Drones = new List<Drone>();
+        internal static List<Station> BaseStations = new List<Station>();
+        internal static List<Customer> Customers = new List<Customer>();
+        internal static List<Parcel> Parcels = new List<Parcel>();
 
         internal class Config
         {
-            internal static int DronesIndex = 0;
-            internal static int StationsIndex = 0;
-            internal static int CustomersIndex = 0;
-            internal static int ParcelIndex = 0;
             //TODO: Function parcelId
-            //Get drones index
-            public int GetDronesIndex() { return DronesIndex; }
-            //Get statiobs index
-            public int GetStationsIndex() { return StationsIndex; }
-            //Get customer index
-            public int GetCustomersIndex() { return CustomersIndex; }
-            //Get parcels index
-            public int GetParceslIndex() { return ParcelIndex; }
-
-            //++DroneIndex
-            public void PromoteDroneslIndex()
-            {
-                if (DronesIndex == 10)
-                    throw new ArgumentException("execption: too many drones", "arg");
-                DronesIndex++;
-            }
-            //++StationsIndex
-
-            public void PromoteStationsIndex()
-            {
-                if (StationsIndex == 5)
-                    throw new ArgumentException("execption: too many stations", "arg");
-                StationsIndex++;
-            }
-            //++CustomersIndex
-
-            public void PromoteCustomerslIndex()
-            {
-                if (CustomersIndex == 1000)
-                    throw new ArgumentException("execption: too many customers", "arg");
-                CustomersIndex++;
-            }
-            //++ParcelsIndex
-            public void PromoteParcelsIndex()
-            {
-                if (ParcelIndex == 1000)
-                    throw new ArgumentException("execption: too many parcels", "arg");
-                ParcelIndex++;
-            }
-
-
         }
 
         public static void Initialize()
@@ -70,22 +27,20 @@ namespace DalObject
 
             for (int i = 0; i < 2; i++)
             {
-                BaseStations[i] = new IDAL.DO.Station();
-                BaseStations[i].Id = r.Next();
-                BaseStations[i].Name = baseNames[i];
-                BaseStations[i].Lng = baseLngs[i];
-                BaseStations[i].Lat = baseLats[i];
-                BaseStations[i].FreeChargeSlots = r.Next(5);
+                Station myStation = new Station(baseNames[i], baseLats[i], baseLngs[i], r.Next(5));
+                BaseStations.Add(myStation);
             }
 
             //Initialize Drones
             for (int i = 0; i < 5; i++)
             {
-                Drones[i].Id = r.Next();
-                Drones[i].Model = "MK"+r.Next(1,4).ToString();
-                Drones[i].MaxWeight = (IDAL.DO.WeightCategories)r.Next(0, 3);
-                Drones[i].Status = (IDAL.DO.DroneStatuses)r.Next(0, 3);
-                Drones[i].Battery = r.Next(1, 101);
+                Drone myDrone = new Drone();
+                myDrone.Id = r.Next();
+                myDrone.Model = "MK"+r.Next(1,4).ToString();
+                myDrone.MaxWeight = (WeightCategories)r.Next(0, 3);
+                myDrone.Status = (DroneStatuses)r.Next(0, 3);
+                myDrone.Battery = r.Next(1, 101);
+                Drones.Add(myDrone);
             }
 
             //Initialize Customers
@@ -93,11 +48,13 @@ namespace DalObject
 
             for (int i = 0; i < 10; i++)
             {
-                Customers[i].Id = r.Next();
-                Customers[i].Name = names[i];
-                Customers[i].Phone = "+972" + r.Next(100000000, 999999999).ToString();//ten digits phone number
-                Customers[i].Lng = (double)r.Next(345000, 355000) / 10000;//v  
-                Customers[i].Lat = (double)r.Next(315000, 330000) / 10000;//somewhere in Israel
+                Customer myCustomer = new Customer();
+                myCustomer.Id = r.Next();
+                myCustomer.Name = names[i];
+                myCustomer.Phone = "+972" + r.Next(100000000, 999999999).ToString();//ten digits phone number
+                myCustomer.Lng = (double)r.Next(345000, 355000) / 10000;//v  
+                myCustomer.Lat = (double)r.Next(315000, 330000) / 10000;//somewhere in Israel
+                Customers.Add(myCustomer);
             }
 
 
@@ -106,9 +63,9 @@ namespace DalObject
             //array of droneId of every Parcel; To make sure that there won't be collisions.
             int[] dronesIds = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
             int j = 0;
-            foreach (IDAL.DO.Drone drone in Drones)
+            foreach (Drone drone in Drones)
             {
-                if (drone.Status == IDAL.DO.DroneStatuses.Delivery)// we need to make them really under delivery.
+                if (drone.Status == DroneStatuses.Delivery)// we need to make them really under delivery.
                 {
                     dronesIds[j] = drone.Id;
                 }
@@ -117,23 +74,25 @@ namespace DalObject
 
             for (int i = 0; i < 10; i++)
             {
-                Parcels[i].Id = i;
-                Parcels[i].SenderId = Customers[r.Next(0, 10)].Id;
-                Parcels[i].TargetId = Customers[r.Next(0, 10)].Id; //TODO: make sure that both sender and target are diffrent..
-                Parcels[i].DroneId = dronesIds[i];
-                Parcels[i].Requsted = randomDateBetween(DateTime.Now.AddDays(-2), DateTime.Now);//date&time in the last two days
-                if (Parcels[i].DroneId != 0)//parcel[i] is under delivery
+                Parcel myParcel = new Parcel();
+                myParcel.Id = i+1;
+                myParcel.SenderId = Customers[r.Next(0, 10)].Id;
+                myParcel.TargetId = Customers[r.Next(0, 10)].Id; //TODO: make sure that both sender and target are diffrent..
+                myParcel.DroneId = dronesIds[i];
+                myParcel.Requsted = randomDateBetween(DateTime.Now.AddDays(-2), DateTime.Now);//date&time in the last two days
+                if (myParcel.DroneId != 0)//parcel[i] is under delivery
                 {
-                    Parcels[i].Weight = Array.Find(Drones,
-                        drone => drone.Id == Parcels[i].DroneId).MaxWeight;
-                    Parcels[i].Scheduled = randomDateBetween(Parcels[i].Requsted, DateTime.Now);
-                    Parcels[i].PickedUp = randomDateBetween(Parcels[i].Scheduled, DateTime.Now);
+                    myParcel.Weight = Drones.Find(drone => drone.Id == myParcel.DroneId).MaxWeight;
+                    myParcel.Scheduled = randomDateBetween(myParcel.Requsted, DateTime.Now);
+                    myParcel.PickedUp = randomDateBetween(myParcel.Scheduled, DateTime.Now);
                 }
                 else
-                    Parcels[i].Weight = (IDAL.DO.WeightCategories)r.Next(0, 3);
-                    //Scheduled and PickedUp aren't assigend because they didnt happend..
+                    myParcel.Weight = (WeightCategories)r.Next(0, 3);
+                //Scheduled and PickedUp aren't assigend because they didnt happend..
 
-                Parcels[i].Priority = (IDAL.DO.Priorities)r.Next(0, 3);
+                myParcel.Priority = (Priorities)r.Next(0, 3);
+
+                Parcels.Add(myParcel);
             }
             //TODO: update config.
 

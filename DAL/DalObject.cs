@@ -26,11 +26,11 @@ namespace DalObject
         public Drone GetDrone(int drone) { return new Drone(); }
         public Customer GetCustomer(int customer) { return new Customer(); }
         public Parcel GetParcerl(int parcel) { return new Parcel(); }
-        public Station[] GetAllStations() { return DataSource.BaseStations; }
-        public Drone[] GetAllDrones() { return DataSource.Drones; }
-        public Customer[] GetAllCustomers() { return DataSource.Customers; }
-        public Parcel[] GetAllParcels() { return DataSource.Parcels; }
-        public Parcel[] GetUnoccupiedParcels() { return DataSource.Parcels; }
-        public Station[] GetNotFullStations() { return DataSource.BaseStations; }
+        public List<Station> GetAllStations() { return DataSource.BaseStations; }
+        public List<Drone> GetAllDrones() { return DataSource.Drones; }
+        public List<Customer> GetAllCustomers() { return DataSource.Customers; }
+        public List<Parcel> GetAllParcels() { return DataSource.Parcels; }
+        public List<Parcel> GetUnoccupiedParcels() { return DataSource.Parcels; }
+        public List<Station> GetNotFullStations() { return DataSource.BaseStations; }
     }
 }
