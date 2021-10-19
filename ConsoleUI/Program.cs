@@ -1,5 +1,4 @@
 ﻿using System;
-using IDAL.DO;
 namespace ConsoleUI
 {
     class Program
@@ -10,13 +9,15 @@ namespace ConsoleUI
             Console.WriteLine("Welcome To DeliverManger!");
             bool exit = false;
             while (!exit)
+            {
                 exit = mainMenu();
+            }
         }
 
         private static bool mainMenu()
         {
             Console.WriteLine("Choose one of the following:");
-            Console.WriteLine("1. Add\n2. Update\n3. View by ID\n4. View List\n5. Exit");
+            Console.WriteLine("1. Add\n2. Update\n3. Get\n4. List\n5. Exit");
             int userChoose = getUserSelection(5);
             bool back = false;
             switch (userChoose)
@@ -31,11 +32,11 @@ namespace ConsoleUI
                     break;
                 case 3:
                     while (!back)
-                        back = viewMenu();
+                        back = GetMenu();
                     break;
                 case 4:
                     while (!back)
-                        back = viewListMenu();
+                        back = ListMenu();
                     break;
                 case 5:
                     Console.WriteLine("Exiting...");
@@ -106,7 +107,7 @@ namespace ConsoleUI
                 Console.WriteLine("Not Valid Input!");
                 input = Console.ReadLine();
             }
-            db.AddBase(new Station(name, lat, lng, slots));
+            db.AddBase(name, lat, lng, slots);
         }
         private static void addDroneMenu()
         {
@@ -115,8 +116,8 @@ namespace ConsoleUI
 
             Console.WriteLine("Choose MaxWeight of drone:");
             Console.WriteLine("1. Light\n2. Middle\n3. Heavy");
-            WeightCategories maxWeight= (WeightCategories)getUserSelection(3) - 1;
-            db.AddDrone(new Drone(model,maxWeight));
+            int maxWeightInt= getUserSelection(3) - 1;
+            db.AddDrone(model, maxWeightInt);
         }
         private static void addCustomerMenu()
         {
@@ -146,7 +147,7 @@ namespace ConsoleUI
                 input = Console.ReadLine();
             }
 
-            db.AddCustomer(new Customer(name, phone, lat, lng));
+            db.AddCustomer(name, phone, lat, lng);
         }
         private static void addParcelMenu()
         {
@@ -170,13 +171,13 @@ namespace ConsoleUI
 
             Console.WriteLine("Choose parcel weight:");
             Console.WriteLine("1. Light\n2. Middle\n3. Heavy");
-            WeightCategories weight = (WeightCategories)getUserSelection(3) - 1;
+            int weightInt = getUserSelection(3) - 1;
 
             Console.WriteLine("Choose parcel priority:");
             Console.WriteLine("1. Normal\n2. Fast\n3. Urgent");
-            Priorities priority = (Priorities)getUserSelection(3) - 1;
+            int priorityInt = getUserSelection(3) - 1;
 
-            db.AddParcel(new Parcel(senderId, targetId, weight, priority));
+            db.AddParcel(senderId, targetId, weightInt, priorityInt);
         }
         private static bool updateMenu()
         {
@@ -192,7 +193,7 @@ namespace ConsoleUI
                     pickUpParcelMenu();
                     break;
                 case 3:
-                    deliverParcel();
+                    DeliverParcel();
                     break;
                 case 4:
                     return true;
@@ -237,7 +238,7 @@ namespace ConsoleUI
             }
             db.PickParcel(parcelId);
         }
-        private static void deliverParcel()
+        private static void DeliverParcel()
         {
             Console.WriteLine("Enter parcel ID:");
             int parcelId;
@@ -251,7 +252,7 @@ namespace ConsoleUI
         }
 
 
-        private static bool viewMenu()
+        private static bool GetMenu()
         {
             Console.WriteLine("What do you want to view?");
             Console.WriteLine("1. Base station\n2. Drone\n3. Customer\n4. Parcel\n5. Back");
@@ -259,16 +260,16 @@ namespace ConsoleUI
             switch (userChoose)
             {
                 case 1:
-                    getBaseStationMenu();
+                    GetBaseStationMenu();
                     break;
                 case 2:
-                    getDroneMenu();
+                    GetDroneMenu();
                     break;
                 case 3:
                     GetCustomerMenu();
                     break;
                 case 4:
-                    getParcelMenu();
+                    GetParcelMenu();
                     break;
                 case 5:
                     return true;
@@ -279,7 +280,7 @@ namespace ConsoleUI
             return false;
 
         }
-        private static void getBaseStationMenu()
+        private static void GetBaseStationMenu()
         {
             Console.WriteLine("Enter station ID:");
             int stationId;
@@ -291,7 +292,7 @@ namespace ConsoleUI
             }
             Console.WriteLine(db.GetStation(stationId));
         }
-        private static void getDroneMenu()
+        private static void GetDroneMenu()
         {
             Console.WriteLine("Enter drone ID:");
             int droneId;
@@ -317,7 +318,7 @@ namespace ConsoleUI
             Console.WriteLine(db.GetCustomer(customerId));
         }
 
-        private static void getParcelMenu()
+        private static void GetParcelMenu()
         {
             Console.WriteLine("Enter parcel ID:");
             int parcelId;
@@ -331,7 +332,7 @@ namespace ConsoleUI
         }
 
 
-        private static bool viewListMenu()
+        private static bool ListMenu()
         {
             Console.WriteLine("What  do you want to view?");
             Console.WriteLine("1. Base stations\n2. Drones\n3. Customers\n4. Parcels\n5. Back");
@@ -339,13 +340,13 @@ namespace ConsoleUI
             switch (userChoose)
             {
                 case 1:
-                    printAllStations();
+                    PrintAllStations();
                     break;
                 case 2:
-                    printAllDrones();
+                    PrintAllDrones();
                     break;
                 case 3:
-                    printAllCustomers();
+                    PrintAllCustomers();
                     break;
                 case 4:
                     printAllParcels();
@@ -360,30 +361,27 @@ namespace ConsoleUI
 
         }
 
-        private static void printAllStations()
+        private static void PrintAllStations()
         {
-            Station[] stations = db.GetAllStations();
-            foreach (Station station in stations)
+            foreach (var station in db.GetAllStations())
             {
                 Console.WriteLine(station);
                 Console.WriteLine("======================");
             }
         }
 
-        private static void printAllDrones()
+        private static void PrintAllDrones()
         {
-            Drone[] drones = db.GetAllDrones();
-            foreach (Drone drone in drones)
+            foreach (var drone in db.GetAllDrones())
             {
                 Console.WriteLine(drone);
                 Console.WriteLine("======================");
             }
         }
 
-        private static void printAllCustomers()
+        private static void PrintAllCustomers()
         {
-            Customer[] customers = db.GetAllCustomers();
-            foreach (Customer customer in customers)
+            foreach (var customer in db.GetAllCustomers())
             {
                 Console.WriteLine(customer);
                 Console.WriteLine("======================");
@@ -392,8 +390,7 @@ namespace ConsoleUI
 
         private static void printAllParcels()
         {
-            Parcel[] parcels = db.GetAllParcels();
-            foreach (Parcel parcel in parcels)
+            foreach (var parcel in db.GetAllParcels())
             {
                 Console.WriteLine(parcel);
                 Console.WriteLine("======================");

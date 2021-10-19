@@ -8,7 +8,57 @@ namespace DalObject
         internal static IDAL.DO.Station[] BaseStations = new IDAL.DO.Station[5];
         internal static IDAL.DO.Customer[] Customers = new IDAL.DO.Customer[100];
         internal static IDAL.DO.Parcel[] Parcels = new IDAL.DO.Parcel[1000];
-        internal static Config config = new Config();
+
+        internal class Config
+        {
+            internal static int DronesIndex = 0;
+            internal static int StationsIndex = 0;
+            internal static int CustomersIndex = 0;
+            internal static int ParcelIndex = 0;
+            //TODO: Function parcelId
+            //Get drones index
+            public int GetDronesIndex() { return DronesIndex; }
+            //Get statiobs index
+            public int GetStationsIndex() { return StationsIndex; }
+            //Get customer index
+            public int GetCustomersIndex() { return CustomersIndex; }
+            //Get parcels index
+            public int GetParceslIndex() { return ParcelIndex; }
+
+            //++DroneIndex
+            public void PromoteDroneslIndex()
+            {
+                if (DronesIndex == 10)
+                    throw new ArgumentException("execption: too many drones", "arg");
+                DronesIndex++;
+            }
+            //++StationsIndex
+
+            public void PromoteStationsIndex()
+            {
+                if (StationsIndex == 5)
+                    throw new ArgumentException("execption: too many stations", "arg");
+                StationsIndex++;
+            }
+            //++CustomersIndex
+
+            public void PromoteCustomerslIndex()
+            {
+                if (CustomersIndex == 1000)
+                    throw new ArgumentException("execption: too many customers", "arg");
+                CustomersIndex++;
+            }
+            //++ParcelsIndex
+            public void PromoteParcelsIndex()
+            {
+                if (ParcelIndex == 1000)
+                    throw new ArgumentException("execption: too many parcels", "arg");
+                ParcelIndex++;
+            }
+
+
+        }
+
         public static void Initialize()
         {
             Random r = new Random();
@@ -85,7 +135,7 @@ namespace DalObject
 
                 Parcels[i].Priority = (IDAL.DO.Priorities)r.Next(0, 3);
             }
-            config.parcelId = 10;//Because we have 10 drones.
+            //TODO: update config.
 
         }
         private static DateTime randomDateBetween(DateTime start, DateTime end)
@@ -97,53 +147,5 @@ namespace DalObject
 
 
 
-    class Config
-    {
-        internal static int DronesIndex = 0;
-        internal static int StationsIndex = 0;
-        internal static int CustomersIndex = 0;
-        internal static int ParcelIndex = 0;
-        //TODO: Function parcelId
-        //Get drones index
-        public int GetDronesIndex() { return DronesIndex; }
-        //Get statiobs index
-        public int GetStationsIndex() { return StationsIndex; }
-        //Get customer index
-        public int GetCustomersIndex() { return CustomersIndex; }
-        //Get parcels index
-        public int GetParceslIndex() { return ParcelIndex; }
-        
-        //++DroneIndex
-        public void PromoteDroneslIndex()
-        {
-            if (DronesIndex == 10)
-                throw new ArgumentException("execption: too many drones", "arg");
-            DronesIndex++;
-        }
-        //++StationsIndex
-
-        public void PromoteStationsIndex()
-        {
-            if (StationsIndex == 5)
-                throw new ArgumentException("execption: too many stations", "arg");
-            StationsIndex++;
-        }
-        //++CustomersIndex
-
-        public void PromoteCustomerslIndex()
-        {
-            if (CustomersIndex == 1000)
-                throw new ArgumentException("execption: too many customers", "arg");
-            CustomersIndex++;
-        }
-        //++ParcelsIndex
-        public void PromoteParcelsIndex()
-        {
-            if (ParcelIndex == 1000)
-                throw new ArgumentException("execption: too many parcels", "arg");
-            ParcelIndex++;
-        }
-        
-
-    }
+    
 }
