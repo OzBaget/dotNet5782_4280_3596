@@ -313,7 +313,7 @@ namespace ConsoleUI
                     break;
                 case printType.AvailableStation:
                     Console.WriteLine("==Available Stations==");
-                    foreach (var parcel in db.GetAvailableStations())
+                    foreach (var parcel in db.GetStationsWithFreeSlots())
                     {
                         Console.WriteLine(parcel);
                         Console.WriteLine("======================");

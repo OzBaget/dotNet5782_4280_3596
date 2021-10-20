@@ -78,13 +78,13 @@ namespace DalObject
             index = DataSource.Drones.IndexOf(droneTmp);
             DataSource.Drones[index] = droneTmp;
         }
-        public void DroneToBase(int station, int drone)
+        public void DroneToBase(int stationId, int droneId)
         {
-            //TODO
+            DataSource.Charges.Add(new DroneCharge(droneId, stationId));
         }
-        public void FreeDrone(int drone)
+        public void FreeDrone(int droneId)
         {
-            //TODO
+            DataSource.Charges.Remove(DataSource.Charges.Find(charger => charger.Droneld == droneId));
         }
 
         public List<Station> GetAllStations()
@@ -107,7 +107,7 @@ namespace DalObject
         {
             return DataSource.Parcels.FindAll(parcel=>parcel.DroneId == 0);
         }
-        public List<Station> GetAvailableStations()
+        public List<Station> GetStationsWithFreeSlots()
         {
             return DataSource.BaseStations.FindAll(station=>station.FreeChargeSlots != 0);
         }

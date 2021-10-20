@@ -10,6 +10,7 @@ namespace DalObject
         internal static List<Station> BaseStations = new List<Station>();
         internal static List<Customer> Customers = new List<Customer>();
         internal static List<Parcel> Parcels = new List<Parcel>();
+        internal static List<DroneCharge> Charges = new List<DroneCharge>();
 
         internal class Config
         {

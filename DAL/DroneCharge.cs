@@ -10,6 +10,12 @@ namespace IDAL
     {
         public struct DroneCharge
         {
+            public DroneCharge(int droneld, int stationld)
+            {
+                Droneld = droneld;
+                Stationld = stationld;
+            }
+
             public int Droneld { get; set; }
             public int Stationld { get; set; }
             public override string ToString()
