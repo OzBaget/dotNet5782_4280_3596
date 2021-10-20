@@ -14,7 +14,7 @@ namespace DalObject
 
         internal class Config
         {
-            int id = 0;
+            static int id = 0;
             public static int parcelId() { return ++id;}
         }
 

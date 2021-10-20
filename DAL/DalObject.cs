@@ -54,8 +54,8 @@ namespace DalObject
             DataSource.Parcels[index] = parcelTmp;
 
             Drone droneTmp = GetDrone(droneId);
-            droneTmp.Status = DroneStatuses.Delivery;
             index = DataSource.Drones.IndexOf(droneTmp);
+            droneTmp.Status = DroneStatuses.Delivery;
             DataSource.Drones[index] = droneTmp;
         }
         public void PickParcel(int parcelId)
@@ -74,8 +74,8 @@ namespace DalObject
             DataSource.Parcels[index] = parcelTmp;
 
             Drone droneTmp = GetDrone(droneId);
-            droneTmp.Status = DroneStatuses.Available;
             index = DataSource.Drones.IndexOf(droneTmp);
+            droneTmp.Status = DroneStatuses.Available;
             DataSource.Drones[index] = droneTmp;
         }
         public void DroneToBase(int stationId, int droneId)
