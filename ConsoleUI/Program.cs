@@ -231,7 +231,7 @@ namespace ConsoleUI
         {
             Console.WriteLine("Enter station ID:");
             int stationId = getIntFromUser();
-            Console.WriteLine(db.GetStation(stationId));
+            Console.WriteLine(db.GetBaseStation(stationId));
         }
         private static void GetDroneMenu()
         {

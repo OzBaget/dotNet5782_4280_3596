@@ -13,7 +13,8 @@ namespace DalObject
 
         internal class Config
         {
-            //TODO: Function parcelId
+            int id = 0;
+            public static int parcelId() { return ++id;}
         }
 
         public static void Initialize()
@@ -75,7 +76,7 @@ namespace DalObject
             for (int i = 0; i < 10; i++)
             {
                 Parcel myParcel = new Parcel();
-                myParcel.Id = i+1;
+                myParcel.Id = Config.parcelId();
                 myParcel.SenderId = Customers[r.Next(0, 10)].Id;
                 myParcel.TargetId = Customers[r.Next(0, 10)].Id; //TODO: make sure that both sender and target are diffrent..
                 myParcel.DroneId = dronesIds[i];
