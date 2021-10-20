@@ -81,39 +81,39 @@ namespace DalObject
         public void DroneToBase(int stationId, int droneId)
         {
             DataSource.Charges.Add(new DroneCharge(droneId, stationId));
+            Drone droneTmp = GetDrone(droneId);
+            int index = DataSource.Drones.IndexOf(droneTmp);
+            droneTmp.Battery= 100;
+            DataSource.Drones[index] = droneTmp;
         }
         public void FreeDrone(int droneId)
         {
             DataSource.Charges.Remove(DataSource.Charges.Find(charger => charger.Droneld == droneId));
         }
 
-        public List<Station> GetAllStations()
+        public Station[] GetAllStations()
         {
-            return DataSource.BaseStations;
+            return DataSource.BaseStations.ToArray();
         }
-        public List<Drone> GetAllDrones()
+        public Drone[] GetAllDrones()
         {
-            return DataSource.Drones;
+            return DataSource.Drones.ToArray();
         }
-        public List<Customer> GetAllCustomers()
+        public Customer[] GetAllCustomers()
         {
-            return DataSource.Customers;
+            return DataSource.Customers.ToArray();
         }
-        public List<Parcel> GetAllParcels()
+        public Parcel[] GetAllParcels()
         {
-            return DataSource.Parcels;
+            return DataSource.Parcels.ToArray();
         }
-        public List<Parcel> GetUnassignedParcels()
+        public Parcel[] GetUnassignedParcels()
         {
-            return DataSource.Parcels.FindAll(parcel=>parcel.DroneId == 0);
+            return DataSource.Parcels.FindAll(parcel => parcel.DroneId == 0).ToArray();
         }
-        public List<Station> GetStationsWithFreeSlots()
+        public Station[] GetStationsWithFreeSlots()
         {
-            return DataSource.BaseStations.FindAll(station=>station.FreeChargeSlots != 0);
+            return DataSource.BaseStations.FindAll(station => station.FreeChargeSlots != 0).ToArray();
         }
-
-
-
-
     }
 }
