@@ -81,14 +81,26 @@ namespace DalObject
         public void DroneToBase(int stationId, int droneId)
         {
             DataSource.Charges.Add(new DroneCharge(droneId, stationId));
+            Station stationTmp = GetBaseStation(stationId);
+            int index = DataSource.BaseStations.IndexOf(stationTmp);
+            stationTmp.FreeChargeSlots--;
+            DataSource.BaseStations[index] = stationTmp;
+
+
             Drone droneTmp = GetDrone(droneId);
-            int index = DataSource.Drones.IndexOf(droneTmp);
+            index = DataSource.Drones.IndexOf(droneTmp);
             droneTmp.Battery= 100;
             DataSource.Drones[index] = droneTmp;
         }
         public void FreeDrone(int droneId)
         {
-            DataSource.Charges.Remove(DataSource.Charges.Find(charger => charger.Droneld == droneId));
+            DroneCharge charger = DataSource.Charges.Find(charger => charger.Droneld == droneId);
+            DataSource.Charges.Remove(charger);
+
+            Station stationTmp = GetBaseStation(charger.Stationld);
+            int index = DataSource.BaseStations.IndexOf(stationTmp);
+            stationTmp.FreeChargeSlots++;
+            DataSource.BaseStations[index] = stationTmp;
         }
 
         public Station[] GetAllStations()
