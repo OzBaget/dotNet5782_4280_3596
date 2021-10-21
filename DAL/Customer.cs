@@ -4,6 +4,7 @@ namespace IDAL
 {
     namespace DO
     {
+       
         public struct Customer
         {
             public Customer(string name, string phone, double lat, double lng)
