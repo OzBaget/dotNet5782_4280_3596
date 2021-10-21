@@ -46,9 +46,9 @@ namespace IDAL
             }
 
             /// <summary>
-            /// Convert Decimal degrees to degrees, minutes, seconds angle.
+            /// Convert decimal degrees to degrees, minutes, seconds angle.
             /// </summary>
-            /// <param name="dec">the degree</param>
+            /// <param name="dec">the degree in decimal</param>
             /// <returns>deg°min'sec"</returns>
             private static string decToDegMinSec(double dec)
             {

@@ -13,47 +13,90 @@ namespace DalObject
         {
             DataSource.Initialize();
         }
-        //returns the base station which has thiis id
+        /// <summary>
+        /// returns base station by ID
+        /// </summary>
+        /// <param name="stationId"> the base station ID</param>
+        /// <returns>Return a Station object of the requsted ID (by value)</returns>
         public Station GetBaseStation(int stationId) 
         {
             return DataSource.BaseStations.Find(station => station.Id == stationId);
         }
-        //returns the drone which has thiis id
+        /// <summary>
+        /// returns drone by ID
+        /// </summary>
+        /// <param name="droneId"> the drone ID</param>
+        /// <returns>Drone object of the requsted ID (by value)</returns>
         public Drone GetDrone(int droneId) 
         {
             return DataSource.Drones.Find(drone => drone.Id == droneId);
         }
-        //returns the customer which has thiis id
+        /// <summary>
+        /// returns customer by ID
+        /// </summary>
+        /// <param name="customerId"> the customer ID</param>
+        /// <returns>Customer object of the requsted ID (by value)</returns>
         public Customer GetCustomer(int customerId)
         {
             return DataSource.Customers.Find(customer=> customer.Id == customerId);
         }
-        //returns the parcel which has thiis id
+        /// <summary>
+        /// returns parcel by ID
+        /// </summary>
+        /// <param name="parcelId"> the parcel ID</param>
+        /// <returns>Parcel object of the requsted ID (by value)</returns>
         public Parcel GetParcerl(int parcelId) 
         {
             return DataSource.Parcels.Find(parcel => parcel.Id == parcelId);
         }
-        //add base to the list
+        /// <summary>
+        /// Add base station to the BaseStations list in DataSource
+        /// </summary>
+        /// <param name="name">the name of the station</param>
+        /// <param name="lat">the latitude of the station</param>
+        /// <param name="lng">the longitude of the station</param>
+        /// <param name="chargSlots">hw many charge slosts are in the station</param>
         public void AddBase(string name, double lat, double lng, int chargSlots)
         {
             DataSource.BaseStations.Add(new Station(name, lat, lng, chargSlots));
         }
-        //add drone to the list
+        /// <summary>
+        /// Add drone to Drones list in DataSource
+        /// </summary>
+        /// <param name="model">the modle of the drone</param>
+        /// <param name="maxWeightInt">max weight of the drone (0/1/2)</param>
         public void AddDrone(string model, int maxWeightInt)
         {
             DataSource.Drones.Add(new Drone(model, (WeightCategories)maxWeightInt));
         }
-        //add customer to the list
+
+        /// <summary>
+        /// Add customer to Customers list in DataSource
+        /// </summary>
+        /// <param name="name">the name of the customer</param>
+        /// <param name="phone">the phone of the customer</param>
+        /// <param name="lat">the latitude of the customer</param>
+        /// <param name="lng">the longitude of the customer</param>
         public void AddCustomer(string name, string phone, double lat, double lng)
         {
             DataSource.Customers.Add(new Customer(name, phone, lat, lng));
         }
-        //add parcel to the list
+        /// <summary>
+        /// Add parcel to Parcels list in DataSource
+        /// </summary>
+        /// <param name="senderId">sender customer ID</param>
+        /// <param name="targetId">target customer ID</param>
+        /// <param name="weightInt">the weight of the parcel (0/1/2)</param>
+        /// <param name="priorityInt">the priority of the parcel (0/1/2)</param>
         public void AddParcel(int senderId, int targetId, int weightInt, int priorityInt)
         {
             DataSource.Parcels.Add(new Parcel(senderId, targetId, (WeightCategories)weightInt, (Priorities)priorityInt));
         }
-        //link the drone to the parcel
+        /// <summary>
+        /// link parcel to drone
+        /// </summary>
+        /// <param name="parcelId">the parcel ID</param>
+        /// <param name="droneId">the drone ID</param>
         public void linkParcel(int parcelId, int droneId)
         {
             Parcel parcelTmp = GetParcerl(parcelId);
@@ -67,7 +110,10 @@ namespace DalObject
             droneTmp.Status = DroneStatuses.Delivery;
             DataSource.Drones[index] = droneTmp;
         }
-        //set the time that the parcel was picked by the drone
+        /// <summary>
+        /// update parcel pickUp time to the current time
+        /// </summary>
+        /// <param name="parcelId">the parcel ID to update</param>
         public void PickParcel(int parcelId)
         {
             Parcel parcelTmp = GetParcerl(parcelId);
@@ -75,7 +121,10 @@ namespace DalObject
             parcelTmp.PickedUp = DateTime.Now;
             DataSource.Parcels[index] = parcelTmp;
         }
-        //set the time that the parcel was picked by the customer
+        /// <summary>
+        /// update parcel Deliverd time to the current time
+        /// </summary>
+        /// <param name="parcelId">the parcel ID to update</param>
         public void ParcelToCustomer(int parcelId)
         {
             Parcel parcelTmp = GetParcerl(parcelId);
@@ -93,15 +142,27 @@ namespace DalObject
         public void DroneToBase(int stationId, int droneId)
         {
             DataSource.Charges.Add(new DroneCharge(droneId, stationId));
+            Station stationTmp = GetBaseStation(stationId);
+            int index = DataSource.BaseStations.IndexOf(stationTmp);
+            stationTmp.FreeChargeSlots--;
+            DataSource.BaseStations[index] = stationTmp;
+
+
             Drone droneTmp = GetDrone(droneId);
-            int index = DataSource.Drones.IndexOf(droneTmp);
+            index = DataSource.Drones.IndexOf(droneTmp);
             droneTmp.Battery= 100;
             DataSource.Drones[index] = droneTmp;
         }
         //Free drone frome charging
         public void FreeDrone(int droneId)
         {
-            DataSource.Charges.Remove(DataSource.Charges.Find(charger => charger.Droneld == droneId));
+            DroneCharge charger = DataSource.Charges.Find(charger => charger.Droneld == droneId);
+            DataSource.Charges.Remove(charger);
+
+            Station stationTmp = GetBaseStation(charger.Stationld);
+            int index = DataSource.BaseStations.IndexOf(stationTmp);
+            stationTmp.FreeChargeSlots++;
+            DataSource.BaseStations[index] = stationTmp;
         }
         //Return array of base satations
         public Station[] GetAllStations()
