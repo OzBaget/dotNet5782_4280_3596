@@ -24,10 +24,11 @@ namespace IDAL
 
             public override string ToString()
             {
-                return $"Customer ID: {Id}\n" +
-                    $"Name: {Name}\n" +
+                return 
+                    $"Customer ID:  {Id}\n" +
+                    $"Name:         {Name}\n" +
                     $"Phone Number: {Phone}\n" +
-                    $"Position: {coordsToSexag(Lat, Lng)}";
+                    $"Position:     {coordsToSexag(Lat, Lng)}";
             }
 
 

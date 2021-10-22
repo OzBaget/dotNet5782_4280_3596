@@ -90,7 +90,7 @@ namespace DalObject
         /// <param name="priorityInt">the priority of the parcel (0/1/2)</param>
         public void AddParcel(int senderId, int targetId, int weightInt, int priorityInt)
         {
-            DataSource.Parcels.Add(new Parcel(senderId, targetId, (WeightCategories)weightInt, (Priorities)priorityInt));
+            DataSource.Parcels.Add(new Parcel(DataSource.Config.parcelId(), senderId, targetId, (WeightCategories)weightInt, (Priorities)priorityInt));
         }
         /// <summary>
         /// link parcel to drone
