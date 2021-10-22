@@ -138,7 +138,11 @@ namespace DalObject
             droneTmp.Status = DroneStatuses.Available;
             DataSource.Drones[index] = droneTmp;
         }
-        //Charge the drone
+        /// <summary>
+        /// Charge the drone
+        /// </summary>
+        /// <param name="stationId">the station ID with the charger</param>
+        /// <param name="droneId">the drone ID</param>
         public void DroneToBase(int stationId, int droneId)
         {
             DataSource.Charges.Add(new DroneCharge(droneId, stationId));
@@ -153,7 +157,10 @@ namespace DalObject
             droneTmp.Battery= 100;
             DataSource.Drones[index] = droneTmp;
         }
-        //Free drone frome charging
+        /// <summary>
+        /// Free drone frome charging
+        /// </summary>
+        /// <param name="droneId">the drone ID to release</param>
         public void FreeDrone(int droneId)
         {
             DroneCharge charger = DataSource.Charges.Find(charger => charger.Droneld == droneId);
@@ -164,32 +171,50 @@ namespace DalObject
             stationTmp.FreeChargeSlots++;
             DataSource.BaseStations[index] = stationTmp;
         }
-        //Return array of base satations
+        /// <summary>
+        /// get array of all base satations
+        /// </summary>
+        /// <returns>array of all base satations</returns>
         public Station[] GetAllStations()
         {
             return DataSource.BaseStations.ToArray();
         }
-        //Return array of drones
+        /// <summary>
+        /// get array of all drones
+        /// </summary>
+        /// <returns>array of all drones</returns>
         public Drone[] GetAllDrones()
         {
             return DataSource.Drones.ToArray();
         }
-        //Return array of customers
+        /// <summary>
+        /// get array of all customers
+        /// </summary>
+        /// <returns>array of all customer</returns>
         public Customer[] GetAllCustomers()
         {
             return DataSource.Customers.ToArray();
         }
-        //Return array of parcels
+        /// <summary>
+        /// get array of all parcels
+        /// </summary>
+        /// <returns>array of all parcels</returns>
         public Parcel[] GetAllParcels()
         {
             return DataSource.Parcels.ToArray();
         }
-        //Return array of unsigned parcels
+        /// <summary>
+        /// get array of all unassigned parcels
+        /// </summary>
+        /// <returns>array of parcels</returns>
         public Parcel[] GetUnassignedParcels()
         {
             return DataSource.Parcels.FindAll(parcel => parcel.DroneId == 0).ToArray();
         }
-        //return all the base stations that has free cahrge slots
+        /// <summary>
+        /// get all base stations that has free cahrge slots
+        /// </summary>
+        /// <returns>array of all the base stations that has free charge slots</returns>
         public Station[] GetStationsWithFreeSlots()
         {
             return DataSource.BaseStations.FindAll(station => station.FreeChargeSlots != 0).ToArray();

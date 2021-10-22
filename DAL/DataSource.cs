@@ -17,7 +17,9 @@ namespace DalObject
             static int id = 0;
             public static int parcelId() { return ++id;}
         }
-
+        /// <summary>
+        /// Initialize all lists with random data
+        /// </summary>
         public static void Initialize()
         {
             Random r = new Random();
@@ -54,7 +56,7 @@ namespace DalObject
                 myCustomer.Id = r.Next();
                 myCustomer.Name = names[i];
                 myCustomer.Phone = "+972" + r.Next(100000000, 999999999).ToString();//ten digits phone number
-                myCustomer.Lng = (double)r.Next(345000, 355000) / 10000;//v  
+                myCustomer.Lng = (double)r.Next(345000, 355000) / 10000;//v         
                 myCustomer.Lat = (double)r.Next(315000, 330000) / 10000;//somewhere in Israel
                 Customers.Add(myCustomer);
             }
@@ -67,7 +69,7 @@ namespace DalObject
             int j = 0;
             foreach (Drone drone in Drones)
             {
-                if (drone.Status == DroneStatuses.Delivery)// we need to make them really under delivery.
+                if (drone.Status == DroneStatuses.Delivery)//need to make them really under delivery.
                 {
                     dronesIds[j] = drone.Id;
                 }
@@ -96,18 +98,18 @@ namespace DalObject
 
                 Parcels.Add(myParcel);
             }
-            //TODO: update config.
-            // do not listen to anything that Oz says. In generaly, leave the degree and go recruit to the IDF 
-
         }
+
+        /// <summary>
+        /// retrun random date&time between two dates
+        /// </summary>
+        /// <param name="start">the min date&time</param>
+        /// <param name="end">the max date&time</param>
+        /// <returns>date&time between the two dates</returns>
         private static DateTime randomDateBetween(DateTime start, DateTime end)
         {
             Random r = new Random();
             return start.AddMinutes(r.Next((int)(end - start).TotalMinutes));
         }
     }
-
-
-
-    
 }
