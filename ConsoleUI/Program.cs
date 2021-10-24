@@ -7,6 +7,7 @@ namespace ConsoleUI
         static DalObject.DalObject db = new DalObject.DalObject();
         static void Main(string[] args)
         {
+            Console.WriteLine($"{CalculateDist(-50.066389, 5.714722, 58.643889, 3.07)}");
             Console.WriteLine("Welcome To DeliverManger!");
             bool exit = false;
             while (!exit)
@@ -20,8 +21,8 @@ namespace ConsoleUI
         private static bool mainMenu()
         {
             Console.WriteLine("Choose one of the following:");
-            Console.WriteLine("1. Add\n2. Update\n3. View\n4. View list\n5. Exit");
-            int userChoose = getUserSelection(5);
+            Console.WriteLine("1. Add\n2. Update\n3. View\n4. View list\n5. Calclate distance\n6. Exit");
+            int userChoose = getUserSelection(6);
             bool back = false;
             switch (userChoose)
             {
@@ -42,6 +43,9 @@ namespace ConsoleUI
                         back = viewListMenu();
                     break;
                 case 5:
+                        calculateDistMenu();
+                    break;
+                case 6:
                     Console.WriteLine("Exiting...");
                     return true;
                 default:
@@ -50,6 +54,8 @@ namespace ConsoleUI
             }
             return false;
         }
+
+        
 
         /// <summary>
         /// The add-object menu
@@ -147,7 +153,7 @@ namespace ConsoleUI
             Console.WriteLine("1. Normal\n2. Fast\n3. Urgent");
             int priorityInt = getUserSelection(3) - 1;
 
-            db.AddParcel(senderId, targetId, weightInt, priorityInt);
+            Console.WriteLine($"parcelID: {db.AddParcel(senderId, targetId, weightInt, priorityInt)}");
         }
         /// <summary>
         /// The update menu
@@ -183,6 +189,7 @@ namespace ConsoleUI
             }
             return false;
         }
+
 
         /// <summary>
         /// get from the user parcel and drone IDs to link
@@ -383,6 +390,16 @@ namespace ConsoleUI
             }
         }
         /// <summary>
+        /// get coords from user and calculate the distance To the first customer in DataSource
+        /// </summary>
+        private static void calculateDistMenu()
+        {
+            Tuple<double, double> coords = getCoordsFromUser();
+            var myCustomer = db.GetAllCustomers()[0];
+            Console.WriteLine($"Distance to customer #{myCustomer.Id} is: {CalculateDist(coords.Item1, coords.Item2, myCustomer.Lat, myCustomer.Lng)}");
+        }
+
+        /// <summary>
         /// get input from user until it valid option
         /// </summary>
         /// <param name="numOptions">the num of options to choose from</param>
@@ -449,6 +466,25 @@ namespace ConsoleUI
             }
             return Tuple.Create(lat, lng);
         }
+
+
+        public static double CalculateDist(double lat1, double lng1, double lat2, double lng2)
+        {
+            const double Radios = 6371000;//meters
+            //deg to radians
+            lat1 = lat1 * Math.PI / 180;
+            lat2 = lat2 * Math.PI / 180;
+            lng1 = lng1 * Math.PI / 180;
+            lng2 = lng2 * Math.PI / 180;
+
+            //Haversine formula
+            double a = Math.Pow(Math.Sin((lat2 - lat1) / 2), 2) +
+                Math.Cos(lat1) * Math.Cos(lat2) *
+                Math.Pow(Math.Sin((lng2 - lng1) / 2), 2);
+            double c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
+            return Radios * c;
+        }
+
         enum printType { BaseStation, Drone, Customer, Parcel, UnassignedParcel, AvailableStation};
     }
 }
