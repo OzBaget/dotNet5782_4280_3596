@@ -1,11 +1,6 @@
 ﻿using System;
 using IDAL.DO;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 namespace DalObject
-
 {
     public class DalObject
     {
@@ -88,9 +83,16 @@ namespace DalObject
         /// <param name="targetId">target customer ID</param>
         /// <param name="weightInt">the weight of the parcel (0/1/2)</param>
         /// <param name="priorityInt">the priority of the parcel (0/1/2)</param>
-        public void AddParcel(int senderId, int targetId, int weightInt, int priorityInt)
+        public int AddParcel(int senderId, int targetId, int weightInt, int priorityInt)
         {
-            DataSource.Parcels.Add(new Parcel(DataSource.Config.parcelId(), senderId, targetId, (WeightCategories)weightInt, (Priorities)priorityInt));
+            Parcel myParcel = new Parcel(
+                ++DataSource.Config.parcelId, //update Config.parcelId
+                senderId,
+                targetId,
+                (WeightCategories)weightInt,
+                (Priorities)priorityInt);
+            DataSource.Parcels.Add(myParcel);
+            return DataSource.Config.parcelId;
         }
         /// <summary>
         /// link parcel to drone

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 namespace ConsoleUI
 {
     class Program
@@ -7,7 +6,6 @@ namespace ConsoleUI
         static DalObject.DalObject db = new DalObject.DalObject();
         static void Main(string[] args)
         {
-            Console.WriteLine($"{CalculateDist(-50.066389, 5.714722, 58.643889, 3.07)}");
             Console.WriteLine("Welcome To DeliverManger!");
             bool exit = false;
             while (!exit)
@@ -153,7 +151,7 @@ namespace ConsoleUI
             Console.WriteLine("1. Normal\n2. Fast\n3. Urgent");
             int priorityInt = getUserSelection(3) - 1;
 
-            Console.WriteLine($"parcelID: {db.AddParcel(senderId, targetId, weightInt, priorityInt)}");
+            db.AddParcel(senderId, targetId, weightInt, priorityInt);
         }
         /// <summary>
         /// The update menu
@@ -427,7 +425,7 @@ namespace ConsoleUI
         }
 
         /// <summary>
-        /// get int from user until 
+        /// get input from user until its valid int
         /// </summary>
         /// <returns>the int the user enter</returns>
         private static int getIntFromUser()
@@ -467,7 +465,14 @@ namespace ConsoleUI
             return Tuple.Create(lat, lng);
         }
 
-
+        /// <summary>
+        /// calculate Haversine dist between two coords
+        /// </summary>
+        /// <param name="lat1">latituse of point 1</param>
+        /// <param name="lng1">longtude of point 1</param>
+        /// <param name="lat2">latituse of point 2</param>
+        /// <param name="lng2">longtude of point 2</param>
+        /// <returns>the distance bitween the two coords in meters</returns>
         public static double CalculateDist(double lat1, double lng1, double lat2, double lng2)
         {
             const double Radios = 6371000;//meters

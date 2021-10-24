@@ -14,8 +14,7 @@ namespace DalObject
 
         internal class Config
         {
-            static int id = 0;
-            public static int parcelId() { return ++id;}
+            public static int parcelId{ get; set; }
         }
         /// <summary>
         /// Initialize all lists with random data
@@ -70,16 +69,14 @@ namespace DalObject
             foreach (Drone drone in Drones)
             {
                 if (drone.Status == DroneStatuses.Delivery)//need to make them really under delivery.
-                {
                     dronesIds[j] = drone.Id;
-                }
                 j++;
             }
 
             for (int i = 0; i < 10; i++)
             {
                 Parcel myParcel = new Parcel();
-                myParcel.Id = Config.parcelId();
+                myParcel.Id = ++Config.parcelId;
                 myParcel.SenderId = Customers[r.Next(0, 10)].Id;
                 myParcel.TargetId = Customers[r.Next(0, 10)].Id; //TODO: make sure that both sender and target are diffrent..
                 myParcel.DroneId = dronesIds[i];
@@ -95,7 +92,6 @@ namespace DalObject
                 //Scheduled and PickedUp aren't assigend because they didnt happend..
 
                 myParcel.Priority = (Priorities)r.Next(0, 3);
-
                 Parcels.Add(myParcel);
             }
         }
