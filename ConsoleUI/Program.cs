@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 namespace ConsoleUI
 {
     class Program
@@ -13,11 +12,15 @@ namespace ConsoleUI
                 exit = mainMenu();
         }
 
+        /// <summary>
+        /// The main menu
+        /// </summary>
+        /// <returns>true if the user choose 'Exit', otherwise, false</returns>
         private static bool mainMenu()
         {
             Console.WriteLine("Choose one of the following:");
-            Console.WriteLine("1. Add\n2. Update\n3. View\n4. View list\n5. Exit");
-            int userChoose = getUserSelection(5);
+            Console.WriteLine("1. Add\n2. Update\n3. View\n4. View list\n5. Calclate distance\n6. Exit");
+            int userChoose = getUserSelection(6);
             bool back = false;
             switch (userChoose)
             {
@@ -38,6 +41,9 @@ namespace ConsoleUI
                         back = viewListMenu();
                     break;
                 case 5:
+                        calculateDistMenu();
+                    break;
+                case 6:
                     Console.WriteLine("Exiting...");
                     return true;
                 default:
@@ -47,6 +53,12 @@ namespace ConsoleUI
             return false;
         }
 
+        
+
+        /// <summary>
+        /// The add-object menu
+        /// </summary>
+        /// <returns>true if the user choose 'back', otherwise, false</returns>
         private static bool addMenu()
         {
             Console.WriteLine("What do you want to add?");
@@ -79,6 +91,9 @@ namespace ConsoleUI
             return false;
         }
 
+        /// <summary>
+        /// get base station info from the user, and add the base station.
+        /// </summary>
         private static void addBaseStationMenu()
         {
             Console.WriteLine("Enter station name:");
@@ -90,6 +105,9 @@ namespace ConsoleUI
             int slots = getIntFromUser();
             db.AddBase(name, location.Item1, location.Item2, slots);
         }
+        /// <summary>
+        /// get drone info from the user, and add the drone.
+        /// </summary>
         private static void addDroneMenu()
         {
             Console.WriteLine("Enter drone model: ");
@@ -100,6 +118,9 @@ namespace ConsoleUI
             int maxWeightInt = getUserSelection(3) - 1;
             db.AddDrone(model, maxWeightInt);
         }
+        /// <summary>
+        /// get customer info from the user, and add the customer.
+        /// </summary>
         private static void addCustomerMenu()
         {
             Console.WriteLine("Enter customer name:");
@@ -111,6 +132,9 @@ namespace ConsoleUI
             Tuple<double, double> position = getCoordsFromUser();
             db.AddCustomer(name, phone, position.Item1, position.Item2);
         }
+        /// <summary>
+        /// get parcel info from the user, and add the parcel.
+        /// </summary>
         private static void addParcelMenu()
         {
             Console.WriteLine("Enter sender ID:");
@@ -129,6 +153,10 @@ namespace ConsoleUI
 
             db.AddParcel(senderId, targetId, weightInt, priorityInt);
         }
+        /// <summary>
+        /// The update menu
+        /// </summary>
+        /// <returns>true if the user choose 'back', otherwise, false</returns>
         private static bool updateMenu()
         {
             Console.WriteLine("What action do you want to do?");
@@ -158,9 +186,12 @@ namespace ConsoleUI
                     break;
             }
             return false;
-
         }
 
+
+        /// <summary>
+        /// get from the user parcel and drone IDs to link
+        /// </summary>
         private static void linkParcelMenu()
         {
             Console.WriteLine("Enter parcel ID:");
@@ -170,18 +201,27 @@ namespace ConsoleUI
             int dronelId = getIntFromUser();
             db.linkParcel(parcelId, dronelId);
         }
+        /// <summary>
+        /// get parcel ID form user and pick-up the parcel
+        /// </summary>
         private static void pickUpParcelMenu()
         {
             Console.WriteLine("Enter parcel ID:");
             int parcelId = getIntFromUser();
             db.PickParcel(parcelId);
         }
+        /// <summary>
+        /// get parcel ID form user and deliver the parcel
+        /// </summary>
         private static void deliverParcel()
         {
             Console.WriteLine("Enter parcel ID:");
             int parcelId = getIntFromUser();
             db.ParcelToCustomer(parcelId);
         }
+        /// <summary>
+        /// get drone ID form user and pick-up the parcel
+        /// </summary>
         private static void sendDroneToCharge()
         {
             Console.WriteLine("Enter drone ID:");
@@ -192,6 +232,9 @@ namespace ConsoleUI
             int stationId = getIntFromUser();
             db.DroneToBase(stationId, droneId);
         }
+        /// <summary>
+        /// get drone ID form user, and release the drone
+        /// </summary>
         private static void releaseDroneFromCharger()
         {
             Console.WriteLine("Enter drone ID:");
@@ -199,6 +242,10 @@ namespace ConsoleUI
             db.FreeDrone(droneId);
         }
 
+        /// <summary>
+        /// View one object menu
+        /// </summary>
+        /// <returns>true if the user choose 'back', otherwise, false</returns>
         private static bool viewMenu()
         {
             Console.WriteLine("What do you want to view?");
@@ -227,26 +274,36 @@ namespace ConsoleUI
             return false;
 
         }
+        /// <summary>
+        /// get station ID and print the station
+        /// </summary>
         private static void GetBaseStationMenu()
         {
             Console.WriteLine("Enter station ID:");
             int stationId = getIntFromUser();
             Console.WriteLine(db.GetBaseStation(stationId));
         }
+        /// <summary>
+        /// get drone ID and print the drone
+        /// </summary>
         private static void GetDroneMenu()
         {
             Console.WriteLine("Enter drone ID:");
             int droneId = getIntFromUser();
             Console.WriteLine(db.GetDrone(droneId));
         }
-
+        /// <summary>
+        /// get customer ID and print the customer
+        /// </summary>
         private static void GetCustomerMenu()
         {
             Console.WriteLine("Enter customer ID:");
             int customerId = getIntFromUser();
             Console.WriteLine(db.GetCustomer(customerId));
         }
-
+        /// <summary>
+        /// get parcel ID and print the parcel
+        /// </summary>
         private static void GetParcelMenu()
         {
             Console.WriteLine("Enter parcel ID:");
@@ -254,7 +311,10 @@ namespace ConsoleUI
             Console.WriteLine(db.GetParcerl(parcelId));
         }
 
-
+        /// <summary>
+        /// View list of objects menu
+        /// </summary>
+        /// <returns>true if the user choose 'back', otherwise, false</returns>
         private static bool viewListMenu()
         {
             Console.WriteLine("What list do you want to view?");
@@ -267,6 +327,10 @@ namespace ConsoleUI
             printListOf((printType)userChoose - 1);
             return false;
         }
+        /// <summary>
+        /// print list of objects by time
+        /// </summary>
+        /// <param name="type">the type of object to print</param>
         private static void printListOf(printType type)
         {
             switch (type)
@@ -323,7 +387,21 @@ namespace ConsoleUI
                     break;
             }
         }
+        /// <summary>
+        /// get coords from user and calculate the distance To the first customer in DataSource
+        /// </summary>
+        private static void calculateDistMenu()
+        {
+            Tuple<double, double> coords = getCoordsFromUser();
+            var myCustomer = db.GetAllCustomers()[0];
+            Console.WriteLine($"Distance to customer #{myCustomer.Id} is: {CalculateDist(coords.Item1, coords.Item2, myCustomer.Lat, myCustomer.Lng)}");
+        }
 
+        /// <summary>
+        /// get input from user until it valid option
+        /// </summary>
+        /// <param name="numOptions">the num of options to choose from</param>
+        /// <returns>return the  the user enter</returns>
         private static int getUserSelection(int numOptions)
         {
             string input = Console.ReadLine();
@@ -335,15 +413,21 @@ namespace ConsoleUI
             }
             return result;
         }
+        /// <summary>
+        /// check if the option is valid.
+        /// </summary>
+        /// <param name="choosen">the choosen option</param>
+        /// <param name="numOptions">the num of options to choose of</param>
+        /// <returns>true if valid option, otherwise false</returns>
         private static bool isValidOption(int choosen, int numOptions)
         {
-            for (int i = 1; i < numOptions + 1; i++)
-            {
-                if (choosen == i)
-                    return true;
-            }
-            return false;
+            return choosen > 0 && choosen <= numOptions;
         }
+
+        /// <summary>
+        /// get input from user until its valid int
+        /// </summary>
+        /// <returns>the int the user enter</returns>
         private static int getIntFromUser()
         {
             int myInt;
@@ -355,6 +439,10 @@ namespace ConsoleUI
             }
             return myInt;
         }
+        /// <summary>
+        /// get coords from user until its valid input
+        /// </summary>
+        /// <returns>the coords (lat,lng)</returns>
         private static Tuple<double, double> getCoordsFromUser()
         {
             Console.WriteLine("Enter Lattitude (as decimal): ");
@@ -376,6 +464,32 @@ namespace ConsoleUI
             }
             return Tuple.Create(lat, lng);
         }
+
+        /// <summary>
+        /// calculate Haversine dist between two coords
+        /// </summary>
+        /// <param name="lat1">latituse of point 1</param>
+        /// <param name="lng1">longtude of point 1</param>
+        /// <param name="lat2">latituse of point 2</param>
+        /// <param name="lng2">longtude of point 2</param>
+        /// <returns>the distance bitween the two coords in meters</returns>
+        public static double CalculateDist(double lat1, double lng1, double lat2, double lng2)
+        {
+            const double Radios = 6371000;//meters
+            //deg to radians
+            lat1 = lat1 * Math.PI / 180;
+            lat2 = lat2 * Math.PI / 180;
+            lng1 = lng1 * Math.PI / 180;
+            lng2 = lng2 * Math.PI / 180;
+
+            //Haversine formula
+            double a = Math.Pow(Math.Sin((lat2 - lat1) / 2), 2) +
+                Math.Cos(lat1) * Math.Cos(lat2) *
+                Math.Pow(Math.Sin((lng2 - lng1) / 2), 2);
+            double c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
+            return Radios * c;
+        }
+
         enum printType { BaseStation, Drone, Customer, Parcel, UnassignedParcel, AvailableStation};
     }
 }

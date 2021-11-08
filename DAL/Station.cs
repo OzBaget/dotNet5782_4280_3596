@@ -27,9 +27,10 @@ namespace IDAL
             public int FreeChargeSlots { get; set; }
             public override string ToString()
             {
-                return $"Station Id: {Id}\n" +
-                    $"Name: {Name}\n" +
-                    $"Position: {coordsToSexag(Lat,Lng)}\n" +
+                return 
+                    $"Station Id:        {Id}\n" +
+                    $"Name:              {Name}\n" +
+                    $"Position:          {coordsToSexag(Lat,Lng)}\n" +
                     $"Free Charge Slots: {FreeChargeSlots}";
             }
 

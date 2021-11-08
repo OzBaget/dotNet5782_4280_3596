@@ -14,10 +14,11 @@ namespace DalObject
 
         internal class Config
         {
-            static int id = 0;
-            public static int parcelId() { return ++id; }
+            public static int parcelId{ get; set; }
         }
-
+        /// <summary>
+        /// Initialize all lists with random data
+        /// </summary>
         public static void Initialize()
         {
             Random r = new Random();
@@ -52,7 +53,7 @@ namespace DalObject
                 myCustomer.Id = r.Next();
                 myCustomer.Name = names[i];
                 myCustomer.Phone = "+972" + r.Next(100000000, 999999999).ToString();//ten digits phone number
-                myCustomer.Lng = (double)r.Next(345000, 355000) / 10000;//v  
+                myCustomer.Lng = (double)r.Next(345000, 355000) / 10000;//v         
                 myCustomer.Lat = (double)r.Next(315000, 330000) / 10000;//somewhere in Israel
                 Customers.Add(myCustomer);
             }
@@ -72,7 +73,7 @@ namespace DalObject
             for (int i = 0; i < 10; i++)
             {
                 Parcel myParcel = new Parcel();
-                myParcel.Id = Config.parcelId();
+                myParcel.Id = ++Config.parcelId;
                 myParcel.SenderId = Customers[r.Next(0, 10)].Id;
                 myParcel.TargetId = Customers[r.Next(0, 10)].Id; //TODO: make sure that both sender and target are diffrent..
                 myParcel.DroneId = dronesIds[i];
@@ -88,21 +89,20 @@ namespace DalObject
                 //Scheduled and PickedUp aren't assigend because they didnt happend..
 
                 myParcel.Priority = (Priorities)r.Next(0, 3);
-
                 Parcels.Add(myParcel);
             }
-            //TODO: update config.
-            // do not listen to anything that Oz says. In generaly, leave the degree and go recruit to the IDF 
-
         }
+
+        /// <summary>
+        /// retrun random date&time between two dates
+        /// </summary>
+        /// <param name="start">the min date&time</param>
+        /// <param name="end">the max date&time</param>
+        /// <returns>date&time between the two dates</returns>
         private static DateTime randomDateBetween(DateTime start, DateTime end)
         {
             Random r = new Random();
             return start.AddMinutes(r.Next((int)(end - start).TotalMinutes));
         }
     }
-
-
-
-
 }
