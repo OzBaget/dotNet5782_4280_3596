@@ -3,7 +3,7 @@ using IDAL.DO;
 
 namespace IDAL
 {
-    interface IDal
+    public interface IDal
     {
         Station GetBaseStation(int stationId);
         Drone GetDrone(int droneId);
@@ -25,5 +25,6 @@ namespace IDAL
         IEnumerable<Parcel> GetUnassignedParcels();
         IEnumerable<Station> GetStationsWithFreeSlots();
         double[] GetPowerUse();
+        DalObject a = new DalObject;
     }
 }

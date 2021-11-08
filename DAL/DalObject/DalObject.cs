@@ -1,8 +1,9 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using IDAL.DO;
+using System;
 namespace DalObject
 {
-    public class DalObject
+    public class DalObject:IDAL.IDal
     {
         public DalObject()
         {
@@ -109,7 +110,6 @@ namespace DalObject
 
             Drone droneTmp = GetDrone(droneId);
             index = DataSource.Drones.IndexOf(droneTmp);
-            droneTmp.Status = DroneStatuses.Delivery;
             DataSource.Drones[index] = droneTmp;
         }
         /// <summary>
@@ -137,7 +137,6 @@ namespace DalObject
 
             Drone droneTmp = GetDrone(droneId);
             index = DataSource.Drones.IndexOf(droneTmp);
-            droneTmp.Status = DroneStatuses.Available;
             DataSource.Drones[index] = droneTmp;
         }
         /// <summary>
@@ -156,7 +155,6 @@ namespace DalObject
 
             Drone droneTmp = GetDrone(droneId);
             index = DataSource.Drones.IndexOf(droneTmp);
-            droneTmp.Battery= 100;
             DataSource.Drones[index] = droneTmp;
         }
         /// <summary>
@@ -177,49 +175,54 @@ namespace DalObject
         /// get array of all base satations
         /// </summary>
         /// <returns>array of all base satations</returns>
-        public Station[] GetAllStations()
+        public IEnumerable<Station> GetAllStations()
         {
-            return DataSource.BaseStations.ToArray();
+            return new List<Station>(DataSource.BaseStations);
         }
         /// <summary>
         /// get array of all drones
         /// </summary>
         /// <returns>array of all drones</returns>
-        public Drone[] GetAllDrones()
+        public IEnumerable<Drone> GetAllDrones()
         {
-            return DataSource.Drones.ToArray();
+            return new List<Drone>(DataSource.Drones);
         }
         /// <summary>
         /// get array of all customers
         /// </summary>
         /// <returns>array of all customer</returns>
-        public Customer[] GetAllCustomers()
+        public IEnumerable<Customer> GetAllCustomers()
         {
-            return DataSource.Customers.ToArray();
+            return new List<Customer>(DataSource.Customers);
         }
         /// <summary>
         /// get array of all parcels
         /// </summary>
         /// <returns>array of all parcels</returns>
-        public Parcel[] GetAllParcels()
+        public IEnumerable<Parcel> GetAllParcels()
         {
-            return DataSource.Parcels.ToArray();
+            return new List<Parcel>(DataSource.Parcels);
         }
         /// <summary>
         /// get array of all unassigned parcels
         /// </summary>
         /// <returns>array of parcels</returns>
-        public Parcel[] GetUnassignedParcels()
+        public IEnumerable<Parcel> GetUnassignedParcels()
         {
-            return DataSource.Parcels.FindAll(parcel => parcel.DroneId == 0).ToArray();
+            return DataSource.Parcels.FindAll(parcel => parcel.DroneId == 0);
         }
         /// <summary>
         /// get all base stations that has free cahrge slots
         /// </summary>
         /// <returns>array of all the base stations that has free charge slots</returns>
-        public Station[] GetStationsWithFreeSlots()
+        public IEnumerable<Station> GetStationsWithFreeSlots()
         {
-            return DataSource.BaseStations.FindAll(station => station.FreeChargeSlots != 0).ToArray();
+            return DataSource.BaseStations.FindAll(station => station.FreeChargeSlots != 0);
+        }
+
+        public double[] GetPowerUse()
+        {
+            
         }
     }
 }
