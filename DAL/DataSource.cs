@@ -14,7 +14,8 @@ namespace DalObject
 
         internal class Config
         {
-            public static int parcelId{ get; set; }
+           // return new double[] { 40, 60, 70, 90};
+        public static int parcelId{ get; set; }
         }
         /// <summary>
         /// Initialize all lists with random data
