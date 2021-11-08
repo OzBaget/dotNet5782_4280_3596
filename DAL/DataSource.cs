@@ -6,7 +6,7 @@ namespace DalObject
 {
     class DataSource
     {
-        internal static List<Drone>Drones = new List<Drone>();
+        internal static List<Drone> Drones = new List<Drone>();
         internal static List<Station> BaseStations = new List<Station>();
         internal static List<Customer> Customers = new List<Customer>();
         internal static List<Parcel> Parcels = new List<Parcel>();
@@ -15,7 +15,7 @@ namespace DalObject
         internal class Config
         {
             static int id = 0;
-            public static int parcelId() { return ++id;}
+            public static int parcelId() { return ++id; }
         }
 
         public static void Initialize()
@@ -38,10 +38,8 @@ namespace DalObject
             {
                 Drone myDrone = new Drone();
                 myDrone.Id = r.Next();
-                myDrone.Model = "MK"+r.Next(1,4).ToString();
+                myDrone.Model = "MK" + r.Next(1, 4).ToString();
                 myDrone.MaxWeight = (WeightCategories)r.Next(0, 3);
-                myDrone.Status = (DroneStatuses)r.Next(0, 3);
-                myDrone.Battery = r.Next(1, 101);
                 Drones.Add(myDrone);
             }
 
@@ -67,10 +65,7 @@ namespace DalObject
             int j = 0;
             foreach (Drone drone in Drones)
             {
-                if (drone.Status == DroneStatuses.Delivery)// we need to make them really under delivery.
-                {
-                    dronesIds[j] = drone.Id;
-                }
+                dronesIds[j] = drone.Id;
                 j++;
             }
 
@@ -109,5 +104,5 @@ namespace DalObject
 
 
 
-    
+
 }

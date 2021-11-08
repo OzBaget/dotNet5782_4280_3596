@@ -107,7 +107,6 @@ namespace DalObject
 
             Drone droneTmp = GetDrone(droneId);
             index = DataSource.Drones.IndexOf(droneTmp);
-            droneTmp.Status = DroneStatuses.Delivery;
             DataSource.Drones[index] = droneTmp;
         }
         /// <summary>
@@ -135,7 +134,6 @@ namespace DalObject
 
             Drone droneTmp = GetDrone(droneId);
             index = DataSource.Drones.IndexOf(droneTmp);
-            droneTmp.Status = DroneStatuses.Available;
             DataSource.Drones[index] = droneTmp;
         }
         //Charge the drone
@@ -150,7 +148,6 @@ namespace DalObject
 
             Drone droneTmp = GetDrone(droneId);
             index = DataSource.Drones.IndexOf(droneTmp);
-            droneTmp.Battery= 100;
             DataSource.Drones[index] = droneTmp;
         }
         //Free drone frome charging
