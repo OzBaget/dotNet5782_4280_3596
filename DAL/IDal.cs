@@ -25,5 +25,6 @@ namespace IDAL
         IEnumerable<Parcel> GetUnassignedParcels();
         IEnumerable<Station> GetStationsWithFreeSlots();
         double[] GetPowerUse();
+        double GetChargingRate();
     }
 }

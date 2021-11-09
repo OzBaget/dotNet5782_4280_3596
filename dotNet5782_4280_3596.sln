@@ -15,9 +15,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{A58113F6-C383-4F46-8072-C819FE0F15B3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BL", "BL\BL.csproj", "{4C4BFFCF-23FB-40DC-A1BE-0F81B52AAF9C}"
-	ProjectSection(ProjectDependencies) = postProject
-		{A58113F6-C383-4F46-8072-C819FE0F15B3} = {A58113F6-C383-4F46-8072-C819FE0F15B3}
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

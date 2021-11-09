@@ -18,7 +18,7 @@ namespace DalObject
             public static double LightPacket = 40; 
             public static double MediumPacket = 60; 
             public static double HeavyPacket = 80; 
-            public  double PrecentHour= 30; 
+            public static double PrecentHour= 30; 
         public static int ParcelId{ get; set; }
         }
         /// <summary>

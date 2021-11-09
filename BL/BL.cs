@@ -10,6 +10,32 @@ namespace BL
     
     public class BL : IBL.IBL
     {
+        IDAL.IDal DalObject;
+        public List<DroneToList> Dronse = new List<DroneToList>();
+        double powerUseEmpty;
+        double powerUseLight;
+        double powerUseMiddle;
+        double powerUseHeavy;
+
+        double chargingRate;
+
+        public BL(List<IDAL.DO.Drone> dronse)
+        {
+            DalObject = new DalObject.DalObject();
+            powerUseEmpty = DalObject.GetPowerUse()[0];
+            powerUseLight = DalObject.GetPowerUse()[1];
+            powerUseMiddle = DalObject.GetPowerUse()[2];
+            powerUseHeavy = DalObject.GetPowerUse()[3];
+
+            chargingRate = DalObject.GetChargingRate();
+
+
+            foreach (IDAL.DO.Drone drone in DalObject.GetAllDrones())
+            {
+                //TODO:: copy to Drones
+            }
+
+        }
 
         public void AddBase(string name, double lat, double lng, int chargSlots)
         {

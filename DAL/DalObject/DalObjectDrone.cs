@@ -22,6 +22,10 @@ namespace DalObject
                 DataSource.Config.HeavyPacket };
             return powerUse;
         }
+        public double GetChargingRate()
+        {
+            return DataSource.Config.PrecentHour;
+        }
 
         /// <summary>
         /// Add drone to Drones list in DataSource
