@@ -11,5 +11,9 @@ namespace IBL.BO
         public int Id;
         public string Sender;
         public string Receiver;
+        public Enums.WeightCategories Weight;
+        public Enums.Priorities Prioritie;
+        public Enums.ParcelStatus StatusParcel;
+        public CustomerInParcel Customer;
     }
 }
