@@ -14,12 +14,12 @@ namespace DalObject
 
         internal class Config
         {
-            public static double free = 20; 
-            public static double lightPacket = 40; 
-            public static double mediumPacket = 60; 
-            public static double heavyPacket = 80; 
-            public  double precentHour= 30; 
-        public static int parcelId{ get; set; }
+            public static double Free = 20; 
+            public static double LightPacket = 40; 
+            public static double MediumPacket = 60; 
+            public static double HeavyPacket = 80; 
+            public  double PrecentHour= 30; 
+        public static int ParcelId{ get; set; }
         }
         /// <summary>
         /// Initialize all lists with random data
@@ -78,7 +78,7 @@ namespace DalObject
             for (int i = 0; i < 10; i++)
             {
                 Parcel myParcel = new Parcel();
-                myParcel.Id = ++Config.parcelId;
+                myParcel.Id = ++Config.ParcelId;
                 myParcel.SenderId = Customers[r.Next(0, 10)].Id;
                 myParcel.TargetId = Customers[r.Next(0, 10)].Id; //TODO: make sure that both sender and target are diffrent..
                 myParcel.DroneId = dronesIds[i];

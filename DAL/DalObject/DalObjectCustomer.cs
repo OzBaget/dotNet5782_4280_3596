@@ -1,12 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DAL.DalObject
+﻿using System.Collections.Generic;
+using IDAL.DO;
+namespace DalObject
 {
-    class DalObjectCustomer
+    public partial class DalObject
     {
+        /// <summary>
+        /// returns customer by ID
+        /// </summary>
+        /// <param name="customerId"> the customer ID</param>
+        /// <returns>Customer object of the requsted ID (by value)</returns>
+        public Customer GetCustomer(int customerId)
+        {
+            return DataSource.Customers.Find(customer => customer.Id == customerId);
+        }
+
+        /// <summary>
+        /// Add customer to Customers list in DataSource
+        /// </summary>
+        /// <param name="name">the name of the customer</param>
+        /// <param name="phone">the phone of the customer</param>
+        /// <param name="lat">the latitude of the customer</param>
+        /// <param name="lng">the longitude of the customer</param>
+        public void AddCustomer(string name, string phone, double lat, double lng)
+        {
+            DataSource.Customers.Add(new Customer(name, phone, lat, lng));
+        }
+
+        /// <summary>
+        /// get array of all customers
+        /// </summary>
+        /// <returns>array of all customer</returns>
+        public IEnumerable<Customer> GetAllCustomers()
+        {
+            return new List<Customer>(DataSource.Customers);
+        }
+
+
     }
 }
