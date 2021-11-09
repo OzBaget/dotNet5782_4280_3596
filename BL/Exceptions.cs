@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IDAL.DO
+namespace IBL.BL
 {
     [Serializable]
     public class IdNotFoundException : Exception
@@ -42,4 +42,5 @@ namespace IDAL.DO
         public CantDeliverParcel(string message) : base(message) { }
     }
 
+    
 }
