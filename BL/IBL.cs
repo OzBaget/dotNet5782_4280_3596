@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using IDAL.DO;
+﻿using System;
+using System.Collections.Generic;
 
-namespace IDAL
+namespace IBL
 {
-    public interface IDal
+    interface IBL
     {
         Station GetBaseStation(int stationId);
         Drone GetDrone(int droneId);
