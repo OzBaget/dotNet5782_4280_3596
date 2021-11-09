@@ -14,7 +14,11 @@ namespace DalObject
 
         internal class Config
         {
-           // return new double[] { 40, 60, 70, 90};
+            public static double free = 20; 
+            public static double lightPacket = 40; 
+            public static double mediumPacket = 60; 
+            public static double heavyPacket = 80; 
+            public  double precentHour= 30; 
         public static int parcelId{ get; set; }
         }
         /// <summary>
