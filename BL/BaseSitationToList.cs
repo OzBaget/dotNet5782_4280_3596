@@ -8,5 +8,9 @@ namespace IBL.BO
 {
     public class BaseSitationToList
     {
+        public int Id;
+        public string name;
+        public int NumFreeChragers;
+        public int NumFullChragers;
     }
 }

@@ -8,5 +8,7 @@ namespace IBL.BO
 {
     public class DroneInCharging
     {
+        public int Id;
+        public double Battery;
     }
 }

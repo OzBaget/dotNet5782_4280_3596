@@ -8,5 +8,10 @@ namespace IBL.BO
 {
     public class ParcelInCustomer
     {
+        public int Id;
+        public Enums.WeightCategories Weight;
+        public Enums.Priorities Prioritie;
+        public Enums.ParcelStatus StatusParcel;
+        public CustomerInParcel Customer;
     }
 }
