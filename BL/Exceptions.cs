@@ -13,34 +13,33 @@ namespace IBL.BL
     }
 
     [Serializable]
-    public class IdAlreadyExists : Exception
+    public class IdAlreadyExistsException : Exception
     {
-        public IdAlreadyExists(string message) : base(message) { }
+        public IdAlreadyExistsException(string message) : base(message) { }
     }
 
     [Serializable]
-    public class CantSendDroneToCharge : Exception
+    public class CantSendDroneToChargeException : Exception
     {
-        public CantSendDroneToCharge(string message) : base(message) { }
+        public CantSendDroneToChargeException(string message) : base(message) { }
     }
 
     [Serializable]
-    public class CantReleaseDroneFromCharge : Exception
+    public class CantReleaseDroneFromChargeException : Exception
     {
-        public CantReleaseDroneFromCharge(string message) : base(message) { }
+        public CantReleaseDroneFromChargeException(string message) : base(message) { }
     }
 
     [Serializable]
-    public class CantPickUpParcel : Exception
+    public class CantPickUpParcelException : Exception
     {
-        public CantPickUpParcel(string message) : base(message) { }
+        public CantPickUpParcelException(string message) : base(message) { }
     }
 
     [Serializable]
-    public class CantDeliverParcel : Exception
+    public class CantDeliverParcelException : Exception
     {
-        public CantDeliverParcel(string message) : base(message) { }
+        public CantDeliverParcelException(string message) : base(message) { }
     }
 
-    
 }

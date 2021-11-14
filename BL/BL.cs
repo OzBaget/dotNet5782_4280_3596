@@ -19,7 +19,7 @@ namespace BL
 
         double chargingRate;
 
-        public BL(List<IDAL.DO.Drone> dronse)
+        public BL()
         {
             DalObject = new DalObject.DalObject();
             powerUseEmpty = DalObject.GetPowerUse()[0];
@@ -37,17 +37,17 @@ namespace BL
 
         }
 
-        public void AddBase(string name, double lat, double lng, int chargSlots)
+        public void AddBase(int id, string name, double lat, double lng, int chargSlots)
         {
             throw new NotImplementedException();
         }
 
-        public void AddCustomer(string name, string phone, double lat, double lng)
+        public void AddCustomer(int id, string name, string phone, double lat, double lng)
         {
             throw new NotImplementedException();
         }
 
-        public void AddDrone(string model, int maxWeightInt)
+        public void AddDrone(int id, string model, int maxWeightInt)
         {
             throw new NotImplementedException();
         }
@@ -134,6 +134,31 @@ namespace BL
         }
 
         public void PickParcel(int parcelId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddBase(string name, double lat, double lng, int chargSlots)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddDrone(string model, int maxWeightInt)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddCustomer(string name, string phone, double lat, double lng)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateDroneName(int id, string model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateStation(int id, string name, int numChargers)
         {
             throw new NotImplementedException();
         }
