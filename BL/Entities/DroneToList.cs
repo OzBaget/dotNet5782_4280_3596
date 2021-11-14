@@ -11,7 +11,7 @@ namespace IBL.BO
         public int Id;
         public string Model;
         public WeightCategories MaxWeight;
-        public double Battery;
+        public int Battery;
         public DroneStatus Status;
         public Location CurrentLocation;
         public int PacrelId;
