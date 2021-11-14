@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace IBL.BO
 {
-    public class Customer
+    public struct Customer
     {
         public int Id;
         public string Name;
-        public int Phone;
+        public string Phone;
         public Location Location;
-        public List<ParcelInCustomer> ToCustomer;
-        public List<ParcelInCustomer> FromCustomer;
+        public List<ParcelInCustomer> Sender;
+        public List<ParcelInCustomer> Reciver;
 
     }
 }

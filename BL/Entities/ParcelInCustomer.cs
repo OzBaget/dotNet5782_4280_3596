@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace IBL.BO
 {
-    public class ParcelInCustomer
+    public struct ParcelInCustomer
     {
         public int Id;
-        public Enums.WeightCategories Weight;
-        public Enums.Priorities Prioritie;
-        public Enums.ParcelStatus StatusParcel;
+        public WeightCategories Weight;
+        public Priorities Prioritie;
+        public ParcelStatus StatusParcel;
         public CustomerInParcel Customer;
     }
 }

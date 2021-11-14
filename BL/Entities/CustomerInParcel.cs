@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace IBL.BO
 {
-    public class Location
+    public struct CustomerInParcel
     {
-        public int Longitude;
-        public int Latitude;
-
+        public int Id;
+        public string Name;
     }
 }

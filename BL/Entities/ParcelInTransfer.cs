@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace IBL.BO
 {
-    public class ParcelInTransfer
+    public struct ParcelInTransfer
     {
         public int Id;
-        public Enums.WeightCategories Weight;
-        public Enums.Priorities Prioritie;
         public bool IsInTransfer;
+        public Priorities Prioritie;
+        public WeightCategories Weight;
         public CustomerInParcel Sender;
         public CustomerInParcel Receiver;
-        public Location Collecting;
-        public Location Target;
-        public int Distance;
+        public Location PickipLocation;
+        public Location TargetLocation;
+        public double Distance;
     }
 }

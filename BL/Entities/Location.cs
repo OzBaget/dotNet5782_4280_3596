@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace IBL.BO
 {
-    public class DroneInCharging
+    public struct Location
     {
-        public int Id;
-        public double Battery;
+        public double Longitude;
+        public double Latitude;
+
     }
 }

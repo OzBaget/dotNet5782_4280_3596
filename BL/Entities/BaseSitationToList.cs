@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace IBL.BO
 {
-    public class BaseSitation
+    public struct BaseSitationToList
     {
         public int Id;
         public string Name;
-        public Location Locate;
-        public int NumFreeChargers;
-        public List<DroneInCharging> DronesInCharging;
-
+        public int NumFreeChragers;
+        public int NumFullChragers;
     }
 }

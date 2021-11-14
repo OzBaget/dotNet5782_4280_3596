@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace IBL.BO
 {
-    public class CustomerToList
+    public struct CustomerToList
     {
         public int Id;
         public string Name;
-        public int Phone;
-        public int ParcerlsDeliverd;
-        public int ParcerlsSend;
+        public string Phone;
+        public int ParcerlsDelivered;
+        public int ParcerlsSent;
         public int ParcerlsReceived;
         public int ParcerlsInProccesToHim;
 

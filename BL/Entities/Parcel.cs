@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace IBL.BO
 {
-    public class Parcel
+    public struct Parcel
     {
         public int Id;
         public CustomerInParcel Sender;
         public CustomerInParcel Receiver;
-        public Enums.DroneStatus DroneStatus;
-        public Enums.Priorities Prioritie;
+        public WeightCategories Weight;
+        public Priorities Prioritie;
         public DroneInParcel Drone;
-        public DateTime DateCreateParcel;
-        public DateTime DateAttribution;
-        public DateTime DateCollection;
-        public DateTime Datesupply;
+        public DateTime DateCreated;
+        public DateTime DateScheduled;
+        public DateTime DatePickup;
+        public DateTime DateDeliverd;
     }
 }
