@@ -24,7 +24,7 @@ namespace DalObject
         }
         public double GetChargingRate()
         {
-            return DataSource.Config.PrecentHour;
+            return DataSource.Config.ChargingRate;
         }
 
         /// <summary>

@@ -14,12 +14,13 @@ namespace DalObject
 
         internal class Config
         {
-            public static double Free = 20; 
-            public static double LightPacket = 40; 
-            public static double MediumPacket = 60; 
-            public static double HeavyPacket = 80; 
-            public static double PrecentHour= 30; 
-        public static int ParcelId{ get; set; }
+            //Precent To Meter
+            public static double Free = 0.01; 
+            public static double LightPacket = 0.02; 
+            public static double MediumPacket = 0.04; 
+            public static double HeavyPacket = 0.08; 
+            public static double ChargingRate= 25; //precent to hour
+            public static int ParcelId{ get; set; }
         }
         /// <summary>
         /// Initialize all lists with random data

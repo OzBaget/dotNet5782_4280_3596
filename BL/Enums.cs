@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace IBL.BO
 {
-        public enum WeightCategories { Light, Middle, Heavy }
-        public enum DroneStatus { Available, Busy, UnderWork }
-        public enum Priorities { Normal, Fast, Urgent }
-        public enum ParcelStatus { Created, Scheduled, PickUp, Deliverd }
+    public enum WeightCategories { Light, Middle, Heavy }
+    public enum DroneStatus { Available, UnderMaintenance, Delivery }
+    public enum Priorities { Normal, Fast, Urgent }
+    public enum ParcelStatus { Created, Scheduled, PickUp, Deliverd }
 }
