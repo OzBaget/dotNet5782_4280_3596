@@ -11,10 +11,10 @@ namespace IBL.BO
         public int Id;
         public string Name;
         public string Phone;
-        public int ParcerlsDelivered;
-        public int ParcerlsSent;
-        public int ParcerlsReceived;
-        public int ParcerlsInProccesToHim;
+        public int ParcelsDelivered;
+        public int ParcelsSent;
+        public int ParcelsReceived;
+        public int ParcelsInProccesToHim;
 
     }
 }

@@ -6,9 +6,17 @@ using System.Threading.Tasks;
 
 namespace IBL.BO
 {
-    public struct DroneInCharging
+    public class DroneInCharging
     {
         public int Id;
         public double Battery;
+
+        public override string ToString()
+        {
+            return
+                $"ID:      {Id}\n" +
+                $"Battery: {Battery}%";
+        }
     }
+
 }

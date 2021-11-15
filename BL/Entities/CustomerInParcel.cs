@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IBL.BO
 {
-    public struct CustomerInParcel
+    public class CustomerInParcel
     {
         public int Id;
         public string Name;

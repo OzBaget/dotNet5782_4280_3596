@@ -22,12 +22,12 @@ namespace IBL
         void UpdateStation(int droneId, string name, int numChargers);
         void UpdateCustomer(int customerId, string name, string phone);
 
-        IEnumerable<BO.BaseStation> GetAllStations();
-        IEnumerable<BO.Customer> GetAllDrones();
-        IEnumerable<BO.Customer> GetAllCustomers();
-        IEnumerable<BO.Parcel> GetAllParcels();
-        IEnumerable<BO.Parcel> GetUnassignedParcels();
-        IEnumerable<BO.BaseStation> GetStationsWithFreeSlots();
+        IEnumerable<BO.BaseStationToList> GetAllStations();
+        IEnumerable<BO.DroneToList> GetAllDrones();
+        IEnumerable<BO.CustomerToList> GetAllCustomers();
+        IEnumerable<BO.ParcelToList> GetAllParcels();
+        IEnumerable<BO.ParcelToList> GetUnassignedParcels();
+        IEnumerable<BO.BaseStationToList> GetStationsWithFreeSlots();
         double[] GetPowerUse();
     }
 }

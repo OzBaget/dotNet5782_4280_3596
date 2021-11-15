@@ -15,10 +15,10 @@ namespace DalObject
         internal class Config
         {
             //Precent To Meter
-            public static double Free = 0.01; 
-            public static double LightPacket = 0.02; 
-            public static double MediumPacket = 0.04; 
-            public static double HeavyPacket = 0.08; 
+            public static double Free = 0.0001; 
+            public static double LightPacket = 0.0002; 
+            public static double MediumPacket = 0.0004; 
+            public static double HeavyPacket = 0.0008; 
             public static double ChargingRate= 25; //precent to hour
             public static int ParcelId{ get; set; }
         }
@@ -90,8 +90,17 @@ namespace DalObject
                     myParcel.Scheduled = randomDateBetween(myParcel.Requsted, DateTime.Now);
                     myParcel.PickedUp = randomDateBetween(myParcel.Scheduled, DateTime.Now);
                 }
-                else
+                else if (true)
+                {
                     myParcel.Weight = (WeightCategories)r.Next(0, 3);
+                    if (r.Next(0,2)==0)
+                    {
+                        myParcel.Scheduled = randomDateBetween(myParcel.Requsted, DateTime.Now);
+                        myParcel.PickedUp = randomDateBetween(myParcel.Scheduled, DateTime.Now);
+                        myParcel.Delivered = randomDateBetween(myParcel.PickedUp, DateTime.Now);
+                    }
+
+                }
                 //Scheduled and PickedUp aren't assigend because they didnt happend..
 
                 myParcel.Priority = (Priorities)r.Next(0, 3);

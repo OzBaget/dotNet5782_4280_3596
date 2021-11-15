@@ -75,12 +75,13 @@ namespace BL
                         myDrone.Status = (DroneStatus)new Random().Next(0, 2);
                         if (myDrone.Status==DroneStatus.UnderMaintenance)
                         {
-                            myDrone.CurrentLocation = GetAllStations().ElementAt(new Random().Next(GetAllStations().Count())).Location;
+                            myDrone.CurrentLocation = GetStation(GetAllStations().ElementAt(new Random().Next(GetAllStations().Count())).Id).Location;
                             myDrone.Battery = new Random().Next(0, 21);
                         }
                         if (myDrone.Status==DroneStatus.Available)
-                        {
-                            myDrone.CurrentLocation=GetAllCustomers().Where(customer => customer.Reciver.Count() > 0).ElementAt(new Random().Next(GetAllCustomers().Where(customer => customer.Reciver.Count() > 0).Count())).Location;
+                        { 
+                            int index = new Random().Next(GetAllCustomers().Where(customer => customer.ParcelsReceived > 0).Count());
+                            myDrone.CurrentLocation=GetCustomer(GetAllCustomers().Where(customer => customer.ParcelsReceived > 0).ElementAt(index).Id).Location;
                             myDrone.Battery = new Random().Next((int)(CalculateDist(myDrone.CurrentLocation, GetClosestStation(myDrone.CurrentLocation).Location)*powerUseEmpty), 101);
                         }
                     }
@@ -89,28 +90,16 @@ namespace BL
             }
         }        
 
+        public IEnumerable<DroneToList> GetAllDrones()
+        {
+            throw new NotImplementedException();
+        }
+
         
-        public IEnumerable<Customer> GetAllCustomers()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Customer> GetAllDrones()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Parcel> GetAllParcels()
-        {
-            throw new NotImplementedException();
-        }
 
                
 
-        public Customer GetCustomer(int customerId)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public Drone GetDrone(int droneId)
         {
@@ -127,12 +116,12 @@ namespace BL
             throw new NotImplementedException();
         }
 
-        public IEnumerable<BaseStation> GetStationsWithFreeSlots()
+        public IEnumerable<BaseStationToList> GetStationsWithFreeSlots()
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Parcel> GetUnassignedParcels()
+        public IEnumerable<ParcelToList> GetUnassignedParcels()
         {
             throw new NotImplementedException();
         }
@@ -154,7 +143,7 @@ namespace BL
 
         private BaseStation GetClosestStation(Location loc)
         {
-            return GetAllStations().OrderBy(station => CalculateDist(station.Location, loc)).First();
+            return GetStation(GetAllStations().OrderBy(station => CalculateDist(GetStation(station.Id).Location, loc)).First().Id);
         }
 
         /// <summary>
@@ -183,7 +172,7 @@ namespace BL
         }
 
         
-        public void AddDrone(Drone drone)
+        public void AddDrone(Drone drone, int stationId)
         {
             throw new NotImplementedException();
         }
@@ -201,7 +190,7 @@ namespace BL
             throw new NotImplementedException();
         }
 
-        public void DroneToStation(int stationId, int droneId)
+        public void DroneToStation(int droneId)
         {
             throw new NotImplementedException();
         }

@@ -32,7 +32,7 @@ namespace BL
                 newStation.Location.Latitude=tmpStation.Lat;
                 newStation.Location.Longitude=tmpStation.Lng;
                 newStation.NumFreeChargers = tmpStation.FreeChargeSlots;
-                newStation.DronesInCharging = GetDronesInChraging(tmpStation.Id);
+                newStation.DronesInCharging = getDronesInChraging(tmpStation.Id);
                 return newStation;
             }catch(IDAL.DO.IdNotFoundException ex)
             {
@@ -40,12 +40,17 @@ namespace BL
             }
         }
 
-        public IEnumerable<BaseStation> GetAllStations()
+        public IEnumerable<BaseStationToList> GetAllStations()
         {
-            List<BaseStation> stations = new();
+            List<BaseStationToList> stations = new();
             foreach (IDAL.DO.Station oldStation in DalObject.GetAllStations())
             {
-                stations.Add(GetStation(oldStation.Id));
+                BaseStationToList newStation = new();
+                newStation.Id = oldStation.Id;
+                newStation.Name = oldStation.Name;
+                newStation.NumFreeChragers = oldStation.FreeChargeSlots;
+                newStation.NumFullChragers = getDronesInChraging(oldStation.Id).Count;
+                stations.Add(newStation);
             }
             return stations;
         }
@@ -56,7 +61,7 @@ namespace BL
             DalObject.DeleteStation(stationId);
             DalObject.AddStation(tmpStation.Id, name, tmpStation.Location.Latitude, tmpStation.Location.Longitude, numChargers);
         }
-        private List<DroneInCharging> GetDronesInChraging(int stationId)
+        private List<DroneInCharging> getDronesInChraging(int stationId)
         {
             List<DroneInCharging> drones = new();
             foreach (IDAL.DO.DroneCharge charger in DalObject.GetAllDroneCharge())

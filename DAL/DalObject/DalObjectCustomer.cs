@@ -11,6 +11,15 @@ namespace DalObject
         /// <returns>Customer object of the requsted ID (by value)</returns>
         public Customer GetCustomer(int customerId)
         {
+            bool isExists = false;
+
+            foreach (Customer customer in DataSource.Customers)
+                if (customer.Id == customerId)
+                    isExists = true;
+
+            if (!isExists)
+                throw new IdNotFoundException($"Cann't find customer with ID #{customerId}", customerId);
+
             return DataSource.Customers.Find(customer => customer.Id == customerId);
         }
 

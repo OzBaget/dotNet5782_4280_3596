@@ -18,7 +18,7 @@ namespace DalObject
                     stationExists = true;
             
             if (!stationExists)
-                throw new IdNotFoundException($"Cann't find Station with ID #{stationId}", stationId);
+                throw new IdNotFoundException($"Cann't find customer with ID #{stationId}", stationId);
 
             return DataSource.BaseStations.Find(station => station.Id == stationId);
         }
