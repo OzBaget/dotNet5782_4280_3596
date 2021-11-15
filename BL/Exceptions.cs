@@ -43,5 +43,10 @@ namespace IBL.BL
     {
         public CantDeliverParcelException(string message) : base(message) { }
     }
+       [Serializable]
+    public class CantLinkParcelException : Exception
+    {
+        public CantLinkParcelException(string message) : base(message) { }
+    }
 
 }

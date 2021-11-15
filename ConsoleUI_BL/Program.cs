@@ -193,10 +193,10 @@ namespace ConsoleUI_BL
             Console.WriteLine("Choose parcel priority:");
             Console.WriteLine("1. Normal\n2. Fast\n3. Urgent");
             IBL.BO.Priorities priority = (IBL.BO.Priorities)getUserSelection(3) - 1;
-            IBL.BO.Parcel p = new IBL.BO.Parcel();
             IBL.BO.CustomerInParcel sender = new IBL.BO.CustomerInParcel();
             sender.Id = senderId;
             IBL.BO.CustomerInParcel target = new IBL.BO.CustomerInParcel();
+            IBL.BO.Parcel p = new IBL.BO.Parcel();
             target.Id = targetId;
             p.Sender = sender;
             p.Receiver = target;
@@ -300,10 +300,14 @@ namespace ConsoleUI_BL
             int droneId = getIntFromUser();
             try
             {
-                db.DroneToBase(droneId);
+                db.DroneToStation(droneId);
 
             }
             catch (IdNotFoundException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (CantSendDroneToChargeException ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -328,6 +332,10 @@ namespace ConsoleUI_BL
             {
                 Console.WriteLine(ex.Message);
             }
+            catch (CantReleaseDroneFromChargeException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
 
@@ -348,6 +356,10 @@ namespace ConsoleUI_BL
             {
                 Console.WriteLine(ex.Message);
             }
+            catch (CantLinkParcelException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
 
         }
         /// <summary>
@@ -365,6 +377,10 @@ namespace ConsoleUI_BL
             {
                 Console.WriteLine(ex.Message);
             }
+            catch (CantPickUpParcelException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
 
         }
         /// <summary>
@@ -379,6 +395,10 @@ namespace ConsoleUI_BL
                 db.ParcelToCustomer(droneId);
             }
             catch (IdNotFoundException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (CantDeliverParcelException ex)
             {
                 Console.WriteLine(ex.Message);
             }
