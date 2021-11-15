@@ -9,7 +9,8 @@ namespace IDAL.DO
     [Serializable]
     public class IdNotFoundException : Exception
     {
-        public IdNotFoundException(string message) : base(message) { }
+        public int Id;
+        public IdNotFoundException(string message,int id) : base(message) { Id = id; }
     }
 
     [Serializable]

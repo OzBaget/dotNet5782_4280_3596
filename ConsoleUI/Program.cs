@@ -230,7 +230,7 @@ namespace ConsoleUI
             printListOf(printType.AvailableStation);
             Console.WriteLine("Enter station ID:");
             int stationId = getIntFromUser();
-            db.DroneToBase(stationId, droneId);
+            db.DroneToStation(stationId, droneId);
         }
         /// <summary>
         /// get drone ID form user, and release the drone
@@ -281,7 +281,7 @@ namespace ConsoleUI
         {
             Console.WriteLine("Enter station ID:");
             int stationId = getIntFromUser();
-            Console.WriteLine(db.GetBaseStation(stationId));
+            Console.WriteLine(db.GetStation(stationId));
         }
         /// <summary>
         /// get drone ID and print the drone

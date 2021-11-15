@@ -9,8 +9,17 @@ namespace DalObject
         /// </summary>
         /// <param name="stationId"> the base station ID</param>
         /// <returns>Return a Station object of the requsted ID (by value)</returns>
-        public Station GetBaseStation(int stationId)
+        public Station GetStation(int stationId)
         {
+            bool stationExists = false;
+
+            foreach (Station station in GetAllStations())
+                if (station.Id == stationId)
+                    stationExists = true;
+            
+            if (!stationExists)
+                throw new IdNotFoundException($"Cann't find Station with ID #{stationId}", stationId);
+
             return DataSource.BaseStations.Find(station => station.Id == stationId);
         }
 
@@ -21,17 +30,22 @@ namespace DalObject
         /// <param name="lat">the latitude of the station</param>
         /// <param name="lng">the longitude of the station</param>
         /// <param name="chargSlots">hw many charge slosts are in the station</param>
-        public void AddBase(int id,string name, double lat, double lng, int chargSlots)
+        public void AddStation(int id,string name, double lat, double lng, int chargSlots)
         {
             foreach (Station station in DataSource.BaseStations)
             {
                 if (station.Id==id)
                 {
-                    throw new IdAlreadyExistsException($"ID #{id} already exists!", id);
+                    throw new IdAlreadyExistsException($"Station with ID #{id} already exists!", id);
                 }
             }
-            DataSource.BaseStations.Add(new Station(id,name, lat, lng, chargSlots));
+            DataSource.BaseStations.Add(new Station(id, name, lat, lng, chargSlots));
         }
+        public void DeleteStation(int id)
+        {
+            DataSource.BaseStations.Remove(GetStation(id));
+        }
+
 
         /// <summary>
         /// get array of all base satations

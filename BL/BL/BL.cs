@@ -87,26 +87,11 @@ namespace BL
                 }
                 Drones.Add(myDrone);
             }
-        }
+        }        
 
         
-
-        public void AddCustomer(int id, string name, string phone, double lat, double lng)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void AddDrone(int id, string model, int maxWeightInt)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int AddParcel(int senderId, int targetId, int weightInt, int priorityInt)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DroneToBase(int stationId, int droneId)
+        
+        public void DroneToBase(int droneId)
         {
             throw new NotImplementedException();
         }
@@ -137,7 +122,7 @@ namespace BL
             throw new NotImplementedException();
         }
 
-        public BaseStation GetBaseStation(int stationId)
+        public BaseStation GetStation(int stationId)
         {
             throw new NotImplementedException();
         }
@@ -222,17 +207,13 @@ namespace BL
             throw new NotImplementedException();
         }
 
-        public void AddDrone(string model, int maxWeightInt)
+        public void AddDrone(Drone drone)
         {
             throw new NotImplementedException();
         }
 
-        public void AddCustomer(string name, string phone, double lat, double lng)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void UpdateDroneName(int id, string model)
+       
+        public void UpdateDroneModel(int id, string model)
         {
             throw new NotImplementedException();
         }

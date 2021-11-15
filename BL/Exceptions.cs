@@ -9,13 +9,14 @@ namespace IBL.BL
     [Serializable]
     public class IdNotFoundException : Exception
     {
-        public IdNotFoundException(string message) : base(message) { }
+        public int Id;
+        public IdNotFoundException(string message,int id) : base(message) { Id = id; }
     }
 
     [Serializable]
     public class IdAlreadyExistsException : Exception
     {
-        int Id;
+        public int Id;
         public IdAlreadyExistsException(string message,int id) : base(message) { Id = id; }
     }
 
