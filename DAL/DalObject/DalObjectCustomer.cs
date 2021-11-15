@@ -26,6 +26,11 @@ namespace DalObject
             DataSource.Customers.Add(new Customer(name, phone, lat, lng));
         }
 
+        public void DeleteCustomer(int customerId)
+        {
+            DataSource.Customers.Remove(GetCustomer(customerId));
+        }
+
         /// <summary>
         /// get array of all customers
         /// </summary>

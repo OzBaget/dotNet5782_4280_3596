@@ -9,6 +9,7 @@ namespace IDAL
         Drone GetDrone(int droneId);
         Customer GetCustomer(int customerId);
         Parcel GetParcerl(int parcelId);
+
         void AddStation(int id,string name, double lat, double lng, int chargSlots);
         void AddDrone(int id,string model, int maxWeightInt);
         void AddCustomer(int id, string name, string phone, double lat, double lng);
@@ -17,9 +18,6 @@ namespace IDAL
         void DeleteDrone(int droneId);
         void DeleteCustomer(int customerId);
         void DeleteParcel(int parcelId);
-
-
-
         void linkParcel(int parcelId, int droneId);
         void PickParcel(int parcelId);
         void ParcelToCustomer(int parcelId);
@@ -29,6 +27,7 @@ namespace IDAL
         IEnumerable<Drone> GetAllDrones();
         IEnumerable<Customer> GetAllCustomers();
         IEnumerable<Parcel> GetAllParcels();
+        IEnumerable<DroneCharge> GetAllDroneCharge();
         IEnumerable<Parcel> GetUnassignedParcels();
         IEnumerable<Station> GetStationsWithFreeSlots();
         double[] GetPowerUse();

@@ -35,6 +35,11 @@ namespace DalObject
             return DataSource.Config.ParcelId;
         }
 
+        public void DeleteParcel(int parcelId)
+        {
+            DataSource.Parcels.Remove(GetParcerl(parcelId));
+        }
+
         /// <summary>
         /// link parcel to drone
         /// </summary>

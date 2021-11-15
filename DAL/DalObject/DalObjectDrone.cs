@@ -4,6 +4,16 @@ namespace DalObject
 {
     public partial class DalObject
     {
+
+        /// <summary>
+        /// Add drone to Drones list in DataSource
+        /// </summary>
+        /// <param name="model">the modle of the drone</param>
+        /// <param name="maxWeightInt">max weight of the drone (0/1/2)</param>
+        public void AddDrone(int id, string model, int maxWeightInt)
+        {
+            DataSource.Drones.Add(new Drone(model, (WeightCategories)maxWeightInt));
+        }
         /// <summary>
         /// returns drone by ID
         /// </summary>
@@ -13,6 +23,12 @@ namespace DalObject
         {
             return DataSource.Drones.Find(drone => drone.Id == droneId);
         }
+
+        public void DeleteDrone(int droneId)
+        {
+            DataSource.Drones.Remove(GetDrone(droneId));
+        }
+
 
         public double[] GetPowerUse()
         {
@@ -27,15 +43,7 @@ namespace DalObject
             return DataSource.Config.ChargingRate;
         }
 
-        /// <summary>
-        /// Add drone to Drones list in DataSource
-        /// </summary>
-        /// <param name="model">the modle of the drone</param>
-        /// <param name="maxWeightInt">max weight of the drone (0/1/2)</param>
-        public void AddDrone(int id, string model, int maxWeightInt)
-        {
-            DataSource.Drones.Add(new Drone(model, (WeightCategories)maxWeightInt));
-        }
+        
 
         /// <summary>
         /// Charge the drone
