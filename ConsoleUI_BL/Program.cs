@@ -1,11 +1,11 @@
 ﻿using System;
-using IBL.BL; 
+using IBL.BL;
 
 namespace ConsoleUI_BL
 {
     class Program
     {
-        static BL.BL  db= new BL.BL();
+        static IBL.IBL db = new BL.BL();
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome To DeliverManger!");
@@ -103,13 +103,18 @@ namespace ConsoleUI_BL
 
             Console.WriteLine("How many charge slots are in the station?");
             int slots = getIntFromUser();
+            IBL.BO.BaseStation s = new();
+            s.Id = id;
+            s.Name = name;
+            s.Location.Latitude = location.Item1;
+            s.Location.Longitude = location.Item2;
             try
             {
-                db.AddBase(id, name, location.Item1, location.Item2, slots); 
+                db.AddStation(s);
             }
-            catch(IdAlreadyExistsException ex)
+            catch (IdAlreadyExistsException ex)
             {
-                Console.WriteLine(ex.Message);  
+                Console.WriteLine(ex.Message);
             }
         }
         /// <summary>
@@ -123,10 +128,17 @@ namespace ConsoleUI_BL
             int id = getIntFromUser();
             Console.WriteLine("Choose MaxWeight of drone:");
             Console.WriteLine("1. Light\n2. Middle\n3. Heavy");
-            int maxWeightInt = getUserSelection(3) - 1;
+            IBL.BO.WeightCategories maxWeight = (IBL.BO.WeightCategories)(getUserSelection(3) - 1);
+            Console.WriteLine("Enter station id:");
+            int idStation = getIntFromUser();
+
+            IBL.BO.Drone d = new();
+            d.Id = id;
+            d.Modle = model;
+            d.MaxWeight = maxWeight;
             try
             {
-                db.AddDrone(id, model, maxWeightInt);
+                db.AddDrone(d, idStation);
             }
             catch (IdAlreadyExistsException ex)
             {
@@ -146,9 +158,16 @@ namespace ConsoleUI_BL
             string phone = Console.ReadLine();
 
             Tuple<double, double> position = getCoordsFromUser();
+            IBL.BO.Customer c = new IBL.BO.Customer();
+            c.Id = id;
+            c.Name = name;
+            c.Phone = phone;
+            c.Location.Latitude = position.Item1;
+            c.Location.Longitude = position.Item2;
             try
+
             {
-                db.AddCustomer(id, name, phone, position.Item1, position.Item2);
+                db.AddCustomer(c);
             }
             catch (IdAlreadyExistsException ex)
             {
@@ -169,14 +188,23 @@ namespace ConsoleUI_BL
 
             Console.WriteLine("Choose parcel weight:");
             Console.WriteLine("1. Light\n2. Middle\n3. Heavy");
-            int weightInt = getUserSelection(3) - 1;
+            IBL.BO.WeightCategories weight =(IBL.BO.WeightCategories) getUserSelection(3) - 1;
 
             Console.WriteLine("Choose parcel priority:");
             Console.WriteLine("1. Normal\n2. Fast\n3. Urgent");
-            int priorityInt = getUserSelection(3) - 1;
+            IBL.BO.Priorities priority = (IBL.BO.Priorities)getUserSelection(3) - 1;
+            IBL.BO.Parcel p = new IBL.BO.Parcel();
+            IBL.BO.CustomerInParcel sender = new IBL.BO.CustomerInParcel();
+            sender.Id = senderId;
+            IBL.BO.CustomerInParcel target = new IBL.BO.CustomerInParcel();
+            target.Id = targetId;
+            p.Sender = sender;
+            p.Receiver = target;
+            p.Prioritie = priority;
+            p.Weight = weight;
             try
             {
-                db.AddParcel(senderId, targetId, weightInt, priorityInt);
+                db.AddParcel(p);
             }
             catch (IdAlreadyExistsException ex)
             {
@@ -234,7 +262,7 @@ namespace ConsoleUI_BL
                 Console.WriteLine(ex.Message);
             }
 
-        } 
+        }
         private static void updateStationMenu()
         {
             Console.WriteLine("Enter station id:");
@@ -246,7 +274,7 @@ namespace ConsoleUI_BL
             Console.WriteLine("Enter station new number of chargers: ");
             int numChargers;
             string input = Console.ReadLine();
-            while (!int.TryParse(input, out numChargers)|| input != "")
+            while (!int.TryParse(input, out numChargers) || input != "")
             {
                 Console.WriteLine("Not Valid Input!");
                 input = Console.ReadLine();
@@ -255,7 +283,7 @@ namespace ConsoleUI_BL
                 numChargers = db.GetStation(id).NumFreeChargers + db.GetStation(id).DronesInCharging.Count;
             try
             {
-                db.UpdateStation(id, name,numChargers);
+                db.UpdateStation(id, name, numChargers);
             }
             catch (IdNotFoundException ex)
             {
@@ -270,7 +298,7 @@ namespace ConsoleUI_BL
         {
             Console.WriteLine("Enter drone ID:");
             int droneId = getIntFromUser();
-            try 
+            try
             {
                 db.DroneToBase(droneId);
 
@@ -280,7 +308,7 @@ namespace ConsoleUI_BL
                 Console.WriteLine(ex.Message);
             }
         }
-        
+
         /// <summary>
         /// get drone ID form user, and release the drone
         /// </summary>
@@ -293,7 +321,7 @@ namespace ConsoleUI_BL
 
             try
             {
-                db.FreeDrone(droneId,droneTime);
+                db.FreeDrone(droneId, droneTime);
 
             }
             catch (IdNotFoundException ex)
@@ -355,7 +383,7 @@ namespace ConsoleUI_BL
                 Console.WriteLine(ex.Message);
             }
         }
-            
+
         /// <summary>
         /// View one object menu
         /// </summary>
@@ -397,7 +425,7 @@ namespace ConsoleUI_BL
             int stationId = getIntFromUser();
             try
             {
-                Console.WriteLine(db.GetBaseStation(stationId));
+                Console.WriteLine(db.GetStation(stationId));
             }
             catch (IdNotFoundException ex)
             {
@@ -529,7 +557,7 @@ namespace ConsoleUI_BL
                     break;
             }
         }
-       
+
         /// <summary>
         /// get input from user until it valid option
         /// </summary>
@@ -596,7 +624,7 @@ namespace ConsoleUI_BL
 
             Console.WriteLine("Enter Longitude (as decimal): ");
             double lng = getDoubleFromUser();
-               
+
             return Tuple.Create(lat, lng);
         }
 
