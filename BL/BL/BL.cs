@@ -90,32 +90,6 @@ namespace BL
         }        
 
         
-
-        public void AddCustomer(int id, string name, string phone, double lat, double lng)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void AddDrone(int id, string model, int maxWeightInt)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int AddParcel(int senderId, int targetId, int weightInt, int priorityInt)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DroneToBase(int droneId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void FreeDrone(int droneId,int drineTime)
-        {
-            throw new NotImplementedException();
-        }
-
         public IEnumerable<Customer> GetAllCustomers()
         {
             throw new NotImplementedException();
@@ -131,16 +105,7 @@ namespace BL
             throw new NotImplementedException();
         }
 
-        public IEnumerable<BaseStation> GetAllStations()
-        {
-            
-            throw new NotImplementedException();
-        }
-
-        public BaseStation GetStation(int stationId)
-        {
-            throw new NotImplementedException();
-        }
+               
 
         public Customer GetCustomer(int customerId)
         {
@@ -217,23 +182,44 @@ namespace BL
             return Radios * c;
         }
 
-        public void AddBase(string name, double lat, double lng, int chargSlots)
-        {
-            throw new NotImplementedException();
-        }
-
+        
         public void AddDrone(Drone drone)
         {
             throw new NotImplementedException();
         }
 
        
+       
+
+        public void AddCustomer(Customer customer)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int AddParcel(Parcel parcel)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DroneToStation(int stationId, int droneId)
+        {
+            throw new NotImplementedException();
+        }
+
         public void UpdateDroneModel(int id, string model)
         {
             throw new NotImplementedException();
         }
 
-        
+        public void FreeDrone(int droneId, double droneTime)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateCustomer(int customerId, string name, string phone)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     
