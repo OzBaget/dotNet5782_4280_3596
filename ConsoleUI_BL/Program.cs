@@ -355,7 +355,7 @@ namespace ConsoleUI_BL
                 Console.WriteLine(ex.Message);
             }
         }
-
+            
         /// <summary>
         /// View one object menu
         /// </summary>
@@ -572,6 +572,19 @@ namespace ConsoleUI_BL
             }
             return myInt;
         }
+        private static double getDoubleFromUser()
+        {
+            double myDouble;
+            string input = Console.ReadLine();
+            while (!double.TryParse(input, out myDouble))
+            {
+                Console.WriteLine("Not Valid Input!");
+                input = Console.ReadLine();
+            }
+            return myDouble;
+        }
+
+
         /// <summary>
         /// get coords from user until its valid input
         /// </summary>
@@ -579,22 +592,11 @@ namespace ConsoleUI_BL
         private static Tuple<double, double> getCoordsFromUser()
         {
             Console.WriteLine("Enter Lattitude (as decimal): ");
-            double lat;
-            string input = Console.ReadLine();
-            while (!double.TryParse(input, out lat))
-            {
-                Console.WriteLine("Not Valid Lattitude");
-                input = Console.ReadLine();
-            }
+            double lat = getDoubleFromUser();
 
             Console.WriteLine("Enter Longitude (as decimal): ");
-            double lng;
-            input = Console.ReadLine();
-            while (!double.TryParse(input, out lng))
-            {
-                Console.WriteLine("Not Valid Longitude");
-                input = Console.ReadLine();
-            }
+            double lng = getDoubleFromUser();
+               
             return Tuple.Create(lat, lng);
         }
 

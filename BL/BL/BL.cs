@@ -111,7 +111,7 @@ namespace BL
             throw new NotImplementedException();
         }
 
-        public void FreeDrone(int droneId,int drineTime)
+        public void FreeDrone(int droneId,double drineTime)
         {
             throw new NotImplementedException();
         }
