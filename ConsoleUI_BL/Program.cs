@@ -155,6 +155,7 @@ namespace ConsoleUI_BL
                 Console.WriteLine(ex.Message);
             }
         }
+
         /// <summary>
         /// get parcel info from the user, and add the parcel.
         /// </summary>
@@ -218,7 +219,7 @@ namespace ConsoleUI_BL
             return false;
         }
 
-        private static void updateDroneNameMenu()
+        private static void updateDroneModelMenu()
         {
             Console.WriteLine("Enter drone id:");
             int id = getIntFromUser();
@@ -263,16 +264,63 @@ namespace ConsoleUI_BL
 
         }
         /// <summary>
+        /// get drone ID form user and pick-up the parcel
+        /// </summary>
+        private static void sendDroneToCharge()
+        {
+            Console.WriteLine("Enter drone ID:");
+            int droneId = getIntFromUser();
+            try 
+            {
+                db.DroneToBase(droneId);
+
+            }
+            catch (IdNotFoundException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+        
+        /// <summary>
+        /// get drone ID form user, and release the drone
+        /// </summary>
+        private static void releaseDroneFromCharger()
+        {
+            Console.WriteLine("Enter drone ID:");
+            int droneId = getIntFromUser();
+            Console.WriteLine("Enter how much hours the drone charged:");
+            double droneTime = getDoubleFromUser();
+
+            try
+            {
+                db.FreeDrone(droneId,droneTime);
+
+            }
+            catch (IdNotFoundException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+
+
+        /// <summary>
         /// get from the user parcel and drone IDs to link
         /// </summary>
+        /// 
         private static void linkParcelMenu()
         {
-            Console.WriteLine("Enter parcel ID:");
-            int parcelId = getIntFromUser();
+            Console.WriteLine("Enter drone ID:");
+            int droneId = getIntFromUser();
+            try
+            {
+                db.linkParcel(droneId);
+            }
+            catch (IdNotFoundException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
 
-            Console.WriteLine("Enter drone  ID:");
-            int dronelId = getIntFromUser();
-            db.linkParcel(parcelId, dronelId);
         }
         /// <summary>
         /// get parcel ID form user and pick-up the parcel
@@ -281,38 +329,31 @@ namespace ConsoleUI_BL
         {
             Console.WriteLine("Enter parcel ID:");
             int parcelId = getIntFromUser();
-            db.PickParcel(parcelId);
+            try
+            {
+                db.PickParcel(parcelId);
+            }
+            catch (IdNotFoundException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
         }
         /// <summary>
         /// get parcel ID form user and deliver the parcel
         /// </summary>
         private static void deliverParcel()
         {
-            Console.WriteLine("Enter parcel ID:");
-            int parcelId = getIntFromUser();
-            db.ParcelToCustomer(parcelId);
-        }
-        /// <summary>
-        /// get drone ID form user and pick-up the parcel
-        /// </summary>
-        private static void sendDroneToCharge()
-        {
             Console.WriteLine("Enter drone ID:");
             int droneId = getIntFromUser();
-
-            printListOf(printType.AvailableStation);
-            Console.WriteLine("Enter station ID:");
-            int stationId = getIntFromUser();
-            db.DroneToBase(stationId, droneId);
-        }
-        /// <summary>
-        /// get drone ID form user, and release the drone
-        /// </summary>
-        private static void releaseDroneFromCharger()
-        {
-            Console.WriteLine("Enter drone ID:");
-            int droneId = getIntFromUser();
-            db.FreeDrone(droneId);
+            try
+            {
+                db.ParcelToCustomer(droneId);
+            }
+            catch (IdNotFoundException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         /// <summary>
@@ -354,7 +395,14 @@ namespace ConsoleUI_BL
         {
             Console.WriteLine("Enter station ID:");
             int stationId = getIntFromUser();
-            Console.WriteLine(db.GetBaseStation(stationId));
+            try
+            {
+                Console.WriteLine(db.GetBaseStation(stationId));
+            }
+            catch (IdNotFoundException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
         /// <summary>
         /// get drone ID and print the drone
@@ -363,7 +411,14 @@ namespace ConsoleUI_BL
         {
             Console.WriteLine("Enter drone ID:");
             int droneId = getIntFromUser();
-            Console.WriteLine(db.GetDrone(droneId));
+            try
+            {
+                Console.WriteLine(db.GetDrone(droneId));
+            }
+            catch (IdNotFoundException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
         /// <summary>
         /// get customer ID and print the customer
@@ -372,7 +427,14 @@ namespace ConsoleUI_BL
         {
             Console.WriteLine("Enter customer ID:");
             int customerId = getIntFromUser();
-            Console.WriteLine(db.GetCustomer(customerId));
+            try
+            {
+                Console.WriteLine(db.GetCustomer(customerId));
+            }
+            catch (IdNotFoundException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
         /// <summary>
         /// get parcel ID and print the parcel
@@ -381,7 +443,14 @@ namespace ConsoleUI_BL
         {
             Console.WriteLine("Enter parcel ID:");
             int parcelId = getIntFromUser();
-            Console.WriteLine(db.GetParcerl(parcelId));
+            try
+            {
+                Console.WriteLine(db.GetParcerl(parcelId));
+            }
+            catch (IdNotFoundException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         /// <summary>

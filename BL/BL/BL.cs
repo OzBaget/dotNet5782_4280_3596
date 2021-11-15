@@ -106,12 +106,12 @@ namespace BL
             throw new NotImplementedException();
         }
 
-        public void DroneToBase(int stationId, int droneId)
+        public void DroneToBase(int droneId)
         {
             throw new NotImplementedException();
         }
 
-        public void FreeDrone(int droneId)
+        public void FreeDrone(int droneId,int drineTime)
         {
             throw new NotImplementedException();
         }
@@ -172,7 +172,7 @@ namespace BL
             throw new NotImplementedException();
         }
 
-        public void linkParcel(int parcelId, int droneId)
+        public void linkParcel(int droneId)
         {
             throw new NotImplementedException();
         }
