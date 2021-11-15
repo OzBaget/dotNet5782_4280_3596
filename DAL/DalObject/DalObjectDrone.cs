@@ -42,10 +42,10 @@ namespace DalObject
         /// </summary>
         /// <param name="stationId">the station ID with the charger</param>
         /// <param name="droneId">the drone ID</param>
-        public void DroneToBase(int stationId, int droneId)
+        public void DroneToStation(int stationId, int droneId)
         {
             DataSource.Charges.Add(new DroneCharge(droneId, stationId));
-            Station stationTmp = GetBaseStation(stationId);
+            Station stationTmp = GetStation(stationId);
             int index = DataSource.BaseStations.IndexOf(stationTmp);
             stationTmp.FreeChargeSlots--;
             DataSource.BaseStations[index] = stationTmp;
@@ -65,7 +65,7 @@ namespace DalObject
             DroneCharge charger = DataSource.Charges.Find(charger => charger.Droneld == droneId);
             DataSource.Charges.Remove(charger);
 
-            Station stationTmp = GetBaseStation(charger.Stationld);
+            Station stationTmp = GetStation(charger.Stationld);
             int index = DataSource.BaseStations.IndexOf(stationTmp);
             stationTmp.FreeChargeSlots++;
             DataSource.BaseStations[index] = stationTmp;

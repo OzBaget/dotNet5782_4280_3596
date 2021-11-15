@@ -227,7 +227,7 @@ namespace ConsoleUI_BL
             string model = Console.ReadLine();
             try
             {
-                db.UpdateDroneName(id, model);
+                db.UpdateDroneModel(id, model);
             }
             catch (IdNotFoundException ex)
             {
@@ -242,7 +242,7 @@ namespace ConsoleUI_BL
             Console.WriteLine("Enter station new name: ");
             string name = Console.ReadLine();
             if (name == "")
-                name = db.GetBaseStation(id).Name;
+                name = db.GetStation(id).Name;
             Console.WriteLine("Enter station new number of chargers: ");
             int numChargers;
             string input = Console.ReadLine();
@@ -252,7 +252,7 @@ namespace ConsoleUI_BL
                 input = Console.ReadLine();
             }
             if (input == "")
-                numChargers = db.GetBaseStation(id).NumFreeChargers + db.GetBaseStation(id).DronesInCharging.Count;
+                numChargers = db.GetStation(id).NumFreeChargers + db.GetStation(id).DronesInCharging.Count;
             try
             {
                 db.UpdateStation(id, name,numChargers);
