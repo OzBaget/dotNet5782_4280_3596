@@ -29,6 +29,7 @@ namespace BL
                 BaseStation newStation = new();
                 newStation.Id = tmpStation.Id;
                 newStation.Name = tmpStation.Name;
+                newStation.Location = new();
                 newStation.Location.Latitude=tmpStation.Lat;
                 newStation.Location.Longitude=tmpStation.Lng;
                 newStation.NumFreeChargers = tmpStation.FreeChargeSlots;
@@ -39,7 +40,6 @@ namespace BL
                 throw new IBL.BL.IdNotFoundException(ex.Message, ex.Id);
             }
         }
-
         public IEnumerable<BaseStationToList> GetAllStations()
         {
             List<BaseStationToList> stations = new();
@@ -57,9 +57,14 @@ namespace BL
 
         public void UpdateStation(int stationId, string name, int numChargers)
         {
-            BaseStation tmpStation= GetStation(stationId);
-            DalObject.DeleteStation(stationId);
-            DalObject.AddStation(tmpStation.Id, name, tmpStation.Location.Latitude, tmpStation.Location.Longitude, numChargers);
+            try
+            {
+                DalObject.UpdateStation(stationId, name, numChargers);
+            }
+            catch (IDAL.DO.IdNotFoundException ex)
+            {
+                throw new IBL.BL.IdNotFoundException(ex.Message, ex.Id);
+            }
         }
         private List<DroneInCharging> getDronesInChraging(int stationId)
         {

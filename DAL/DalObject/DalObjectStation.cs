@@ -18,7 +18,7 @@ namespace DalObject
                     stationExists = true;
             
             if (!stationExists)
-                throw new IdNotFoundException($"Cann't find customer with ID #{stationId}", stationId);
+                throw new IdNotFoundException($"Can't find station with ID #{stationId}", stationId);
 
             return DataSource.BaseStations.Find(station => station.Id == stationId);
         }
@@ -45,7 +45,12 @@ namespace DalObject
         {
             DataSource.BaseStations.Remove(GetStation(id));
         }
-
+        public void UpdateStation(int stationId, string name, int numChargers)
+        {
+            Station tmpStation = GetStation(stationId);
+            DeleteStation(stationId);
+            AddStation(tmpStation.Id, name, tmpStation.Lat, tmpStation.Lng, numChargers);
+        }
 
         /// <summary>
         /// get array of all base satations

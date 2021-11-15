@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IBL.BO
 {
-    public struct DroneInParcel
+    public class DroneInParcel
     {
         public int Id;
         public double Battery;

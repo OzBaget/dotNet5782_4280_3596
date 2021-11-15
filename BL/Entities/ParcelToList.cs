@@ -6,13 +6,24 @@ using System.Threading.Tasks;
 
 namespace IBL.BO
 {
-    public struct ParcelToList
+    public class ParcelToList
     {
         public int Id;
-        public string Sender;
-        public string Receiver;
+        public string SenderName;
+        public string TargetName;
         public WeightCategories Weight;
-        public Priorities Prioritie;
-        public ParcelStatus StatusParcel;
+        public Priorities Priority;
+        public ParcelStatus Status;
+
+        public override string ToString()
+        {
+            return 
+                $"ID: {Id}\n" +
+                $"Sender name: {SenderName}\n" +
+                $"Target name: {TargetName}\n" +
+                $"Weight: {Weight}\n" +
+                $"Priority: {Priority}\n" +
+                $"Status: {Status}";
+        }
     }
 }

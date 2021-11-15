@@ -43,15 +43,15 @@ namespace BL
                         myDrone.Status = DroneStatus.Delivery;
                         if (parcel.PickedUp== DateTime.MinValue)
                         {
-                            myDrone.CurrentLocation = GetClosestStation(GetCustomer(parcel.SenderId).Location).Location;
+                            myDrone.CurrentLocation = getClosestStation(GetCustomer(parcel.SenderId).Location).Location;
                         }
                         else
                         {
                             myDrone.CurrentLocation = GetCustomer(parcel.SenderId).Location;
                         }
                         int minBattery = 0;
-                        double distancToCover = CalculateDist(myDrone.CurrentLocation, GetCustomer(parcel.TargetId).Location)+
-                            CalculateDist(GetCustomer(parcel.TargetId).Location,GetClosestStation(GetCustomer(parcel.TargetId).Location).Location);
+                        double distancToCover = calculateDist(myDrone.CurrentLocation, GetCustomer(parcel.TargetId).Location)+
+                            calculateDist(GetCustomer(parcel.TargetId).Location,getClosestStation(GetCustomer(parcel.TargetId).Location).Location);
                         switch (parcel.Weight)
                         {
                             case IDAL.DO.WeightCategories.Light:
@@ -82,7 +82,7 @@ namespace BL
                         { 
                             int index = new Random().Next(GetAllCustomers().Where(customer => customer.ParcelsReceived > 0).Count());
                             myDrone.CurrentLocation=GetCustomer(GetAllCustomers().Where(customer => customer.ParcelsReceived > 0).ElementAt(index).Id).Location;
-                            myDrone.Battery = new Random().Next((int)(CalculateDist(myDrone.CurrentLocation, GetClosestStation(myDrone.CurrentLocation).Location)*powerUseEmpty), 101);
+                            myDrone.Battery = new Random().Next((int)(calculateDist(myDrone.CurrentLocation, getClosestStation(myDrone.CurrentLocation).Location)*powerUseEmpty), 101);
                         }
                     }
                 }
@@ -95,22 +95,13 @@ namespace BL
             throw new NotImplementedException();
         }
 
-        
-
-               
-
-        
-
+       
         public Drone GetDrone(int droneId)
         {
             throw new NotImplementedException();
         }
 
-        public Parcel GetParcerl(int parcelId)
-        {
-            throw new NotImplementedException();
-        }
-
+        
         public double[] GetPowerUse()
         {
             throw new NotImplementedException();
@@ -121,29 +112,23 @@ namespace BL
             throw new NotImplementedException();
         }
 
-        public IEnumerable<ParcelToList> GetUnassignedParcels()
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public void linkParcel(int droneId)
         {
             throw new NotImplementedException();
         }
 
-        public void ParcelToCustomer(int parcelId)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public void PickParcel(int parcelId)
         {
             throw new NotImplementedException();
         }
 
-        private BaseStation GetClosestStation(Location loc)
+        private BaseStation getClosestStation(Location loc)
         {
-            return GetStation(GetAllStations().OrderBy(station => CalculateDist(GetStation(station.Id).Location, loc)).First().Id);
+            return GetStation(GetAllStations().OrderBy(station => calculateDist(GetStation(station.Id).Location, loc)).First().Id);
         }
 
         /// <summary>
@@ -154,7 +139,7 @@ namespace BL
         /// <param name="lat2">latituse of point 2</param>
         /// <param name="lng2">longtude of point 2</param>
         /// <returns>the distance bitween the two coords in meters</returns>
-        private double CalculateDist(Location loc1, Location loc2)
+        private double calculateDist(Location loc1, Location loc2)
         {
             const double Radios = 6371000;//meters
             //deg to radians
@@ -172,30 +157,15 @@ namespace BL
         }
 
         
-        public void AddDrone(Drone drone, int stationId)
-        {
-            throw new NotImplementedException();
-        }
+        
 
-       
-       
-
-        public void AddCustomer(Customer customer)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int AddParcel(Parcel parcel)
-        {
-            throw new NotImplementedException();
-        }
 
         public void DroneToStation(int droneId)
         {
             throw new NotImplementedException();
         }
 
-        public void UpdateDroneModel(int id, string model)
+        public void UpdateDrone(int id, string model)
         {
             throw new NotImplementedException();
         }
@@ -205,7 +175,7 @@ namespace BL
             throw new NotImplementedException();
         }
 
-        public void UpdateCustomer(int customerId, string name, string phone)
+        public void ParcelToCustomer(int droneID)
         {
             throw new NotImplementedException();
         }

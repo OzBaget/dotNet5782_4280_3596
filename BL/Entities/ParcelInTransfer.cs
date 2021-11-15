@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IBL.BO
 {
-    public struct ParcelInTransfer
+    public class ParcelInTransfer
     {
         public int Id;
         public bool IsInTransfer;

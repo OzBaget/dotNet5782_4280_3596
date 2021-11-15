@@ -10,9 +10,16 @@ namespace DalObject
         /// </summary>
         /// <param name="model">the modle of the drone</param>
         /// <param name="maxWeightInt">max weight of the drone (0/1/2)</param>
-        public void AddDrone(int id, string model, int maxWeightInt)
+        public void AddDrone(int id, string model, WeightCategories maxWeight)
         {
-            DataSource.Drones.Add(new Drone(model, (WeightCategories)maxWeightInt));
+            bool droneExists = false;
+            foreach (Drone drone in DataSource.Drones)
+                if (drone.Id == id)
+                    droneExists = true;
+            if(!droneExists)
+                throw new IdAlreadyExistsException($"Drone with ID #{id} already exists!", id);
+
+            DataSource.Drones.Add(new Drone(model, maxWeight));
         }
         /// <summary>
         /// returns drone by ID
@@ -21,6 +28,15 @@ namespace DalObject
         /// <returns>Drone object of the requsted ID (by value)</returns>
         public Drone GetDrone(int droneId)
         {
+            bool droneExists = false;
+
+            foreach (Drone drone in GetAllDrones())
+                if (drone.Id == droneId)
+                    droneExists = true;
+
+            if (!droneExists)
+                throw new IdNotFoundException($"Can't find drone with ID #{droneId}", droneId);
+
             return DataSource.Drones.Find(drone => drone.Id == droneId);
         }
 
@@ -29,6 +45,12 @@ namespace DalObject
             DataSource.Drones.Remove(GetDrone(droneId));
         }
 
+        public void UpdateDrone(int droneId, string model)
+        {
+            Drone tmpDrone = GetDrone(droneId);
+            DeleteDrone(droneId);
+            AddDrone(tmpDrone.Id, model, tmpDrone.MaxWeight);
+        }
 
         public double[] GetPowerUse()
         {

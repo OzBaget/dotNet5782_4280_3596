@@ -13,6 +13,15 @@ namespace DalObject
         /// <returns>Parcel object of the requsted ID (by value)</returns>
         public Parcel GetParcerl(int parcelId)
         {
+            bool parcelExists = false;
+
+            foreach (Customer customer in DataSource.Customers)
+                if (customer.Id == parcelId)
+                    parcelExists = true;
+
+            if (!parcelExists)
+                throw new IdNotFoundException($"Can't find parcel with ID #{parcelId}", parcelId);
+
             return DataSource.Parcels.Find(parcel => parcel.Id == parcelId);
         }
 
@@ -21,18 +30,21 @@ namespace DalObject
         /// </summary>
         /// <param name="senderId">sender customer ID</param>
         /// <param name="targetId">target customer ID</param>
-        /// <param name="weightInt">the weight of the parcel (0/1/2)</param>
-        /// <param name="priorityInt">the priority of the parcel (0/1/2)</param>
-        public int AddParcel(int id, int senderId, int targetId, int weightInt, int priorityInt)
+        /// <param name="weight">the weight of the parcel</param>
+        /// <param name="priority">the priority of the parcel</param>
+        void AddParcel(int senderId, int targetId, WeightCategories weight, Priorities priority, DateTime requsted, DateTime scheduled, DateTime pickedUp, DateTime delivered)
         {
-            Parcel myParcel = new Parcel(
-                ++DataSource.Config.ParcelId, //update Config.parcelId
-                senderId,
-                targetId,
-                (WeightCategories)weightInt,
-                (Priorities)priorityInt);
+            Parcel myParcel = new();
+            myParcel.Id = ++DataSource.Config.ParcelId;
+            myParcel.SenderId = senderId;
+            myParcel.TargetId = targetId;
+            myParcel.Weight = weight;
+            myParcel.Priority = priority;
+            myParcel.Requsted = requsted;
+            myParcel.Scheduled = scheduled;
+            myParcel.PickedUp = pickedUp;
+            myParcel.Delivered = delivered;
             DataSource.Parcels.Add(myParcel);
-            return DataSource.Config.ParcelId;
         }
 
         public void DeleteParcel(int parcelId)

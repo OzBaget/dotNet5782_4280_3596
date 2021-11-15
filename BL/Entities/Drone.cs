@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace IBL.BO
 {
-    public struct Drone
+    public class Drone
     {
         public int Id;
-        public string Modle;
+        public string Model;
         public WeightCategories MaxWeight;
         public double Battery;
         public DroneStatus Status;

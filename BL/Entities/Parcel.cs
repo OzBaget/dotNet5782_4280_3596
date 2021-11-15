@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace IBL.BO
 {
-    public struct Parcel
+    public class Parcel
     {
         public int Id;
         public CustomerInParcel Sender;
-        public CustomerInParcel Receiver;
+        public CustomerInParcel Target;
         public WeightCategories Weight;
         public Priorities Prioritie;
         public DroneInParcel Drone;

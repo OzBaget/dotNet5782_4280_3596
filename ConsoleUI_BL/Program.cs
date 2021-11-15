@@ -134,7 +134,7 @@ namespace ConsoleUI_BL
 
             IBL.BO.Drone d = new();
             d.Id = id;
-            d.Modle = model;
+            d.Model = model;
             d.MaxWeight = maxWeight;
             try
             {
@@ -199,7 +199,7 @@ namespace ConsoleUI_BL
             IBL.BO.Parcel p = new IBL.BO.Parcel();
             target.Id = targetId;
             p.Sender = sender;
-            p.Receiver = target;
+            p.Target = target;
             p.Prioritie = priority;
             p.Weight = weight;
             try
@@ -255,7 +255,7 @@ namespace ConsoleUI_BL
             string model = Console.ReadLine();
             try
             {
-                db.UpdateDroneModel(id, model);
+                db.UpdateDrone(id, model);
             }
             catch (IdNotFoundException ex)
             {

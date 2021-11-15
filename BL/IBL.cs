@@ -12,13 +12,13 @@ namespace IBL
         void AddStation(BO.BaseStation station);
         void AddDrone(BO.Drone drone,int idStation);
         void AddCustomer(BO.Customer customer);
-        int AddParcel(BO.Parcel parcel);
+        void AddParcel(BO.Parcel parcel);
         void linkParcel(int parcelId);
         void PickParcel(int parcelId);
         void ParcelToCustomer(int droneID);
         void DroneToStation(int droneId);
         void FreeDrone(int droneId,double droneTime);
-        void UpdateDroneModel(int droneId, string model);
+        void UpdateDrone(int droneId, string model);
         void UpdateStation(int droneId, string name, int numChargers);
         void UpdateCustomer(int customerId, string name, string phone);
 
