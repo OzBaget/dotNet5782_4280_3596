@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IBL.BO
 {
-    public struct BaseSitation
+    public struct BaseStation
     {
         public int Id;
         public string Name;

@@ -36,7 +36,7 @@ namespace DalObject
 
             for (int i = 0; i < 2; i++)
             {
-                Station myStation = new Station(baseNames[i], baseLats[i], baseLngs[i], r.Next(5));
+                Station myStation = new Station(r.Next(), baseNames[i], baseLats[i], baseLngs[i], r.Next(5));
                 BaseStations.Add(myStation);
             }
 

@@ -15,7 +15,8 @@ namespace IDAL.DO
     [Serializable]
     public class IdAlreadyExistsException : Exception
     {
-        public IdAlreadyExistsException(string message) : base(message) { }
+        public int Id;
+        public IdAlreadyExistsException(string message,int id) : base(message) { Id = id; }
     }
 
     [Serializable]

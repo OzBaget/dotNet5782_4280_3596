@@ -5,14 +5,14 @@ namespace IBL
 {
     interface IBL
     {
-        BO.BaseSitation GetBaseStation(int stationId);
+        BO.BaseStation GetBaseStation(int stationId);
         BO.Drone GetDrone(int droneId);
         BO.Customer GetCustomer(int customerId);
         BO.Parcel GetParcerl(int parcelId);
-        void AddBase(string name, double lat, double lng, int chargSlots);
-        void AddDrone(string model, int maxWeightInt);
-        void AddCustomer(string name, string phone, double lat, double lng);
-        int AddParcel(int senderId, int targetId, int weightInt, int priorityInt);
+        void AddBase(BO.BaseStation station);
+        void AddDrone(BO.Drone drone);
+        void AddCustomer(BO.Customer customer);
+        int AddParcel(BO.Parcel parcel);
         void linkParcel(int parcelId, int droneId);
         void PickParcel(int parcelId);
         void ParcelToCustomer(int parcelId);
@@ -20,12 +20,12 @@ namespace IBL
         void FreeDrone(int droneId);
         void UpdateDroneName(int id, string model);
         void UpdateStation(int id, string name, int numChargers);
-        IEnumerable<BO.BaseSitation> GetAllStations();
+        IEnumerable<BO.BaseStation> GetAllStations();
         IEnumerable<BO.Customer> GetAllDrones();
         IEnumerable<BO.Customer> GetAllCustomers();
         IEnumerable<BO.Parcel> GetAllParcels();
         IEnumerable<BO.Parcel> GetUnassignedParcels();
-        IEnumerable<BO.BaseSitation> GetStationsWithFreeSlots();
+        IEnumerable<BO.BaseStation> GetStationsWithFreeSlots();
         double[] GetPowerUse();
     }
 }

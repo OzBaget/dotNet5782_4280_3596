@@ -15,7 +15,8 @@ namespace IBL.BL
     [Serializable]
     public class IdAlreadyExistsException : Exception
     {
-        public IdAlreadyExistsException(string message) : base(message) { }
+        int Id;
+        public IdAlreadyExistsException(string message,int id) : base(message) { Id = id; }
     }
 
     [Serializable]

@@ -23,7 +23,7 @@ namespace DalObject
         /// <param name="targetId">target customer ID</param>
         /// <param name="weightInt">the weight of the parcel (0/1/2)</param>
         /// <param name="priorityInt">the priority of the parcel (0/1/2)</param>
-        public int AddParcel(int senderId, int targetId, int weightInt, int priorityInt)
+        public int AddParcel(int id, int senderId, int targetId, int weightInt, int priorityInt)
         {
             Parcel myParcel = new Parcel(
                 ++DataSource.Config.ParcelId, //update Config.parcelId

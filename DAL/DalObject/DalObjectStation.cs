@@ -21,9 +21,16 @@ namespace DalObject
         /// <param name="lat">the latitude of the station</param>
         /// <param name="lng">the longitude of the station</param>
         /// <param name="chargSlots">hw many charge slosts are in the station</param>
-        public void AddBase(string name, double lat, double lng, int chargSlots)
+        public void AddBase(int id,string name, double lat, double lng, int chargSlots)
         {
-            DataSource.BaseStations.Add(new Station(name, lat, lng, chargSlots));
+            foreach (Station station in DataSource.BaseStations)
+            {
+                if (station.Id==id)
+                {
+                    throw new IdAlreadyExistsException($"ID #{id} already exists!", id);
+                }
+            }
+            DataSource.BaseStations.Add(new Station(id,name, lat, lng, chargSlots));
         }
 
         /// <summary>

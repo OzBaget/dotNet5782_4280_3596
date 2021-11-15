@@ -9,10 +9,10 @@ namespace IDAL
         Drone GetDrone(int droneId);
         Customer GetCustomer(int customerId);
         Parcel GetParcerl(int parcelId);
-        void AddBase(string name, double lat, double lng, int chargSlots);
-        void AddDrone(string model, int maxWeightInt);
-        void AddCustomer(string name, string phone, double lat, double lng);
-        int AddParcel(int senderId, int targetId, int weightInt, int priorityInt);
+        void AddBase(int id,string name, double lat, double lng, int chargSlots);
+        void AddDrone(int id,string model, int maxWeightInt);
+        void AddCustomer(int id, string name, string phone, double lat, double lng);
+        int AddParcel(int id, int senderId, int targetId, int weightInt, int priorityInt);
         void linkParcel(int parcelId, int droneId);
         void PickParcel(int parcelId);
         void ParcelToCustomer(int parcelId);

@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace BL
 {
-    
-    public class BL : IBL.IBL
+    public partial class BL : IBL.IBL
     {
         IDAL.IDal DalObject;
         static List<DroneToList> Drones = new List<DroneToList>();
@@ -86,17 +85,11 @@ namespace BL
                         }
                     }
                 }
-
                 Drones.Add(myDrone);
             }
-            
-
         }
 
-        public void AddBase(int id, string name, double lat, double lng, int chargSlots)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public void AddCustomer(int id, string name, string phone, double lat, double lng)
         {
@@ -138,13 +131,13 @@ namespace BL
             throw new NotImplementedException();
         }
 
-        public IEnumerable<BaseSitation> GetAllStations()
+        public IEnumerable<BaseStation> GetAllStations()
         {
             
             throw new NotImplementedException();
         }
 
-        public BaseSitation GetBaseStation(int stationId)
+        public BaseStation GetBaseStation(int stationId)
         {
             throw new NotImplementedException();
         }
@@ -169,7 +162,7 @@ namespace BL
             throw new NotImplementedException();
         }
 
-        public IEnumerable<BaseSitation> GetStationsWithFreeSlots()
+        public IEnumerable<BaseStation> GetStationsWithFreeSlots()
         {
             throw new NotImplementedException();
         }
@@ -194,7 +187,7 @@ namespace BL
             throw new NotImplementedException();
         }
 
-        private BaseSitation GetClosestStation(Location loc)
+        private BaseStation GetClosestStation(Location loc)
         {
             return GetAllStations().OrderBy(station => CalculateDist(station.Location, loc)).First();
         }
@@ -224,7 +217,27 @@ namespace BL
             return Radios * c;
         }
 
+        public void AddBase(string name, double lat, double lng, int chargSlots)
+        {
+            throw new NotImplementedException();
+        }
 
+        public void AddDrone(string model, int maxWeightInt)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddCustomer(string name, string phone, double lat, double lng)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateDroneName(int id, string model)
+        {
+            throw new NotImplementedException();
+        }
+
+        
     }
 
     

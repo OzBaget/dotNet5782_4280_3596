@@ -32,7 +32,7 @@ namespace DalObject
         /// </summary>
         /// <param name="model">the modle of the drone</param>
         /// <param name="maxWeightInt">max weight of the drone (0/1/2)</param>
-        public void AddDrone(string model, int maxWeightInt)
+        public void AddDrone(int id, string model, int maxWeightInt)
         {
             DataSource.Drones.Add(new Drone(model, (WeightCategories)maxWeightInt));
         }
