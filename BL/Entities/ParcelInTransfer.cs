@@ -13,8 +13,8 @@ namespace IBL.BO
         public Priorities Prioritie;
         public WeightCategories Weight;
         public CustomerInParcel Sender;
-        public CustomerInParcel Receiver;
-        public Location PickipLocation;
+        public CustomerInParcel Target;
+        public Location PickupLocation;
         public Location TargetLocation;
         public double Distance;
     }

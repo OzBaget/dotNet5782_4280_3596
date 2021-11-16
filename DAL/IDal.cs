@@ -15,6 +15,7 @@ namespace IDAL
         void AddDrone(int id,string model, WeightCategories maxWeight);
         void AddCustomer(int id, string name, string phone, double lat, double lng);
         void AddParcel(int senderId, int targetId, WeightCategories weight, Priorities priority, DateTime requsted, DateTime scheduled, DateTime pickedUp, DateTime delivered);
+
         void DeleteStation(int stationId);                                                                                                              
         void DeleteDrone(int droneId);                                                                                                                 
         void DeleteCustomer(int customerId);

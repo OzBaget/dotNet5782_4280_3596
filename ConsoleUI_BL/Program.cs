@@ -106,8 +106,10 @@ namespace ConsoleUI_BL
             IBL.BO.BaseStation s = new();
             s.Id = id;
             s.Name = name;
+            s.Location = new();
             s.Location.Latitude = location.Item1;
             s.Location.Longitude = location.Item2;
+            s.NumFreeChargers = slots;
             try
             {
                 db.AddStation(s);

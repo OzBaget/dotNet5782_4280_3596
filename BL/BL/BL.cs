@@ -88,29 +88,32 @@ namespace BL
                 }
                 Drones.Add(myDrone);
             }
-        }        
+        }
 
-        public IEnumerable<DroneToList> GetAllDrones()
+
+            
+
+
+
+        public void FreeDrone(int droneId, double droneTime)
         {
             throw new NotImplementedException();
         }
 
-       
-        public Drone GetDrone(int droneId)
+        public void ParcelToCustomer(int droneID)
         {
             throw new NotImplementedException();
         }
 
-        
+
+
+
         public double[] GetPowerUse()
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<BaseStationToList> GetStationsWithFreeSlots()
-        {
-            throw new NotImplementedException();
-        }
+        
 
         
 
@@ -160,25 +163,7 @@ namespace BL
         
 
 
-        public void DroneToStation(int droneId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void UpdateDrone(int id, string model)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void FreeDrone(int droneId, double droneTime)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void ParcelToCustomer(int droneID)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 
     

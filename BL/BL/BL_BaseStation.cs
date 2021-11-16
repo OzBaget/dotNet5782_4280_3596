@@ -54,7 +54,6 @@ namespace BL
             }
             return stations;
         }
-
         public void UpdateStation(int stationId, string name, int numChargers)
         {
             try
@@ -66,6 +65,11 @@ namespace BL
                 throw new IBL.BL.IdNotFoundException(ex.Message, ex.Id);
             }
         }
+        public IEnumerable<BaseStationToList> GetStationsWithFreeSlots()
+        {
+            return GetAllStations().Where(station => station.NumFreeChragers > 0);
+        }
+
         private List<DroneInCharging> getDronesInChraging(int stationId)
         {
             List<DroneInCharging> drones = new();
@@ -81,5 +85,7 @@ namespace BL
             }
         return drones;
         }
+
+
     }
 }

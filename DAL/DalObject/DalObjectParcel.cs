@@ -15,8 +15,8 @@ namespace DalObject
         {
             bool parcelExists = false;
 
-            foreach (Customer customer in DataSource.Customers)
-                if (customer.Id == parcelId)
+            foreach (Parcel parcel in DataSource.Parcels)
+                if (parcel.Id == parcelId)
                     parcelExists = true;
 
             if (!parcelExists)
@@ -32,7 +32,7 @@ namespace DalObject
         /// <param name="targetId">target customer ID</param>
         /// <param name="weight">the weight of the parcel</param>
         /// <param name="priority">the priority of the parcel</param>
-        void AddParcel(int senderId, int targetId, WeightCategories weight, Priorities priority, DateTime requsted, DateTime scheduled, DateTime pickedUp, DateTime delivered)
+        public void AddParcel(int senderId, int targetId, WeightCategories weight, Priorities priority, DateTime requsted, DateTime scheduled, DateTime pickedUp, DateTime delivered)
         {
             Parcel myParcel = new();
             myParcel.Id = ++DataSource.Config.ParcelId;
