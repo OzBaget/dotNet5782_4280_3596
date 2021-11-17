@@ -20,7 +20,8 @@ namespace IBL.BO
                             $"Weight status:      {Weight}\n" +
                             $"Prioritie status:      {Prioritie}\n" +
                             $"Parcel status:      {StatusParcel}\n" +
-                            $"Customer :      {Customer}\n";                    
+                            $"Customer :      {Customer}\n";
             return toString;
         }
     }
+}

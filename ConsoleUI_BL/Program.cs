@@ -9,15 +9,6 @@ namespace ConsoleUI_BL
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome To DeliverManger!");
-            while (true)
-            {
-                IBL.BO.Location loc= new();
-                Tuple<double, double> a = getCoordsFromUser();
-                loc.Latitude = a.Item1;
-                loc.Longitude = a.Item2;
-                Console.WriteLine(db.getClosestStation(loc).Name);
-            }
-
             bool exit = false;
             while (!exit)
                 exit = mainMenu();

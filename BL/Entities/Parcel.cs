@@ -31,7 +31,8 @@ namespace IBL.BO
                 $"Scheduled date:      {DateScheduled}\n" +
                 $"Pick up date:      {DatePickup}\n" +
                 $"Deliverd date:      {DateDeliverd}\n";
-                
+
             return toString;
         }
+    }
 }
