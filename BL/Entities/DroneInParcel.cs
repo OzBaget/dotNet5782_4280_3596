@@ -11,5 +11,13 @@ namespace IBL.BO
         public int Id;
         public double Battery;
         public Location CurrentLocation;
-    }
+        public override string ToString()
+        {
+            string toString =
+                $"ID:            {Id}\n" +
+                $"Battery:          {Battery}\n" +
+                $"Location: {CurrentLocation}\n";
+            
+            return toString;
+        }
 }

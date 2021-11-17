@@ -18,5 +18,20 @@ namespace IBL.BO
         public DateTime DateScheduled;
         public DateTime DatePickup;
         public DateTime DateDeliverd;
-    }
+        public override string ToString()
+        {
+            string toString =
+                $"ID:            {Id}\n" +
+                $"Sender:          {Sender}\n" +
+                $"Receiver:     {Target}\n" +
+                $"Weight status:      {Weight}\n" +
+                $"Prioritie status:      {Prioritie}\n" +
+                $"Parcel's Drone :      {Drone}\n" +
+                $"Created date:      {DateCreated}\n" +
+                $"Scheduled date:      {DateScheduled}\n" +
+                $"Pick up date:      {DatePickup}\n" +
+                $"Deliverd date:      {DateDeliverd}\n";
+                
+            return toString;
+        }
 }

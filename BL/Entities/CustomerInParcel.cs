@@ -10,5 +10,12 @@ namespace IBL.BO
     {
         public int Id;
         public string Name;
+        public override string ToString()
+        {
+            string toString =
+                $"ID:            {Id}\n" +
+                $"Name:          {Name}\n";
+            return toString;
+        }
     }
 }

@@ -14,6 +14,26 @@ namespace IBL.BO
         public Location Location;
         public List<ParcelInCustomer> WaitsToSendParcels;
         public List<ParcelInCustomer> ReceivedParcels;
+        public override string ToString()
+        {
+            string toString =
+                $"ID:            {Id}\n" +
+                $"Name:          {Name}\n" +
+                $"Location: {Location}\n" +
+                $"Phone number:      {Phone}\n" +
+                $"Parcels which wait to send:\n";
+            foreach (var parcel in WaitsToSendParcels)
+            {
+                toString += "=============\n" + parcel.ToString();
+            }
+            toString = toString + "Parcels which received:\n";
+            foreach (var parcel in ReceivedParcels)
+            {
+                toString += "=============\n" + parcel.ToString();
+            }
+            return toString;
+
+        }
 
     }
 }
