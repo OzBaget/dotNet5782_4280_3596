@@ -42,7 +42,7 @@ namespace DalObject
             if (customerExists)
                 throw new IdAlreadyExistsException($"Customer with ID #{id} already exists!", id);
 
-            DataSource.Customers.Add(new Customer(name, phone, lat, lng));
+            DataSource.Customers.Add(new Customer(id, name, phone, lat, lng));
         }
 
         public void DeleteCustomer(int customerId)

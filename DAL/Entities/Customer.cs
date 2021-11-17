@@ -7,10 +7,9 @@ namespace IDAL
        
         public struct Customer
         {
-            public Customer(string name, string phone, double lat, double lng)
+            public Customer(int id, string name, string phone, double lat, double lng)
             {
-                Random r = new Random();
-                Id = r.Next();
+                Id = id;
                 Name = name;
                 Phone = phone;
                 Lat = lat;

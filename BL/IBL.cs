@@ -5,6 +5,8 @@ namespace IBL
 {
     public interface IBL
     {
+
+
         BO.BaseStation GetStation(int stationId);
         BO.Drone GetDrone(int droneId);
         BO.Customer GetCustomer(int customerId);
@@ -16,7 +18,7 @@ namespace IBL
         void linkParcel(int parcelId);
         void PickParcel(int parcelId);
         void ParcelToCustomer(int droneID);
-        void DroneToStation(int droneId);
+        int DroneToStation(int droneId);
         void FreeDrone(int droneId,double droneTime);
         void UpdateDrone(int droneId, string model);
         void UpdateStation(int droneId, string name, int numChargers);

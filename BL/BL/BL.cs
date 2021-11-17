@@ -38,7 +38,7 @@ namespace BL
 
                 foreach (IDAL.DO.Parcel parcel in DalObject.GetAllParcels())
                 {
-                    if (parcel.Delivered != DateTime.MinValue && parcel.DroneId == myDrone.Id)//parcel havn't deliverd but schudled
+                    if (parcel.Delivered == DateTime.MinValue && parcel.Scheduled != DateTime.MinValue &&  parcel.DroneId == myDrone.Id) //parcel havn't deliverd but scheduled
                     {
                         myDrone.Status = DroneStatus.Delivery;
                         if (parcel.PickedUp== DateTime.MinValue)
@@ -49,56 +49,49 @@ namespace BL
                         {
                             myDrone.CurrentLocation = GetCustomer(parcel.SenderId).Location;
                         }
-                        int minBattery = 0;
-                        double distancToCover = calculateDist(myDrone.CurrentLocation, GetCustomer(parcel.TargetId).Location)+
-                            calculateDist(GetCustomer(parcel.TargetId).Location,getClosestStation(GetCustomer(parcel.TargetId).Location).Location);
-                        switch (parcel.Weight)
+
+                        myDrone.PacrelId = parcel.Id;
+                        int minBattery = batteryNeedForDest(GetCustomer(parcel.TargetId).Location, myDrone.CurrentLocation, false, (WeightCategories)parcel.Weight)+
+                            batteryNeedForDest(getClosestStation(GetCustomer(parcel.TargetId).Location).Location, myDrone.CurrentLocation);
+                        
+                        if (minBattery < 100)
                         {
-                            case IDAL.DO.WeightCategories.Light:
-                                minBattery = (int)(distancToCover * powerUseLight);
-                                break;
-                            case IDAL.DO.WeightCategories.Middle:
-                                minBattery = (int)(distancToCover * powerUseMiddle);
-                                break;
-                            case IDAL.DO.WeightCategories.Heavy:
-                                minBattery = (int)(distancToCover * powerUseHeavy);
-                                break;
-                            default:
-                                minBattery = 0;
-                                break;
+                            myDrone.Battery = new Random().Next(minBattery, 101);
                         }
-                        myDrone.Battery = new Random().Next(minBattery, 101);
+                        else
+                            myDrone.Battery = 100;
                         break;
                     }
-                    else
+                }
+                if (myDrone.Status != DroneStatus.Delivery) 
+                {
+                    myDrone.Status = (DroneStatus)new Random().Next(0, 2);
+                    if (myDrone.Status == DroneStatus.UnderMaintenance)
                     {
-                        myDrone.Status = (DroneStatus)new Random().Next(0, 2);
-                        if (myDrone.Status==DroneStatus.UnderMaintenance)
+                        BaseStation chargerStation = GetStation(GetAllStations().ElementAt(new Random().Next(GetAllStations().Count())).Id);
+                        myDrone.CurrentLocation = chargerStation.Location;
+                        myDrone.Battery = new Random().Next(0, 21);
+                        DalObject.DroneToStation(chargerStation.Id, myDrone.Id);
+                    }
+                    if (myDrone.Status == DroneStatus.Available)
+                    {
+                        int index = new Random().Next(GetAllCustomers().Where(customer => customer.ParcelsReceived > 0).Count());
+                        myDrone.CurrentLocation = GetCustomer(GetAllCustomers().ElementAt(index).Id).Location;
+
+                        int minBattry = batteryNeedForDest(myDrone.CurrentLocation, getClosestStation(myDrone.CurrentLocation).Location);
+                        if (minBattry>100)
                         {
-                            myDrone.CurrentLocation = GetStation(GetAllStations().ElementAt(new Random().Next(GetAllStations().Count())).Id).Location;
-                            myDrone.Battery = new Random().Next(0, 21);
+                            minBattry = 100;
                         }
-                        if (myDrone.Status==DroneStatus.Available)
-                        { 
-                            int index = new Random().Next(GetAllCustomers().Where(customer => customer.ParcelsReceived > 0).Count());
-                            myDrone.CurrentLocation=GetCustomer(GetAllCustomers().Where(customer => customer.ParcelsReceived > 0).ElementAt(index).Id).Location;
-                            myDrone.Battery = new Random().Next((int)(calculateDist(myDrone.CurrentLocation, getClosestStation(myDrone.CurrentLocation).Location)*powerUseEmpty), 101);
-                        }
+                        
+                        myDrone.Battery = new Random().Next(minBattry, 101);
                     }
                 }
                 Drones.Add(myDrone);
             }
         }
 
-
-            
-
-
-
-        public void FreeDrone(int droneId, double droneTime)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public void ParcelToCustomer(int droneID)
         {
@@ -117,15 +110,12 @@ namespace BL
 
         
 
-        public void linkParcel(int droneId)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         
 
         public void PickParcel(int parcelId)
-        {
+        {   
             throw new NotImplementedException();
         }
 

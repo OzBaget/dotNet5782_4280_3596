@@ -91,5 +91,56 @@ namespace BL
             return parcels;
         }
 
+        public void linkParcel(int droneId)
+        {
+            Drone myDrone = GetDrone(droneId);
+            if (myDrone.Status != DroneStatus.Available)
+                throw new IBL.BL.CantLinkParcelException("Drone is not available!");
+
+            List<ParcelToList> myParcels = (List<ParcelToList>)GetUnassignedParcels();
+            myParcels.RemoveAll(parcel=>
+            batteryNeedForDest(GetCustomer(GetParcerl(parcel.Id).Sender.Id).Location,myDrone.CurrentLocation)+//baterry for currnt location->sender
+            batteryNeedForDest(GetCustomer(GetParcerl(parcel.Id).Target.Id).Location, GetCustomer(GetParcerl(parcel.Id).Sender.Id).Location,false,parcel.Weight) +//baterry for sender->target (with weight)
+            batteryNeedForDest(getClosestStation(GetCustomer(GetParcerl(parcel.Id).Sender.Id).Location).Location, GetCustomer(GetParcerl(parcel.Id).Sender.Id).Location)//baterry for target->closer station to target
+            >myDrone.Battery);//remove too far parcels
+            
+
+
+            myParcels.Sort(delegate (ParcelToList parcel1, ParcelToList parcel2)//sort by Priority
+            {
+                    if (parcel1.Priority > parcel2.Priority) return 1;
+                    else return -1;
+            });
+            myParcels.Reverse();
+            myParcels.RemoveAll(parcel => parcel.Priority < myParcels[0].Priority);//remove all parcel that less pariority
+
+            myParcels.Sort(delegate (ParcelToList parcel1, ParcelToList parcel2)//sort by Weight
+            {
+                if (parcel1.Weight > parcel2.Weight) return 1;
+                else return -1;
+            });
+            myParcels.Reverse();
+            myParcels.RemoveAll(parcel => parcel.Priority < myParcels[0].Priority);//remove all parcel that less weight
+
+            myParcels.Sort(delegate (ParcelToList parcel1, ParcelToList parcel2)//sort by Weight
+            {
+                if (calculateDist(GetCustomer(GetParcerl(parcel1.Id).Sender.Id).Location,myDrone.CurrentLocation) >
+                 calculateDist(GetCustomer(GetParcerl(parcel2.Id).Sender.Id).Location, myDrone.CurrentLocation)) return 1;
+                else return -1;
+            });
+            myParcels.Reverse();
+
+            if (myParcels.Count == 0)
+                throw new IBL.BL.CantLinkParcelException("Can't find parcel to link too!");
+
+            DroneToList newDrone = new();
+
+            //Drones.Add()
+
+        }
+
+
+
+
     }
 }

@@ -24,6 +24,8 @@ namespace BL
                 newDrone.Status = DroneStatus.UnderMaintenance;
                 newDrone.CurrentLocation = GetStation(stationId).Location;
                 Drones.Add(newDrone);
+
+                DalObject.DroneToStation(stationId, drone.Id);
             }
             catch (IDAL.DO.IdAlreadyExistsException ex)
             { 
@@ -35,7 +37,9 @@ namespace BL
             int droneIndex = Drones.FindIndex(drone => drone.Id == droneId);
             if (droneIndex==-1)
                 throw new IBL.BL.IdNotFoundException($"Can't find drone with ID #{droneId}", droneId);
+            
             DroneToList tmpDrone = Drones[droneIndex];
+
             Drone newDrone = new();
             newDrone.Id = tmpDrone.Id;
             newDrone.Model = tmpDrone.Model;
@@ -43,8 +47,9 @@ namespace BL
             newDrone.MaxWeight = tmpDrone.MaxWeight;
             newDrone.CurrentLocation = tmpDrone.CurrentLocation;
             newDrone.Battery = tmpDrone.Battery;
-
             ParcelInTransfer parcel = new();
+            if (tmpDrone.PacrelId != 0) 
+            {
             Parcel tmpParcel = GetParcerl(tmpDrone.PacrelId);
             parcel.Id = tmpParcel.Id;
             parcel.Prioritie = tmpParcel.Prioritie;
@@ -53,9 +58,9 @@ namespace BL
             parcel.Target = tmpParcel.Target;
             parcel.PickupLocation = GetCustomer(tmpParcel.Sender.Id).Location;
             parcel.TargetLocation = GetCustomer(tmpParcel.Target.Id).Location;
-            parcel.IsInTransfer = tmpParcel.DatePickup != DateTime.MinValue;
+                parcel.IsInTransfer = tmpParcel.DatePickup != DateTime.MinValue && tmpParcel.DateDeliverd == DateTime.MinValue;
             parcel.Distance = calculateDist(parcel.PickupLocation, parcel.TargetLocation);
-
+            }
             newDrone.Parcel = parcel;
             return newDrone;
 
@@ -65,10 +70,13 @@ namespace BL
             return Drones;
         }
 
-        public void DroneToStation(int droneId)
+        public int DroneToStation(int droneId)
         {
-            Drone myDrone = GetDrone(droneId);
-            if (myDrone.Status != DroneStatus.Available)
+            int droneIndex = Drones.FindIndex(drone => drone.Id == droneId);
+            if (droneIndex == -1)
+                throw new IBL.BL.IdNotFoundException($"Can't find drone with ID #{droneId}", droneId);
+            DroneToList myDrone = Drones[droneIndex];//copy by ref..
+            if (Drones[droneIndex].Status != DroneStatus.Available)
                 throw new IBL.BL.CantSendDroneToChargeException("Drone is not available!");
 
             foreach (BaseStationToList station in GetStationsWithFreeSlots())
@@ -76,15 +84,31 @@ namespace BL
                 int batteryNeeded = batteryNeedForDest(GetStation(station.Id).Location, myDrone.CurrentLocation);
                 if (myDrone.Battery >= batteryNeeded)
                 {
-                    myDrone.Battery = myDrone.Battery - batteryNeeded;
-                    myDrone.CurrentLocation = GetStation(station.Id).Location;
+                    myDrone.Battery -= batteryNeeded;
                     myDrone.Status = DroneStatus.UnderMaintenance;
-
-                    DalObject.DroneToStation(station.Id,droneId);
-                    return;
+                    myDrone.CurrentLocation = GetStation(station.Id).Location;
+                    DalObject.DroneToStation(station.Id, droneId);
+                    return station.Id;
                 }
             }
             throw new IBL.BL.CantSendDroneToChargeException("There is no station that the drone is able to charge at!");
+        }
+        public void FreeDrone(int droneId, double droneTime)
+        {
+            int droneIndex = Drones.FindIndex(drone => drone.Id == droneId);
+            if (droneIndex == -1)
+                throw new IBL.BL.IdNotFoundException($"Can't find drone with ID #{droneId}", droneId);
+
+            DroneToList myDrone = Drones[droneIndex];
+            if (myDrone.Status != DroneStatus.UnderMaintenance)
+                throw new IBL.BL.CantReleaseDroneFromChargeException("Drone is not in charging!");
+
+            DalObject.FreeDrone(droneId);
+
+
+
+            myDrone.Battery = (int)(droneTime * chargingRate) < 100 ? myDrone.Battery + (int)(droneTime * chargingRate) : 100;
+            myDrone.Status = DroneStatus.Available;
         }
 
         public void UpdateDrone(int id, string model)

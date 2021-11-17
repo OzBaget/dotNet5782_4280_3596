@@ -36,7 +36,7 @@ namespace DalObject
 
             for (int i = 0; i < 2; i++)
             {
-                Station myStation = new Station(r.Next(), baseNames[i], baseLats[i], baseLngs[i], r.Next(5));
+                Station myStation = new Station(r.Next(), baseNames[i], baseLats[i], baseLngs[i], r.Next(5, 15));
                 BaseStations.Add(myStation);
             }
 
@@ -72,7 +72,8 @@ namespace DalObject
             int j = 0;
             foreach (Drone drone in Drones)
             {
-                dronesIds[j] = drone.Id;
+                if(r.Next(2)==0)
+                    dronesIds[j] = drone.Id;
                 j++;
             }
 
@@ -90,10 +91,10 @@ namespace DalObject
                     myParcel.Scheduled = randomDateBetween(myParcel.Requsted, DateTime.Now);
                     myParcel.PickedUp = randomDateBetween(myParcel.Scheduled, DateTime.Now);
                 }
-                else if (true)
+                else
                 {
                     myParcel.Weight = (WeightCategories)r.Next(0, 3);
-                    if (r.Next(0,2)==0)
+                    if (r.Next(0, 2) == 0)
                     {
                         myParcel.Scheduled = randomDateBetween(myParcel.Requsted, DateTime.Now);
                         myParcel.PickedUp = randomDateBetween(myParcel.Scheduled, DateTime.Now);

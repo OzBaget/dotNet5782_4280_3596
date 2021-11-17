@@ -19,7 +19,7 @@ namespace DalObject
             if(droneExists)
                 throw new IdAlreadyExistsException($"Drone with ID #{id} already exists!", id);
 
-            DataSource.Drones.Add(new Drone(model, maxWeight));
+            DataSource.Drones.Add(new Drone(id,model, maxWeight));
         }
         /// <summary>
         /// returns drone by ID

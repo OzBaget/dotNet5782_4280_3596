@@ -10,10 +10,9 @@ namespace IDAL
     {
         public struct Drone
         {
-            public Drone(string model, WeightCategories maxWeight)
+            public Drone(int id,string model, WeightCategories maxWeight)
             {
-                Random r = new Random();
-                Id = r.Next();
+                Id = id;
                 Model = model;
                 MaxWeight = maxWeight;
 

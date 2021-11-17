@@ -11,21 +11,24 @@ namespace IBL.BO
         public int Id;
         public string Model;
         public WeightCategories MaxWeight;
-        public double Battery;
+        public int Battery;
         public DroneStatus Status;
         public ParcelInTransfer Parcel;
         public Location CurrentLocation;
 
         public override string ToString()
         {
-            return 
+            string tostringText =
                 $"ID:               {Id}\n" +
                 $"Model:            {Model}\n" +
                 $"Max weight:       {MaxWeight}\n" +
                 $"Battery:          {Battery}%\n" +
-                $"Status:           {Status}\n" +
-                $"Parcel:         \n{Parcel}\n" +
-                $"Current location: {CurrentLocation}";
+                $"Status:           {Status}\n";
+            if (Parcel.Id != 0)
+                tostringText += $"Parcel:         \n{Parcel}\n";
+
+            tostringText+=$"Current location: {CurrentLocation}";
+            return tostringText;
         }
     }
 }
