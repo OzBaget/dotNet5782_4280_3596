@@ -25,7 +25,7 @@ namespace IBL.BO
                 $"Battery:          {Battery}%\n" +
                 $"Status:           {Status}\n";
             if (Parcel.Id != 0)
-                tostringText += $"Parcel:         \n{Parcel}\n";
+                tostringText += $"Parcel:         \n{Parcel.ToString().Replace("\n","\n\t")}\n";
 
             tostringText+=$"Current location: {CurrentLocation}";
             return tostringText;

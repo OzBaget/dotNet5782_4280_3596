@@ -21,7 +21,7 @@ namespace BL
                 throw new IBL.BL.IdAlreadyExistsException(ex.Message, ex.Id);
             }
         }
-        public Parcel GetParcerl(int parcelId)
+        public Parcel GetParcel(int parcelId)
         {
             try
             {
@@ -93,18 +93,22 @@ namespace BL
 
         public void linkParcel(int droneId)
         {
-            Drone myDrone = GetDrone(droneId);
+            int droneIndex = Drones.FindIndex(drone => drone.Id == droneId);
+            if(droneIndex==-1)
+                throw new IBL.BL.IdNotFoundException($"Can't find drone with ID #{droneId}!", droneId);
+
+            DroneToList myDrone = Drones[droneIndex];//copy by ref
             if (myDrone.Status != DroneStatus.Available)
                 throw new IBL.BL.CantLinkParcelException("Drone is not available!");
 
             List<ParcelToList> myParcels = (List<ParcelToList>)GetUnassignedParcels();
             myParcels.RemoveAll(parcel=>
-            batteryNeedForDest(GetCustomer(GetParcerl(parcel.Id).Sender.Id).Location,myDrone.CurrentLocation)+//baterry for currnt location->sender
-            batteryNeedForDest(GetCustomer(GetParcerl(parcel.Id).Target.Id).Location, GetCustomer(GetParcerl(parcel.Id).Sender.Id).Location,false,parcel.Weight) +//baterry for sender->target (with weight)
-            batteryNeedForDest(getClosestStation(GetCustomer(GetParcerl(parcel.Id).Sender.Id).Location).Location, GetCustomer(GetParcerl(parcel.Id).Sender.Id).Location)//baterry for target->closer station to target
-            >myDrone.Battery);//remove too far parcels
-            
+            batteryNeedForDest(GetCustomer(GetParcel(parcel.Id).Sender.Id).Location,myDrone.CurrentLocation)+//baterry for currnt location->sender
+            batteryNeedForDest(GetCustomer(GetParcel(parcel.Id).Target.Id).Location, GetCustomer(GetParcel(parcel.Id).Sender.Id).Location,false,parcel.Weight) +//baterry for sender->target (with weight)
+            batteryNeedForDest(getClosestStation(GetCustomer(GetParcel(parcel.Id).Sender.Id).Location).Location, GetCustomer(GetParcel(parcel.Id).Sender.Id).Location)//baterry for target->closer station to target
+            >myDrone.Battery);//remove too far parcels            
 
+            myParcels.RemoveAll(parcel => parcel.Weight > myDrone.MaxWeight);//remove too heavy parcels
 
             myParcels.Sort(delegate (ParcelToList parcel1, ParcelToList parcel2)//sort by Priority
             {
@@ -113,34 +117,77 @@ namespace BL
             });
             myParcels.Reverse();
             myParcels.RemoveAll(parcel => parcel.Priority < myParcels[0].Priority);//remove all parcel that less pariority
-
+            
             myParcels.Sort(delegate (ParcelToList parcel1, ParcelToList parcel2)//sort by Weight
             {
                 if (parcel1.Weight > parcel2.Weight) return 1;
                 else return -1;
             });
             myParcels.Reverse();
-            myParcels.RemoveAll(parcel => parcel.Priority < myParcels[0].Priority);//remove all parcel that less weight
+            myParcels.RemoveAll(parcel => parcel.Weight < myParcels[0].Weight);//remove all parcel that less weight
 
-            myParcels.Sort(delegate (ParcelToList parcel1, ParcelToList parcel2)//sort by Weight
+            myParcels.Sort(delegate (ParcelToList parcel1, ParcelToList parcel2)//sort by distance
             {
-                if (calculateDist(GetCustomer(GetParcerl(parcel1.Id).Sender.Id).Location,myDrone.CurrentLocation) >
-                 calculateDist(GetCustomer(GetParcerl(parcel2.Id).Sender.Id).Location, myDrone.CurrentLocation)) return 1;
+                if (calculateDist(GetCustomer(GetParcel(parcel1.Id).Sender.Id).Location,myDrone.CurrentLocation) >
+                 calculateDist(GetCustomer(GetParcel(parcel2.Id).Sender.Id).Location, myDrone.CurrentLocation)) return 1;
                 else return -1;
             });
-            myParcels.Reverse();
 
             if (myParcels.Count == 0)
                 throw new IBL.BL.CantLinkParcelException("Can't find parcel to link too!");
 
-            DroneToList newDrone = new();
+            
+            myDrone.Status = DroneStatus.Delivery;
 
-            //Drones.Add()
-
+            DalObject.linkParcel(myParcels[0].Id, myDrone.Id);
         }
 
+        public void PickParcel(int droneId)
+        {
+            int droneIndex = Drones.FindIndex(drone => drone.Id == droneId);
+            if (droneIndex == -1)
+                throw new IBL.BL.IdNotFoundException($"Can't find drone with ID #{droneId}!", droneId);
+            DroneToList myDrone = Drones[droneIndex];
+            if (myDrone.PacelId == 0) 
+                throw new IBL.BL.CantPickUpParcelException("Drone is not link to any parcel!");
+           
+            Parcel myParcel = GetParcel(myDrone.PacelId);
+            if (myParcel.DatePickup == DateTime.MinValue) 
+                throw new IBL.BL.CantPickUpParcelException("Parcel alredy picked up!");
 
+            myDrone.Battery -= batteryNeedForDest(GetCustomer(myParcel.Sender.Id).Location, myDrone.CurrentLocation);
+            myDrone.CurrentLocation = GetCustomer(myParcel.Sender.Id).Location;
 
+            DalObject.PickParcel(myParcel.Id);
 
+            
+        }
+
+        public void ParcelToCustomer(int droneId)
+        {
+            int droneIndex = Drones.FindIndex(drone => drone.Id == droneId);
+            if(droneIndex==-1)
+                throw new IBL.BL.IdNotFoundException($"Can't find drone with ID #{droneId}!", droneId);
+
+            DroneToList myDrone = Drones[droneIndex];//copy by ref
+
+            if (myDrone.PacelId == 0)
+                throw new IBL.BL.CantDeliverParcelException("Drone is not link to any parcel!");
+            
+            Parcel myParcel = GetParcel(myDrone.PacelId);
+            if (myParcel.DatePickup == DateTime.MinValue)
+                throw new IBL.BL.CantDeliverParcelException($"The drone didn't picked up the parcel #{myParcel.Id}!");
+            if(myParcel.DateDeliverd!=DateTime.MinValue)
+                throw new IBL.BL.CantDeliverParcelException($"The drone deliverd parcel #{myParcel.Id} already!");
+
+            int batteryNeededForCustomer = batteryNeedForDest(GetCustomer(myParcel.Target.Id).Location, myDrone.CurrentLocation, false, myParcel.Weight);
+            if (batteryNeededForCustomer > myDrone.Battery)
+                throw new IBL.BL.CantDeliverParcelException($"Not enough battery to deliver parcel! (battry needed: {batteryNeededForCustomer}%)");
+
+            myDrone.Battery -= batteryNeededForCustomer;
+            myDrone.CurrentLocation = GetCustomer(myParcel.Target.Id).Location;
+            myDrone.Status = DroneStatus.Available;
+            DalObject.ParcelToCustomer(myParcel.Id);
+        }
     }
 }

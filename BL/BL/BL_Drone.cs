@@ -48,9 +48,9 @@ namespace BL
             newDrone.CurrentLocation = tmpDrone.CurrentLocation;
             newDrone.Battery = tmpDrone.Battery;
             ParcelInTransfer parcel = new();
-            if (tmpDrone.PacrelId != 0) 
+            if (tmpDrone.PacelId != 0) 
             {
-            Parcel tmpParcel = GetParcerl(tmpDrone.PacrelId);
+            Parcel tmpParcel = GetParcel(tmpDrone.PacelId);
             parcel.Id = tmpParcel.Id;
             parcel.Prioritie = tmpParcel.Prioritie;
             parcel.Weight = tmpParcel.Weight;
@@ -99,13 +99,11 @@ namespace BL
             if (droneIndex == -1)
                 throw new IBL.BL.IdNotFoundException($"Can't find drone with ID #{droneId}", droneId);
 
-            DroneToList myDrone = Drones[droneIndex];
+            DroneToList myDrone = Drones[droneIndex];//copy by ref
             if (myDrone.Status != DroneStatus.UnderMaintenance)
                 throw new IBL.BL.CantReleaseDroneFromChargeException("Drone is not in charging!");
 
             DalObject.FreeDrone(droneId);
-
-
 
             myDrone.Battery = (int)(droneTime * chargingRate) < 100 ? myDrone.Battery + (int)(droneTime * chargingRate) : 100;
             myDrone.Status = DroneStatus.Available;
@@ -138,7 +136,7 @@ namespace BL
                         powerUse = powerUseLight;
                     break;
                     case WeightCategories.Middle:
-                        powerUse = powerUseLight;
+                        powerUse = powerUseMiddle;
                         break;
                     case WeightCategories.Heavy:
                         powerUse = powerUseHeavy;
@@ -149,5 +147,6 @@ namespace BL
             }
             return (int)(calculateDist(currentLoc, dest) * powerUse);
         }
+
     }
 }

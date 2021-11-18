@@ -10,7 +10,7 @@ namespace IBL
         BO.BaseStation GetStation(int stationId);
         BO.Drone GetDrone(int droneId);
         BO.Customer GetCustomer(int customerId);
-        BO.Parcel GetParcerl(int parcelId);
+        BO.Parcel GetParcel(int parcelId);
         void AddStation(BO.BaseStation station);
         void AddDrone(BO.Drone drone,int idStation);
         void AddCustomer(BO.Customer customer);
@@ -30,6 +30,5 @@ namespace IBL
         IEnumerable<BO.ParcelToList> GetAllParcels();
         IEnumerable<BO.ParcelToList> GetUnassignedParcels();
         IEnumerable<BO.BaseStationToList> GetStationsWithFreeSlots();
-        double[] GetPowerUse();
     }
 }

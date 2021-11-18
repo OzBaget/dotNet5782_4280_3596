@@ -50,7 +50,7 @@ namespace BL
                             myDrone.CurrentLocation = GetCustomer(parcel.SenderId).Location;
                         }
 
-                        myDrone.PacrelId = parcel.Id;
+                        myDrone.PacelId = parcel.Id;
                         int minBattery = batteryNeedForDest(GetCustomer(parcel.TargetId).Location, myDrone.CurrentLocation, false, (WeightCategories)parcel.Weight)+
                             batteryNeedForDest(getClosestStation(GetCustomer(parcel.TargetId).Location).Location, myDrone.CurrentLocation);
                         
@@ -92,33 +92,6 @@ namespace BL
         }
 
         
-
-        public void ParcelToCustomer(int droneID)
-        {
-            throw new NotImplementedException();
-        }
-
-
-
-
-        public double[] GetPowerUse()
-        {
-            throw new NotImplementedException();
-        }
-
-        
-
-        
-
-        
-
-        
-
-        public void PickParcel(int parcelId)
-        {   
-            throw new NotImplementedException();
-        }
-
         private BaseStation getClosestStation(Location loc)
         {
             return GetStation(GetAllStations().OrderBy(station => calculateDist(GetStation(station.Id).Location, loc)).First().Id);

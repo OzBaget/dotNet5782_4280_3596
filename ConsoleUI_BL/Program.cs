@@ -495,7 +495,7 @@ namespace ConsoleUI_BL
             int parcelId = getIntFromUser();
             try
             {
-                Console.WriteLine(db.GetParcerl(parcelId));
+                Console.WriteLine(db.GetParcel(parcelId));
             }
             catch (IdNotFoundException ex)
             {

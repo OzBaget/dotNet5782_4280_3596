@@ -63,11 +63,7 @@ namespace DalObject
             int index = DataSource.Parcels.IndexOf(parcelTmp);
             parcelTmp.DroneId = droneId;
             parcelTmp.Scheduled = DateTime.Now;
-            DataSource.Parcels[index] = parcelTmp;
-
-            Drone droneTmp = GetDrone(droneId);
-            index = DataSource.Drones.IndexOf(droneTmp);
-            DataSource.Drones[index] = droneTmp;
+            DataSource.Parcels[index] = parcelTmp;  
         }
 
         /// <summary>
