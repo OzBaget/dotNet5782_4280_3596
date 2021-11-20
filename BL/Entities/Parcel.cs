@@ -21,15 +21,15 @@ namespace IBL.BO
         public override string ToString()
         {
             string toString =
-                $"ID:            {Id}\n" +
-                $"Sender:          {Sender}\n" +
-                $"Receiver:     {Target}\n" +
+                $"ID:                 {Id}\n" +
+                $"Sender:             {Sender}\n" +
+                $"Receiver:           {Target}\n" +
                 $"Weight status:      {Weight}\n" +
-                $"Prioritie status:      {Prioritie}\n" +
-                $"Parcel's Drone :      {Drone}\n" +
-                $"Created date:      {DateCreated}\n" +
-                $"Scheduled date:      {DateScheduled}\n" +
-                $"Pick up date:      {DatePickup}\n" +
+                $"Prioritie status:   {Prioritie}\n" +
+                $"Parcel's Drone :    {Drone}\n" +
+                $"Created date:       {DateCreated}\n" +
+                $"Scheduled date:     {DateScheduled}\n" +
+                $"Pick up date:       {DatePickup}\n" +
                 $"Deliverd date:      {DateDeliverd}\n";
 
             return toString;

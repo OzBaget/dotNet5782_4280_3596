@@ -103,7 +103,7 @@ namespace ConsoleUI
 
             Console.WriteLine("How many charge slots are in the station?");
             int slots = getIntFromUser();
-            db.AddBase(name, location.Item1, location.Item2, slots);
+         //   db.AddBase(name, location.Item1, location.Item2, slots);
         }
         /// <summary>
         /// get drone info from the user, and add the drone.
@@ -116,7 +116,7 @@ namespace ConsoleUI
             Console.WriteLine("Choose MaxWeight of drone:");
             Console.WriteLine("1. Light\n2. Middle\n3. Heavy");
             int maxWeightInt = getUserSelection(3) - 1;
-            db.AddDrone(model, maxWeightInt);
+         //   db.AddDrone(model, maxWeightInt);
         }
         /// <summary>
         /// get customer info from the user, and add the customer.
@@ -130,7 +130,7 @@ namespace ConsoleUI
             string phone = Console.ReadLine();
 
             Tuple<double, double> position = getCoordsFromUser();
-            db.AddCustomer(name, phone, position.Item1, position.Item2);
+           // db.AddCustomer(name, phone, position.Item1, position.Item2);
         }
         /// <summary>
         /// get parcel info from the user, and add the parcel.
@@ -151,7 +151,7 @@ namespace ConsoleUI
             Console.WriteLine("1. Normal\n2. Fast\n3. Urgent");
             int priorityInt = getUserSelection(3) - 1;
 
-            db.AddParcel(senderId, targetId, weightInt, priorityInt);
+            //db.AddParcel(senderId, targetId, weightInt, priorityInt);
         }
         /// <summary>
         /// The update menu
@@ -392,9 +392,9 @@ namespace ConsoleUI
         /// </summary>
         private static void calculateDistMenu()
         {
-            Tuple<double, double> coords = getCoordsFromUser();
+         /*   Tuple<double, double> coords = getCoordsFromUser();
             var myCustomer = db.GetAllCustomers()[0];
-            Console.WriteLine($"Distance to customer #{myCustomer.Id} is: {CalculateDist(coords.Item1, coords.Item2, myCustomer.Lat, myCustomer.Lng)}");
+            Console.WriteLine($"Distance to customer #{myCustomer.Id} is: {CalculateDist(coords.Item1, coords.Item2, myCustomer.Lat, myCustomer.Lng)}");*/
         }
 
         /// <summary>
