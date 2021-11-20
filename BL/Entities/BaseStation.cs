@@ -17,10 +17,10 @@ namespace IBL.BO
         public override string ToString()
         {
             string toString =
-                $"ID:            {Id}\n" +
-                $"Name:          {Name}\n" +
-                $"Location:      {Location}\n" +
-                $"Free chargers: {NumFreeChargers}\n" +
+                $"ID:                            {Id}\n" +
+                $"Name:                          {Name}\n" +
+                $"Location:                      {Location}\n" +
+                $"Free chargers:                 {NumFreeChargers}\n" +
                 $"Drones in charging:";
             foreach (var droneInChargeing in DronesInCharging)
             {

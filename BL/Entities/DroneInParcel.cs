@@ -14,9 +14,9 @@ namespace IBL.BO
         public override string ToString()
         {
             string toString =
-                $"ID:               {Id}\n" +
-                $"Battery:          {Battery}\n" +
-                $"Location:         {CurrentLocation}\n";
+                $"ID:                            {Id}\n" +
+                $"Battery:                       {Battery}\n" +
+                $"Location:                      {CurrentLocation}\n";
 
             return toString;
         }

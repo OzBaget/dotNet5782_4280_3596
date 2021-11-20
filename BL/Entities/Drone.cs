@@ -19,11 +19,11 @@ namespace IBL.BO
         public override string ToString()
         {
             string tostringText =
-                $"ID:               {Id}\n" +
-                $"Model:            {Model}\n" +
-                $"Max weight:       {MaxWeight}\n" +
-                $"Battery:          {Battery}%\n" +
-                $"Status:           {Status}\n";
+                $"ID:                            {Id}\n" +
+                $"Model:                         {Model}\n" +
+                $"Max weight:                    {MaxWeight}\n" +
+                $"Battery:                       {Battery}%\n" +
+                $"Status:                        {Status}\n";
             if (Parcel.Id != 0)
                 tostringText += $"Parcel:         \n{Parcel.ToString().Replace("\n","\n\t")}\n";
 

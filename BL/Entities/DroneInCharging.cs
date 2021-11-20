@@ -14,8 +14,8 @@ namespace IBL.BO
         public override string ToString()
         {
             return
-                $"ID:      {Id}\n" +
-                $"Battery: {Battery}%";
+                $"ID:                            {Id}\n" +
+                $"Battery:                       {Battery}%";
         }
     }
 

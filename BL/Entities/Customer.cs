@@ -17,10 +17,10 @@ namespace IBL.BO
         public override string ToString()
         {
             string toString =
-                $"ID:                   {Id}\n" +
-                $"Name:                 {Name}\n" +
-                $"Location:             {Location}\n" +
-                $"Phone number:         {Phone}\n" +
+                $"ID:                            {Id}\n" +
+                $"Name:                          {Name}\n" +
+                $"Location:                      {Location}\n" +
+                $"Phone number:                  {Phone}\n" +
                 $"Parcels which wait to send:\n";
             foreach (var parcel in WaitsToSendParcels)
             {

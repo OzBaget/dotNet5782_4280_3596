@@ -17,13 +17,13 @@ namespace IBL.BO
 
         public override string ToString()
         {
-            return 
-                $"ID:          {Id}\n" +
-                $"Sender name: {SenderName}\n" +
-                $"Target name: {TargetName}\n" +
-                $"Weight:      {Weight}\n" +
-                $"Priority:    {Priority}\n" +
-                $"Status:      {Status}";
+            return
+                $"ID:                            {Id}\n" +
+                $"Sender name:                   {SenderName}\n" +
+                $"Target name:                   {TargetName}\n" +
+                $"Weight:                        {Weight}\n" +
+                $"Priority:                      {Priority}\n" +
+                $"Status:                        {Status}";
         }
     }
 }

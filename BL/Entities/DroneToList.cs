@@ -18,14 +18,14 @@ namespace IBL.BO
 
         public override string ToString()
         {
-            return 
-                $"ID:                {Id}\n" +
-                $"Model:             {Model}\n" +
-                $"Max weight:        {MaxWeight}\n" +
-                $"Battery:           {Battery}%\n" +
-                $"Status:            {Status}\n" +
-                $"Current location:  {CurrentLocation}\n" +
-                $"Parcel ID:         {PacelId}";
+            return            
+                $"ID:                            {Id}\n" +
+                $"Model:                         {Model}\n" +
+                $"Max weight:                    {MaxWeight}\n" +
+                $"Battery:                       {Battery}%\n" +
+                $"Status:                        {Status}\n" +
+                $"Current location:              {CurrentLocation}\n" +
+                $"Parcel ID:                     {PacelId}";
         }
     }
 }

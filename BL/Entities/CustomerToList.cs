@@ -18,14 +18,14 @@ namespace IBL.BO
 
         public override string ToString()
         {
-            return 
-                $"ID:                        {Id}\n" +
-                $"Name:                      {Name}\n" +
-                $"Phone:                     {Phone}\n" +
-                $"Parcels delivered:         {ParcelsDelivered}\n" +
-                $"Parcels sent:              {ParcelsSent}\n" +
-                $"Parcels received:          {ParcelsReceived}\n" +
-                $"Parcels in the way to him: {ParcelsInProccesToHim}";
+            return
+                $"ID:                            {Id}\n" +
+                $"Name:                          {Name}\n" +
+                $"Phone:                         {Phone}\n" +
+                $"Parcels delivered:             {ParcelsDelivered}\n" +
+                $"Parcels sent:                  {ParcelsSent}\n" +
+                $"Parcels received:              {ParcelsReceived}\n" +
+                $"Parcels in the way to him:     {ParcelsInProccesToHim}";
         }
     }
 }
