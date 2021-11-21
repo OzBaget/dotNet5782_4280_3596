@@ -14,7 +14,7 @@ namespace IBL.BO
         public int Battery;
         public DroneStatus Status;
         public Location CurrentLocation;
-        public int PacelId;
+        public int ParcelId;
 
         public override string ToString()
         {
@@ -25,7 +25,7 @@ namespace IBL.BO
                 $"Battery:                       {Battery}%\n" +
                 $"Status:                        {Status}\n" +
                 $"Current location:              {CurrentLocation}\n" +
-                $"Parcel ID:                     {PacelId}";
+                $"Parcel ID:                     {ParcelId}";
         }
     }
 }

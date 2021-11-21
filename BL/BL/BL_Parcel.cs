@@ -43,6 +43,14 @@ namespace BL
                 newParcel.Sender.Id = tmpParcel.SenderId;
                 newParcel.Sender.Name = DalObject.GetCustomer(tmpParcel.SenderId).Name;
 
+                DroneInParcel drone=new();
+                if (tmpParcel.DroneId != 0)
+                {
+                    drone.Id = tmpParcel.DroneId;
+                    drone.Battery = Drones.Find(drone => drone.Id == tmpParcel.DroneId).Battery;
+                    drone.CurrentLocation = Drones.Find(drone => drone.Id == tmpParcel.DroneId).CurrentLocation;
+                }
+                newParcel.Drone = drone;
                 return newParcel;
 
             }
@@ -86,7 +94,7 @@ namespace BL
         {
             List<ParcelToList> parcels = new();
             foreach (ParcelToList parcel in GetAllParcels())
-                if (parcel.Id == 0)
+                if (parcel.Status == ParcelStatus.Created)
                     parcels.Add(parcel);
             return parcels;
         }
@@ -103,9 +111,9 @@ namespace BL
 
             List<ParcelToList> myParcels = (List<ParcelToList>)GetUnassignedParcels();
             myParcels.RemoveAll(parcel=>
-            batteryNeedForDest(GetCustomer(GetParcel(parcel.Id).Sender.Id).Location,myDrone.CurrentLocation)+//baterry for currnt location->sender
-            batteryNeedForDest(GetCustomer(GetParcel(parcel.Id).Target.Id).Location, GetCustomer(GetParcel(parcel.Id).Sender.Id).Location,false,parcel.Weight) +//baterry for sender->target (with weight)
-            batteryNeedForDest(getClosestStation(GetCustomer(GetParcel(parcel.Id).Sender.Id).Location).Location, GetCustomer(GetParcel(parcel.Id).Sender.Id).Location)//baterry for target->closer station to target
+            batteryNeedForTrip(GetCustomer(GetParcel(parcel.Id).Sender.Id).Location,myDrone.CurrentLocation)+//baterry for currnt location->sender
+            batteryNeedForTrip(GetCustomer(GetParcel(parcel.Id).Target.Id).Location, GetCustomer(GetParcel(parcel.Id).Sender.Id).Location,false,parcel.Weight) +//baterry for sender->target (with weight)
+            batteryNeedForTrip(getClosestStation(GetCustomer(GetParcel(parcel.Id).Sender.Id).Location).Location, GetCustomer(GetParcel(parcel.Id).Sender.Id).Location)//baterry for target->closer station to target
             >myDrone.Battery);//remove too far parcels            
 
             myParcels.RemoveAll(parcel => parcel.Weight > myDrone.MaxWeight);//remove too heavy parcels
@@ -138,7 +146,6 @@ namespace BL
 
             
             myDrone.Status = DroneStatus.Delivery;
-
             DalObject.linkParcel(myParcels[0].Id, myDrone.Id);
         }
 
@@ -148,14 +155,14 @@ namespace BL
             if (droneIndex == -1)
                 throw new IBL.BL.IdNotFoundException($"Can't find drone with ID #{droneId}!", droneId);
             DroneToList myDrone = Drones[droneIndex];
-            if (myDrone.PacelId == 0) 
+            if (myDrone.ParcelId == 0) 
                 throw new IBL.BL.CantPickUpParcelException("Drone is not link to any parcel!");
            
-            Parcel myParcel = GetParcel(myDrone.PacelId);
+            Parcel myParcel = GetParcel(myDrone.ParcelId);
             if (myParcel.DatePickup == DateTime.MinValue) 
                 throw new IBL.BL.CantPickUpParcelException("Parcel alredy picked up!");
 
-            myDrone.Battery -= batteryNeedForDest(GetCustomer(myParcel.Sender.Id).Location, myDrone.CurrentLocation);
+            myDrone.Battery -= batteryNeedForTrip(GetCustomer(myParcel.Sender.Id).Location, myDrone.CurrentLocation);
             myDrone.CurrentLocation = GetCustomer(myParcel.Sender.Id).Location;
 
             DalObject.PickParcel(myParcel.Id);
@@ -171,22 +178,23 @@ namespace BL
 
             DroneToList myDrone = Drones[droneIndex];//copy by ref
 
-            if (myDrone.PacelId == 0)
+            if (myDrone.ParcelId == 0)
                 throw new IBL.BL.CantDeliverParcelException("Drone is not link to any parcel!");
             
-            Parcel myParcel = GetParcel(myDrone.PacelId);
+            Parcel myParcel = GetParcel(myDrone.ParcelId);
             if (myParcel.DatePickup == DateTime.MinValue)
                 throw new IBL.BL.CantDeliverParcelException($"The drone didn't picked up the parcel #{myParcel.Id}!");
             if(myParcel.DateDeliverd!=DateTime.MinValue)
                 throw new IBL.BL.CantDeliverParcelException($"The drone deliverd parcel #{myParcel.Id} already!");
 
-            int batteryNeededForCustomer = batteryNeedForDest(GetCustomer(myParcel.Target.Id).Location, myDrone.CurrentLocation, false, myParcel.Weight);
+            int batteryNeededForCustomer = batteryNeedForTrip(GetCustomer(myParcel.Target.Id).Location, myDrone.CurrentLocation, false, myParcel.Weight);
             if (batteryNeededForCustomer > myDrone.Battery)
                 throw new IBL.BL.CantDeliverParcelException($"Not enough battery to deliver parcel! (battry needed: {batteryNeededForCustomer}%)");
 
             myDrone.Battery -= batteryNeededForCustomer;
             myDrone.CurrentLocation = GetCustomer(myParcel.Target.Id).Location;
             myDrone.Status = DroneStatus.Available;
+            myDrone.ParcelId = 0;
             DalObject.ParcelToCustomer(myParcel.Id);
         }
     }

@@ -48,6 +48,7 @@ namespace BL
                         parcelInCustomer.Customer = customer;
                         newCustomer.ReceivedParcels.Add(parcelInCustomer);
                     }
+                    
                     if (parcel.PickedUp == DateTime.MinValue && parcel.SenderId == tmpCustomer.Id) 
                     {
                         ParcelInCustomer parcelInCustomer = new();
@@ -61,7 +62,7 @@ namespace BL
                             parcelInCustomer.StatusParcel = ParcelStatus.Created;
                          
                         CustomerInParcel customer = new();
-                        customer.Id = parcel.SenderId;
+                        customer.Id = parcel.TargetId;
                         customer.Name = DalObject.GetCustomer(parcel.TargetId).Name;
                         parcelInCustomer.Customer = customer;
                         newCustomer.WaitsToSendParcels.Add(parcelInCustomer);

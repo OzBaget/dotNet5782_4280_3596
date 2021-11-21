@@ -50,9 +50,9 @@ namespace BL
                             myDrone.CurrentLocation = GetCustomer(parcel.SenderId).Location;
                         }
 
-                        myDrone.PacelId = parcel.Id;
-                        int minBattery = batteryNeedForDest(GetCustomer(parcel.TargetId).Location, myDrone.CurrentLocation, false, (WeightCategories)parcel.Weight)+
-                            batteryNeedForDest(getClosestStation(GetCustomer(parcel.TargetId).Location).Location, myDrone.CurrentLocation);
+                        myDrone.ParcelId = parcel.Id;
+                        int minBattery = batteryNeedForTrip(GetCustomer(parcel.TargetId).Location, myDrone.CurrentLocation, false, (WeightCategories)parcel.Weight)+
+                            batteryNeedForTrip(getClosestStation(GetCustomer(parcel.TargetId).Location).Location, myDrone.CurrentLocation);
                         
                         if (minBattery < 100)
                         {
@@ -78,7 +78,7 @@ namespace BL
                         int index = new Random().Next(GetAllCustomers().Where(customer => customer.ParcelsReceived > 0).Count());
                         myDrone.CurrentLocation = GetCustomer(GetAllCustomers().ElementAt(index).Id).Location;
 
-                        int minBattry = batteryNeedForDest(myDrone.CurrentLocation, getClosestStation(myDrone.CurrentLocation).Location);
+                        int minBattry = batteryNeedForTrip(myDrone.CurrentLocation, getClosestStation(myDrone.CurrentLocation).Location);
                         if (minBattry>100)
                         {
                             minBattry = 100;

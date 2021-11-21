@@ -48,9 +48,9 @@ namespace BL
             newDrone.CurrentLocation = tmpDrone.CurrentLocation;
             newDrone.Battery = tmpDrone.Battery;
             ParcelInTransfer parcel = new();
-            if (tmpDrone.PacelId != 0) 
+            if (tmpDrone.ParcelId != 0) 
             {
-            Parcel tmpParcel = GetParcel(tmpDrone.PacelId);
+            Parcel tmpParcel = GetParcel(tmpDrone.ParcelId);
             parcel.Id = tmpParcel.Id;
             parcel.Prioritie = tmpParcel.Prioritie;
             parcel.Weight = tmpParcel.Weight;
@@ -81,7 +81,7 @@ namespace BL
 
             foreach (BaseStationToList station in GetStationsWithFreeSlots())
             {
-                int batteryNeeded = batteryNeedForDest(GetStation(station.Id).Location, myDrone.CurrentLocation);
+                int batteryNeeded = batteryNeedForTrip(GetStation(station.Id).Location, myDrone.CurrentLocation);
                 if (myDrone.Battery >= batteryNeeded)
                 {
                     myDrone.Battery -= batteryNeeded;
@@ -123,7 +123,7 @@ namespace BL
             }
         }
 
-        private int batteryNeedForDest(Location dest, Location currentLoc, bool empty = true, WeightCategories weight=WeightCategories.Light)
+        private int batteryNeedForTrip(Location dest, Location currentLoc, bool empty = true, WeightCategories weight=WeightCategories.Light)
         {
             double powerUse = 0;
             if (empty)
