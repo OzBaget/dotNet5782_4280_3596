@@ -146,6 +146,7 @@ namespace BL
 
             
             myDrone.Status = DroneStatus.Delivery;
+            myDrone.ParcelId = myParcels[0].Id;
             DalObject.linkParcel(myParcels[0].Id, myDrone.Id);
         }
 
@@ -159,7 +160,7 @@ namespace BL
                 throw new IBL.BL.CantPickUpParcelException("Drone is not link to any parcel!");
            
             Parcel myParcel = GetParcel(myDrone.ParcelId);
-            if (myParcel.DatePickup == DateTime.MinValue) 
+            if (myParcel.DatePickup != DateTime.MinValue) 
                 throw new IBL.BL.CantPickUpParcelException("Parcel alredy picked up!");
 
             myDrone.Battery -= batteryNeedForTrip(GetCustomer(myParcel.Sender.Id).Location, myDrone.CurrentLocation);
