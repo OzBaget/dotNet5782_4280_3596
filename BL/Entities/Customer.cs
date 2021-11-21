@@ -20,16 +20,22 @@ namespace IBL.BO
                 $"ID:                            {Id}\n" +
                 $"Name:                          {Name}\n" +
                 $"Location:                      {Location}\n" +
-                $"Phone number:                  {Phone}\n" +
-                $"Parcels which wait to send:\n";
-            foreach (var parcel in WaitsToSendParcels)
+                $"Phone number:                  {Phone}\n";
+            if (WaitsToSendParcels.Count > 0)
             {
-                toString += "=============\n" + parcel.ToString();
+              toString +=  $"Parcels which wait to send:\n";
+                foreach (var parcel in WaitsToSendParcels)
+                {
+                    toString += "=============\n" + parcel.ToString();
+                }
             }
-            toString = toString + "Parcels which received:\n";
-            foreach (var parcel in ReceivedParcels)
+            if (ReceivedParcels.Count > 0)
             {
-                toString += "=============\n" + parcel.ToString();
+                toString = toString + "Parcels which received:\n";
+                foreach (var parcel in ReceivedParcels)
+                {
+                    toString += "=============\n" + parcel.ToString();
+                }
             }
             return toString;
 

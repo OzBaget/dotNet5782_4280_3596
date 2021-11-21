@@ -86,7 +86,7 @@ namespace BL
         {
             List<ParcelToList> parcels = new();
             foreach (ParcelToList parcel in GetAllParcels())
-                if (parcel.Id == 0)
+                if (parcel.Status == ParcelStatus.Created)
                     parcels.Add(parcel);
             return parcels;
         }
