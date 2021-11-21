@@ -22,14 +22,13 @@ namespace IBL.BO
         {
             string toString =
                 $"ID:                            {Id}\n" +
-                $"ID:                            {Id}\n" +
-                $"Sender:                        \n{Sender}" +
-                $"Receiver:                      \n{Target}" +
+                $"========Receiver=======================\n\t{Target.ToString().Replace("\n", "\n\t")}\n" +
+                $"========Sender=========================\n\t{Sender.ToString().Replace("\n", "\n\t")}\n" +
                 $"Weight status:                 {Weight}\n" +
                 $"Prioritie status:              {Prioritie}\n";
-                if (Drone.Id != 0)
-                    toString += $"Parcel's Drone :               \n{Drone}";
-                if(DateCreated != DateTime.MinValue)
+            if (Drone.Id != 0)
+                toString += $"========Drone==========================\n\t{Drone.ToString().Replace("\n", "\n\t")}\n";
+                if (DateCreated != DateTime.MinValue)
                     toString += $"Created date:                  {DateCreated}\n";
                 if (DateScheduled != DateTime.MinValue)
                     toString += $"Scheduled date:                {DateScheduled}\n";
