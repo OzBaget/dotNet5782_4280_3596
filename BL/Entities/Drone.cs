@@ -26,7 +26,7 @@ namespace IBL.BO
                 $"Status:                        {Status}\n"+
                 $"Current location:              {CurrentLocation}";
             if (Parcel.Id != 0)
-                tostringText += $"============Parcel=============\n{Parcel.ToString().Replace("\n", "\n\t")}\n";
+                tostringText += $"========Parcel=========================\n\t{Parcel.ToString().Replace("\n", "\n\t")}\n";
             return tostringText;
         }
     }
