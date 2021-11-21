@@ -23,15 +23,20 @@ namespace IBL.BO
             string toString =
                 $"ID:                            {Id}\n" +
                 $"ID:                            {Id}\n" +
-                $"Sender:                        \n{ Sender}" +
+                $"Sender:                        \n{Sender}" +
                 $"Receiver:                      \n{Target}" +
                 $"Weight status:                 {Weight}\n" +
-                $"Prioritie status:              {Prioritie}\n" +
-                $"Parcel's Drone :               {Drone}\n" +
-                $"Created date:                  {DateCreated}\n" +
-                $"Scheduled date:                {DateScheduled}\n" +
-                $"Pick up date:                  {DatePickup}\n" +
-                $"Deliverd date:                 {DateDeliverd}\n";
+                $"Prioritie status:              {Prioritie}\n";
+                if (Drone.Id != 0)
+                    toString += $"Parcel's Drone :               \n{Drone}";
+                if(DateCreated != DateTime.MinValue)
+                    toString += $"Created date:                  {DateCreated}\n";
+                if (DateScheduled != DateTime.MinValue)
+                    toString += $"Scheduled date:                {DateScheduled}\n";
+                if (DatePickup != DateTime.MinValue)
+                    toString += $"Pick up date:                  {DatePickup}\n";
+                if (DateDeliverd!= DateTime.MinValue)
+                    toString += $"Deliverd date:                 {DateDeliverd}\n";
 
             return toString;
         }

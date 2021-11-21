@@ -14,7 +14,7 @@ namespace IBL.BO
         {
             string toString =
                 $"ID:                            {Id}\n" +
-                $"Name:                          {Name}\n";
+                $"Name:                          {Name}";
             return toString;
         }
     }

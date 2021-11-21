@@ -24,8 +24,8 @@ namespace IBL.BO
                 $"Is in transer:                 {IsInTransfer}\n" +
                 $"Prioritie status:              {Prioritie}\n" +
                 $"Weight status:                 {Weight}\n" +
-                $"Receiver:                      {Target}\n" +
-                $"Sender:                        {Sender}\n" +
+                $"============Receiver===========\n{Target.ToString().Replace("\n", "\n\t")}\n"+
+                $"============Sender=============\n{Sender.ToString().Replace("\n", "\n\t")}\n"+                
                 $"Pick up location:              {PickupLocation}\n" +
                 $"Target location:               {TargetLocation}\n" +
                 $"Distance frome target:         {Distance}\n";

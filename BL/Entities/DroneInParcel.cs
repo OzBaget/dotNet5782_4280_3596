@@ -16,7 +16,7 @@ namespace IBL.BO
             string toString =
                 $"ID:                            {Id}\n" +
                 $"Battery:                       {Battery}\n" +
-                $"Location:                      {CurrentLocation}\n";
+                $"Location:                      {CurrentLocation}";
 
             return toString;
         }

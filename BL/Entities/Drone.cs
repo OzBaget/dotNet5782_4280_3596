@@ -23,11 +23,10 @@ namespace IBL.BO
                 $"Model:                         {Model}\n" +
                 $"Max weight:                    {MaxWeight}\n" +
                 $"Battery:                       {Battery}%\n" +
-                $"Status:                        {Status}\n";
+                $"Status:                        {Status}\n"+
+                $"Current location:              {CurrentLocation}";
             if (Parcel.Id != 0)
-                tostringText += $"\t======Parcel======         \n\t{Parcel.ToString().Replace("\n","\n\t")}\n";
-
-            tostringText+=$"Current location: {CurrentLocation}";
+                tostringText += $"============Parcel=============\n{Parcel.ToString().Replace("\n", "\n\t")}\n";
             return tostringText;
         }
     }
