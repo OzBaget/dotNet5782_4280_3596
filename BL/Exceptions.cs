@@ -48,5 +48,9 @@ namespace IBL.BL
     {
         public CantLinkParcelException(string message) : base(message) { }
     }
-
+    [Serializable]
+    public class LessChargersThanDronesInCharchingException : Exception
+    {
+        public LessChargersThanDronesInCharchingException(string message) : base(message) { }
+    }
 }

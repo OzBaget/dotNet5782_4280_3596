@@ -1,10 +1,10 @@
 ﻿using System;
-using IBL.BO;
-
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IBL.BL;
+using IBL.BO;
 
 namespace BL
 {
@@ -54,15 +54,30 @@ namespace BL
             }
             return stations;
         }
-        public void UpdateStation(int stationId, string name, int numChargers)
+        public void UpdateStation(int stationId, string name, string input)
         {
             try
             {
+                if (name == "")
+                    name = GetStation(stationId).Name;
+                int numChargers;
+                if (input == "")
+                    numChargers = GetStation(stationId).NumFreeChargers;
+                else
+                    numChargers = int.Parse(input);
+                if (numChargers < GetStation(stationId).DronesInCharging.Count)
+                    throw new LessChargersThanDronesInCharchingException($"Too few chargers. you have {GetStation(stationId).DronesInCharging.Count} drones in charging");
+                numChargers -= GetStation(stationId).DronesInCharging.Count;
+
                 DalObject.UpdateStation(stationId, name, numChargers);
             }
             catch (IDAL.DO.IdNotFoundException ex)
             {
                 throw new IBL.BL.IdNotFoundException(ex.Message, ex.Id);
+            }
+                catch (LessChargersThanDronesInCharchingException ex)
+            {
+                throw new IBL.BL.LessChargersThanDronesInCharchingException(ex.Message);
             }
         }
         public IEnumerable<BaseStationToList> GetStationsWithFreeSlots()

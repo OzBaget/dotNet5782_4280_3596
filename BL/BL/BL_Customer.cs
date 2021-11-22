@@ -108,6 +108,10 @@ namespace BL
         {
             try
             {
+                if (name == "")
+                    name = GetCustomer(customerId).Name;
+                if (phone == "")
+                    phone = GetCustomer(customerId).Phone;
                 DalObject.UpdateCustomer(customerId, name, phone);
             }
             catch (IDAL.DO.IdNotFoundException ex)

@@ -20,10 +20,10 @@ namespace IBL.BO
                 $"ID:                            {Id}\n" +
                 $"Name:                          {Name}\n" +
                 $"Location:                      {Location}\n" +
-                $"Free chargers:                 {NumFreeChargers}\n";
+                $"Free chargers:                 {NumFreeChargers}";
             if (DronesInCharging.Count > 0)
             {
-                toString+=   $"Drones in charging:";
+                toString+=   $"\nDrones in charging:";
                 foreach (var droneInChargeing in DronesInCharging)
                 {
                     toString += "\n======================\n" + droneInChargeing.ToString();

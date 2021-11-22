@@ -230,9 +230,9 @@ namespace ConsoleUI_BL
         {
             Console.WriteLine(@"-/\-/\-/\-/\-/\-/\-/\-/\-/\-");
             Console.WriteLine("What action do you want to do?");
-            Console.WriteLine("1. Link parcel to drone\n2. Pick up parcel by drone\n3. Deliver parcel to customer\n4. Send drone to charge\n5. Release drone from charger\n6. Back");
+            Console.WriteLine("1. Link parcel to drone\n2. Pick up parcel by drone\n3. Deliver parcel to customer\n4. Send drone to charge\n5. Release drone from charger\n6. Update drone model \n7. Update Station\n8. Update customer\n9. Back");
             Console.WriteLine(@"-/\-/\-/\-/\-/\-/\-/\-/\-/\-");
-            int userChoose = getUserSelection(6);
+            int userChoose = getUserSelection(9);
             switch (userChoose)
             {
                 case 1:
@@ -251,6 +251,15 @@ namespace ConsoleUI_BL
                     releaseDroneFromCharger();
                     break;
                 case 6:
+                    updateDroneModelMenu();
+                    break;
+                case 7:
+                    updateStationMenu();
+                    break;
+                case 8:
+                    updateCustomerMenu();
+                    break;
+                case 9:
                     return true;
                 default:
                     Console.WriteLine("An Error Accurd!");
@@ -281,21 +290,39 @@ namespace ConsoleUI_BL
             int id = getIntFromUser();
             Console.WriteLine("Enter station new name: ");
             string name = Console.ReadLine();
-            if (name == "")
-                name = db.GetStation(id).Name;
             Console.WriteLine("Enter station new number of chargers: ");
             int numChargers;
             string input = Console.ReadLine();
-            while (!int.TryParse(input, out numChargers) || input != "")
+            while (!int.TryParse(input, out numChargers) && input != "")
             {
                 Console.WriteLine("Not Valid Input!");
                 input = Console.ReadLine();
             }
-            if (input == "")
-                numChargers = db.GetStation(id).NumFreeChargers + db.GetStation(id).DronesInCharging.Count;
             try
             {
-                db.UpdateStation(id, name, numChargers);
+                db.UpdateStation(id, name, input);
+            }
+            catch (IdNotFoundException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (LessChargersThanDronesInCharchingException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+        }
+        private static void updateCustomerMenu()
+        {
+            Console.WriteLine("Enter customer id:");
+            int id = getIntFromUser();
+            Console.WriteLine("Enter customer new name: ");
+            string newName = Console.ReadLine();            
+            Console.WriteLine("Enter customer new phone number: ");
+            string newPhone = Console.ReadLine() ;
+            try
+            {
+                db.UpdateCustomer(id, newName, newPhone);
             }
             catch (IdNotFoundException ex)
             {

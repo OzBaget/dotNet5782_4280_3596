@@ -21,7 +21,7 @@ namespace IBL
         int DroneToStation(int droneId);
         void FreeDrone(int droneId,double droneTime);
         void UpdateDrone(int droneId, string model);
-        void UpdateStation(int droneId, string name, int numChargers);
+        void UpdateStation(int droneId, string name, string input);
         void UpdateCustomer(int customerId, string name, string phone);
 
         IEnumerable<BO.BaseStationToList> GetAllStations();

@@ -43,5 +43,10 @@ namespace IDAL.DO
     {
         public CantDeliverParcelException(string message) : base(message) { }
     }
+    [Serializable]
+    public class LessChargersThanDronesInCharchingException : Exception
+    {
+        public LessChargersThanDronesInCharchingException(string message) : base(message) { }
+    }
 
 }
