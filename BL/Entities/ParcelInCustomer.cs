@@ -20,7 +20,7 @@ namespace IBL.BO
                  $"Weight status:                 {Weight}\n" +
                  $"Prioritie status:              {Prioritie}\n" +
                  $"Parcel status:                 {StatusParcel}\n"+
-                 $"        ============Customer============\n\t{Customer.ToString().Replace("\n", "\n\t")}";                                
+                 $"        ============Customer===========\n\t{Customer.ToString().Replace("\n", "\n\t")}";                                
             return toString;
         }
     }

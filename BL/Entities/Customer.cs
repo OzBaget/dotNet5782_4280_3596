@@ -23,18 +23,22 @@ namespace IBL.BO
                 $"Phone number:                  {Phone}";
             if (WaitsToSendParcels.Count > 0)
             {
-              toString +=  $"\nParcels which wait to send:\n";
+                int count = 1;
+                toString +=  $"\n - Parcels which wait to send:";
                 foreach (var parcel in WaitsToSendParcels)
                 {
-                    toString += "================================" + parcel.ToString();
+                    toString += $"\n===========Parcel #{count}===========\n" + parcel.ToString();
+                    ++count;
                 }
             }
             if (ReceivedParcels.Count > 0)
             {
-                toString = toString + "\nParcels which received:\n";
+                int count = 1;
+                toString = toString + "\n - Parcels which received:";
                 foreach (var parcel in ReceivedParcels)
                 {
-                    toString += "================================\n" + parcel.ToString();
+                    toString += $"\n===========Parcel #{count}===========\n" + parcel.ToString();
+                    ++count;
                 }
             }
             return toString;
