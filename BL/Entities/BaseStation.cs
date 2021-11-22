@@ -26,7 +26,7 @@ namespace IBL.BO
                 toString+=   $"Drones in charging:";
                 foreach (var droneInChargeing in DronesInCharging)
                 {
-                    toString += "\n=============\n" + droneInChargeing.ToString();
+                    toString += "\n======================\n" + droneInChargeing.ToString();
                 }
             }
             return toString;

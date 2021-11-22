@@ -20,8 +20,10 @@ namespace ConsoleUI_BL
         /// <returns>true if the user choose 'Exit', otherwise, false</returns>
         private static bool mainMenu()
         {
+            Console.WriteLine("============================");
             Console.WriteLine("Choose one of the following:");
             Console.WriteLine("1. Add\n2. Update\n3. View\n4. View list\n5. Exit");
+            Console.WriteLine("============================");
             int userChoose = getUserSelection(6);
             bool back = false;
             switch (userChoose)
@@ -60,8 +62,10 @@ namespace ConsoleUI_BL
         /// <returns>true if the user choose 'back', otherwise, false</returns>
         private static bool addMenu()
         {
+            Console.WriteLine(@"-/\-/\-/\-/\-/\-/\-/\-/\-/\-");
             Console.WriteLine("What do you want to add?");
             Console.WriteLine("1. Base station\n2. Drone\n3. Customer\n4. Parcel\n5. Back");
+            Console.WriteLine(@"-/\-/\-/\-/\-/\-/\-/\-/\-/\-");
             int userChoose = getUserSelection(5);
             if (userChoose == 5)
             {
@@ -146,6 +150,10 @@ namespace ConsoleUI_BL
             {
                 Console.WriteLine(ex.Message);
             }
+            catch (IdNotFoundException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
         /// <summary>
         /// get customer info from the user, and add the customer.
@@ -220,8 +228,10 @@ namespace ConsoleUI_BL
         /// <returns>true if the user choose 'back', otherwise, false</returns>
         private static bool updateMenu()
         {
+            Console.WriteLine(@"-/\-/\-/\-/\-/\-/\-/\-/\-/\-");
             Console.WriteLine("What action do you want to do?");
             Console.WriteLine("1. Link parcel to drone\n2. Pick up parcel by drone\n3. Deliver parcel to customer\n4. Send drone to charge\n5. Release drone from charger\n6. Back");
+            Console.WriteLine(@"-/\-/\-/\-/\-/\-/\-/\-/\-/\-");
             int userChoose = getUserSelection(6);
             switch (userChoose)
             {
@@ -412,8 +422,10 @@ namespace ConsoleUI_BL
         /// <returns>true if the user choose 'back', otherwise, false</returns>
         private static bool viewMenu()
         {
+            Console.WriteLine(@"-/\-/\-/\-/\-/\-/\-/\-/\-/\-");
             Console.WriteLine("What do you want to view?");
             Console.WriteLine("1. Base station\n2. Drone\n3. Customer\n4. Parcel\n5. Back");
+            Console.WriteLine(@"-/\-/\-/\-/\-/\-/\-/\-/\-/\-");
             int userChoose = getUserSelection(5);
             switch (userChoose)
             {
@@ -445,6 +457,7 @@ namespace ConsoleUI_BL
         {
             Console.WriteLine("Enter station ID:");
             int stationId = getIntFromUser();
+            Console.WriteLine("===============================");
             try
             {
                 Console.WriteLine(db.GetStation(stationId));
@@ -453,6 +466,7 @@ namespace ConsoleUI_BL
             {
                 Console.WriteLine(ex.Message);
             }
+            Console.WriteLine("===============================");
         }
         /// <summary>
         /// get drone ID and print the drone
@@ -461,6 +475,7 @@ namespace ConsoleUI_BL
         {
             Console.WriteLine("Enter drone ID:");
             int droneId = getIntFromUser();
+           Console.WriteLine("===============================");
             try
             {
                 Console.WriteLine(db.GetDrone(droneId));
@@ -469,6 +484,7 @@ namespace ConsoleUI_BL
             {
                 Console.WriteLine(ex.Message);
             }
+            Console.WriteLine("===============================");
         }
         /// <summary>
         /// get customer ID and print the customer
@@ -477,6 +493,7 @@ namespace ConsoleUI_BL
         {
             Console.WriteLine("Enter customer ID:");
             int customerId = getIntFromUser();
+            Console.WriteLine("===============================");
             try
             {
                 Console.WriteLine(db.GetCustomer(customerId));
@@ -485,6 +502,7 @@ namespace ConsoleUI_BL
             {
                 Console.WriteLine(ex.Message);
             }
+            Console.WriteLine("===============================");
         }
         /// <summary>
         /// get parcel ID and print the parcel
@@ -493,6 +511,7 @@ namespace ConsoleUI_BL
         {
             Console.WriteLine("Enter parcel ID:");
             int parcelId = getIntFromUser();
+            Console.WriteLine("===============================");
             try
             {
                 Console.WriteLine(db.GetParcel(parcelId));
@@ -501,6 +520,7 @@ namespace ConsoleUI_BL
             {
                 Console.WriteLine(ex.Message);
             }
+            Console.WriteLine("===============================");
         }
 
         /// <summary>
@@ -509,8 +529,10 @@ namespace ConsoleUI_BL
         /// <returns>true if the user choose 'back', otherwise, false</returns>
         private static bool viewListMenu()
         {
+            Console.WriteLine(@"-/\-/\-/\-/\-/\-/\-/\-/\-/\-");
             Console.WriteLine("What list do you want to view?");
             Console.WriteLine("1. Base stations\n2. Drones\n3. Customers\n4. Parcels\n5. Unassigned parcels\n6. Available stations\n7. Back");
+            Console.WriteLine(@"-/\-/\-/\-/\-/\-/\-/\-/\-/\-");
             int userChoose = getUserSelection(7);
             if (userChoose == 7)//back..
             {
@@ -528,51 +550,51 @@ namespace ConsoleUI_BL
             switch (type)
             {
                 case printType.BaseStation:
-                    Console.WriteLine("=======Stations=======");
+                    Console.WriteLine("=======Stations================");
                     foreach (var station in db.GetAllStations())
                     {
                         Console.WriteLine(station);
-                        Console.WriteLine("======================");
+                        Console.WriteLine("===============================");
                     }
                     break;
                 case printType.Drone:
-                    Console.WriteLine("========Drones========");
+                    Console.WriteLine("===========Drones==============");
                     foreach (var drone in db.GetAllDrones())
                     {
                         Console.WriteLine(drone);
-                        Console.WriteLine("======================");
+                        Console.WriteLine("===============================");
                     }
                     break;
                 case printType.Customer:
-                    Console.WriteLine("======Customers=======");
+                    Console.WriteLine("==========Customers============");
                     foreach (var customer in db.GetAllCustomers())
                     {
                         Console.WriteLine(customer);
-                        Console.WriteLine("======================");
+                        Console.WriteLine("===============================");
                     }
                     break;
                 case printType.Parcel:
-                    Console.WriteLine("=======Parcels========");
+                    Console.WriteLine("==========Parcels==============");
                     foreach (var parcel in db.GetAllParcels())
                     {
                         Console.WriteLine(parcel);
-                        Console.WriteLine("======================");
+                        Console.WriteLine("===============================");
                     }
                     break;
                 case printType.UnassignedParcel:
-                    Console.WriteLine("==Unassigned Parcels==");
+                    Console.WriteLine("======Unassigned Parcels=======");
                     foreach (var parcel in db.GetUnassignedParcels())
                     {
                         Console.WriteLine(parcel);
-                        Console.WriteLine("======================");
+                        Console.WriteLine("===============================");
                     }
                     break;
                 case printType.AvailableStation:
-                    Console.WriteLine("==Available Stations==");
+                    Console.WriteLine("======Available Stations=======");
                     foreach (var parcel in db.GetStationsWithFreeSlots())
                     {
                         Console.WriteLine(parcel);
-                        Console.WriteLine("======================");
+                        Console.WriteLine("===============================");
                     }
                     break;
                 default:

@@ -20,23 +20,23 @@ namespace IBL.BO
         public DateTime DateDeliverd;
         public override string ToString()
         {
+
             string toString =
                 $"ID:                            {Id}\n" +
-                $"========Receiver=======================\n\t{Target.ToString().Replace("\n", "\n\t")}\n" +
-                $"========Sender=========================\n\t{Sender.ToString().Replace("\n", "\n\t")}\n" +
                 $"Weight status:                 {Weight}\n" +
                 $"Prioritie status:              {Prioritie}\n";
-            if (Drone.Id != 0)
-                toString += $"========Drone==========================\n\t{Drone.ToString().Replace("\n", "\n\t")}\n";
                 if (DateCreated != DateTime.MinValue)
-                    toString += $"Created date:                  {DateCreated}\n";
+                    toString += $"\nCreated date:                  {DateCreated}";
                 if (DateScheduled != DateTime.MinValue)
-                    toString += $"Scheduled date:                {DateScheduled}\n";
+                    toString += $"\nScheduled date:                {DateScheduled}";
                 if (DatePickup != DateTime.MinValue)
-                    toString += $"Pick up date:                  {DatePickup}\n";
-                if (DateDeliverd!= DateTime.MinValue)
-                    toString += $"Deliverd date:                 {DateDeliverd}\n";
-
+                    toString += $"\nPick up date:                  {DatePickup}";
+                if (DateDeliverd != DateTime.MinValue)
+                    toString += $"\nDeliverd date:                 {DateDeliverd}";
+                toString += $"        ===========Receiver============\n\t{Target.ToString().Replace("\n", "\n\t")}\n" +
+                $"        ===========Sender==============\n\t{Sender.ToString().Replace("\n", "\n\t")}";
+                if (Drone.Id != 0)
+                    toString += $"\n        ===========Drone===============\n\t{Drone.ToString().Replace("\n", "\n\t")}";                
             return toString;
         }
     }
