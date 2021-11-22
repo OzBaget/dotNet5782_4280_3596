@@ -27,7 +27,8 @@ namespace IBL.BO
                 toString +=  $"\n - Parcels which wait to send:";
                 foreach (var parcel in WaitsToSendParcels)
                 {
-                    toString += $"\n===========Parcel #{count}===========\n" + parcel.ToString();
+                    toString += $"\n\t===========Parcel #{count}===========\n\t" + parcel.ToString().Replace("\n", "\n\t");
+                    parcel.ToString();
                     ++count;
                 }
             }
@@ -37,7 +38,7 @@ namespace IBL.BO
                 toString = toString + "\n - Parcels which received:";
                 foreach (var parcel in ReceivedParcels)
                 {
-                    toString += $"\n===========Parcel #{count}===========\n" + parcel.ToString();
+                    toString += $"\n\t===========Parcel #{count}===========\n\t" + parcel.ToString().Replace("\n", "\n\t");
                     ++count;
                 }
             }
