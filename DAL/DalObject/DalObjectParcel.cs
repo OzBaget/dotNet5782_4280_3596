@@ -1,16 +1,11 @@
 ﻿using System.Collections.Generic;
 using IDAL.DO;
-using IDAL;
 using System;
 namespace DalObject
 {
     public partial class DalObject
     {
-        /// <summary>
-        /// returns parcel by ID
-        /// </summary>
-        /// <param name="parcelId"> the parcel ID</param>
-        /// <returns>Parcel object of the requsted ID (by value)</returns>
+        
         public Parcel GetParcerl(int parcelId)
         {
             bool parcelExists = false;
@@ -25,13 +20,7 @@ namespace DalObject
             return DataSource.Parcels.Find(parcel => parcel.Id == parcelId);
         }
 
-        /// <summary>
-        /// Add parcel to Parcels list in DataSource
-        /// </summary>
-        /// <param name="senderId">sender customer ID</param>
-        /// <param name="targetId">target customer ID</param>
-        /// <param name="weight">the weight of the parcel</param>
-        /// <param name="priority">the priority of the parcel</param>
+        
         public void AddParcel(int senderId, int targetId, WeightCategories weight, Priorities priority, DateTime requsted, DateTime scheduled, DateTime pickedUp, DateTime delivered)
         {
             Parcel myParcel = new();
@@ -52,11 +41,7 @@ namespace DalObject
             DataSource.Parcels.Remove(GetParcerl(parcelId));
         }
 
-        /// <summary>
-        /// link parcel to drone
-        /// </summary>
-        /// <param name="parcelId">the parcel ID</param>
-        /// <param name="droneId">the drone ID</param>
+        
         public void linkParcel(int parcelId, int droneId)
         {
             Parcel parcelTmp = GetParcerl(parcelId);
@@ -66,10 +51,7 @@ namespace DalObject
             DataSource.Parcels[index] = parcelTmp;  
         }
 
-        /// <summary>
-        /// update parcel pickUp time to the current time
-        /// </summary>
-        /// <param name="parcelId">the parcel ID to update</param>
+        
         public void PickParcel(int parcelId)
         {
             Parcel parcelTmp = GetParcerl(parcelId);
@@ -78,10 +60,7 @@ namespace DalObject
             DataSource.Parcels[index] = parcelTmp;
         }
 
-        /// <summary>
-        /// update parcel Deliverd time to the current time
-        /// </summary>
-        /// <param name="parcelId">the parcel ID to update</param>
+        
         public void ParcelToCustomer(int parcelId)
         {
             Parcel parcelTmp = GetParcerl(parcelId);
@@ -95,19 +74,12 @@ namespace DalObject
             DataSource.Drones[index] = droneTmp;
         }
 
-        /// <summary>
-        /// get array of all parcels
-        /// </summary>
-        /// <returns>array of all parcels</returns>
+       
         public IEnumerable<Parcel> GetAllParcels()
         {
             return new List<Parcel>(DataSource.Parcels);
         }
 
-        /// <summary>
-        /// get array of all unassigned parcels
-        /// </summary>
-        /// <returns>array of parcels</returns>
         public IEnumerable<Parcel> GetUnassignedParcels()
         {
             return DataSource.Parcels.FindAll(parcel => parcel.DroneId == 0);

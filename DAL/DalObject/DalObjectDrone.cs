@@ -4,12 +4,6 @@ namespace DalObject
 {
     public partial class DalObject
     {
-
-        /// <summary>
-        /// Add drone to Drones list in DataSource
-        /// </summary>
-        /// <param name="model">the modle of the drone</param>
-        /// <param name="maxWeightInt">max weight of the drone (0/1/2)</param>
         public void AddDrone(int id, string model, WeightCategories maxWeight)
         {
             bool droneExists = false;
@@ -21,11 +15,7 @@ namespace DalObject
 
             DataSource.Drones.Add(new Drone(id,model, maxWeight));
         }
-        /// <summary>
-        /// returns drone by ID
-        /// </summary>
-        /// <param name="droneId"> the drone ID</param>
-        /// <returns>Drone object of the requsted ID (by value)</returns>
+        
         public Drone GetDrone(int droneId)
         {
             bool droneExists = false;
@@ -67,11 +57,7 @@ namespace DalObject
 
         
 
-        /// <summary>
-        /// Charge the drone
-        /// </summary>
-        /// <param name="stationId">the station ID with the charger</param>
-        /// <param name="droneId">the drone ID</param>
+       
         public void DroneToStation(int stationId, int droneId)
         {
             DataSource.Charges.Add(new DroneCharge(droneId, stationId));
@@ -86,10 +72,7 @@ namespace DalObject
             DataSource.Drones[index] = droneTmp;
         }
 
-        /// <summary>
-        /// Free drone frome charging
-        /// </summary>
-        /// <param name="droneId">the drone ID to release</param>
+        
         public void FreeDrone(int droneId)
         {
             DroneCharge charger = DataSource.Charges.Find(charger => charger.Droneld == droneId);
@@ -101,10 +84,7 @@ namespace DalObject
             DataSource.BaseStations[index] = stationTmp;
         }
 
-        /// <summary>
-        /// get array of all drones
-        /// </summary>
-        /// <returns>array of all drones</returns>
+        
         public IEnumerable<Drone> GetAllDrones()
         {
             return new List<Drone>(DataSource.Drones);

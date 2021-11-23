@@ -58,16 +58,17 @@ namespace BL
         {
             try
             {
+                BaseStation myStation = GetStation(stationId);
                 if (name == "")
-                    name = GetStation(stationId).Name;
+                    name = myStation.Name;
                 int numChargers;
                 if (input == "")
-                    numChargers = GetStation(stationId).NumFreeChargers;
+                    numChargers = myStation.NumFreeChargers;
                 else
                     numChargers = int.Parse(input);
-                if (numChargers < GetStation(stationId).DronesInCharging.Count)
-                    throw new LessChargersThanDronesInCharchingException($"Too few chargers. you have {GetStation(stationId).DronesInCharging.Count} drones in charging");
-                numChargers -= GetStation(stationId).DronesInCharging.Count;
+                if (numChargers < myStation.DronesInCharging.Count)
+                    throw new LessChargersThanDronesInCharchingException($"Too few chargers. you have {myStation.DronesInCharging.Count} drones in charging");
+                numChargers -= myStation.DronesInCharging.Count;
 
                 DalObject.UpdateStation(stationId, name, numChargers);
             }
@@ -75,10 +76,7 @@ namespace BL
             {
                 throw new IBL.BL.IdNotFoundException(ex.Message, ex.Id);
             }
-                catch (LessChargersThanDronesInCharchingException ex)
-            {
-                throw new IBL.BL.LessChargersThanDronesInCharchingException(ex.Message);
-            }
+            
         }
         public IEnumerable<BaseStationToList> GetStationsWithFreeSlots()
         {

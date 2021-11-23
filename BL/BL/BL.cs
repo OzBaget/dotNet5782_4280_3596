@@ -40,6 +40,7 @@ namespace BL
                 {
                     if (parcel.Delivered == DateTime.MinValue && parcel.Scheduled != DateTime.MinValue &&  parcel.DroneId == myDrone.Id) //parcel havn't deliverd but scheduled
                     {
+                        myDrone.ParcelId = parcel.Id;
                         myDrone.Status = DroneStatus.Delivery;
                         if (parcel.PickedUp== DateTime.MinValue)
                         {
@@ -50,9 +51,8 @@ namespace BL
                             myDrone.CurrentLocation = GetCustomer(parcel.SenderId).Location;
                         }
 
-                        myDrone.ParcelId = parcel.Id;
-                        int minBattery = batteryNeedForTrip(GetCustomer(parcel.TargetId).Location, myDrone.CurrentLocation, false, (WeightCategories)parcel.Weight)+
-                            batteryNeedForTrip(getClosestStation(GetCustomer(parcel.TargetId).Location).Location, myDrone.CurrentLocation);
+                        int minBattery = batteryNeedForTrip(GetCustomer(parcel.TargetId).Location, myDrone.CurrentLocation, false, (WeightCategories)parcel.Weight)+//battry needed for delivering the parcel
+                            batteryNeedForTrip(getClosestStation(GetCustomer(parcel.TargetId).Location).Location, myDrone.CurrentLocation); //battry for arriving closest station to customer.
                         
                         if (minBattery < 100)
                         {

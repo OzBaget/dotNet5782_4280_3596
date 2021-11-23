@@ -4,11 +4,7 @@ namespace DalObject
 {
     public partial class DalObject
     {
-        /// <summary>
-        /// returns base station by ID
-        /// </summary>
-        /// <param name="stationId"> the base station ID</param>
-        /// <returns>Return a Station object of the requsted ID (by value)</returns>
+        
         public Station GetStation(int stationId)
         {
             bool stationExists = false;
@@ -23,13 +19,7 @@ namespace DalObject
             return DataSource.BaseStations.Find(station => station.Id == stationId);
         }
 
-        /// <summary>
-        /// Add base station to the BaseStations list in DataSource
-        /// </summary>
-        /// <param name="name">the name of the station</param>
-        /// <param name="lat">the latitude of the station</param>
-        /// <param name="lng">the longitude of the station</param>
-        /// <param name="chargSlots">hw many charge slosts are in the station</param>
+       
         public void AddStation(int id,string name, double lat, double lng, int chargSlots)
         {
             foreach (Station station in DataSource.BaseStations)
@@ -52,10 +42,7 @@ namespace DalObject
             AddStation(tmpStation.Id, name, tmpStation.Lat, tmpStation.Lng, numChargers);
         }
 
-        /// <summary>
-        /// get array of all base satations
-        /// </summary>
-        /// <returns>array of all base satations</returns>
+        
         public IEnumerable<Station> GetAllStations()
         {
             return new List<Station>(DataSource.BaseStations);
