@@ -8,13 +8,13 @@ namespace IBL.BO
 {
     public class Drone
     {
-        public int Id;
-        public string Model;
-        public WeightCategories MaxWeight;
-        public int Battery;
-        public DroneStatus Status;
-        public ParcelInTransfer Parcel;
-        public Location CurrentLocation;
+        public int Id { get; set; }
+        public string Model { get; set; }
+        public WeightCategories MaxWeight { get; set; }
+        public int Battery { get; set; }
+        public DroneStatus Status { get; set; }
+        public ParcelInTransfer Parcel { get; set; }
+        public Location CurrentLocation { get; set; }
 
         public override string ToString()
         {

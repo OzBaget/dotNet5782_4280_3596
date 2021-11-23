@@ -1,5 +1,7 @@
 ﻿using System;
 using IBL.BL;
+using System.Globalization;
+
 
 namespace ConsoleUI_BL
 {
@@ -117,6 +119,7 @@ namespace ConsoleUI_BL
             try
             {
                 db.AddStation(s);
+                Console.WriteLine("The station was added successfully!");
             }
             catch (IdAlreadyExistsException ex)
             {
@@ -145,6 +148,7 @@ namespace ConsoleUI_BL
             try
             {
                 db.AddDrone(d, idStation);
+                Console.WriteLine("The drone was added successfully!");
             }
             catch (IdAlreadyExistsException ex)
             {
@@ -178,6 +182,7 @@ namespace ConsoleUI_BL
 
             {
                 db.AddCustomer(c);
+                Console.WriteLine("The customer was added successfully!");
             }
             catch (IdAlreadyExistsException ex)
             {
@@ -202,7 +207,7 @@ namespace ConsoleUI_BL
 
             Console.WriteLine("Choose parcel priority:");
             Console.WriteLine("1. Normal\n2. Fast\n3. Urgent");
-            IBL.BO.Priorities priority = (IBL.BO.Priorities)getUserSelection(3) - 1;
+            IBL.BO.Priorities priority = (IBL.BO.Priorities)(getUserSelection(3) - 1);
             IBL.BO.CustomerInParcel sender = new IBL.BO.CustomerInParcel();
             sender.Id = senderId;
             IBL.BO.CustomerInParcel target = new IBL.BO.CustomerInParcel();
@@ -215,6 +220,7 @@ namespace ConsoleUI_BL
             try
             {
                 db.AddParcel(p);
+                Console.WriteLine("The parcel was added successfully!");
             }
             catch (IdAlreadyExistsException ex)
             {
@@ -277,6 +283,7 @@ namespace ConsoleUI_BL
             try
             {
                 db.UpdateDrone(id, model);
+                Console.WriteLine("The drone was updated successfully!");
             }
             catch (IdNotFoundException ex)
             {
@@ -301,6 +308,7 @@ namespace ConsoleUI_BL
             try
             {
                 db.UpdateStation(id, name, input);
+                Console.WriteLine("The station was updated successfully!");
             }
             catch (IdNotFoundException ex)
             {
@@ -323,6 +331,7 @@ namespace ConsoleUI_BL
             try
             {
                 db.UpdateCustomer(id, newName, newPhone);
+                Console.WriteLine("The customer was updated successfully!");
             }
             catch (IdNotFoundException ex)
             {
@@ -330,17 +339,15 @@ namespace ConsoleUI_BL
             }
 
         }
-        /// <summary>
-        /// get drone ID form user and pick-up the parcel
-        /// </summary>
+        
         private static void sendDroneToCharge()
         {
             Console.WriteLine("Enter drone ID:");
             int droneId = getIntFromUser();
             try
             {
-                db.DroneToStation(droneId);
-
+                int stationId=db.DroneToStation(droneId);
+                Console.WriteLine($"The drone sent to charge at station #{stationId} successfully!");
             }
             catch (IdNotFoundException ex)
             {
@@ -359,13 +366,19 @@ namespace ConsoleUI_BL
         {
             Console.WriteLine("Enter drone ID:");
             int droneId = getIntFromUser();
-            Console.WriteLine("Enter how much hours the drone charged:");
-            double droneTime = getDoubleFromUser();
-
+            Console.WriteLine("Enter how much time the drone charged (hh:mm):");
+          
+            TimeSpan chargingTime;
+            string input = Console.ReadLine();
+            while (!TimeSpan.TryParseExact(input, "h\\:mm", CultureInfo.CurrentCulture, out chargingTime))
+            {
+                Console.WriteLine("Not Valid Input!");
+                input = Console.ReadLine();
+            }
             try
             {
-                db.FreeDrone(droneId, droneTime);
-
+                int newBattery=db.FreeDrone(droneId, chargingTime);
+                Console.WriteLine($"The drone charged successfully, current battry is {newBattery}%");
             }
             catch (IdNotFoundException ex)
             {
@@ -389,7 +402,8 @@ namespace ConsoleUI_BL
             int droneId = getIntFromUser();
             try
             {
-                db.linkParcel(droneId);
+                int parcelId=db.linkParcel(droneId);
+                Console.WriteLine($"The drone linked to parcel #{parcelId} successfully!");
             }
             catch (IdNotFoundException ex)
             {
@@ -411,6 +425,7 @@ namespace ConsoleUI_BL
             try
             {
                 db.PickParcel(parcelId);
+                Console.WriteLine("The parcel picked-up successfully!");
             }
             catch (IdNotFoundException ex)
             {
@@ -432,6 +447,7 @@ namespace ConsoleUI_BL
             try
             {
                 db.ParcelToCustomer(droneId);
+                Console.WriteLine("The parcel deliverd successfully!");
             }
             catch (IdNotFoundException ex)
             {

@@ -91,7 +91,12 @@ namespace BL
             }
         }
 
-        
+
+        /// <summary>
+        /// get the closest station of spasific location
+        /// </summary>
+        /// <param name="loc">the location</param>
+        /// <returns>BaseStation</returns>
         private BaseStation getClosestStation(Location loc)
         {
             return GetStation(GetAllStations().OrderBy(station => calculateDist(GetStation(station.Id).Location, loc)).First().Id);

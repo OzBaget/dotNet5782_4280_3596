@@ -8,12 +8,12 @@ namespace IBL.BO
 {
     public class Customer
     {
-        public int Id;
-        public string Name;
-        public string Phone;
-        public Location Location;
-        public List<ParcelInCustomer> SentParcels;
-        public List<ParcelInCustomer> ReceivedParcels;
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Phone { get; set; }
+        public Location Location { get; set; }
+        public List<ParcelInCustomer> SentParcels { get; set; }
+        public List<ParcelInCustomer> ReceivedParcels { get; set; }
         public override string ToString()
         {
             string toString =

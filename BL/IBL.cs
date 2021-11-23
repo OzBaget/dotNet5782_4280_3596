@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using IBL.BO;
 
 namespace IBL
 {
@@ -11,25 +12,25 @@ namespace IBL
         /// </summary>
         /// <param name="stationId"></param>
         /// <returns></returns>
-        BO.BaseStation GetStation(int stationId);
+        BaseStation GetStation(int stationId);
         /// <summary>
         /// Gets id returns the drone
         /// </summary>
         /// <param name="droneId"></param>
         /// <returns></returns>
-        BO.Drone GetDrone(int droneId);
+        Drone GetDrone(int droneId);
         /// <summary>
         /// Gets id returns the customer
         /// </summary>
         /// <param name="customerId"></param>
         /// <returns></returns>
-        BO.Customer GetCustomer(int customerId);
+        Customer GetCustomer(int customerId);
         /// <summary>
         /// Gets id returns the parcel
         /// </summary>
         /// <param name="parcelId"></param>
         /// <returns></returns>
-        BO.Parcel GetParcel(int parcelId);
+        Parcel GetParcel(int parcelId);
         /// <summary>
         /// Get station add it to the data base
         /// </summary>
@@ -51,11 +52,11 @@ namespace IBL
         /// </summary>
         /// <param name="parcel"></param>
         void AddParcel(BO.Parcel parcel);
-     /// <summary>
-     ///  Link parcel to drone
-     /// </summary>
-     /// <param name="droneId"></param>
-        void linkParcel(int droneId);
+         /// <summary>
+         ///  Link parcel to drone
+         /// </summary>
+         /// <param name="droneId"></param>
+        int linkParcel(int droneId);
         /// <summary>
         /// Pick parcel to the drone
         /// </summary>
@@ -77,7 +78,7 @@ namespace IBL
         /// </summary>
         /// <param name="droneId"></param>
         /// <param name="droneTime"></param>
-        void FreeDrone(int droneId,double droneTime);
+        int FreeDrone(int droneId,TimeSpan droneTime);
         /// <summary>
         /// Update the model's drone
         /// </summary>
@@ -102,31 +103,31 @@ namespace IBL
         /// Returns list of all stations
         /// </summary>
         /// <returns></returns>
-        IEnumerable<BO.BaseStationToList> GetAllStations();
+        IEnumerable<BaseStationToList> GetAllStations();
         /// <summary>
         /// Returns list of all drones
         /// </summary>
         /// <returns></returns>
-        IEnumerable<BO.DroneToList> GetAllDrones();
+        IEnumerable<DroneToList> GetAllDrones();
         /// <summary>
         /// Returns list of all customers
         /// </summary>
         /// <returns></returns>
-        IEnumerable<BO.CustomerToList> GetAllCustomers();
+        IEnumerable<CustomerToList> GetAllCustomers();
         /// <summary>
         /// Returns list of all parcels
         /// </summary>
         /// <returns></returns>
-        IEnumerable<BO.ParcelToList> GetAllParcels();
+        IEnumerable<ParcelToList> GetAllParcels();
         /// <summary>
         /// Returns list of all unassigned parcels
         /// </summary>
         /// <returns></returns>
-        IEnumerable<BO.ParcelToList> GetUnassignedParcels();
+        IEnumerable<ParcelToList> GetUnassignedParcels();
         /// <summary>
         /// Returns list of all stations with free chargers
         /// </summary>
         /// <returns></returns>
-        IEnumerable<BO.BaseStationToList> GetStationsWithFreeSlots();
+        IEnumerable<BaseStationToList> GetStationsWithFreeSlots();
     }
 }

@@ -8,15 +8,15 @@ namespace IBL.BO
 {
     public class ParcelInTransfer
     {
-        public int Id;
-        public bool IsInTransfer;
-        public Priorities Prioritie;
-        public WeightCategories Weight;
-        public CustomerInParcel Sender;
-        public CustomerInParcel Target;
-        public Location PickupLocation;
-        public Location TargetLocation;
-        public double Distance;
+        public int Id { get; set; }
+        public bool IsInTransfer { get; set; }
+        public Priorities Prioritie { get; set; }
+        public WeightCategories Weight { get; set; }
+        public CustomerInParcel Sender { get; set; }
+        public CustomerInParcel Target { get; set; }
+        public Location PickupLocation { get; set; }
+        public Location TargetLocation { get; set; }
+        public double Distance { get; set; }
         public override string ToString()
         {
             string toString =

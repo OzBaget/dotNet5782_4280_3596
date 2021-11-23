@@ -23,6 +23,21 @@ namespace DalObject
         
         public void AddParcel(int senderId, int targetId, WeightCategories weight, Priorities priority, DateTime requsted, DateTime scheduled, DateTime pickedUp, DateTime delivered)
         {
+            bool customerExists = false;
+            foreach (Customer customer in DataSource.Customers)
+                if (customer.Id == senderId)
+                    customerExists = true;
+            if (!customerExists)
+                throw new IdNotFoundException($"Can't find sender (#{senderId}", senderId);
+
+            customerExists = false;
+            foreach (Customer customer in DataSource.Customers)
+                if (customer.Id == targetId)
+                    customerExists = true;
+            if (!customerExists)
+                throw new IdNotFoundException($"Can't find target (#{targetId}", targetId);
+
+
             Parcel myParcel = new();
             myParcel.Id = ++DataSource.Config.ParcelId;
             myParcel.SenderId = senderId;

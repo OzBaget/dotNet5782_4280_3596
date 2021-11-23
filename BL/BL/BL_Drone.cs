@@ -93,7 +93,7 @@ namespace BL
             }
             throw new IBL.BL.CantSendDroneToChargeException("There is no station that the drone is able to charge at!");
         }
-        public void FreeDrone(int droneId, double droneTime)
+        public int FreeDrone(int droneId, TimeSpan droneTime)
         {
             int droneIndex = Drones.FindIndex(drone => drone.Id == droneId);
             if (droneIndex == -1)
@@ -105,8 +105,9 @@ namespace BL
 
             DalObject.FreeDrone(droneId);
 
-            myDrone.Battery = (int)(droneTime * chargingRate) < 100 ? myDrone.Battery + (int)(droneTime * chargingRate) : 100;
+            myDrone.Battery = (int)(droneTime.TotalHours * chargingRate)+myDrone.Battery < 100 ? myDrone.Battery + (int)(droneTime.TotalHours * chargingRate) : 100;
             myDrone.Status = DroneStatus.Available;
+            return myDrone.Battery;
         }
 
         public void UpdateDrone(int id, string model)
@@ -123,6 +124,15 @@ namespace BL
             }
         }
 
+
+        /// <summary>
+        /// calculate the batrry needed for getting from point A to point B with spacific onditions
+        /// </summary>
+        /// <param name="dest">point A</param>
+        /// <param name="currentLoc">point B</param>
+        /// <param name="empty">if dorne isn't empty-false</param>
+        /// <param name="weight">if the drone isn't empty, the wight of the parcel that it carrying</param>
+        /// <returns>the precnts battry needed</returns>
         private int batteryNeedForTrip(Location dest, Location currentLoc, bool empty = true, WeightCategories weight=WeightCategories.Light)
         {
             double powerUse = 0;
@@ -147,6 +157,5 @@ namespace BL
             }
             return (int)(calculateDist(currentLoc, dest) * powerUse);
         }
-
     }
 }

@@ -8,16 +8,16 @@ namespace IBL.BO
 {
     public class Parcel
     {
-        public int Id;
-        public CustomerInParcel Sender;
-        public CustomerInParcel Target;
-        public WeightCategories Weight;
-        public Priorities Prioritie;
-        public DroneInParcel Drone;
-        public DateTime DateCreated;
-        public DateTime DateScheduled;
-        public DateTime DatePickup;
-        public DateTime DateDeliverd;
+        public int Id { get; set; }
+        public CustomerInParcel Sender { get; set; }
+        public CustomerInParcel Target { get; set; }
+        public WeightCategories Weight { get; set; }
+        public Priorities Prioritie { get; set; }
+        public DroneInParcel Drone { get; set; }
+        public DateTime DateCreated { get; set; }
+        public DateTime DateScheduled { get; set; }
+        public DateTime DatePickup { get; set; }
+        public DateTime DateDeliverd { get; set; }
         public override string ToString()
         {
 

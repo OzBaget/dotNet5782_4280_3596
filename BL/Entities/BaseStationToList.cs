@@ -8,10 +8,10 @@ namespace IBL.BO
 {
     public class BaseStationToList
     {
-        public int Id;
-        public string Name;
-        public int NumFreeChragers;
-        public int NumFullChragers;
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public int NumFreeChragers { get; set; }
+        public int NumFullChragers { get; set; }
 
         public override string ToString()
         {

@@ -83,6 +83,11 @@ namespace BL
             return GetAllStations().Where(station => station.NumFreeChragers > 0);
         }
 
+        /// <summary>
+        /// returns all drones that are in charge in station
+        /// </summary>
+        /// <param name="stationId">the station ID</param>
+        /// <returns>list of drones</returns>
         private List<DroneInCharging> getDronesInChraging(int stationId)
         {
             List<DroneInCharging> drones = new();
@@ -98,7 +103,5 @@ namespace BL
             }
         return drones;
         }
-
-
     }
 }
