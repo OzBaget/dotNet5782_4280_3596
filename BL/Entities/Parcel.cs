@@ -24,7 +24,7 @@ namespace IBL.BO
             string toString =
                 $"ID:                            {Id}\n" +
                 $"Weight status:                 {Weight}\n" +
-                $"Prioritie status:              {Prioritie}\n";
+                $"Prioritie status:              {Prioritie}";
                 if (DateCreated != DateTime.MinValue)
                     toString += $"\nCreated date:                  {DateCreated}";
                 if (DateScheduled != DateTime.MinValue)
@@ -33,8 +33,8 @@ namespace IBL.BO
                     toString += $"\nPick up date:                  {DatePickup}";
                 if (DateDeliverd != DateTime.MinValue)
                     toString += $"\nDeliverd date:                 {DateDeliverd}";
-                toString += $"        ===========Receiver============\n\t{Target.ToString().Replace("\n", "\n\t")}\n" +
-                $"        ===========Sender==============\n\t{Sender.ToString().Replace("\n", "\n\t")}";
+                toString += $"\n        ===========Receiver============\n\t{Target.ToString().Replace("\n", "\n\t")}" +
+                $"\n        ===========Sender==============\n\t{Sender.ToString().Replace("\n", "\n\t")}";
                 if (Drone.Id != 0)
                     toString += $"\n        ===========Drone===============\n\t{Drone.ToString().Replace("\n", "\n\t")}";                
             return toString;

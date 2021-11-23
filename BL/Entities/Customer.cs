@@ -12,7 +12,7 @@ namespace IBL.BO
         public string Name;
         public string Phone;
         public Location Location;
-        public List<ParcelInCustomer> WaitsToSendParcels;
+        public List<ParcelInCustomer> SentParcels;
         public List<ParcelInCustomer> ReceivedParcels;
         public override string ToString()
         {
@@ -21,11 +21,11 @@ namespace IBL.BO
                 $"Name:                          {Name}\n" +
                 $"Location:                      {Location}\n" +
                 $"Phone number:                  {Phone}";
-            if (WaitsToSendParcels.Count > 0)
+            if (SentParcels.Count > 0)
             {
                 int count = 1;
                 toString +=  $"\n - Parcels which wait to send:";
-                foreach (var parcel in WaitsToSendParcels)
+                foreach (var parcel in SentParcels)
                 {
                     toString += $"\n\t===========Parcel #{count}===========\n\t" + parcel.ToString().Replace("\n", "\n\t");
                     parcel.ToString();

@@ -30,7 +30,7 @@ namespace BL
                 newCustomer.Location.Latitude = tmpCustomer.Lat;
                 newCustomer.Location.Longitude = tmpCustomer.Lng;
                 newCustomer.ReceivedParcels = new();
-                newCustomer.WaitsToSendParcels = new();
+                newCustomer.SentParcels = new();
 
                 //update ReceivedParcels and WaitsToSendParcels
                 foreach (var parcel in DalObject.GetAllParcels())
@@ -65,7 +65,7 @@ namespace BL
                         customer.Id = parcel.TargetId;
                         customer.Name = DalObject.GetCustomer(parcel.TargetId).Name;
                         parcelInCustomer.Customer = customer;
-                        newCustomer.WaitsToSendParcels.Add(parcelInCustomer);
+                        newCustomer.SentParcels.Add(parcelInCustomer);
                     }
                 }
                 return newCustomer;
