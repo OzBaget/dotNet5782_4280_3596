@@ -4,10 +4,6 @@
              xmlns:local="clr-namespace:PL"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <Style x:Key="CustomFont">
-            <Setter Property="TextElement.FontFamily"
-                    Value="/Fonts/#Rabble Rouser">
-            </Setter>
-        </Style>
-    </Application.Resources>
+   </Application.Resources>
+    
 </Application>

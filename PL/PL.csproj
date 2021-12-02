@@ -7,7 +7,30 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Fonts\Cotton Butter.ttf" />
+    <None Remove="Fonts\Long_Shot.ttf" />
+    <None Remove="Fonts\Rabble Rouser.ttf" />
+    <None Remove="Fonts\Storytime.ttf" />
+    <None Remove="Fonts\VintageKing.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Fonts\Cotton Butter.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fonts\VintageKing.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BL\BL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Fonts\Storytime.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>
