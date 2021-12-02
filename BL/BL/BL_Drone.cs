@@ -126,9 +126,9 @@ namespace BL
 
 
 
-        public IEnumerable<DroneToList> GetFilterdDrones(WeightCategories maxWight, DroneStatus status)
+        public IEnumerable<DroneToList> GetFilterdDrones(Predicate<DroneToList> filter)
         {
-            return Drones.FindAll(d => d.MaxWeight == maxWight && d.Status == status);
+            return Drones.FindAll(filter);
         }
 
 
