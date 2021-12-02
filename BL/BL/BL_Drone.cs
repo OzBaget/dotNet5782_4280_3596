@@ -125,6 +125,13 @@ namespace BL
         }
 
 
+
+        public IEnumerable<DroneToList> GetFilterdDrones(WeightCategories maxWight, DroneStatus status)
+        {
+            return Drones.FindAll(d => d.MaxWeight == maxWight && d.Status == status);
+        }
+
+
         /// <summary>
         /// calculate the batrry needed for getting from point A to point B with spacific onditions
         /// </summary>

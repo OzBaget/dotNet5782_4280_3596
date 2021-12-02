@@ -36,6 +36,15 @@ namespace PL
         {
             ListViewDrones.ItemsSource = db.GetAllDrones(d => (IBL.BO.DroneStatus)StatusSelector.SelectedItem == StatusSelector.SelectedItem);
         }
+
+        private void ListViewDrones_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var a=(ListView)sender ;
+            
+            Console.WriteLine(sender);
+            InitializeComponent();
+
+        }
     }
 
 }

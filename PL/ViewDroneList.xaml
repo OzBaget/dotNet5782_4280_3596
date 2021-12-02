@@ -24,7 +24,7 @@ VerticalAlignment="Stretch" Width="auto">
             <ComboBox x:Name="WeightSelector" FontFamily="Fonts/#Cotton Butter" HorizontalAlignment="Left" VerticalAlignment="Center" Width="168" SelectionChanged="StatusSelector_SelectionChanged" Grid.Column="2" FontSize="22" Margin="22,0,0,0" />
             <Label x:Name="TextSelector" Content="Choose your Selectors:" RenderTransformOrigin="0.586,0.567" FontSize="35" FontFamily="Fonts/#Cotton Butter" Margin="10,-2,171,12" Grid.ColumnSpan="2"/>
         </Grid>
-        <ListView x:Name="ListViewDrones" Grid.Row="1" FontFamily="Fonts/#Storytime"  FontSize="30">
+        <ListView x:Name="ListViewDrones" Grid.Row="1" FontFamily="Fonts/#Storytime"  FontSize="30" MouseDoubleClick="ListViewDrones_MouseDoubleClick">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>

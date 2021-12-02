@@ -129,5 +129,7 @@ namespace IBL
         /// </summary>
         /// <returns></returns>
         IEnumerable<BaseStationToList> GetStationsWithFreeSlots();
+
+        IEnumerable<DroneToList> GetFilterdDrones(WeightCategories maxWight, DroneStatus status);
     }
 }
