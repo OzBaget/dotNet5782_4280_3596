@@ -19,13 +19,22 @@ namespace PL
     /// </summary>
     public partial class ViewDroneList : Window
     {
+        private IBL.IBL db;
         public ViewDroneList()
         {
             InitializeComponent();
         }
-        public ViewDroneList(IBL.IBL db)
+        public ViewDroneList(IBL.IBL database)
         {
             InitializeComponent();
+            db = database;
+            ListViewDrones.ItemsSource = db.GetAllDrones();
+            StatusSelector.ItemsSource = Enum.GetValues(typeof(IBL.BO.DroneStatus));
+        }
+
+        private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //StatusSelector.SelectedItem
         }
     }
 
