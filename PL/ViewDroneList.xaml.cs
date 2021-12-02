@@ -23,5 +23,10 @@ namespace PL
         {
             InitializeComponent();
         }
+        public ViewDroneList(IBL.IBL db)
+        {
+            InitializeComponent();
+        }
     }
+
 }
