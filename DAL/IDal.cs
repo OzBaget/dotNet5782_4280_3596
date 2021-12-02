@@ -132,7 +132,7 @@ namespace IDAL
         /// <param name="scheduled">the link time of the parcel</param>
         /// <param name="pickedUp">the pick up date of the parcel</param>
         /// <param name="delivered">the delivery date of the parcel</param>
-        void AddParcel(int senderId, int targetId, WeightCategories weight, Priorities priority, DateTime requsted, DateTime scheduled, DateTime pickedUp, DateTime delivered);
+        void AddParcel(int senderId, int targetId, WeightCategories weight, Priorities priority, DateTime? requsted, DateTime? scheduled, DateTime? pickedUp, DateTime? delivered);
 
 
         //==========Deleters==========//

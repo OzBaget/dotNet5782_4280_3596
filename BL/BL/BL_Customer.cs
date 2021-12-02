@@ -35,7 +35,7 @@ namespace BL
                 //update ReceivedParcels and WaitsToSendParcels
                 foreach (var parcel in DalObject.GetAllParcels())
                 {
-                    if (parcel.Delivered != DateTime.MinValue && parcel.TargetId == tmpCustomer.Id)
+                    if (parcel.Delivered != null && parcel.TargetId == tmpCustomer.Id)
                     {
                         ParcelInCustomer parcelInCustomer = new();
                         parcelInCustomer.Id = parcel.Id;
@@ -49,14 +49,14 @@ namespace BL
                         newCustomer.ReceivedParcels.Add(parcelInCustomer);
                     }
                     
-                    if (parcel.PickedUp == DateTime.MinValue && parcel.SenderId == tmpCustomer.Id) 
+                    if (parcel.PickedUp == null && parcel.SenderId == tmpCustomer.Id) 
                     {
                         ParcelInCustomer parcelInCustomer = new();
                         parcelInCustomer.Id = parcel.Id;
                         parcelInCustomer.Prioritie = (Priorities)parcel.Priority;
                         parcelInCustomer.Weight = (WeightCategories)parcel.Weight;
 
-                        if (parcel.Scheduled != DateTime.MinValue)
+                        if (parcel.Scheduled != null)
                             parcelInCustomer.StatusParcel = ParcelStatus.Scheduled;
                         else
                             parcelInCustomer.StatusParcel = ParcelStatus.Created;
@@ -91,13 +91,13 @@ namespace BL
 
                 foreach (var parcel in DalObject.GetAllParcels())
                 {
-                    if (parcel.SenderId == newCustomer.Id && parcel.Delivered != DateTime.MinValue)
+                    if (parcel.SenderId == newCustomer.Id && parcel.Delivered != null)
                         newCustomer.ParcelsDelivered++;
-                    if (parcel.SenderId == newCustomer.Id && parcel.Delivered == DateTime.MinValue)
+                    if (parcel.SenderId == newCustomer.Id && parcel.Delivered == null)
                         newCustomer.ParcelsSent++;
-                    if (parcel.TargetId == newCustomer.Id && parcel.Delivered != DateTime.MinValue)
+                    if (parcel.TargetId == newCustomer.Id && parcel.Delivered != null)
                         newCustomer.ParcelsReceived++;
-                    if (parcel.TargetId == newCustomer.Id && parcel.Delivered == DateTime.MinValue)
+                    if (parcel.TargetId == newCustomer.Id && parcel.Delivered == null)
                         newCustomer.ParcelsInProccesToHim++;
                 }
                 customers.Add(newCustomer);

@@ -9,13 +9,10 @@ namespace BL
     {
         public void AddParcel(Parcel parcel)
         {
-            parcel.DateCreated = DateTime.Now;
-            parcel.DateScheduled = DateTime.MinValue;
-            parcel.DatePickup = DateTime.MinValue;
-            parcel.DateDeliverd = DateTime.MinValue;
+            
             try
             {
-                DalObject.AddParcel(parcel.Sender.Id, parcel.Target.Id, (IDAL.DO.WeightCategories)parcel.Weight, (IDAL.DO.Priorities)parcel.Prioritie, parcel.DateCreated, parcel.DateScheduled, parcel.DatePickup, parcel.DateDeliverd);
+                DalObject.AddParcel(parcel.Sender.Id, parcel.Target.Id, (IDAL.DO.WeightCategories)parcel.Weight, (IDAL.DO.Priorities)parcel.Prioritie, DateTime.Now, null, null, null);
             }
             catch (IDAL.DO.IdAlreadyExistsException ex)
             {
@@ -78,16 +75,16 @@ namespace BL
                 parcel.Priority = (Priorities)oldParcel.Priority;
                 parcel.Weight = (WeightCategories)oldParcel.Weight;
 
-                if (oldParcel.Requsted!=DateTime.MinValue)
+                if (oldParcel.Requsted!=null)
                     parcel.Status = ParcelStatus.Created;
 
-                if (oldParcel.Scheduled!=DateTime.MinValue)
+                if (oldParcel.Scheduled!=null)
                     parcel.Status = ParcelStatus.Scheduled;
 
-                if (oldParcel.PickedUp!=DateTime.MinValue)
+                if (oldParcel.PickedUp!=null)
                     parcel.Status = ParcelStatus.PickUp;
 
-                if (oldParcel.Delivered!=DateTime.MinValue)
+                if (oldParcel.Delivered!=null)
                     parcel.Status = ParcelStatus.Deliverd;
 
                 parcels.Add(parcel);
@@ -152,7 +149,7 @@ namespace BL
                 throw new IBL.BL.CantPickUpParcelException("Drone is not link to any parcel!");
            
             Parcel myParcel = GetParcel(myDrone.ParcelId);
-            if (myParcel.DatePickup != DateTime.MinValue) 
+            if (myParcel.DatePickup != null) 
                 throw new IBL.BL.CantPickUpParcelException("Parcel alredy picked up!");
 
             myDrone.Battery -= batteryNeedForTrip(GetCustomer(myParcel.Sender.Id).Location, myDrone.CurrentLocation);
@@ -175,9 +172,9 @@ namespace BL
                 throw new IBL.BL.CantDeliverParcelException("Drone is not link to any parcel!");
             
             Parcel myParcel = GetParcel(myDrone.ParcelId);
-            if (myParcel.DatePickup == DateTime.MinValue)
+            if (myParcel.DatePickup == null)
                 throw new IBL.BL.CantDeliverParcelException($"The drone didn't picked up the parcel #{myParcel.Id}!");
-            if(myParcel.DateDeliverd!=DateTime.MinValue)
+            if(myParcel.DateDeliverd!=null)
                 throw new IBL.BL.CantDeliverParcelException($"The drone deliverd parcel #{myParcel.Id} already!");
 
             int batteryNeededForCustomer = batteryNeedForTrip(GetCustomer(myParcel.Target.Id).Location, myDrone.CurrentLocation, false, myParcel.Weight);

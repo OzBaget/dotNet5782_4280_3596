@@ -21,7 +21,7 @@ namespace DalObject
         }
 
         
-        public void AddParcel(int senderId, int targetId, WeightCategories weight, Priorities priority, DateTime requsted, DateTime scheduled, DateTime pickedUp, DateTime delivered)
+        public void AddParcel(int senderId, int targetId, WeightCategories weight, Priorities priority, DateTime? requsted, DateTime? scheduled, DateTime? pickedUp, DateTime? delivered)
         {
             bool customerExists = false;
             foreach (Customer customer in DataSource.Customers)
