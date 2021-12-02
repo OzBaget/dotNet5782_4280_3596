@@ -13,6 +13,7 @@
     <None Remove="Fonts\Storytime.ttf" />
     <None Remove="Fonts\VintageKing.ttf" />
     <None Remove="Images\ClockSelector.png" />
+    <None Remove="Images\DoneView.png" />
     <None Remove="Images\WeightKg.png" />
   </ItemGroup>
 
@@ -37,6 +38,9 @@
 
   <ItemGroup>
     <Resource Include="Images\ClockSelector.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\DoneView.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\WeightKg.png">

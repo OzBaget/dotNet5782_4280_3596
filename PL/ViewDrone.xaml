@@ -7,22 +7,50 @@
         mc:Ignorable="d"
         Title="ViewDrone" Height="450" Width="800">
     <Grid>
-        <TextBox x:Name="ID" HorizontalAlignment="Left" Margin="150,50,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Label x:Name="label1" Content="ID" HorizontalAlignment="Left" Margin="41,46,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="IdTextBox" HorizontalAlignment="Left" Margin="150,50,0,0" Text="TextBoxSSS" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
         <Label x:Name="label" Content="Model" HorizontalAlignment="Left" Margin="41,72,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="Model" HorizontalAlignment="Left" Margin="150,76,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="Model" HorizontalAlignment="Left" Margin="150,76,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
         <Label x:Name="label2" Content="Max Wight" HorizontalAlignment="Left" Margin="41,98,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="MaxWight" HorizontalAlignment="Left" Margin="150,100,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="MaxWight" HorizontalAlignment="Left" Margin="150,100,0,0" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
         <Label x:Name="label3" Content="Battery" HorizontalAlignment="Left" Margin="41,126,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="Battery" HorizontalAlignment="Left" Margin="150,130,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Label x:Name="label4" Content="Status" HorizontalAlignment="Left" Margin="41,151,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="150,153,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="StatusBox" HorizontalAlignment="Left" Margin="150,153,0,0" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
         <Label x:Name="label5" Content="Location" HorizontalAlignment="Left" Margin="41,191,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="textBox" HorizontalAlignment="Left" Margin="150,186,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="LatBox" HorizontalAlignment="Left" Margin="150,186,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
         <Label x:Name="label6" Content="Lat" HorizontalAlignment="Left" Margin="101,182,0,0" VerticalAlignment="Top" Height="25"/>
         <Label x:Name="label7" Content="Lng" HorizontalAlignment="Left" Margin="101,0,0,0" VerticalAlignment="Center"/>
-        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Margin="150,212,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="LngBox" HorizontalAlignment="Left" Margin="150,212,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
         <Label x:Name="label8" Content="Parcel" HorizontalAlignment="Left" Margin="514,46,0,0" VerticalAlignment="Top"/>
+        <Image x:Name="ClockSelector" Margin="158,-4,24,4" Width="68">
+            <Image.Source>
+                <BitmapImage  UriSource="/Images/DoneView.png" />
+            </Image.Source>
+        </Image>
+        <TextBox x:Name="BatteryText" HorizontalAlignment="Left" Margin="150,130,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
+        <Button Margin="350,126,300,174">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <StackPanel Width="{TemplateBinding Width}" Height="{TemplateBinding Width}" x:Name="panel">
+                                    <ContentPresenter Width="{TemplateBinding Width}" Height="{TemplateBinding Width}" />
+                                </StackPanel>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsPressed" Value="true">
+                                        <Setter Property="Background" Value="Gray" TargetName="panel" />
+                                    </Trigger>
+                                    <Trigger Property="IsMouseOver" Value="true">
+                                        <Setter Property="Background" Value="LightGray" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Button.Style>
+        </Button>
 
     </Grid>
 </Window>
