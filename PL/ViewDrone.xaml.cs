@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IBL.BO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,12 @@ namespace PL
         public ViewDrone()
         {
             InitializeComponent();
+        }
+
+        public ViewDrone(Drone drone)
+        {
+            InitializeComponent();
+
         }
     }
 }

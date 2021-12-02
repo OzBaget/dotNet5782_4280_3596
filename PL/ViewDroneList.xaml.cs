@@ -34,16 +34,12 @@ namespace PL
 
         private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ListViewDrones.ItemsSource = db.GetAllDrones(d => (IBL.BO.DroneStatus)StatusSelector.SelectedItem == StatusSelector.SelectedItem);
+            //ListViewDrones.ItemsSource = db.GetAllDrones(d => (IBL.BO.DroneStatus)StatusSelector.SelectedItem == StatusSelector.SelectedItem);
         }
 
         private void ListViewDrones_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            var a=(ListView)sender ;
-            
-            Console.WriteLine(sender);
-            InitializeComponent();
-
+            new ViewDrone(db.GetDrone(((sender as ListView).SelectedItem as IBL.BO.DroneToList).Id)).Show();
         }
     }
 
