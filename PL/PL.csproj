@@ -12,6 +12,8 @@
     <None Remove="Fonts\Rabble Rouser.ttf" />
     <None Remove="Fonts\Storytime.ttf" />
     <None Remove="Fonts\VintageKing.ttf" />
+    <None Remove="Images\ClockSelector.png" />
+    <None Remove="Images\WeightKg.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,6 +33,15 @@
     <Content Include="Fonts\Storytime.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\ClockSelector.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\WeightKg.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>

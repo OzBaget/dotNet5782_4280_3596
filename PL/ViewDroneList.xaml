@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="ViewDroneList" Height="640
-        " Width="800">
+        " Width="1000">
     <Grid Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="50*"/>
@@ -20,12 +20,22 @@ VerticalAlignment="Stretch" Width="auto">
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
-            <ComboBox x:Name="StatusSelector" FontFamily="Fonts/#Cotton Butter" HorizontalAlignment="Left" Margin="39,0,0,0" VerticalAlignment="Center" Width="167" SelectionChanged="StatusSelector_SelectionChanged" Grid.Column="1" FontSize="22" Grid.ColumnSpan="2"/>
-            <ComboBox x:Name="WeightSelector" FontFamily="Fonts/#Cotton Butter" HorizontalAlignment="Left" VerticalAlignment="Center" Width="168" SelectionChanged="StatusSelector_SelectionChanged" Grid.Column="2" FontSize="22" Margin="22,0,0,0" />
-            <Label x:Name="TextSelector" Content="Choose your Selectors:" RenderTransformOrigin="0.586,0.567" FontSize="35" FontFamily="Fonts/#Cotton Butter" Margin="10,-2,171,12" Grid.ColumnSpan="2"/>
-            <Button x:Name="Resetbutton" Content="Reset selectors" FontFamily="Fonts/#Cotton Butter" Grid.Column="3" HorizontalAlignment="Left" Margin="36,0,0,0" VerticalAlignment="Center" Height="28" Width="90" FontSize="20" FontWeight="Normal" FontStyle="Normal" FontStretch="Medium" Panel.ZIndex="0" ScrollViewer.HorizontalScrollBarVisibility="Visible" FlowDirection="LeftToRight" UseLayoutRounding="False" Padding="2,-5,1,1" Click="Resetbutton_Click"/>
+            <ComboBox x:Name="StatusSelector" FontFamily="Fonts/#Cotton Butter" HorizontalAlignment="Center" VerticalAlignment="Center" Width="166" SelectionChanged="StatusSelector_SelectionChanged" Grid.Column="1" FontSize="26" Margin="73,0,0,0" Padding="10,0,5,0" Height="43"/>
+            <ComboBox x:Name="WeightSelector" FontFamily="Fonts/#Cotton Butter" HorizontalAlignment="Left" VerticalAlignment="Center" Width="168" SelectionChanged="StatusSelector_SelectionChanged" Grid.Column="2" FontSize="30" Margin="187,0,0,0" Grid.ColumnSpan="2" Height="43" IsDropDownOpen="True" Padding="50,-7,0,0" VerticalContentAlignment="Center" />
+            <Label x:Name="TextSelector" Content="Selectors:" RenderTransformOrigin="0.586,0.567" FontSize="48" FontFamily="Fonts/#Cotton Butter" Margin="30,-10,0,0" Padding="0,0,0,0" Width="131" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center"/>
+            <Button x:Name="Resetbutton" Content="Reset selectors" FontFamily="Fonts/#Cotton Butter" Grid.Column="3" HorizontalAlignment="Left" Margin="125,0,0,0" VerticalAlignment="Center" Height="28" Width="90" FontSize="20" FontWeight="Normal" FontStyle="Normal" FontStretch="Medium" Panel.ZIndex="0" ScrollViewer.HorizontalScrollBarVisibility="Visible" FlowDirection="LeftToRight" UseLayoutRounding="False" Padding="2,-5,1,1" Click="Resetbutton_Click"/>
+            <Image x:Name="WeightKg" Margin="133,-5,70,3" Width="47" Grid.Column="2">
+                <Image.Source>
+                    <BitmapImage  UriSource="/Images/WeightKg.png" />
+                </Image.Source>
+            </Image>
+            <Image x:Name="ClockSelector" Margin="9,-4,173,4" Grid.Column="1" Width="68">
+                <Image.Source>
+                    <BitmapImage  UriSource="/Images/ClockSelector.png" />
+                </Image.Source>
+            </Image>
         </Grid>
-        <ListView x:Name="ListViewDrones" Grid.Row="1" FontFamily="Fonts/#Storytime"  FontSize="30" MouseDoubleClick="ListViewDrones_MouseDoubleClick">
+        <ListView x:Name="ListViewDrones" FontFamily="Fonts/#Storytime"  FontSize="30" MouseDoubleClick="ListViewDrones_MouseDoubleClick" Margin="0,69,0,0" Grid.RowSpan="2">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
