@@ -21,8 +21,15 @@ VerticalAlignment="Stretch" Width="auto">
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
             <ComboBox x:Name="StatusSelector" Grid.Column="1" HorizontalAlignment="Center" Margin="0,19,0,0" VerticalAlignment="Top" Width="120"/>
-            <Label x:Name="TextSelector" Content="Choose your Selctor:" HorizontalAlignment="Center" VerticalAlignment="Center" Width="180" Height="50" RenderTransformOrigin="0.586,0.567"/>
+            <Label x:Name="TextSelector" Content="Choose your Selector:" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="180" Height="50" RenderTransformOrigin="0.586,0.567"/>
         </Grid>
+        <ListView x:Name="listView" Grid.Row="1">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 
 

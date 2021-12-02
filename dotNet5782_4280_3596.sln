@@ -19,9 +19,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleUI_BL", "ConsoleUI_BL\ConsoleUI_BL.csproj", "{4FD4A57F-CB66-4C4E-9371-5F07AA31248D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PL", "PL\PL.csproj", "{01E79629-8374-44CA-A0EC-EE8EBB784682}"
-	ProjectSection(ProjectDependencies) = postProject
-		{4C4BFFCF-23FB-40DC-A1BE-0F81B52AAF9C} = {4C4BFFCF-23FB-40DC-A1BE-0F81B52AAF9C}
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
