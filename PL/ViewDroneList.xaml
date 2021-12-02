@@ -40,7 +40,7 @@ VerticalAlignment="Stretch" Width="auto">
         
         <ListView x:Name="ListViewDrones" FontFamily="Fonts/#Storytime"  FontSize="30" MouseDoubleClick="ListViewDrones_MouseDoubleClick" Margin="0,69,0,0" Grid.RowSpan="2">
             <ListView.Background>
-                <ImageBrush ImageSource="/Images/9752136.jpg" AlignmentX="Left" AlignmentY="Top" TileMode="Tile" Stretch="None" ViewportUnits="Absolute" Viewport="0,-60,1319,303" />
+                <ImageBrush ImageSource="/Images/9752136.jpg" AlignmentX="Left" AlignmentY="Top" TileMode="FlipXY" Stretch="UniformToFill" ViewportUnits="Absolute" Viewport="0,-60,1310,303" />
             </ListView.Background>
         </ListView>
         
