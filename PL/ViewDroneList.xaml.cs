@@ -30,11 +30,28 @@ namespace PL
             db = database;
             ListViewDrones.ItemsSource = db.GetAllDrones();
             StatusSelector.ItemsSource = Enum.GetValues(typeof(IBL.BO.DroneStatus));
+            WeightSelector.ItemsSource = Enum.GetValues(typeof(IBL.BO.WeightCategories));
         }
 
         private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ListViewDrones.ItemsSource = db.GetAllDrones(d => (IBL.BO.DroneStatus)StatusSelector.SelectedItem == StatusSelector.SelectedItem);
+            if(StatusSelector.SelectedItem == null)
+                ListViewDrones.ItemsSource = db.GetAllDrones();
+            else if (WeightSelector.SelectedItem != null)
+                ListViewDrones.ItemsSource = db.GetFilterdDrones(d => (IBL.BO.DroneStatus)StatusSelector.SelectedItem == d.Status && (IBL.BO.WeightCategories)WeightSelector.SelectedItem == d.MaxWeight);
+            else
+                ListViewDrones.ItemsSource = db.GetFilterdDrones(d => (IBL.BO.DroneStatus)StatusSelector.SelectedItem == d.Status);
+
+        }
+        private void WeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(WeightSelector.SelectedItem == null)
+                ListViewDrones.ItemsSource = db.GetAllDrones();
+            else if (StatusSelector.SelectedItem != null)
+                ListViewDrones.ItemsSource = db.GetFilterdDrones(d => (IBL.BO.WeightCategories)WeightSelector.SelectedItem == d.MaxWeight&& (IBL.BO.DroneStatus)StatusSelector.SelectedItem == d.Status);
+            else
+                ListViewDrones.ItemsSource = db.GetFilterdDrones(d => (IBL.BO.WeightCategories)WeightSelector.SelectedItem == d.MaxWeight);
+
         }
 
         private void ListViewDrones_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -44,6 +61,13 @@ namespace PL
             Console.WriteLine(sender);
             InitializeComponent();
 
+        }
+
+        private void Resetbutton_Click(object sender, RoutedEventArgs e)
+        {
+            WeightSelector.SelectedItem = null;
+            StatusSelector.SelectedItem = null;
+            ListViewDrones.ItemsSource = db.GetAllDrones();
         }
     }
 

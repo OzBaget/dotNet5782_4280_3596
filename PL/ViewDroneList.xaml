@@ -23,6 +23,7 @@ VerticalAlignment="Stretch" Width="auto">
             <ComboBox x:Name="StatusSelector" FontFamily="Fonts/#Cotton Butter" HorizontalAlignment="Left" Margin="39,0,0,0" VerticalAlignment="Center" Width="167" SelectionChanged="StatusSelector_SelectionChanged" Grid.Column="1" FontSize="22" Grid.ColumnSpan="2"/>
             <ComboBox x:Name="WeightSelector" FontFamily="Fonts/#Cotton Butter" HorizontalAlignment="Left" VerticalAlignment="Center" Width="168" SelectionChanged="StatusSelector_SelectionChanged" Grid.Column="2" FontSize="22" Margin="22,0,0,0" />
             <Label x:Name="TextSelector" Content="Choose your Selectors:" RenderTransformOrigin="0.586,0.567" FontSize="35" FontFamily="Fonts/#Cotton Butter" Margin="10,-2,171,12" Grid.ColumnSpan="2"/>
+            <Button x:Name="Resetbutton" Content="Reset selectors" FontFamily="Fonts/#Cotton Butter" Grid.Column="3" HorizontalAlignment="Left" Margin="36,0,0,0" VerticalAlignment="Center" Height="28" Width="90" FontSize="20" FontWeight="Normal" FontStyle="Normal" FontStretch="Medium" Panel.ZIndex="0" ScrollViewer.HorizontalScrollBarVisibility="Visible" FlowDirection="LeftToRight" UseLayoutRounding="False" Padding="2,-5,1,1" Click="Resetbutton_Click"/>
         </Grid>
         <ListView x:Name="ListViewDrones" Grid.Row="1" FontFamily="Fonts/#Storytime"  FontSize="30" MouseDoubleClick="ListViewDrones_MouseDoubleClick">
             <ListView.View>
