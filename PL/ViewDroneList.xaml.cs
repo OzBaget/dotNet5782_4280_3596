@@ -34,7 +34,7 @@ namespace PL
 
         private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //StatusSelector.SelectedItem
+            ListViewDrones.ItemsSource = db.GetAllDrones(d => (IBL.BO.DroneStatus)StatusSelector.SelectedItem == StatusSelector.SelectedItem);
         }
     }
 
