@@ -369,19 +369,19 @@ namespace ConsoleUI
                     break;
                 case printType.UnassignedParcel:
                     Console.WriteLine("==Unassigned Parcels==");
-                    foreach (var parcel in db.GetUnassignedParcels())
+                   /* foreach (var parcel in db.GetUnassignedParcels())
                     {
                         Console.WriteLine(parcel);
                         Console.WriteLine("======================");
-                    }
+                    }*/
                     break;
                 case printType.AvailableStation:
                     Console.WriteLine("==Available Stations==");
-                    foreach (var parcel in db.GetStationsWithFreeSlots())
+                    /*foreach (var parcel in db.GetStationsWithFreeSlots())
                     {
                         Console.WriteLine(parcel);
                         Console.WriteLine("======================");
-                    }
+                    }*/
                     break;
                 default:
                     break;

@@ -30,5 +30,15 @@ namespace PL
             InitializeComponent();
 
         }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void textBox_Copy_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }
