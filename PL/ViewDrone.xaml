@@ -29,7 +29,7 @@
                 <BitmapImage  UriSource="/Images/DroneView.png" />
             </Image.Source>
         </Image>
-        <Button x:Name="button" Content="ID:" HorizontalAlignment="Left" Margin="546,325,0,0" VerticalAlignment="Top" Width="207" Height="20" Click="button_Click">
+        <Button x:Name="button" Content="ID:" HorizontalAlignment="Left" Margin="552,325,0,0" VerticalAlignment="Top" Width="207" Height="20" Click="button_Click">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="Template">
@@ -52,7 +52,7 @@
                 </Style>
             </Button.Style>
         </Button>
-        <Button x:Name="button2" Content="ID:" HorizontalAlignment="Left" Margin="566,371,0,0" VerticalAlignment="Top" Width="208" Height="20" Click="button_Click">
+        <Button x:Name="button2" Content="ID:" HorizontalAlignment="Left" Margin="557,371,0,0" VerticalAlignment="Top" Width="208" Height="20" Click="button_Click">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="Template">
@@ -75,7 +75,7 @@
                 </Style>
             </Button.Style>
         </Button>
-        <Button x:Name="button3" Content="ID:" HorizontalAlignment="Left" Margin="28,323,0,0" VerticalAlignment="Top" Width="208" Height="20" Click="button_Click">
+        <Button x:Name="button3" Content="ID:" HorizontalAlignment="Left" Margin="32,325,0,0" VerticalAlignment="Top" Width="208" Height="20" Click="button_Click">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="Template">
@@ -98,7 +98,7 @@
                 </Style>
             </Button.Style>
         </Button>
-        <Button x:Name="button4" Content="ID:" HorizontalAlignment="Center" Margin="-8,325,0,0" VerticalAlignment="Top" Width="208" Height="20" Click="button_Click" RenderTransformOrigin="0.5,0.5">
+        <Button x:Name="button4" Content="ID:" HorizontalAlignment="Center" Margin="6,327,0,0" VerticalAlignment="Top" Width="208" Height="20" Click="button_Click" RenderTransformOrigin="0.5,0.5">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -129,7 +129,7 @@
                 </Style>
             </Button.Style>
         </Button>
-        <Button x:Name="button5" Content="ID:" HorizontalAlignment="Left" Margin="294,371,0,0" VerticalAlignment="Top" Width="208" Height="20" Click="button_Click" RenderTransformOrigin="0.5,0.5">
+        <Button x:Name="button5" Content="ID:" HorizontalAlignment="Center" Margin="7,371,0,0" VerticalAlignment="Top" Width="208" Height="20" Click="button_Click" RenderTransformOrigin="0.5,0.5">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -160,7 +160,7 @@
                 </Style>
             </Button.Style>
         </Button>
-        <Button x:Name="button6" Content="ID:" HorizontalAlignment="Left" Margin="32,371,0,0" VerticalAlignment="Top" Width="208" Height="20" Click="button_Click" RenderTransformOrigin="0.5,0.5">
+        <Button x:Name="button6" Content="ID:" HorizontalAlignment="Left" Margin="35,371,0,0" VerticalAlignment="Top" Width="208" Height="20" Click="button_Click" RenderTransformOrigin="0.5,0.5">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -259,16 +259,16 @@
         <Label x:Name="label9_Copy" Content="Label" HorizontalAlignment="Left" Margin="552,148,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="textBox_Copy1" HorizontalAlignment="Left" Margin="324,153,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="143"  BorderThickness="0" Padding="0" Background="Transparent" />
         <Label x:Name="label9_Copy1" Content="Label" HorizontalAlignment="Left" Margin="289,148,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="textBox_Copy2" HorizontalAlignment="Left" Margin="593,215,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="143"  BorderThickness="0" Padding="0" Background="Transparent" />
-        <Label x:Name="label9_Copy2" Content="Label" HorizontalAlignment="Left" Margin="558,210,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="textBox_Copy3" HorizontalAlignment="Left" Margin="319,218,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="143"  BorderThickness="0" Padding="0" Background="Transparent" />
-        <Label x:Name="label9_Copy3" Content="Label" HorizontalAlignment="Left" Margin="284,210,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="textBox_Copy4" HorizontalAlignment="Left" Margin="574,271,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="143"  BorderThickness="0" Padding="0" Background="Transparent" />
-        <Label x:Name="label9_Copy4" Content="Label" HorizontalAlignment="Left" Margin="539,266,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox_Copy2" HorizontalAlignment="Left" Margin="593,213,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="143"  BorderThickness="0" Padding="0" Background="Transparent" />
+        <Label x:Name="label9_Copy2" Content="Label" HorizontalAlignment="Left" Margin="558,208,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox_Copy3" HorizontalAlignment="Left" Margin="319,213,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="143"  BorderThickness="0" Padding="0" Background="Transparent" />
+        <Label x:Name="label9_Copy3" Content="Label" HorizontalAlignment="Left" Margin="284,208,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox_Copy4" HorizontalAlignment="Left" Margin="576,271,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="143"  BorderThickness="0" Padding="0" Background="Transparent" />
+        <Label x:Name="label9_Copy4" Content="Label" HorizontalAlignment="Left" Margin="541,266,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="textBox_Copy5" HorizontalAlignment="Left" Margin="694,270,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="143"  BorderThickness="0" Padding="0" Background="Transparent" />
         <Label x:Name="label9_Copy5" Content="Label" HorizontalAlignment="Left" Margin="659,266,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="textBox_Copy6" HorizontalAlignment="Left" Margin="67,155,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="56"  BorderThickness="0" Padding="0" Background="Transparent" />
-        <TextBox x:Name="textBox_Copy7" HorizontalAlignment="Left" Margin="33,104,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="118"  BorderThickness="0" Padding="0" Background="Transparent" />
+        <TextBox x:Name="textBox_Copy7" HorizontalAlignment="Left" Margin="43,105,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="118"  BorderThickness="0" Padding="0" Background="Transparent" />
 
 
 

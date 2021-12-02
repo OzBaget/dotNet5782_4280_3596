@@ -20,6 +20,7 @@ VerticalAlignment="Stretch" Width="auto">
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
+
             <ComboBox x:Name="StatusSelector" FontFamily="Fonts/#Cotton Butter" HorizontalAlignment="Left" VerticalAlignment="Center" Width="166" SelectionChanged="StatusSelector_SelectionChanged" FontSize="26" Padding="10,0,5,0" Height="43" Grid.ColumnSpan="2" Margin="221,0,0,0"/>
             <ComboBox x:Name="WeightSelector" FontFamily="Fonts/#Cotton Butter" HorizontalAlignment="Left" VerticalAlignment="Top" Width="168" SelectionChanged="StatusSelector_SelectionChanged" Grid.Column="1" FontSize="30" Margin="214,12,0,0" Height="43" IsDropDownOpen="True" Padding="50,-7,0,0" VerticalContentAlignment="Center" Grid.ColumnSpan="2" />
             <Label x:Name="TextSelector" Content="Selectors:" RenderTransformOrigin="0.586,0.567" FontSize="48" FontFamily="Fonts/#Cotton Butter" Margin="30,-10,0,0" Padding="0,0,0,0" Width="131" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center"/>
@@ -35,13 +36,14 @@ VerticalAlignment="Stretch" Width="auto">
                 </Image.Source>
             </Image>
         </Grid>
+        
+        
         <ListView x:Name="ListViewDrones" FontFamily="Fonts/#Storytime"  FontSize="30" MouseDoubleClick="ListViewDrones_MouseDoubleClick" Margin="0,69,0,0" Grid.RowSpan="2">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
+            <ListView.Background>
+                <ImageBrush ImageSource="/Images/9752136.jpg" AlignmentX="Left" AlignmentY="Top" TileMode="Tile" Stretch="None" ViewportUnits="Absolute" Viewport="0,-60,1319,303" />
+            </ListView.Background>
         </ListView>
+        
     </Grid>
 
 
