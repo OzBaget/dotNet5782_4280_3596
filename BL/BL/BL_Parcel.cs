@@ -94,7 +94,27 @@ namespace BL
 
         public IEnumerable<ParcelToList> GetUnassignedParcels()
         {
-            return GetAllParcels().Where(parcel => parcel.Status == ParcelStatus.Created);
+            List<ParcelToList> filterdParcel = new();
+            foreach (IDAL.DO.Parcel oldParcel in DalObject.GetFilterdParcels(parcel => parcel.Scheduled == null))
+            {
+                ParcelToList newParcel = new();
+                newParcel.Id = oldParcel.Id;
+                newParcel.Priority = (Priorities)oldParcel.Priority;
+                newParcel.Weight = (WeightCategories)oldParcel.Weight;
+                newParcel.SenderName = DalObject.GetCustomer(oldParcel.SenderId).Name;
+                newParcel.TargetName = DalObject.GetCustomer(oldParcel.TargetId).Name;
+                newParcel.Status = ParcelStatus.Created;
+                if (oldParcel.Scheduled != null)
+                    newParcel.Status = ParcelStatus.Scheduled;
+                if (oldParcel.PickedUp != null)
+                    newParcel.Status = ParcelStatus.PickUp;
+                if (oldParcel.Delivered != null)
+                    newParcel.Status = ParcelStatus.Deliverd;
+                filterdParcel.Add(newParcel);
+            }
+            return filterdParcel;
+
+            
         }
 
         public int linkParcel(int droneId)

@@ -80,7 +80,17 @@ namespace BL
         }
         public IEnumerable<BaseStationToList> GetStationsWithFreeSlots()
         {
-            return GetAllStations().Where(station => station.NumFreeChragers > 0);
+            List<BaseStationToList> filterdStations = new();
+            foreach (IDAL.DO.Station oldStation in DalObject.GetFilterdStations(station => station.FreeChargeSlots > 0))
+            {
+                BaseStationToList newStation = new();
+                newStation.Id = oldStation.Id;
+                newStation.Name = oldStation.Name;
+                newStation.NumFreeChragers = oldStation.FreeChargeSlots;
+                newStation.NumFullChragers = getDronesInChraging(newStation.Id).Count;
+                filterdStations.Add(newStation);
+            }
+            return filterdStations;
         }
 
         /// <summary>

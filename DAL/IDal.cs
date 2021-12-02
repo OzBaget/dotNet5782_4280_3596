@@ -71,13 +71,13 @@ namespace IDAL
         /// get IEnumerable of all unassigned parcels 
         /// </summary>
         /// <returns>IEnumerable of all unassigned parcels</returns>
-        IEnumerable<Parcel> GetUnassignedParcels();
+        IEnumerable<Parcel> GetFilterdParcels(Predicate<Parcel> filter);
 
         /// <summary>
         /// get IEnumerable of all the stations with free slots
         /// </summary>
         /// <returns>IEnumerable odf stations</returns>
-        IEnumerable<Station> GetStationsWithFreeSlots();
+        IEnumerable<Station> GetFilterdStations(Predicate<Station> filter);
 
         /// <summary>
         /// returns power uses of drone

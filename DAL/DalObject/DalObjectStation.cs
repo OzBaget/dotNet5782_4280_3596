@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using IDAL.DO;
 namespace DalObject
 {
@@ -52,9 +53,9 @@ namespace DalObject
         /// get all base stations that has free cahrge slots
         /// </summary>
         /// <returns>array of all the base stations that has free charge slots</returns>
-        public IEnumerable<Station> GetStationsWithFreeSlots()
+        public IEnumerable<Station> GetFilterdStations(Predicate<Station> filter)
         {
-            return DataSource.BaseStations.FindAll(station => station.FreeChargeSlots != 0);
+            return DataSource.BaseStations.FindAll(filter);
         }
     }
 }

@@ -95,9 +95,9 @@ namespace DalObject
             return new List<Parcel>(DataSource.Parcels);
         }
 
-        public IEnumerable<Parcel> GetUnassignedParcels()
+        public IEnumerable<Parcel> GetFilterdParcels(Predicate<Parcel> filter)
         {
-            return DataSource.Parcels.FindAll(parcel => parcel.DroneId == 0);
+            return DataSource.Parcels.FindAll(filter);
         }
     }
 }
