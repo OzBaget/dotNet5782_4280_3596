@@ -21,7 +21,7 @@ namespace DalObject
         }
 
         
-        public void AddParcel(int senderId, int targetId, WeightCategories weight, Priorities priority, DateTime requsted, DateTime scheduled, DateTime pickedUp, DateTime delivered)
+        public void AddParcel(int senderId, int targetId, WeightCategories weight, Priorities priority, DateTime? requsted, DateTime? scheduled, DateTime? pickedUp, DateTime? delivered)
         {
             bool customerExists = false;
             foreach (Customer customer in DataSource.Customers)
@@ -95,9 +95,9 @@ namespace DalObject
             return new List<Parcel>(DataSource.Parcels);
         }
 
-        public IEnumerable<Parcel> GetUnassignedParcels()
+        public IEnumerable<Parcel> GetFilterdParcels(Predicate<Parcel> filter)
         {
-            return DataSource.Parcels.FindAll(parcel => parcel.DroneId == 0);
+            return DataSource.Parcels.FindAll(filter);
         }
     }
 }

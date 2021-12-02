@@ -226,6 +226,10 @@ namespace ConsoleUI_BL
             {
                 Console.WriteLine(ex.Message);
             }
+            catch(IdNotFoundException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
 
         }
         /// <summary>

@@ -89,17 +89,17 @@ namespace DalObject
                 if (myParcel.DroneId != 0)//myParcel is under delivery
                 {
                     myParcel.Weight = Drones.Find(drone => drone.Id == myParcel.DroneId).MaxWeight;
-                    myParcel.Scheduled = randomDateBetween(myParcel.Requsted, DateTime.Now);
-                    myParcel.PickedUp = randomDateBetween(myParcel.Scheduled, DateTime.Now);
+                    myParcel.Scheduled = randomDateBetween((DateTime)myParcel.Requsted, DateTime.Now);
+                    myParcel.PickedUp = randomDateBetween((DateTime)myParcel.Scheduled, DateTime.Now);
                 }
                 else
                 {
                     myParcel.Weight = (WeightCategories)r.Next(0, 3);
                     if (r.Next(0, 2) == 0)
                     {
-                        myParcel.Scheduled = randomDateBetween(myParcel.Requsted, DateTime.Now);
-                        myParcel.PickedUp = randomDateBetween(myParcel.Scheduled, DateTime.Now);
-                        myParcel.Delivered = randomDateBetween(myParcel.PickedUp, DateTime.Now);
+                        myParcel.Scheduled = randomDateBetween((DateTime)myParcel.Requsted, DateTime.Now);
+                        myParcel.PickedUp = randomDateBetween((DateTime)myParcel.Scheduled, DateTime.Now);
+                        myParcel.Delivered = randomDateBetween((DateTime)myParcel.PickedUp, DateTime.Now);
                     }
 
                 }

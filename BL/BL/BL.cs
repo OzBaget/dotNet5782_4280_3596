@@ -38,11 +38,11 @@ namespace BL
 
                 foreach (IDAL.DO.Parcel parcel in DalObject.GetAllParcels())
                 {
-                    if (parcel.Delivered == DateTime.MinValue && parcel.Scheduled != DateTime.MinValue &&  parcel.DroneId == myDrone.Id) //parcel havn't deliverd but scheduled
+                    if (parcel.Delivered == null && parcel.Scheduled != null &&  parcel.DroneId == myDrone.Id) //parcel havn't deliverd but scheduled
                     {
                         myDrone.ParcelId = parcel.Id;
                         myDrone.Status = DroneStatus.Delivery;
-                        if (parcel.PickedUp== DateTime.MinValue)
+                        if (parcel.PickedUp== null)
                         {
                             myDrone.CurrentLocation = getClosestStation(GetCustomer(parcel.SenderId).Location).Location;
                         }

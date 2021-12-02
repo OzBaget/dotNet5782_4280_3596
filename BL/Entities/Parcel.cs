@@ -14,10 +14,10 @@ namespace IBL.BO
         public WeightCategories Weight { get; set; }
         public Priorities Prioritie { get; set; }
         public DroneInParcel Drone { get; set; }
-        public DateTime DateCreated { get; set; }
-        public DateTime DateScheduled { get; set; }
-        public DateTime DatePickup { get; set; }
-        public DateTime DateDeliverd { get; set; }
+        public DateTime? DateCreated { get; set; }
+        public DateTime? DateScheduled { get; set; }
+        public DateTime? DatePickup { get; set; }
+        public DateTime? DateDeliverd { get; set; }
         public override string ToString()
         {
 
@@ -25,13 +25,13 @@ namespace IBL.BO
                 $"ID:                            {Id}\n" +
                 $"Weight status:                 {Weight}\n" +
                 $"Prioritie status:              {Prioritie}";
-                if (DateCreated != DateTime.MinValue)
+                if (DateCreated != null)
                     toString += $"\nCreated date:                  {DateCreated}";
-                if (DateScheduled != DateTime.MinValue)
+                if (DateScheduled != null)
                     toString += $"\nScheduled date:                {DateScheduled}";
-                if (DatePickup != DateTime.MinValue)
+                if (DatePickup != null)
                     toString += $"\nPick up date:                  {DatePickup}";
-                if (DateDeliverd != DateTime.MinValue)
+                if (DateDeliverd != null)
                     toString += $"\nDeliverd date:                 {DateDeliverd}";
                 toString += $"\n        ===========Receiver============\n\t{Target.ToString().Replace("\n", "\n\t")}" +
                 $"\n        ===========Sender==============\n\t{Sender.ToString().Replace("\n", "\n\t")}";

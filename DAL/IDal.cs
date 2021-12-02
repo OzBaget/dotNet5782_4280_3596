@@ -71,13 +71,13 @@ namespace IDAL
         /// get IEnumerable of all unassigned parcels 
         /// </summary>
         /// <returns>IEnumerable of all unassigned parcels</returns>
-        IEnumerable<Parcel> GetUnassignedParcels();
+        IEnumerable<Parcel> GetFilterdParcels(Predicate<Parcel> filter);
 
         /// <summary>
         /// get IEnumerable of all the stations with free slots
         /// </summary>
         /// <returns>IEnumerable odf stations</returns>
-        IEnumerable<Station> GetStationsWithFreeSlots();
+        IEnumerable<Station> GetFilterdStations(Predicate<Station> filter);
 
         /// <summary>
         /// returns power uses of drone
@@ -132,7 +132,7 @@ namespace IDAL
         /// <param name="scheduled">the link time of the parcel</param>
         /// <param name="pickedUp">the pick up date of the parcel</param>
         /// <param name="delivered">the delivery date of the parcel</param>
-        void AddParcel(int senderId, int targetId, WeightCategories weight, Priorities priority, DateTime requsted, DateTime scheduled, DateTime pickedUp, DateTime delivered);
+        void AddParcel(int senderId, int targetId, WeightCategories weight, Priorities priority, DateTime? requsted, DateTime? scheduled, DateTime? pickedUp, DateTime? delivered);
 
 
         //==========Deleters==========//

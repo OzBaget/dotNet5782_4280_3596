@@ -58,7 +58,7 @@ namespace BL
             parcel.Target = tmpParcel.Target;
             parcel.PickupLocation = GetCustomer(tmpParcel.Sender.Id).Location;
             parcel.TargetLocation = GetCustomer(tmpParcel.Target.Id).Location;
-                parcel.IsInTransfer = tmpParcel.DatePickup != DateTime.MinValue && tmpParcel.DateDeliverd == DateTime.MinValue;
+                parcel.IsInTransfer = tmpParcel.DatePickup != null && tmpParcel.DateDeliverd == null;
             parcel.Distance = calculateDist(parcel.PickupLocation, parcel.TargetLocation);
             }
             newDrone.Parcel = parcel;
