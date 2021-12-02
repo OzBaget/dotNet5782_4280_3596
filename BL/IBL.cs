@@ -130,6 +130,6 @@ namespace IBL
         /// <returns></returns>
         IEnumerable<BaseStationToList> GetStationsWithFreeSlots();
 
-        IEnumerable<DroneToList> GetFilterdDrones(WeightCategories maxWight, DroneStatus status);
+        IEnumerable<DroneToList> GetFilterdDrones(Predicate<DroneToList> filter);
     }
 }
