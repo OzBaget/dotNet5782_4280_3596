@@ -13,17 +13,28 @@
             <RowDefinition Height="400*"/>
         </Grid.RowDefinitions>
         <Grid Name="UpGrid" HorizontalAlignment="Stretch" Height="auto" Grid.Row="0"
-VerticalAlignment="Stretch" Width="auto">
+            VerticalAlignment="Stretch" Width="auto">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
-
-            <ComboBox x:Name="StatusSelector" FontFamily="Fonts/#Cotton Butter" HorizontalAlignment="Left" VerticalAlignment="Center" Width="166" SelectionChanged="StatusSelector_SelectionChanged" FontSize="26" Padding="10,0,5,0" Height="43" Grid.ColumnSpan="2" Margin="221,0,0,0"/>
-            <ComboBox x:Name="WeightSelector" FontFamily="Fonts/#Cotton Butter" HorizontalAlignment="Left" VerticalAlignment="Top" Width="168" SelectionChanged="StatusSelector_SelectionChanged" Grid.Column="1" FontSize="30" Margin="214,12,0,0" Height="43" IsDropDownOpen="True" Padding="50,-7,0,0" VerticalContentAlignment="Center" Grid.ColumnSpan="2" />
-            <Label x:Name="TextSelector" Content="Selectors:" RenderTransformOrigin="0.586,0.567" FontSize="48" FontFamily="Fonts/#Cotton Butter" Margin="30,-10,0,0" Padding="0,0,0,0" Width="131" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center"/>
+            <Image x:Name="BackgroundUp" Width="1000" HorizontalAlignment="Left" Grid.ColumnSpan="4" Margin="0,-16,0,-14">
+                <Image.Source>
+                    <BitmapImage  UriSource="/Images/upBackgroundViewDroneList.png" />
+                </Image.Source>
+            </Image>
+            <ComboBox x:Name="StatusSelector" FontFamily="Fonts/#Cotton Butter" HorizontalAlignment="Left" VerticalAlignment="Center" Width="166" SelectionChanged="StatusSelector_SelectionChanged" FontSize="26" Padding="10,0,5,0" Height="43" Grid.ColumnSpan="2" Margin="221,0,0,0" Foreground="Black" BorderBrush="#FF575252"/>
+            <ComboBox x:Name="WeightSelector" FontFamily="Fonts/#Cotton Butter" HorizontalAlignment="Left" VerticalAlignment="Top" Width="168" SelectionChanged="StatusSelector_SelectionChanged" Grid.Column="1" FontSize="30" Margin="214,12,0,0" Height="43" IsDropDownOpen="True" Padding="50,-7,0,0" VerticalContentAlignment="Center" Grid.ColumnSpan="2" BorderBrush="#FF939393" Foreground="Black" >
+                <ComboBox.Background>
+                    <LinearGradientBrush EndPoint="0,1">
+                        <GradientStop Color="#FFF0F0F0"/>
+                        <GradientStop Color="#FFB6AEAE" Offset="1"/>
+                    </LinearGradientBrush>
+                </ComboBox.Background>
+            </ComboBox>
+            <Label x:Name="TextSelector" Content="Selectors:"  RenderTransformOrigin="0.586,0.567" FontSize="48" FontFamily="Fonts/#Cotton Butter" Margin="30,-10,0,0" Padding="0,0,0,0" Width="131" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" Foreground="White" ></Label>
             <Button x:Name="Resetbutton" Content="Reset selectors" FontFamily="Fonts/#Cotton Butter" Grid.Column="2" HorizontalAlignment="Left" Margin="188,0,0,0" VerticalAlignment="Center" Height="41" Width="131" FontSize="30" FontWeight="Normal" FontStyle="Normal" FontStretch="Medium" Panel.ZIndex="0" ScrollViewer.HorizontalScrollBarVisibility="Visible" FlowDirection="LeftToRight" UseLayoutRounding="False" Padding="2,-9,1,1" Click="Resetbutton_Click" Grid.ColumnSpan="2"/>
             <Image x:Name="WeightKg" Margin="161,-4,0,2" Width="48" Grid.Column="1" HorizontalAlignment="Left">
                 <Image.Source>
@@ -35,15 +46,16 @@ VerticalAlignment="Stretch" Width="auto">
                     <BitmapImage  UriSource="/Images/ClockSelector.png" />
                 </Image.Source>
             </Image>
+            
         </Grid>
-        
-        
-        <ListView x:Name="ListViewDrones" FontFamily="Fonts/#Storytime"  FontSize="30" MouseDoubleClick="ListViewDrones_MouseDoubleClick" Margin="0,69,0,0" Grid.RowSpan="2">
+
+
+        <ListView x:Name="ListViewDrones" FontFamily="Heebo Black"  FontSize="25" MouseDoubleClick="ListViewDrones_MouseDoubleClick" Margin="0,66,0,3" Grid.RowSpan="2" Foreground="White">
             <ListView.Background>
-                <ImageBrush ImageSource="/Images/9752136.jpg" AlignmentX="Left" AlignmentY="Top" TileMode="FlipXY" Stretch="UniformToFill" ViewportUnits="Absolute" Viewport="0,-60,1310,303" />
+                <ImageBrush ImageSource="/Images/downbackgroundDroneViewList.png" AlignmentX="Left" AlignmentY="Top" TileMode="FlipXY" Stretch="UniformToFill" />
             </ListView.Background>
         </ListView>
-        
+
     </Grid>
 
 

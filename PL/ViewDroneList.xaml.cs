@@ -57,7 +57,7 @@ namespace PL
 
         private void ListViewDrones_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-                        new ViewDrone(db.GetDrone(((sender as ListView).SelectedItem as IBL.BO.DroneToList).Id)).Show();
+                   new ViewDrone(db.GetDrone(((sender as ListView).SelectedItem as IBL.BO.DroneToList).Id)).Show();
         }
 
         private void Resetbutton_Click(object sender, RoutedEventArgs e)

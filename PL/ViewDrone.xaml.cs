@@ -20,6 +20,14 @@ namespace PL
     /// </summary>
     public partial class ViewDrone : Window
     {
+        Drone Cdrone;
+        /*TextBox StatusBox = new TextBox();
+        TextBox MaxWeighBox = new TextBox();
+        TextBox BatteryBox = new TextBox();
+        TextBox LatBox = new TextBox();
+        TextBox LngBox = new TextBox();
+        TextBox IdBox = new TextBox();
+        TextBox ModelBox = new TextBox();*/
         public ViewDrone()
         {
             InitializeComponent();
@@ -28,7 +36,15 @@ namespace PL
         public ViewDrone(Drone drone)
         {
             InitializeComponent();
-
+            Cdrone = drone;
+            StatusBox.Text =  Cdrone.Status.ToString();
+            MaxWeighBox.Text =  Cdrone.MaxWeight.ToString();
+            BatteryBox.Text =  Cdrone.Battery.ToString();
+            LatBox.Text =  Cdrone.CurrentLocation.Latitude.ToString();
+            LngBox.Text =  Cdrone.CurrentLocation.Longitude.ToString();
+            IdBox.Text =  Cdrone.Id.ToString();
+            ModelBox.Text =  Cdrone.Model;
+                
         }
 
         private void button_Click(object sender, RoutedEventArgs e)

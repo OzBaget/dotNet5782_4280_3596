@@ -14,7 +14,9 @@
     <None Remove="Fonts\VintageKing.ttf" />
     <None Remove="Images\9752136.jpg" />
     <None Remove="Images\ClockSelector.png" />
+    <None Remove="Images\downbackgroundDroneViewList.png" />
     <None Remove="Images\DroneView.png" />
+    <None Remove="Images\upBackgroundViewDroneList.png" />
     <None Remove="Images\WeightKg.png" />
   </ItemGroup>
 
@@ -44,7 +46,13 @@
     <Resource Include="Images\ClockSelector.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\downbackgroundDroneViewList.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\DroneView.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\upBackgroundViewDroneList.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\WeightKg.png">
