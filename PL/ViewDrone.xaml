@@ -7,19 +7,14 @@
         mc:Ignorable="d"
         Title="ViewDrone" Height="440" Width="800">
     <Grid>
-        <Label x:Name="label1" Content="ID" HorizontalAlignment="Left" Margin="41,46,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="IdTextBox" HorizontalAlignment="Left" Margin="144,50,0,0" Text="TextBoxSSS" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
-        <Label x:Name="label" Content="Model" HorizontalAlignment="Left" Margin="41,72,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="Model" HorizontalAlignment="Left" Margin="150,76,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
-        <Label x:Name="label2" Content="Max Wight" HorizontalAlignment="Left" Margin="41,98,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="MaxWight" HorizontalAlignment="Left" Margin="150,100,0,0" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
         <Image x:Name="BackgroundDrones" Width="800" MinWidth="1" Height="450" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="-15,-24,0,0">
 
             <Image.Source>
                 <BitmapImage  UriSource="/Images/DroneView.png" />
             </Image.Source>
         </Image>
-        <Button x:Name="button" Content="ID:" HorizontalAlignment="Left" Margin="552,325,0,0" VerticalAlignment="Top" Width="207" Height="20" Click="button_Click">
+        <Button x:Name="BringParcel" Foreground="White" FontFamily="Fonts/#Alfa Slab One"  Content="Bring the parcel to customer" HorizontalAlignment="Left" Margin="552,325,0,0" VerticalAlignment="Top" Width="207" Height="20" Click="Bring_Click"  Background="{x:Null}" FontStyle="Normal" FontWeight="Normal" BorderBrush="{x:Null}">
+            
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="Template">
@@ -42,7 +37,7 @@
                 </Style>
             </Button.Style>
         </Button>
-        <Button x:Name="button2" Content="ID:" HorizontalAlignment="Left" Margin="557,371,0,0" VerticalAlignment="Top" Width="208" Height="20" Click="button_Click">
+        <Button x:Name="CollectParcel" Foreground="White" FontFamily="Fonts/#Alfa Slab One"  Content="Collect parcel" HorizontalAlignment="Left" Margin="557,371,0,0" VerticalAlignment="Top" Width="208" Height="20" Click="Collect_Click">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="Template">
@@ -65,7 +60,7 @@
                 </Style>
             </Button.Style>
         </Button>
-        <Button x:Name="button3" Content="ID:" HorizontalAlignment="Left" Margin="32,325,0,0" VerticalAlignment="Top" Width="208" Height="20" Click="button_Click">
+        <Button x:Name="UpdateButton" Foreground="White" FontFamily="Fonts/#Alfa Slab One"  Content="Update" HorizontalAlignment="Left" Margin="32,325,0,0" VerticalAlignment="Top" Width="208" Height="20" Click="Update_Click">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="Template">
@@ -88,7 +83,7 @@
                 </Style>
             </Button.Style>
         </Button>
-        <Button x:Name="button4" Content="ID:" HorizontalAlignment="Center" Margin="6,327,0,0" VerticalAlignment="Top" Width="208" Height="20" Click="button_Click" RenderTransformOrigin="0.5,0.5">
+        <Button x:Name="SendDroneToCharge" Foreground="White" FontFamily="Fonts/#Alfa Slab One"  Content="Send drone to charge" HorizontalAlignment="Center" Margin="6,327,0,0" VerticalAlignment="Top" Width="208" Height="20" Click="Charge_Click" RenderTransformOrigin="0.5,0.5">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -119,7 +114,7 @@
                 </Style>
             </Button.Style>
         </Button>
-        <Button x:Name="button5" Content="ID:" HorizontalAlignment="Center" Margin="7,371,0,0" VerticalAlignment="Top" Width="208" Height="20" Click="button_Click" RenderTransformOrigin="0.5,0.5">
+        <Button x:Name="RealseDroneFromeCharge" Foreground="White" FontFamily="Fonts/#Alfa Slab One"  Content="Realse drone from charging" HorizontalAlignment="Center" Margin="7,371,0,0" VerticalAlignment="Top" Width="208" Height="20" Click="Realse_Click" RenderTransformOrigin="0.5,0.5">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -150,7 +145,7 @@
                 </Style>
             </Button.Style>
         </Button>
-        <Button x:Name="button6" Content="ID:" HorizontalAlignment="Left" Margin="35,371,0,0" VerticalAlignment="Top" Width="208" Height="20" Click="button_Click" RenderTransformOrigin="0.5,0.5">
+        <Button x:Name="DroneToDelevery" Foreground="White" FontFamily="Fonts/#Alfa Slab One"  Content="Send drone to delivery" HorizontalAlignment="Left" Margin="35,371,0,0" VerticalAlignment="Top" Width="208" Height="20" Click="Send_Click" RenderTransformOrigin="0.5,0.5">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -181,7 +176,7 @@
                 </Style>
             </Button.Style>
         </Button>
-        <Button x:Name="button7" Content="ID:" HorizontalAlignment="Left" Margin="51,212,0,0" VerticalAlignment="Top" Width="93" Height="70" Click="button_Click" RenderTransformOrigin="0.5,0.5">
+        <Button x:Name="ParcelView" Foreground="White" FontFamily="Fonts/#Alfa Slab One"  Content="Parcel details" HorizontalAlignment="Left" Margin="51,212,0,0" VerticalAlignment="Top" Width="93" Height="70" Click="PacelDetaitls_Click" RenderTransformOrigin="0.5,0.5">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -212,7 +207,7 @@
                 </Style>
             </Button.Style>
         </Button>
-        <Button x:Name="button8" Content="" HorizontalAlignment="Left" Margin="743,13,0,0" VerticalAlignment="Top" Width="29" Height="23" Click="button_Click" RenderTransformOrigin="0.5,0.5">
+        <Button x:Name="Cancel" Foreground="White" FontFamily="Fonts/#Alfa Slab One"  Content="" HorizontalAlignment="Left" Margin="743,13,0,0" VerticalAlignment="Top" Width="29" Height="23" Click="Cancel_Click" RenderTransformOrigin="0.5,0.5">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -243,20 +238,20 @@
                 </Style>
             </Button.Style>
         </Button>
-        <TextBox x:Name="MaxWeighBox" HorizontalAlignment="Left" Margin="627,101,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="143"  BorderThickness="0" Padding="0" Background="Transparent" IsReadOnlyCaretVisible="True" />
-        <Label x:Name="MaxWeightLable" Content="MaxWeight:" HorizontalAlignment="Left" Margin="558,96,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="BatteryBox" HorizontalAlignment="Left" Margin="608,152,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="142"  BorderThickness="0" Padding="0" Background="Transparent" TextChanged="textBox_Copy_TextChanged" IsReadOnlyCaretVisible="True" />
-        <Label x:Name="BatteryLable" Content="Battery:" HorizontalAlignment="Left" Margin="552,148,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="IdBox" HorizontalAlignment="Left" Margin="311,153,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="143"  BorderThickness="0" Padding="0" Background="Transparent" IsReadOnly="True" />
-        <Label x:Name="IdLable" Content="ID:" HorizontalAlignment="Left" Margin="289,148,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="StatusBox" HorizontalAlignment="Left" Margin="596,213,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="143"  BorderThickness="0" Padding="0" Background="Transparent" IsReadOnly="True" IsReadOnlyCaretVisible="True" />
-        <Label x:Name="StatusLable" Content="Status:" HorizontalAlignment="Left" Margin="558,208,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="ModelBox" HorizontalAlignment="Left" Margin="324,213,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="143"  BorderThickness="0" Padding="0" Background="Transparent" />
-        <Label x:Name="ModelLable" Content="Model:" HorizontalAlignment="Left" Margin="284,208,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="LatBox" HorizontalAlignment="Left" Margin="576,271,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="143"  BorderThickness="0" Padding="0" Background="Transparent" IsReadOnlyCaretVisible="True" />
-        <Label x:Name="Lat" Content="Lat:" HorizontalAlignment="Left" Margin="541,266,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="LngBox" HorizontalAlignment="Left" Margin="694,270,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="143"  BorderThickness="0" Padding="0" Background="Transparent" IsReadOnlyCaretVisible="True" />
-        <Label x:Name="Lng" Content="Lng:" HorizontalAlignment="Left" Margin="659,266,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="MaxWeighBox" FontFamily="Fonts/#Cotton Butter"  FontSize="18" HorizontalAlignment="Left" Margin="659,91,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="143"  BorderThickness="0" Padding="0" Background="Transparent" IsReadOnlyCaretVisible="True" />
+        <Label x:Name="MaxWeightLable" FontFamily="Fonts/#Cotton Butter" FontSize="18" Content="MaxWeight:" HorizontalAlignment="Left" Margin="558,86,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="BatteryBox" FontFamily="Fonts/#Cotton Butter" FontSize="18" HorizontalAlignment="Left" Margin="663,144,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="142"  BorderThickness="0" Padding="0" Background="Transparent" TextChanged="textBox_Copy_TextChanged" IsReadOnlyCaretVisible="True" />
+        <Label x:Name="BatteryLable" FontFamily="Fonts/#Cotton Butter" FontSize="18" Content="Battery:" HorizontalAlignment="Left" Margin="552,138,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="IdBox" FontFamily="Fonts/#Cotton Butter" FontSize="18" HorizontalAlignment="Left" Margin="379,144,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="142"  BorderThickness="0" Padding="0" Background="Transparent" IsReadOnly="True"/>
+        <Label x:Name="IdLable" FontFamily="Fonts/#Cotton Butter" FontSize="18" Content="ID:" HorizontalAlignment="Left" Margin="283,141,0,0" VerticalAlignment="Top" />
+        <TextBox x:Name="StatusBox" FontFamily="Fonts/#Cotton Butter" FontSize="18" HorizontalAlignment="Left" Margin="666,203,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="143"  BorderThickness="0" Padding="0" Background="Transparent" IsReadOnly="True" IsReadOnlyCaretVisible="True" />
+        <Label x:Name="StatusLable" FontFamily="Fonts/#Cotton Butter" FontSize="18" Content="Status:" HorizontalAlignment="Left" Margin="558,198,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="ModelBox" FontFamily="Fonts/#Cotton Butter" FontSize="18" HorizontalAlignment="Left" Margin="378,206,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="142"  BorderThickness="0" Padding="0" Background="Transparent" />
+        <Label x:Name="ModelLable" FontFamily="Fonts/#Cotton Butter" FontSize="18" Content="Model:" HorizontalAlignment="Left" Margin="284,201,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="LatBox" FontFamily="Fonts/#Cotton Butter" FontSize="18" HorizontalAlignment="Left" Margin="576,261,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="143"  BorderThickness="0" Padding="0" Background="Transparent" IsReadOnlyCaretVisible="True" />
+        <Label x:Name="Lat" FontFamily="Fonts/#Cotton Butter" FontSize="18" Content="Lat:" HorizontalAlignment="Left" Margin="541,256,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="LngBox" FontFamily="Fonts/#Cotton Butter" FontSize="18" HorizontalAlignment="Left" Margin="701,261,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="143"  BorderThickness="0" Padding="0" Background="Transparent" IsReadOnlyCaretVisible="True" />
+        <Label x:Name="Lng" FontFamily="Fonts/#Cotton Butter" FontSize="18" Content="Lng:" HorizontalAlignment="Left" Margin="659,256,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="textBox_Copy6" HorizontalAlignment="Left" Margin="67,155,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="56"  BorderThickness="0" Padding="0" Background="Transparent" IsReadOnlyCaretVisible="True" />
         <Label x:Name="Parcel" HorizontalAlignment="Left" Margin="43,105,0,0" Content="Pacrel"  VerticalAlignment="Top" Width="118"  BorderThickness="0" Padding="0" Background="Transparent" />
 

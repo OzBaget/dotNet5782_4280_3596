@@ -47,12 +47,49 @@ namespace PL
                 
         }
 
-        private void button_Click(object sender, RoutedEventArgs e)
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        
+        private void textBox_Copy_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }
 
-        private void textBox_Copy_TextChanged(object sender, TextChangedEventArgs e)
+
+        private void Bring_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Collect_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void PacelDetaitls_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Update_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Send_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Charge_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Realse_Click(object sender, RoutedEventArgs e)
         {
 
         }

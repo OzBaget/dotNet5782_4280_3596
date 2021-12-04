@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Fonts\AlfaSlabOne-Regular.ttf" />
     <None Remove="Fonts\Cotton Butter.ttf" />
     <None Remove="Fonts\Long_Shot.ttf" />
     <None Remove="Fonts\Rabble Rouser.ttf" />
@@ -21,6 +22,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Fonts\AlfaSlabOne-Regular.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Fonts\Cotton Butter.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
