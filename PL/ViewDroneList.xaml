@@ -46,15 +46,14 @@
                     <BitmapImage  UriSource="/Images/ClockSelector.png" />
                 </Image.Source>
             </Image>
-            
+
         </Grid>
 
 
-        <ListView x:Name="ListViewDrones" FontFamily="Heebo Black"  FontSize="25" MouseDoubleClick="ListViewDrones_MouseDoubleClick" Margin="0,66,0,3" Grid.RowSpan="2" Foreground="White">
-            <ListView.Background>
-                <ImageBrush ImageSource="/Images/downbackgroundDroneViewList.png" AlignmentX="Left" AlignmentY="Top" TileMode="FlipXY" Stretch="UniformToFill" />
-            </ListView.Background>
+        <MediaElement Source="Images/GIF.gif" LoadedBehavior="Play" Visibility="Visible" Margin="0,59,4,-14" Grid.RowSpan="2" />
+        <ListView x:Name="ListViewDrones" FontFamily="Heebo Black"  FontSize="21" MouseDoubleClick="ListViewDrones_MouseDoubleClick" Margin="0,66,0,3" Grid.RowSpan="2" Foreground="Black" Background="{x:Null}">
         </ListView>
+
 
     </Grid>
 

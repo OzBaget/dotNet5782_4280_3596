@@ -17,6 +17,7 @@
     <None Remove="Images\ClockSelector.png" />
     <None Remove="Images\downbackgroundDroneViewList.png" />
     <None Remove="Images\DroneView.png" />
+    <None Remove="Images\GIF.gif" />
     <None Remove="Images\upBackgroundViewDroneList.png" />
     <None Remove="Images\WeightKg.png" />
   </ItemGroup>
@@ -62,6 +63,12 @@
     <Resource Include="Images\WeightKg.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Images\GIF.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>
