@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
+        ResizeMode="NoResize"
         mc:Ignorable="d"
         Title="ViewDroneList" Height="640
         " Width="1000">
@@ -26,7 +27,7 @@
                 </Image.Source>
             </Image>
             <ComboBox x:Name="StatusSelector" FontFamily="Fonts/#Cotton Butter" HorizontalAlignment="Left" VerticalAlignment="Center" Width="166" SelectionChanged="StatusSelector_SelectionChanged" FontSize="26" Padding="10,0,5,0" Height="43" Grid.ColumnSpan="2" Margin="221,0,0,0" Foreground="Black" BorderBrush="#FF575252"/>
-            <ComboBox x:Name="WeightSelector" FontFamily="Fonts/#Cotton Butter" HorizontalAlignment="Left" VerticalAlignment="Top" Width="168" SelectionChanged="StatusSelector_SelectionChanged" Grid.Column="1" FontSize="30" Margin="214,12,0,0" Height="43" IsDropDownOpen="True" Padding="50,-7,0,0" VerticalContentAlignment="Center" Grid.ColumnSpan="2" BorderBrush="#FF939393" Foreground="Black" >
+            <ComboBox x:Name="WeightSelector" FontFamily="Fonts/#Cotton Butter" HorizontalAlignment="Left" VerticalAlignment="Top" Width="168" SelectionChanged="WeightSelector_SelectionChanged" Grid.Column="1" FontSize="30" Margin="214,12,0,0" Height="43"  Padding="50,-7,0,0" VerticalContentAlignment="Center" Grid.ColumnSpan="2" BorderBrush="#FF939393" Foreground="Black" >
                 <ComboBox.Background>
                     <LinearGradientBrush EndPoint="0,1">
                         <GradientStop Color="#FFF0F0F0"/>
@@ -50,7 +51,7 @@
 
         </Grid>
 
-
+        
         <MediaElement x:Name ="GifDrones" Source="Images/GIF.gif" LoadedBehavior="Play" UnloadedBehavior="Manual" MediaEnded="Again_Gif" Visibility="Visible" Margin="0,59,4,-14" Grid.RowSpan="2" />
         <ListView x:Name="ListViewDrones" FontFamily="Alef"  FontSize="21" MouseDoubleClick="ListViewDrones_MouseDoubleClick" Margin="0,66,0,3" Grid.RowSpan="2" Foreground="Black" Background="{x:Null}" >
         </ListView>

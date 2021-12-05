@@ -41,7 +41,7 @@ namespace IBL.BO
             int deg = (int)dec;
             int min = (int)((dec - deg) * 60);
             double sec = (dec - deg - ((double)min / 60)) * 3600;
-            return $"{deg}°{min}'{Math.Round(sec, 3)}\"";
+            return $"{deg}°{min}'{Math.Round(sec, 2)}\"";
         }
 
     }

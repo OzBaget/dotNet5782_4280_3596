@@ -14,8 +14,6 @@ namespace BL
         {
             try
             {
-                DalObject.AddDrone(drone.Id, drone.Model, (IDAL.DO.WeightCategories)drone.MaxWeight);
-
                 DroneToList newDrone = new();
                 newDrone.Id = drone.Id;
                 newDrone.Model = drone.Model;
@@ -23,9 +21,11 @@ namespace BL
                 newDrone.Battery = new Random().Next(20, 41);
                 newDrone.Status = DroneStatus.UnderMaintenance;
                 newDrone.CurrentLocation = GetStation(stationId).Location;
-                Drones.Add(newDrone);
 
+                DalObject.AddDrone(drone.Id, drone.Model, (IDAL.DO.WeightCategories)drone.MaxWeight);
                 DalObject.DroneToStation(stationId, drone.Id);
+
+                Drones.Add(newDrone);
             }
             catch (IDAL.DO.IdAlreadyExistsException ex)
             { 

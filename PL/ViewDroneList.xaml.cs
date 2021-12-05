@@ -20,15 +20,11 @@ namespace PL
     public partial class ViewDroneList : Window
     {
         private IBL.IBL db;
-        public ViewDroneList()
-        {
-            InitializeComponent();
-        }
+
         public ViewDroneList(IBL.IBL database)
         {
             InitializeComponent();
             db = database;
-            ListViewDrones.ItemsSource = null;
             ListViewDrones.ItemsSource = db.GetAllDrones();
             StatusSelector.ItemsSource = Enum.GetValues(typeof(IBL.BO.DroneStatus));
             WeightSelector.ItemsSource = Enum.GetValues(typeof(IBL.BO.WeightCategories));
@@ -58,7 +54,12 @@ namespace PL
 
         private void ListViewDrones_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-                   new ViewDrone(db.GetDrone(((sender as ListView).SelectedItem as IBL.BO.DroneToList).Id)).Show();
+            new ViewDrone(db.GetDrone(((sender as ListView).SelectedItem as IBL.BO.DroneToList).Id), db).ShowDialog();
+            //refresh listView
+            ListViewDrones.ItemsSource = null;
+            ListViewDrones.ItemsSource =db.GetAllDrones();
+            WeightSelector_SelectionChanged(null, null);
+            StatusSelector_SelectionChanged(null, null);
         }
 
         private void Resetbutton_Click(object sender, RoutedEventArgs e)
@@ -78,7 +79,12 @@ namespace PL
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            new ViewDrone().Show();
+            new ViewDrone(db).ShowDialog();
+            //refresh listView
+            ListViewDrones.ItemsSource = null;
+            ListViewDrones.ItemsSource = db.GetAllDrones();
+            WeightSelector_SelectionChanged(null, null);
+            StatusSelector_SelectionChanged(null, null);
         }
     }
 

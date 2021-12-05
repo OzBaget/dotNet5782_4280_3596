@@ -370,6 +370,7 @@ namespace ConsoleUI_BL
         {
             Console.WriteLine("Enter drone ID:");
             int droneId = getIntFromUser();
+            
             Console.WriteLine("Enter how much time the drone charged (hh:mm):");
           
             TimeSpan chargingTime;

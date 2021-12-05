@@ -25,7 +25,7 @@ namespace PL
         {
             InitializeComponent();
         }
-        private void NewEvent(object sender, RoutedEventArgs e)
+        private void openDroneList(object sender, RoutedEventArgs e)
         {
             new ViewDroneList(db).Show();
         }
