@@ -21,13 +21,6 @@ namespace PL
     public partial class ViewDrone : Window
     {
         Drone Cdrone;
-        /*TextBox StatusBox = new TextBox();
-        TextBox MaxWeighBox = new TextBox();
-        TextBox BatteryBox = new TextBox();
-        TextBox LatBox = new TextBox();
-        TextBox LngBox = new TextBox();
-        TextBox IdBox = new TextBox();
-        TextBox ModelBox = new TextBox();*/
         public ViewDrone()
         {
             InitializeComponent();
