@@ -78,7 +78,7 @@ namespace PL
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            new ViewDrone(db.GetDrone(((sender as ListView).SelectedItem as IBL.BO.DroneToList).Id)).Show();
+            new ViewDrone().Show();
         }
     }
 

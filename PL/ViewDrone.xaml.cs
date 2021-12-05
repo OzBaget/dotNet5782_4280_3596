@@ -31,11 +31,15 @@ namespace PL
         public ViewDrone()
         {
             InitializeComponent();
+            DroneViewGrid.Opacity = 0;
+            AddDroneGrid.Opacity = 100;
         }
 
         public ViewDrone(Drone drone)
         {
             InitializeComponent();
+            AddDroneGrid.Opacity = 0;
+            DroneViewGrid.Opacity = 100;
             Cdrone = drone;
             StatusBox.Text =  Cdrone.Status.ToString();
             MaxWeighBox.Text =  Cdrone.MaxWeight.ToString();
@@ -92,6 +96,11 @@ namespace PL
         private void Realse_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void Add_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }
