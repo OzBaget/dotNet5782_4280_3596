@@ -34,6 +34,7 @@
                     </LinearGradientBrush>
                 </ComboBox.Background>
             </ComboBox>
+            <Button x:Name="add" Content="+" Grid.Column="3" HorizontalAlignment="Left" Margin="125,10,0,0" VerticalAlignment="Top" Height="45" Width="71" Click="Add_Click"/>
             <Label x:Name="TextSelector" Content="Selectors:"  RenderTransformOrigin="0.586,0.567" FontSize="48" FontFamily="Fonts/#Cotton Butter" Margin="30,-10,0,0" Padding="0,0,0,0" Width="131" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" Foreground="White" ></Label>
             <Button x:Name="Resetbutton" Content="Reset selectors" FontFamily="Fonts/#Cotton Butter" Grid.Column="2" HorizontalAlignment="Left" Margin="188,0,0,0" VerticalAlignment="Center" Height="41" Width="131" FontSize="30" FontWeight="Normal" FontStyle="Normal" FontStretch="Medium" Panel.ZIndex="0" ScrollViewer.HorizontalScrollBarVisibility="Visible" FlowDirection="LeftToRight" UseLayoutRounding="False" Padding="2,-9,1,1" Click="Resetbutton_Click" Grid.ColumnSpan="2"/>
             <Image x:Name="WeightKg" Margin="161,-4,0,2" Width="48" Grid.Column="1" HorizontalAlignment="Left">
@@ -50,8 +51,8 @@
         </Grid>
 
 
-        <MediaElement Source="Images/GIF.gif" LoadedBehavior="Play" Visibility="Visible" Margin="0,59,4,-14" Grid.RowSpan="2" />
-        <ListView x:Name="ListViewDrones" FontFamily="Heebo Black"  FontSize="21" MouseDoubleClick="ListViewDrones_MouseDoubleClick" Margin="0,66,0,3" Grid.RowSpan="2" Foreground="Black" Background="{x:Null}">
+        <MediaElement x:Name ="GifDrones" Source="Images/GIF.gif" LoadedBehavior="Play" UnloadedBehavior="Manual" MediaEnded="Again_Gif" Visibility="Visible" Margin="0,59,4,-14" Grid.RowSpan="2" />
+        <ListView x:Name="ListViewDrones" FontFamily="Alef"  FontSize="21" MouseDoubleClick="ListViewDrones_MouseDoubleClick" Margin="0,66,0,3" Grid.RowSpan="2" Foreground="Black" Background="{x:Null}" >
         </ListView>
 
 

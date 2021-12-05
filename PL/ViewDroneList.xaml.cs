@@ -68,6 +68,18 @@ namespace PL
             ListViewDrones.ItemsSource = db.GetAllDrones();
 
         }
+
+        private void Again_Gif(object sender, RoutedEventArgs e)
+        {
+            GifDrones.Position = new TimeSpan(0, 0, 1);
+            GifDrones.Play();
+        }
+
+
+        private void Add_Click(object sender, RoutedEventArgs e)
+        {
+            new ViewDrone(db.GetDrone(((sender as ListView).SelectedItem as IBL.BO.DroneToList).Id)).Show();
+        }
     }
 
 }
