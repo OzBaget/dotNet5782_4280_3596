@@ -7,30 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Charge.png" />
-    <None Remove="confirmIcon.jpg" />
-    <None Remove="Deliver parcel.png" />
-    <None Remove="Fonts\AlfaSlabOne-Regular.ttf" />
-    <None Remove="Fonts\Cotton Butter.ttf" />
-    <None Remove="Fonts\Hey Comic.ttf" />
-    <None Remove="Fonts\Long_Shot.ttf" />
-    <None Remove="Fonts\Rabble Rouser.ttf" />
-    <None Remove="Fonts\Storytime.ttf" />
-    <None Remove="Fonts\VintageKing.ttf" />
-    <None Remove="Images\9752136.jpg" />
-    <None Remove="Images\ClockSelector.png" />
-    <None Remove="Images\DoneViewNew.png" />
-    <None Remove="Images\downbackgroundDroneViewList.png" />
-    <None Remove="Images\DroneView.png" />
-    <None Remove="Images\GIF.gif" />
-    <None Remove="Images\upBackgroundViewDroneList.png" />
-    <None Remove="Images\WeightKg.png" />
-    <None Remove="Link to parcel.png" />
-    <None Remove="Pick up parcel.png" />
-    <None Remove="plus-sign.png" />
-    <None Remove="refresh-page-option.png" />
-    <None Remove="Release.png" />
+    <None Remove="Images\Charge.png" />
+    <None Remove="Images\checked.png" />
+    <None Remove="Images\confirmIcon.jpg" />
+    <None Remove="Images\Deliver parcel.png" />
+    <None Remove="Images\Link to parcel.png" />
+    <None Remove="Images\Parcel details.png" />
+    <None Remove="Images\Pick up parcel.png" />
+    <None Remove="Images\refresh-page-option.png" />
+    <None Remove="Images\Release.png" />
   </ItemGroup>
+
+ 
 
   <ItemGroup>
     <Content Include="Fonts\AlfaSlabOne-Regular.ttf">
@@ -45,8 +33,36 @@
     <Content Include="Fonts\VintageKing.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Resource Include="Charge.png" />
-    <Resource Include="Deliver parcel.png" />
+    <Content Include="Images\Charge.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\checked.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\confirmIcon.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Deliver parcel.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Link to parcel.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Parcel details.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Pick up parcel.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\plus-sign.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\refresh-page-option.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Release.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Resource Include="Images\DoneViewNew.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -63,10 +79,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="confirmIcon.jpg" />
-    <Resource Include="Images\9752136.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
+    
     <Resource Include="Images\ClockSelector.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -82,11 +95,9 @@
     <Resource Include="Images\WeightKg.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Link to parcel.png" />
-    <Resource Include="Pick up parcel.png" />
-    <Resource Include="plus-sign.png" />
-    <Resource Include="refresh-page-option.png" />
-    <Resource Include="Release.png" />
+    <Content Include="Images\refresh-page-option.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -95,10 +106,13 @@
     </Content>
   </ItemGroup>
 
+  
+
   <ItemGroup>
-    <None Update="Images\refresh-page-option.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </None>
+    <Content Include="Images\AddDroneNew.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
+
 
 </Project>
