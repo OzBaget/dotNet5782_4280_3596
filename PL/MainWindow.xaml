@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
+        ResizeMode="NoResize"
         Title="MainWindow" Height="640" Width="800">
     <Grid>
         <MediaElement x:Name ="GifDrones" Source="Images/MainWindow.gif" LoadedBehavior="Play" UnloadedBehavior="Manual" MediaEnded="Again_Gif" Visibility="Visible" Margin="-50,-24,-51,-19" />

@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Media;
 
 namespace PL
 {
@@ -20,7 +21,7 @@ namespace PL
     public partial class ViewDroneList : Window
     {
         private IBL.IBL db;
-
+        bool exit = false;
         public ViewDroneList(IBL.IBL database)
         {
             InitializeComponent();
@@ -86,6 +87,21 @@ namespace PL
             ListViewDrones.ItemsSource = db.GetAllDrones();
             WeightSelector_SelectionChanged(null, null);
             StatusSelector_SelectionChanged(null, null);
+        }
+
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            exit = true;
+            Close();
+        }
+
+        private void CloseWindow(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (!exit)
+            {
+                e.Cancel = true;
+                SystemSounds.Beep.Play();
+            }
         }
     }
 
