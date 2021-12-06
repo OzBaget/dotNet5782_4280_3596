@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Media;
 
 namespace PL
 {
@@ -22,7 +23,8 @@ namespace PL
     {
         IBL.IBL db;
         Drone Cdrone;
-        
+        bool exit = false;
+
         /// <summary>
         /// Add new drone menu
         /// </summary>
@@ -46,10 +48,49 @@ namespace PL
             Cdrone = drone;
 
             InitializeComponent();
-            AddDroneGrid.Visibility = Visibility.Collapsed;
-            
+
+            AddDroneGrid.Visibility = Visibility.Collapsed;            
             DroneViewGrid.Visibility = Visibility.Visible;
             updateTextBoxs();
+
+            switch (Cdrone.Status)
+            {
+                case DroneStatus.Available:
+                    ChargeButton.Visibility = Visibility.Visible;
+                    ReleaseButton.Visibility = Visibility.Hidden;
+                    PickUpButton.Visibility = Visibility.Hidden;
+                    LinkButton.Visibility = Visibility.Visible;
+                    DeliverButton.Visibility = Visibility.Hidden;
+                    break;
+                case DroneStatus.UnderMaintenance:
+                    ChargeButton.Visibility = Visibility.Hidden;
+                    ReleaseButton.Visibility = Visibility.Visible;
+                    PickUpButton.Visibility = Visibility.Hidden;
+                    LinkButton.Visibility = Visibility.Hidden;
+                    DeliverButton.Visibility = Visibility.Hidden;
+                    break;
+                case DroneStatus.Delivery:
+                    if (Cdrone.Parcel.IsInTransfer)
+                    {
+                        ChargeButton.Visibility = Visibility.Hidden;
+                        ReleaseButton.Visibility = Visibility.Hidden;
+                        PickUpButton.Visibility = Visibility.Hidden;
+                        LinkButton.Visibility = Visibility.Hidden;
+                        DeliverButton.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        ChargeButton.Visibility = Visibility.Hidden;
+                        ReleaseButton.Visibility = Visibility.Hidden;
+                        PickUpButton.Visibility = Visibility.Hidden;
+                        LinkButton.Visibility = Visibility.Visible;
+                        DeliverButton.Visibility = Visibility.Hidden;
+                    }
+                    break;
+                default:
+                    break;
+            }
+
         }
 
         private void updateTextBoxs()
@@ -58,28 +99,30 @@ namespace PL
             StatusBox.Text = Cdrone.Status.ToString();
             MaxWeighBox.Text = Cdrone.MaxWeight.ToString();
             BatteryBox.Text = Cdrone.Battery.ToString() + "%";
-            
+            LocationBox.Text = Cdrone.CurrentLocation.ToString();
             IdBox.Text = Cdrone.Id.ToString();
             ModelBox.Text = Cdrone.Model;
 
             if (Cdrone.Parcel.Id != 0)
             {
-                ParcelId.Text = "ID: " + Cdrone.Parcel.Id;
+                IdParcel.Text = "ID: " + Cdrone.Parcel.Id;
+                ParcelDetials.Visibility = Visibility.Visible;
             }
             else
             {
-                ParcelId.Text = "No parcel";
+                IdParcel.Text = "No parcel";
+                ParcelDetials.Visibility = Visibility.Hidden;
             }
         }
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
+            exit = true;
             Close();
         }
 
         
       
-
-        
+               
         private void PacelDetaitls_Click(object sender, RoutedEventArgs e)
         {
             if (Cdrone.Parcel.Id != 0) 
@@ -99,12 +142,16 @@ namespace PL
         {
             Drone myDrone = new();
             int id;
-            if (!int.TryParse(AddID.Text, out id))
+            if (!int.TryParse(AddID.Text, out id)||id<1)
             {
                 MessageBox.Show("Drone ID is not vaild!", "Can't add dorne", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            
+            if (AddModel.Text=="")
+            {
+                MessageBox.Show("Model is not valid!", "Can't add dorne", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
 
             myDrone.Id =id ;
             myDrone.Model = AddModel.Text;
@@ -140,7 +187,6 @@ namespace PL
                 MessageBox.Show(ex.Message, "Can't update dorne", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
   
         private void ModelChanged(object sender, TextChangedEventArgs e)
         {
@@ -262,6 +308,40 @@ namespace PL
             catch (IBL.BL.CantLinkParcelException ex)
             {
                 MessageBox.Show(ex.Message, "Can't link parcel", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void VerifyModel(object sender, TextChangedEventArgs e)
+        {
+            if (AddModel.Text=="")
+            {
+                AddModel.Background = Brushes.Red;
+            }
+            else
+            {
+                AddModel.Background = Brushes.Transparent;
+            }
+        }
+
+        private void verifyID(object sender, TextChangedEventArgs e)
+        {
+            int id;
+            if (!int.TryParse(AddID.Text, out id) || id < 1)
+            {
+                AddID.Background = Brushes.Red;
+            }
+            else
+            {
+                AddID.Background = Brushes.Transparent;
+            }
+        }
+
+        private void CencelClose(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if(!exit)
+            {
+                e.Cancel = true;
+                SystemSounds.Beep.Play();
             }
         }
     }
