@@ -15,7 +15,6 @@
     <None Remove="Fonts\Storytime.ttf" />
     <None Remove="Fonts\VintageKing.ttf" />
     <None Remove="Images\9752136.jpg" />
-    <None Remove="Images\AddDrone.png" />
     <None Remove="Images\ClockSelector.png" />
     <None Remove="Images\downbackgroundDroneViewList.png" />
     <None Remove="Images\DroneView.png" />
@@ -49,9 +48,6 @@
   <ItemGroup>
     <Resource Include="confirmIcon.jpg" />
     <Resource Include="Images\9752136.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\AddDrone.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\ClockSelector.png">
