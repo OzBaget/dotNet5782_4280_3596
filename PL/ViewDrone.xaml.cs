@@ -257,6 +257,8 @@ namespace PL
   
         private void ModelChanged(object sender, TextChangedEventArgs e)
         {
+            if (Cdrone == null)
+                return;
             if (ModelBox.Text != Cdrone.Model)
             {
                 updateButton.Visibility = Visibility.Visible;
