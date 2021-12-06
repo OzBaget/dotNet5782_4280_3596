@@ -46,10 +46,49 @@ namespace PL
             Cdrone = drone;
 
             InitializeComponent();
-            AddDroneGrid.Visibility = Visibility.Collapsed;
-            
+
+            AddDroneGrid.Visibility = Visibility.Collapsed;            
             DroneViewGrid.Visibility = Visibility.Visible;
             updateTextBoxs();
+
+            switch (Cdrone.Status)
+            {
+                case DroneStatus.Available:
+                    ChargeButton.Visibility = Visibility.Visible;
+                    ReleaseButton.Visibility = Visibility.Hidden;
+                    PickUpButton.Visibility = Visibility.Hidden;
+                    LinkButton.Visibility = Visibility.Visible;
+                    DeliverButton.Visibility = Visibility.Hidden;
+                    break;
+                case DroneStatus.UnderMaintenance:
+                    ChargeButton.Visibility = Visibility.Hidden;
+                    ReleaseButton.Visibility = Visibility.Visible;
+                    PickUpButton.Visibility = Visibility.Hidden;
+                    LinkButton.Visibility = Visibility.Hidden;
+                    DeliverButton.Visibility = Visibility.Hidden;
+                    break;
+                case DroneStatus.Delivery:
+                    if (Cdrone.Parcel.IsInTransfer)
+                    {
+                        ChargeButton.Visibility = Visibility.Hidden;
+                        ReleaseButton.Visibility = Visibility.Hidden;
+                        PickUpButton.Visibility = Visibility.Hidden;
+                        LinkButton.Visibility = Visibility.Hidden;
+                        DeliverButton.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        ChargeButton.Visibility = Visibility.Hidden;
+                        ReleaseButton.Visibility = Visibility.Hidden;
+                        PickUpButton.Visibility = Visibility.Hidden;
+                        LinkButton.Visibility = Visibility.Visible;
+                        DeliverButton.Visibility = Visibility.Hidden;
+                    }
+                    break;
+                default:
+                    break;
+            }
+
         }
 
         private void updateTextBoxs()
