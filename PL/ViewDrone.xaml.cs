@@ -78,42 +78,8 @@ namespace PL
 
         
       
-        private void Bring_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                db.ParcelToCustomer(Cdrone.Id);
-                MessageBox.Show("The parcel deliverd successfully!", "success!", MessageBoxButton.OK, MessageBoxImage.Information);
-                updateTextBoxs();
-            }
-            catch (IBL.BL.IdNotFoundException ex)
-            {
-                MessageBox.Show(ex.Message, "Can't deliver parcel", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            catch (IBL.BL.CantDeliverParcelException ex)
-            {
-                MessageBox.Show(ex.Message, "Can't deliver parcel", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
 
-        private void Collect_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                db.PickParcel(Cdrone.Id);
-                MessageBox.Show("The parcel picked-up successfully!", "success!", MessageBoxButton.OK, MessageBoxImage.Information);
-                updateTextBoxs();
-            }
-            catch (IBL.BL.IdNotFoundException ex)
-            {
-                MessageBox.Show(ex.Message, "Can't pickup parcel", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            catch (IBL.BL.CantPickUpParcelException ex)
-            {
-                MessageBox.Show(ex.Message, "Can't pickup parcel", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
+        
         private void PacelDetaitls_Click(object sender, RoutedEventArgs e)
         {
             if (Cdrone.Parcel.Id != 0) 
@@ -127,86 +93,8 @@ namespace PL
             }
         }
 
-        private void Update_Click(object sender, RoutedEventArgs e)
-        {
-            if (ModelBox.Text==Cdrone.Model)
-            {
-                MessageBox.Show("Enter new model!", "Can't update dorne", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-            try
-            {
-                db.UpdateDrone(Cdrone.Id, ModelBox.Text);
-                MessageBox.Show("The drone was updated successfully!", "success!", MessageBoxButton.OK, MessageBoxImage.Information);
-                updateTextBoxs();
-            }
-            catch (IBL.BL.IdNotFoundException ex)
-            {
-                MessageBox.Show(ex.Message, "Can't update dorne", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
-        private void Link_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                db.linkParcel(Cdrone.Id);
-                MessageBox.Show("The drone linked successfully!", "success!", MessageBoxButton.OK, MessageBoxImage.Information);
-                updateTextBoxs();
-            }
-            catch (IBL.BL.IdNotFoundException ex)
-            {
-                MessageBox.Show(ex.Message, "Can't link parcel", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            catch (IBL.BL.CantLinkParcelException ex)
-            {
-                MessageBox.Show(ex.Message, "Can't link parcel", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
-        private void Charge_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                int stationId = db.DroneToStation(Cdrone.Id);
-                MessageBox.Show($"The drone sent to charge at station #{stationId} successfully!", "success!", MessageBoxButton.OK, MessageBoxImage.Information);
-                updateTextBoxs();
-
-            }
-            catch (IBL.BL.IdNotFoundException ex)
-            {
-                MessageBox.Show(ex.Message, "Can't send drone to charge", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            catch (IBL.BL.CantSendDroneToChargeException ex)
-            {
-                MessageBox.Show(ex.Message, "Can't send drone to charge", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
-        private void Release_Click(object sender, RoutedEventArgs e)
-        {
-            TimeSpan? result =ReleaseDroneDialog.GetResult();
-            if (result != null) 
-            {
-                try
-                {
-                    int newBattery = db.FreeDrone(Cdrone.Id, (TimeSpan)result);
-                    MessageBox.Show("The drone released successfully!", "Success!", MessageBoxButton.OK, MessageBoxImage.Information);
-                    updateTextBoxs();
-                }
-                catch (IBL.BL.IdNotFoundException ex)
-                {
-                    MessageBox.Show(ex.Message, "Can't release dorne", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                catch (IBL.BL.CantReleaseDroneFromChargeException ex)
-                {
-                    MessageBox.Show(ex.Message, "Can't release dorne", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
-            
-
-        }
-
+                
+               
         private void Add_Click(object sender, RoutedEventArgs e)
         {
             Drone myDrone = new();
@@ -270,7 +158,111 @@ namespace PL
 
         private void Deliver_Click(object sender, MouseButtonEventArgs e)
         {
+            try
+            {
+                db.ParcelToCustomer(Cdrone.Id);
+                MessageBox.Show("The parcel deliverd successfully!", "success!", MessageBoxButton.OK, MessageBoxImage.Information);
+                updateTextBoxs();
+                DeliverButton.Visibility = Visibility.Hidden;
+                LinkButton.Visibility = Visibility.Visible;
+                ChargeButton.Visibility = Visibility.Visible;
+            }
+            catch (IBL.BL.IdNotFoundException ex)
+            {
+                MessageBox.Show(ex.Message, "Can't deliver parcel", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (IBL.BL.CantDeliverParcelException ex)
+            {
+                MessageBox.Show(ex.Message, "Can't deliver parcel", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
 
+        private void ChargeDrone_Click(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                int stationId = db.DroneToStation(Cdrone.Id);
+                MessageBox.Show($"The drone sent to charge at station #{stationId} successfully!", "success!", MessageBoxButton.OK, MessageBoxImage.Information);
+                updateTextBoxs();
+                ChargeButton.Visibility = Visibility.Hidden;
+                ReleaseButton.Visibility = Visibility.Visible;
+                LinkButton.Visibility = Visibility.Hidden;
+            }
+            catch (IBL.BL.IdNotFoundException ex)
+            {
+                MessageBox.Show(ex.Message, "Can't send drone to charge", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (IBL.BL.CantSendDroneToChargeException ex)
+            {
+                MessageBox.Show(ex.Message, "Can't send drone to charge", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void Release_Click(object sender, MouseButtonEventArgs e)
+        {
+            TimeSpan? result = ReleaseDroneDialog.GetResult();
+            if (result != null)
+            {
+                try
+                {
+                    int newBattery = db.FreeDrone(Cdrone.Id, (TimeSpan)result);
+                    MessageBox.Show("The drone released successfully!", "Success!", MessageBoxButton.OK, MessageBoxImage.Information);
+                    updateTextBoxs();
+                    ReleaseButton.Visibility = Visibility.Hidden;
+                    ChargeButton.Visibility = Visibility.Visible;
+                    LinkButton.Visibility = Visibility.Visible;
+                }
+                catch (IBL.BL.IdNotFoundException ex)
+                {
+                    MessageBox.Show(ex.Message, "Can't release dorne", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                catch (IBL.BL.CantReleaseDroneFromChargeException ex)
+                {
+                    MessageBox.Show(ex.Message, "Can't release dorne", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+
+        }
+
+        private void PickUp_Click(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                db.PickParcel(Cdrone.Id);
+                MessageBox.Show("The parcel picked-up successfully!", "success!", MessageBoxButton.OK, MessageBoxImage.Information);
+                updateTextBoxs();
+                PickUpButton.Visibility = Visibility.Hidden;
+                DeliverButton.Visibility = Visibility.Visible;
+            }
+            catch (IBL.BL.IdNotFoundException ex)
+            {
+                MessageBox.Show(ex.Message, "Can't pickup parcel", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (IBL.BL.CantPickUpParcelException ex)
+            {
+                MessageBox.Show(ex.Message, "Can't pickup parcel", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void Link_Click(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                db.linkParcel(Cdrone.Id);
+                MessageBox.Show("The drone linked successfully!", "success!", MessageBoxButton.OK, MessageBoxImage.Information);
+                updateTextBoxs();
+                LinkButton.Visibility = Visibility.Hidden;
+                ChargeButton.Visibility = Visibility.Hidden;
+                PickUpButton.Visibility = Visibility.Visible;
+            }
+            catch (IBL.BL.IdNotFoundException ex)
+            {
+                MessageBox.Show(ex.Message, "Can't link parcel", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (IBL.BL.CantLinkParcelException ex)
+            {
+                MessageBox.Show(ex.Message, "Can't link parcel", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

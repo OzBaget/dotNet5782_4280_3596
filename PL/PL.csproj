@@ -7,7 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Charge.png" />
     <None Remove="confirmIcon.jpg" />
+    <None Remove="Deliver parcel.png" />
     <None Remove="Fonts\AlfaSlabOne-Regular.ttf" />
     <None Remove="Fonts\Cotton Butter.ttf" />
     <None Remove="Fonts\Hey Comic.ttf" />
@@ -23,6 +25,8 @@
     <None Remove="Images\GIF.gif" />
     <None Remove="Images\upBackgroundViewDroneList.png" />
     <None Remove="Images\WeightKg.png" />
+    <None Remove="Link to parcel.png" />
+    <None Remove="Pick up parcel.png" />
     <None Remove="Release.png" />
   </ItemGroup>
 
@@ -39,6 +43,8 @@
     <Content Include="Fonts\VintageKing.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Charge.png" />
+    <Resource Include="Deliver parcel.png" />
     <Resource Include="Images\DoneViewNew.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -74,6 +80,8 @@
     <Resource Include="Images\WeightKg.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Link to parcel.png" />
+    <Resource Include="Pick up parcel.png" />
     <Resource Include="Release.png" />
   </ItemGroup>
 
