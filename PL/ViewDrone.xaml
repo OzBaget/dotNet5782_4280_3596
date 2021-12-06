@@ -29,17 +29,33 @@
             <Image x:Name="PickUpButton" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="178" Source="/Images/Pick up parcel.png" MouseLeftButtonDown="PickUp_Click" Margin="535,495,0,0" Visibility="Hidden"/>
             <Image x:Name="LinkButton" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="178" Source="/Images/Link to parcel.png" MouseLeftButtonDown="Link_Click" Margin="535,495,0,0" />
             <Image x:Name="DeliverButton" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="178" Source="/Images/Deliver parcel.png" MouseLeftButtonDown="Deliver_Click" Margin="535,495,0,0" Visibility="Hidden"/>
+            <Grid x:Name="ParcelDetials">
+                <Image HorizontalAlignment="Left" Height="168" VerticalAlignment="Top" Width="112" Source="/Images/Parcel details.png" MouseLeftButtonDown="Deliver_Click" Margin="337,157,0,0" />
+                <Button x:Name="button" Content="" Margin="357,243,367,329" Opacity="0" Click="PacelDetaitls_Click"/>
+                <TextBlock x:Name="IdParcel" HorizontalAlignment="Center" Margin="0,199,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top"/>
+            </Grid>
+
+
         </Grid>
-        <Grid x:Name="AddDroneGrid" Visibility="Hidden">
+        <Grid x:Name="AddDroneGrid" Visibility="Collapsed">
             <Image x:Name="BackgroundAddDrone" Width="800" MinWidth="1" Height="650" Margin="0,-21,0,-5" Source="/Images/AddDroneNew.png">
             </Image>
-            <TextBox x:Name="AddModel" HorizontalAlignment="Left" Margin="480,131,0,0" Text="" FontSize="18" FontFamily="Fonts/#Hey Comic" TextWrapping="Wrap" VerticalAlignment="Top" Width="270" Height="19"  BorderThickness="0" Padding="0,-7,0,0" Background="Transparent"></TextBox>
-            <ComboBox x:Name="AddIdStation" HorizontalAlignment="Left" Margin="480,273,0,0" FontSize="18" FontFamily="Fonts/#Hey Comic" Text=""  VerticalAlignment="Top" Width="263" Height="20" BorderThickness="0" Padding="0,-7,0,0" Background="Transparent"/>
-            <TextBox x:Name="AddID" HorizontalAlignment="Left" Margin="30,131,0,0" Text="" FontSize="18" FontFamily="Fonts/#Hey Comic" TextWrapping="Wrap" VerticalAlignment="Top" Width="263" Height="18" BorderThickness="0" Padding="0,-7,0,0" Background="Transparent"/>
-            <ComboBox x:Name="AddMaxWeight" HorizontalAlignment="Left" Margin="30,270,0,0" FontSize="18" FontFamily="Fonts/#Hey Comic" VerticalAlignment="Top" Width="263" Padding="0" Height="25" />
-            <Button x:Name="Add" Opacity="0" IsDefault="True" HorizontalAlignment="Left" Margin="322,365,0,0" VerticalAlignment="Top" Width="147" Height="28" Click="Add_Click" />
+            <TextBox x:Name="AddModel" HorizontalAlignment="Left" Margin="498,185,0,0" Text="" FontSize="18" FontFamily="Fonts/#Hey Comic" TextWrapping="Wrap" VerticalAlignment="Top" Width="248" Height="19"  BorderThickness="0" Padding="0,-7,0,0" Background="Transparent"></TextBox>
+            <TextBox x:Name="AddID" HorizontalAlignment="Left" Margin="46,185,0,0" Text="" FontSize="18" FontFamily="Fonts/#Hey Comic" TextWrapping="Wrap" VerticalAlignment="Top" Width="250" Height="18" BorderThickness="0" Padding="0,-7,0,0" Background="Transparent"/>
+            <ComboBox x:Name="AddIdStation" HorizontalAlignment="Left" Margin="492,428,0,0" FontSize="18" FontFamily="Fonts/#Hey Comic" Text=""  VerticalAlignment="Top" Width="289" Height="20" BorderThickness="0" Padding="0,-7,0,0" Background="Transparent"/>
+            <ComboBox x:Name="AddMaxWeight" HorizontalAlignment="Left" Margin="39,423,0,0" FontSize="18" FontFamily="Fonts/#Hey Comic" VerticalAlignment="Top" Width="263" Padding="0" Height="25" />
+            <Button x:Name="Add" Opacity="0" IsDefault="True" HorizontalAlignment="Center" Margin="0,527,0,0" VerticalAlignment="Top" Width="148" Height="28" Click="Add_Click" />
 
-            <Button x:Name="CanacelButton" Opacity="0" IsCancel="True" HorizontalAlignment="Left" Margin="731,13,0,0" VerticalAlignment="Top" Width="29" Click="Cancel_Click"/>
+            <Button x:Name="CanacelButton" Opacity="0" IsCancel="True" HorizontalAlignment="Left" Margin="746,37,0,0" VerticalAlignment="Top" Width="32" Click="Cancel_Click" Height="20" RenderTransformOrigin="0.5,0.5">
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="-1"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Button.RenderTransform>
+            </Button>
 
         </Grid>
     </Grid>
