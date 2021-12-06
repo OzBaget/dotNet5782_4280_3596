@@ -62,14 +62,7 @@ namespace PL
             StatusSelector_SelectionChanged(null, null);
         }
 
-        private void Resetbutton_Click(object sender, RoutedEventArgs e)
-        {
-            StatusSelector.SelectedItem = null;
-            WeightSelector.SelectedItem = null;
-            ListViewDrones.ItemsSource = db.GetAllDrones();
-
-        }
-
+        
         private void Again_Gif(object sender, RoutedEventArgs e)
         {
             GifDrones.Position = new TimeSpan(0, 0, 1);
@@ -77,7 +70,15 @@ namespace PL
         }
 
 
-        private void Add_Click(object sender, RoutedEventArgs e)
+        
+        private void ResetFilters_btn(object sender, MouseButtonEventArgs e)
+        {
+            StatusSelector.SelectedItem = null;
+            WeightSelector.SelectedItem = null;
+            ListViewDrones.ItemsSource = db.GetAllDrones();
+        }
+
+        private void AddDrone_clk(object sender, MouseButtonEventArgs e)
         {
             new ViewDrone(db).ShowDialog();
             //refresh listView
