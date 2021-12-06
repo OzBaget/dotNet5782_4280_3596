@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="confirmIcon.jpg" />
     <None Remove="Fonts\AlfaSlabOne-Regular.ttf" />
     <None Remove="Fonts\Cotton Butter.ttf" />
     <None Remove="Fonts\Long_Shot.ttf" />
@@ -46,6 +47,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="confirmIcon.jpg" />
     <Resource Include="Images\9752136.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>

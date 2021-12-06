@@ -43,11 +43,12 @@ namespace PL
         public ViewDrone(Drone drone, IBL.IBL db)
         {
             this.db = db;
+            Cdrone = drone;
+
             InitializeComponent();
             AddDroneGrid.Visibility = Visibility.Collapsed;
             
             DroneViewGrid.Visibility = Visibility.Visible;
-            Cdrone = drone;
             updateTextBoxs();
         }
 
@@ -119,6 +120,7 @@ namespace PL
             if (Cdrone.Parcel.Id != 0) 
             {
                 //TODO: show parcel ditalis
+                MessageBox.Show(Cdrone.Parcel.ToString(), "Parcel ditalis", MessageBoxButton.OK);
             }
             else
             {
@@ -233,6 +235,35 @@ namespace PL
             catch (IBL.BL.IdNotFoundException ex)
             {
                 MessageBox.Show(ex.Message, "Can't add dorne", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void Update_Click(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                db.UpdateDrone(Cdrone.Id, ModelBox.Text);
+                MessageBox.Show("The drone was updated successfully!", "success!", MessageBoxButton.OK, MessageBoxImage.Information);
+                updateTextBoxs();
+                updateButton.Visibility = Visibility.Hidden;
+
+            }
+            catch (IBL.BL.IdNotFoundException ex)
+            {
+                MessageBox.Show(ex.Message, "Can't update dorne", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+  
+        private void ModelChanged(object sender, TextChangedEventArgs e)
+        {
+            if (ModelBox.Text != Cdrone.Model)
+            {
+                updateButton.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                updateButton.Visibility = Visibility.Hidden;
             }
         }
     }

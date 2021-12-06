@@ -8,7 +8,7 @@
         ResizeMode="NoResize"
         Title="ViewDrone" Height="440" Width="800">
     <Grid>
-        <Grid x:Name="DroneViewGrid" Visibility="Collapsed">
+        <Grid x:Name="DroneViewGrid" Visibility="Visible">
             <Image x:Name="BackgroundDrones" Width="800" MinWidth="1" Height="450" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="-15,-24,0,0">
                 <Image.Source>
                     <BitmapImage  UriSource="/Images/DroneView.png" />
@@ -36,7 +36,7 @@
                         </Setter>
                     </Style>
                 </Button.Style>
-                
+
             </Button>
             <Button x:Name="CollectParcel" Foreground="White" FontFamily="Fonts/#Alfa Slab One"  Content="Collect parcel" HorizontalAlignment="Left" Margin="557,371,0,0" VerticalAlignment="Top" Width="208" Height="20" Click="Collect_Click">
                 <Button.Style>
@@ -218,7 +218,8 @@
             <Label x:Name="IdLable" FontFamily="Fonts/#Cotton Butter" FontSize="18" Content="ID:" HorizontalAlignment="Left" Margin="283,141,0,0" VerticalAlignment="Top" />
             <TextBlock x:Name="StatusBox" FontFamily="Fonts/#Cotton Butter" FontSize="18" HorizontalAlignment="Left" Margin="666,203,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="143"   Padding="0" Background="Transparent" />
             <Label x:Name="StatusLable" FontFamily="Fonts/#Cotton Butter" FontSize="18" Content="Status:" HorizontalAlignment="Left" Margin="558,198,0,0" VerticalAlignment="Top"/>
-            <TextBox x:Name="ModelBox" FontFamily="Fonts/#Cotton Butter" FontSize="18" HorizontalAlignment="Left" Margin="378,206,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="142"   Padding="0" Background="Transparent" BorderThickness="0" />
+            <Image x:Name="updateButton" HorizontalAlignment="Left" Height="20" Margin="452,214,0,0" VerticalAlignment="Top" Width="20" Source="/confirmIcon.jpg" MouseLeftButtonDown="Update_Click" Visibility="Hidden"/>
+            <TextBox x:Name="ModelBox" FontFamily="Fonts/#Cotton Butter" FontSize="18" HorizontalAlignment="Left" Margin="378,206,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"   Padding="0" Background="Transparent" BorderThickness="0" TextChanged="ModelChanged" />
             <Label x:Name="ModelLable" FontFamily="Fonts/#Cotton Butter" FontSize="18" Content="Model:" HorizontalAlignment="Left" Margin="284,201,0,0" VerticalAlignment="Top"/>
             <TextBlock x:Name="LatBox" FontFamily="Fonts/#Cotton Butter" FontSize="18" HorizontalAlignment="Left" Margin="565,261,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="143"   Padding="0" Background="Transparent"  />
             <Label x:Name="Lat" FontFamily="Fonts/#Cotton Butter" FontSize="18" Content="Lat:" HorizontalAlignment="Left" Margin="541,256,0,0" VerticalAlignment="Top"/>

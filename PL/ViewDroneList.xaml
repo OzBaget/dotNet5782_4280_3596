@@ -53,8 +53,7 @@
 
         
         <MediaElement x:Name ="GifDrones" Source="Images/GIF.gif" LoadedBehavior="Play" UnloadedBehavior="Manual" MediaEnded="Again_Gif" Visibility="Visible" Margin="0,59,4,-14" Grid.RowSpan="2" />
-        <ListView x:Name="ListViewDrones" FontFamily="Alef"  FontSize="21" MouseDoubleClick="ListViewDrones_MouseDoubleClick" Margin="0,66,0,3" Grid.RowSpan="2" Foreground="Black" Background="{x:Null}" >
-        </ListView>
+        <ListView x:Name="ListViewDrones" FontFamily="Alef"  FontSize="21" MouseDoubleClick="ListViewDrones_MouseDoubleClick" Margin="0,66,0,3" Grid.RowSpan="2" Foreground="Black" Background="{x:Null}" />
 
 
     </Grid>
