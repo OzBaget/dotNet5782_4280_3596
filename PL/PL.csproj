@@ -27,6 +27,8 @@
     <None Remove="Images\WeightKg.png" />
     <None Remove="Link to parcel.png" />
     <None Remove="Pick up parcel.png" />
+    <None Remove="plus-sign.png" />
+    <None Remove="refresh-page-option.png" />
     <None Remove="Release.png" />
   </ItemGroup>
 
@@ -82,6 +84,8 @@
     </Resource>
     <Resource Include="Link to parcel.png" />
     <Resource Include="Pick up parcel.png" />
+    <Resource Include="plus-sign.png" />
+    <Resource Include="refresh-page-option.png" />
     <Resource Include="Release.png" />
   </ItemGroup>
 
@@ -89,6 +93,12 @@
     <Content Include="Images\GIF.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Images\refresh-page-option.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
