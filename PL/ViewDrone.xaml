@@ -11,7 +11,7 @@
         <Grid x:Name="DroneViewGrid" Visibility="Visible">
             <Image x:Name="BackgroundDrones" Width="800" MinWidth="1" Height="450" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="-15,-24,0,0">
                 <Image.Source>
-                    <BitmapImage  UriSource="/Images/DroneView.png" />
+                    <BitmapImage  UriSource="/Images/DoneViewNew.png" />
                 </Image.Source>
             </Image>
             <Button x:Name="BringParcel" Foreground="White" FontFamily="Fonts/#Alfa Slab One"  Content="Bring the parcel to customer" HorizontalAlignment="Left" Margin="552,325,0,0" VerticalAlignment="Top" Width="207" Height="20" Click="Bring_Click"  Background="Transparent" FontStyle="Normal" FontWeight="Normal" BorderBrush="Transparent" >
