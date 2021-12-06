@@ -11,6 +11,7 @@
     <None Remove="Images\checked.png" />
     <None Remove="Images\confirmIcon.jpg" />
     <None Remove="Images\Deliver parcel.png" />
+    <None Remove="Images\Exit Button.png" />
     <None Remove="Images\Link to parcel.png" />
     <None Remove="Images\MainWindow.gif" />
     <None Remove="Images\Parcel details.png" />
@@ -45,6 +46,9 @@
     </Content>
     <Content Include="Images\Deliver parcel.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Exit Button.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Link to parcel.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
