@@ -42,6 +42,11 @@ namespace PL
             AddIdStation.SelectedIndex = 0;
             }
 
+        /// <summary>
+        /// View drone menu
+        /// </summary>
+        /// <param name="drone">the drone to view</param>
+        /// <param name="db"></param>
         public ViewDrone(Drone drone, IBL.IBL db)
         {
             this.db = db;
@@ -93,6 +98,9 @@ namespace PL
 
         }
 
+        /// <summary>
+        /// update all textboxs to the currnt status of Cdrone
+        /// </summary>
         private void updateTextBoxs()
         {
             Cdrone = db.GetDrone(Cdrone.Id);
@@ -114,15 +122,25 @@ namespace PL
                 ParcelDetials.Visibility = Visibility.Hidden;
             }
         }
+        
+        /// <summary>
+        /// Close window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
             exit = true;
             Close();
         }
 
-        
-      
-               
+
+
+        /// <summary>
+        /// Show parcel detaitls
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PacelDetaitls_Click(object sender, RoutedEventArgs e)
         {
             if (Cdrone.Parcel.Id != 0) 
@@ -137,7 +155,12 @@ namespace PL
         }
 
                 
-               
+       
+        /// <summary>
+        /// Add new Drone to db
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Add_Click(object sender, RoutedEventArgs e)
         {
             Drone myDrone = new();
@@ -172,6 +195,11 @@ namespace PL
             }
         }
 
+        /// <summary>
+        /// update drone model
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Update_Click(object sender, MouseButtonEventArgs e)
         {
             try
@@ -188,6 +216,11 @@ namespace PL
             }
         }
   
+        /// <summary>
+        /// Show confirm button if the model changed 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ModelChanged(object sender, TextChangedEventArgs e)
         {
             if (Cdrone == null)
@@ -223,6 +256,11 @@ namespace PL
             }
         }
 
+        /// <summary>
+        /// Deliver parcel to customer
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ChargeDrone_Click(object sender, MouseButtonEventArgs e)
         {
             try
@@ -244,6 +282,11 @@ namespace PL
             }
         }
 
+        /// <summary>
+        /// Release drone from charging
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Release_Click(object sender, MouseButtonEventArgs e)
         {
             TimeSpan? result = ReleaseDroneDialog.GetResult();
@@ -270,6 +313,11 @@ namespace PL
 
         }
 
+        /// <summary>
+        /// pick up parcel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PickUp_Click(object sender, MouseButtonEventArgs e)
         {
             try
@@ -290,6 +338,11 @@ namespace PL
             }
         }
 
+        /// <summary>
+        /// link drone to parcel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Link_Click(object sender, MouseButtonEventArgs e)
         {
             try
@@ -311,6 +364,11 @@ namespace PL
             }
         }
 
+        /// <summary>
+        /// verify model is okey, if not-set the background 100
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void VerifyModel(object sender, TextChangedEventArgs e)
         {
             if (AddModel.Text=="")
@@ -323,6 +381,11 @@ namespace PL
             }
         }
 
+        /// <summary>
+        /// verify ID is okey, if not-set the background 100
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void verifyID(object sender, TextChangedEventArgs e)
         {
             int id;
@@ -336,6 +399,12 @@ namespace PL
             }
         }
 
+
+        /// <summary>
+        /// Close the window only if the cencel button preased
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CencelClose(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if(!exit)
