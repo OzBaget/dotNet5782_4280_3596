@@ -16,6 +16,7 @@
     <None Remove="Fonts\VintageKing.ttf" />
     <None Remove="Images\9752136.jpg" />
     <None Remove="Images\ClockSelector.png" />
+    <None Remove="Images\DoneViewNew.png" />
     <None Remove="Images\downbackgroundDroneViewList.png" />
     <None Remove="Images\DroneView.png" />
     <None Remove="Images\GIF.gif" />
@@ -33,6 +34,9 @@
     <Content Include="Fonts\VintageKing.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Images\DoneViewNew.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
