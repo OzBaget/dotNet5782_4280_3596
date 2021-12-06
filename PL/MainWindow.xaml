@@ -7,7 +7,9 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="640" Width="800">
     <Grid>
-        <Button x:Name="button" Click="openDroneList" Content="View drone list" HorizontalAlignment="Center" Margin="0,150,0,0" VerticalAlignment="Top" Height="81" Width="198"/>
+        <MediaElement x:Name ="GifDrones" Source="Images/MainWindow.gif" LoadedBehavior="Play" UnloadedBehavior="Manual" MediaEnded="Again_Gif" Visibility="Visible" Margin="-50,-24,-51,-19" />
+
+        <Button x:Name="button" Click="openDroneList" Content="View drone list" HorizontalAlignment="Left" Margin="277,192,0,0" VerticalAlignment="Top" Height="81" Width="280" Opacity="0" Cursor="Hand"/>
 
     </Grid>
 </Window>

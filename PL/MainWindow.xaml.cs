@@ -29,5 +29,10 @@ namespace PL
         {
             new ViewDroneList(db).Show();
         }
+        private void Again_Gif(object sender, RoutedEventArgs e)
+        {
+            GifDrones.Position = new TimeSpan(0, 0, 1);
+            GifDrones.Play();
+        }
     }
 }

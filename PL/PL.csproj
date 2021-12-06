@@ -12,6 +12,7 @@
     <None Remove="Images\confirmIcon.jpg" />
     <None Remove="Images\Deliver parcel.png" />
     <None Remove="Images\Link to parcel.png" />
+    <None Remove="Images\MainWindow.gif" />
     <None Remove="Images\Parcel details.png" />
     <None Remove="Images\Pick up parcel.png" />
     <None Remove="Images\refresh-page-option.png" />
@@ -47,6 +48,9 @@
     </Content>
     <Content Include="Images\Link to parcel.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\MainWindow.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Parcel details.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
