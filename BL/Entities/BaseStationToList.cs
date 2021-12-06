@@ -16,10 +16,10 @@ namespace IBL.BO
         public override string ToString()
         {
             return
-                $"ID:                      {Id}\n" +
-                $"Name                     {Name}\n" +
-                $"Free Chargers:           {NumFreeChragers}\n" +
-                $"Occupied Chargers:       {NumFullChragers}";
+                $"ID: {Id}\n" +
+                $"Name: {Name}\n" +
+                $"Free Chargers: {NumFreeChragers}\n" +
+                $"Occupied Chargers: {NumFullChragers}";
         }
     }
 
