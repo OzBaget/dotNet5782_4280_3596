@@ -63,7 +63,11 @@ namespace PL
             StatusSelector_SelectionChanged(null, null);
         }
 
-        
+        /// <summary>
+        /// Play Gif
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Again_Gif(object sender, RoutedEventArgs e)
         {
             GifDrones.Position = new TimeSpan(0, 0, 1);
@@ -71,14 +75,22 @@ namespace PL
         }
 
 
-        
+        /// <summary>
+        /// Reset filters
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ResetFilters_btn(object sender, MouseButtonEventArgs e)
         {
             StatusSelector.SelectedItem = null;
             WeightSelector.SelectedItem = null;
             ListViewDrones.ItemsSource = db.GetAllDrones();
         }
-
+        /// <summary>
+        /// add drone function
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddDrone_clk(object sender, MouseButtonEventArgs e)
         {
             new ViewDrone(db).ShowDialog();
@@ -89,12 +101,21 @@ namespace PL
             StatusSelector_SelectionChanged(null, null);
         }
 
+        /// <summary>
+        /// cancel function
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
             exit = true;
             Close();
         }
-
+        /// <summary>
+        /// close the window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CloseWindow(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (!exit)

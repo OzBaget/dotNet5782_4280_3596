@@ -25,10 +25,20 @@ namespace PL
         {
             InitializeComponent();
         }
+        /// <summary>
+        /// Button to drone list
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void openDroneList(object sender, RoutedEventArgs e)
         {
             new ViewDroneList(db).Show();
         }
+        /// <summary>
+        /// Play gif agian
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Again_Gif(object sender, RoutedEventArgs e)
         {
             GifDrones.Position = new TimeSpan(0, 0, 1);
