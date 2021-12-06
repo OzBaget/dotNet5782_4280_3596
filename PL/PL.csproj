@@ -10,6 +10,7 @@
     <None Remove="confirmIcon.jpg" />
     <None Remove="Fonts\AlfaSlabOne-Regular.ttf" />
     <None Remove="Fonts\Cotton Butter.ttf" />
+    <None Remove="Fonts\Hey Comic.ttf" />
     <None Remove="Fonts\Long_Shot.ttf" />
     <None Remove="Fonts\Rabble Rouser.ttf" />
     <None Remove="Fonts\Storytime.ttf" />
@@ -22,6 +23,7 @@
     <None Remove="Images\GIF.gif" />
     <None Remove="Images\upBackgroundViewDroneList.png" />
     <None Remove="Images\WeightKg.png" />
+    <None Remove="Release.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,11 +33,14 @@
     <Content Include="Fonts\Cotton Butter.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Fonts\Hey Comic.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Fonts\VintageKing.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Resource Include="Images\DoneViewNew.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
 
@@ -69,6 +74,7 @@
     <Resource Include="Images\WeightKg.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Release.png" />
   </ItemGroup>
 
   <ItemGroup>

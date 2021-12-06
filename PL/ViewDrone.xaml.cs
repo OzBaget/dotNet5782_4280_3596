@@ -58,8 +58,7 @@ namespace PL
             StatusBox.Text = Cdrone.Status.ToString();
             MaxWeighBox.Text = Cdrone.MaxWeight.ToString();
             BatteryBox.Text = Cdrone.Battery.ToString() + "%";
-            LatBox.Text = Cdrone.CurrentLocation.ToString().Split(", ")[0];
-            LngBox.Text = Cdrone.CurrentLocation.ToString().Split(", ")[1];
+            
             IdBox.Text = Cdrone.Id.ToString();
             ModelBox.Text = Cdrone.Model;
 
@@ -184,7 +183,7 @@ namespace PL
             }
         }
 
-        private void Realse_Click(object sender, RoutedEventArgs e)
+        private void Release_Click(object sender, RoutedEventArgs e)
         {
             TimeSpan? result =ReleaseDroneDialog.GetResult();
             if (result != null) 
@@ -267,6 +266,11 @@ namespace PL
             {
                 updateButton.Visibility = Visibility.Hidden;
             }
+        }
+
+        private void Deliver_Click(object sender, MouseButtonEventArgs e)
+        {
+
         }
     }
 }
