@@ -12,52 +12,39 @@
             <RowDefinition Height="50*"/>
             <RowDefinition Height="400*"/>
         </Grid.RowDefinitions>
-        <Grid Name="UpGrid" HorizontalAlignment="Stretch" Height="auto" Grid.Row="0"
-            VerticalAlignment="Stretch" Width="auto">
+        <Grid Name="UpGrid" HorizontalAlignment="Stretch" Grid.Row="0">
+            <Grid.Background>
+                <ImageBrush ImageSource="Images\upBackgroundViewDroneList.png" />
+            </Grid.Background>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
-            <Image x:Name="BackgroundUp" Width="1000" HorizontalAlignment="Left" Grid.ColumnSpan="4" Margin="0,-16,0,-14">
-                <Image.Source>
-                    <BitmapImage  UriSource="/Images/upBackgroundViewDroneList.png" />
-                </Image.Source>
-            </Image>
-            <ComboBox x:Name="StatusSelector" FontFamily="Fonts/#KG Red Hands" HorizontalAlignment="Left" VerticalAlignment="Center" Width="166" SelectionChanged="StatusSelector_SelectionChanged" FontSize="14  " Padding="5,10,0,0" Height="43" Grid.ColumnSpan="2" Margin="221,0,0,0" Foreground="Black" BorderBrush="#FF575252"/>
-            <ComboBox x:Name="WeightSelector" FontFamily="Fonts/#KG Red Hands" HorizontalAlignment="Left" VerticalAlignment="Top" Width="168" SelectionChanged="WeightSelector_SelectionChanged" Grid.Column="1" FontSize="20" Margin="214,12,0,0" Height="43"  Padding="50,0,0,0" VerticalContentAlignment="Center" Grid.ColumnSpan="2" BorderBrush="#FF939393" Foreground="Black" >
-                <ComboBox.Background>
-                    <LinearGradientBrush EndPoint="0,1">
-                        <GradientStop Color="#FFF0F0F0"/>
-                        <GradientStop Color="#FFB6AEAE" Offset="1"/>
-                    </LinearGradientBrush>
-                </ComboBox.Background>
-            </ComboBox>
+
+            <ComboBox x:Name="StatusSelector" FontFamily="Fonts/#KG Red Hands" HorizontalAlignment="Left" VerticalAlignment="Center" Width="166" SelectionChanged="StatusSelector_SelectionChanged" FontSize="14  " Padding="5,10,0,0" Height="43" Grid.ColumnSpan="2" Margin="221,0,0,0"  />
+            <ComboBox x:Name="WeightSelector" FontFamily="Fonts/#KG Red Hands" HorizontalAlignment="Left" VerticalAlignment="Top" Width="168" SelectionChanged="WeightSelector_SelectionChanged" Grid.Column="1" FontSize="20" Margin="214,12,0,0" Height="43"  Padding="50,0,0,0" VerticalContentAlignment="Center" Grid.ColumnSpan="2"/>
+
             <Label x:Name="TextSelector" Content="Filters:"  RenderTransformOrigin="0.586,0.567" FontSize="48" FontFamily="Fonts/#Cotton Butter" Margin="30,-10,0,0" Padding="0,0,0,0" Width="131" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" Foreground="White" ></Label>
-            <Image x:Name="WeightKg" Margin="161,-4,0,2" Width="48" Grid.Column="1" HorizontalAlignment="Left">
-                <Image.Source>
-                    <BitmapImage  UriSource="/Images/WeightKg.png" />
-                </Image.Source>
-            </Image>
-            <Image x:Name="ClockSelector" Margin="158,-4,24,4" Width="68">
-                <Image.Source>
-                    <BitmapImage  UriSource="/Images/ClockSelector.png" />
-                </Image.Source>
-            </Image>
+            <Image x:Name="WeightKg" Margin="161,-4,0,2" Width="48" Grid.Column="1" HorizontalAlignment="Left" Source="Images\WeightKg.png"/>
+            <Image x:Name="ClockSelector" Margin="158,-4,24,4" Width="68" Source="/Images/ClockSelector.png"/>
+
             <Image x:Name="image" Grid.Column="2" HorizontalAlignment="Left" Height="40" VerticalAlignment="Center" Width="40" Source="\Images\refresh-page-option.png" Cursor="Hand" MouseLeftButtonDown="ResetFilters_btn" Margin="198,0,0,0"/>
             <Image x:Name="image1" Grid.Column="3" HorizontalAlignment="Left" Height="45" VerticalAlignment="Center" Width="46" Source="\Images\plus-sign.png" Cursor="Hand" MouseLeftButtonDown="AddDrone_clk" Margin="68,0,0,0"/>
             <Image x:Name="image2" Grid.Column="3" HorizontalAlignment="Left" Height="40" Margin="178,13,0,0" VerticalAlignment="Top" Width="40" Source="/Images/Exit Button.png"/>
-            <Button x:Name="button" Content="" Grid.Column="3" HorizontalAlignment="Left" Margin="178,13,0,0" VerticalAlignment="Top" Width="40" Height="40" Opacity="0" IsCancel="True" Cursor="Hand" Click="Cancel_Click"/>
-
+            <Button x:Name="button" Grid.Column="3" HorizontalAlignment="Left" Margin="178,13,0,0" VerticalAlignment="Top" Width="40" Height="40" Opacity="0" IsCancel="True" Cursor="Hand" Click="Cancel_Click"/>
         </Grid>
 
 
-        <MediaElement x:Name ="GifDrones" Source="Images/GIF.gif" LoadedBehavior="Play" UnloadedBehavior="Manual" MediaEnded="Again_Gif" Visibility="Visible" Margin="0,59,4,-14" Grid.RowSpan="2" />
-        <ListView x:Name="ListViewDrones" FontFamily="Fonts/#KG Red Hands"  FontSize="17" MouseDoubleClick="ListViewDrones_MouseDoubleClick" Margin="0,66,0,3" Grid.RowSpan="2" Foreground="Black" Background="{x:Null}" />
-
-
+        <ListView x:Name="ListViewDrones" FontFamily="Fonts/#KG Red Hands"  FontSize="17" MouseDoubleClick="ListViewDrones_MouseDoubleClick" Margin="0,66,0,3" Grid.RowSpan="2" Foreground="Black" >
+            <ListView.Background>
+                <VisualBrush>
+                    <VisualBrush.Visual>
+                        <MediaElement x:Name ="GifDrones" Source="Images/GIF.gif" LoadedBehavior="Play" MediaEnded="Again_Gif" UnloadedBehavior="Manual"/>
+                    </VisualBrush.Visual>
+                </VisualBrush>
+            </ListView.Background>
+        </ListView>
     </Grid>
-
-
 </Window>

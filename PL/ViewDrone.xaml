@@ -8,43 +8,45 @@
         ResizeMode="NoResize"
         Title="ViewDrone" Height="640" Width="800" Closing="CencelClose" >
     <Grid>
-        <Grid x:Name="DroneViewGrid" Visibility="Visible">
-            <Image x:Name="BackgroundDrones" Width="800" MinWidth="1" Height="640" Margin="1,-8,-1,-8">
-                <Image.Source>
-                    <BitmapImage  UriSource="/Images/DoneViewNew.png" />
-                </Image.Source>
-            </Image>
-            <Button x:Name="Cancel" Foreground="White" IsCancel="True" FontFamily="Fonts/#Alfa Slab One"  Opacity="0" HorizontalAlignment="Left" Margin="726,52,0,0" VerticalAlignment="Top" Width="48" Height="36" Click="Cancel_Click" Cursor="Hand"/>
-            <TextBlock x:Name="MaxWeighBox" FontFamily="Fonts/#KG Red Hands"  FontSize="18" HorizontalAlignment="Left" Margin="624,155,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="143"  Background="Transparent"  />
-            <TextBlock x:Name="BatteryBox" FontFamily="Fonts/#KG Red Hands" FontSize="18" HorizontalAlignment="Left" Margin="166,283,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="142"  Background="Transparent"  />
-            <TextBlock x:Name="IdBox" FontFamily="Fonts/#KG Red Hands" FontSize="18" HorizontalAlignment="Left" Margin="165,155,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="142" Background="Transparent" />
-            <TextBlock x:Name="StatusBox" FontFamily="Fonts/#KG Red Hands" FontSize="18" HorizontalAlignment="Left" Margin="568,415,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="199" Background="Transparent" />
-            <Image x:Name="updateButton" HorizontalAlignment="Left" Height="56" Margin="343,402,0,0" VerticalAlignment="Top" Width="50" Source="Images/checked.png" MouseLeftButtonDown="Update_Click" Cursor="Hand"/>
-            <TextBox x:Name="ModelBox" FontFamily="Fonts/#KG Red Hands" FontSize="18" HorizontalAlignment="Left" Margin="166,415,0,0" Text="TextB                    ox" TextWrapping="Wrap" VerticalAlignment="Top" Width="114"   Padding="0" Background="Transparent" BorderThickness="0" TextChanged="ModelChanged" Height="23" />
-            <TextBlock x:Name="LocationBox" FontFamily="Fonts/#KG Red Hands" HorizontalAlignment="Left" Margin="587,289,0,0" Text="31°57'53.64&quot;N, 34°54'19.08&quot;E" TextWrapping="Wrap" VerticalAlignment="Top" Width="179"   Padding="0" Background="Transparent" FontSize="10"  />
-            <Label x:Name="Parcel" HorizontalAlignment="Left" Margin="43,105,0,0" Content="Pacrel"  VerticalAlignment="Top" Width="118"  BorderThickness="0" Padding="0" Background="Transparent" />
+        <Grid x:Name="DroneViewGrid" Visibility="Collapsed">
+            <Grid.Background>
+                <ImageBrush ImageSource="/Images/DoneViewNew.png" Stretch="UniformToFill"/>
+            </Grid.Background>
+
+            <Button x:Name="Cancel" Foreground="White" IsCancel="True" FontFamily="Fonts/#Alfa Slab One"  Opacity="0" HorizontalAlignment="Left" Margin="710,47,0,0" VerticalAlignment="Top" Width="48" Height="36" Click="Cancel_Click" Cursor="Hand"/>
+            <TextBlock x:Name="MaxWeighBox" FontFamily="Fonts/#KG Red Hands"  FontSize="18" HorizontalAlignment="Left" Margin="624,145,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="143"  Background="Transparent"  />
+            <TextBlock x:Name="BatteryBox" FontFamily="Fonts/#KG Red Hands" FontSize="18" HorizontalAlignment="Left" Margin="166,273,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="142"  Background="Transparent"  />
+            <TextBlock x:Name="IdBox" FontFamily="Fonts/#KG Red Hands" FontSize="18" HorizontalAlignment="Left" Margin="165,145,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="142" Background="Transparent" />
+            <TextBlock x:Name="StatusBox" FontFamily="Fonts/#KG Red Hands" FontSize="18" HorizontalAlignment="Left" Margin="568,400,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="199" Background="Transparent" />
+            <Image x:Name="updateButton" HorizontalAlignment="Left" Height="56" Margin="343,390,0,0" VerticalAlignment="Top" Width="50" Source="Images/checked.png" MouseLeftButtonDown="Update_Click" Cursor="Hand"/>
+            <TextBox x:Name="ModelBox" FontFamily="Fonts/#KG Red Hands" FontSize="18" HorizontalAlignment="Left" Margin="166,400,0,0" Text="TextB                " TextWrapping="Wrap" VerticalAlignment="Top" Width="114"   Padding="0" Background="Transparent" BorderThickness="0" TextChanged="ModelChanged" Height="23" />
+            <TextBlock x:Name="LocationBox" FontFamily="Fonts/#KG Red Hands" HorizontalAlignment="Left" Margin="587,277,0,0"  Text="31°57'53.64&quot;N, 34°54'19.08&quot;E" TextWrapping="Wrap" VerticalAlignment="Top" Width="179"   Padding="0" Background="Transparent" FontSize="10"  />
             <Image x:Name="ChargeButton" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="178" Source="/Images/Charge.png" MouseLeftButtonDown="ChargeDrone_Click" Margin="77,495,0,0" Cursor="Hand"/>
             <Image x:Name="ReleaseButton" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="178" Source="/Images/Release.png" MouseLeftButtonDown="Release_Click" Margin="77,495,0,0" Cursor="Hand" Visibility="Hidden"/>
             <Image x:Name="PickUpButton" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="178" Source="/Images/Pick up parcel.png" MouseLeftButtonDown="PickUp_Click" Margin="535,495,0,0" Cursor="Hand" Visibility="Hidden"/>
             <Image x:Name="LinkButton" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="178" Source="/Images/Link to parcel.png" MouseLeftButtonDown="Link_Click" Margin="535,495,0,0" Cursor="Hand"/>
             <Image x:Name="DeliverButton" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="178" Source="/Images/Deliver parcel.png" MouseLeftButtonDown="Deliver_Click" Margin="535,495,0,0" Cursor="Hand" Visibility="Hidden"/>
-            <Grid x:Name="ParcelDetials" >
-                <Image HorizontalAlignment="Left" Height="168" VerticalAlignment="Top" Width="112" Source="/Images/Parcel details.png" Margin="337,157,0,0" />
-                <Button x:Name="button" Margin="357,243,365,322" Opacity="0" Click="PacelDetaitls_Click" Cursor="Hand"/>
-                <TextBlock x:Name="IdParcel" FontFamily="Fonts/#KG Red Hands" HorizontalAlignment="Left" Margin="371,200,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White"/>
+            <Grid x:Name="ParcelDetials" Margin="337,146,342,310" >
+                <Grid.Background>
+                    <ImageBrush ImageSource="Images\Parcel details.png"/>
+                </Grid.Background>
+                <Button x:Name="button" Margin="19,80,10,10" Opacity="0" Click="PacelDetaitls_Click" Cursor="Hand"/>
+                <TextBlock x:Name="IdParcel" FontFamily="Fonts/#KG Red Hands" HorizontalAlignment="Center" Margin="0,40,0,0" Text="TextBlock" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White"/>
             </Grid>
 
 
         </Grid>
-        <Grid x:Name="AddDroneGrid" Visibility="Collapsed">
-            <Image x:Name="BackgroundAddDrone" Width="800" MinWidth="1" Height="650" Margin="0,-21,0,-5" Source="/Images/AddDroneNew.png">
-            </Image>
-            <TextBox x:Name="AddModel"  HorizontalAlignment="Left" Margin="498,178,0,0" FontSize="18" FontFamily="Fonts/#KG Red Hands" TextWrapping="Wrap" VerticalAlignment="Top" Width="248" Height="24" BorderThickness="0"  Background="Transparent" TextChanged="VerifyModel"></TextBox>
-            <TextBox x:Name="AddID" HorizontalAlignment="Left" Margin="46,178,0,0" FontSize="18" FontFamily="Fonts/#KG Red Hands" TextWrapping="Wrap" VerticalAlignment="Top" Width="250" Height="24" BorderThickness="0"  Background="Transparent" TextChanged="verifyID"/>
-            <ComboBox x:Name="AddIdStation" HorizontalAlignment="Left" Margin="492,423,0,0" FontSize="16" FontFamily="Fonts/#KG Red Hands"  VerticalAlignment="Top" Width="289" Height="25" />
-            <ComboBox x:Name="AddMaxWeight" HorizontalAlignment="Left" Margin="39,423,0,0" FontSize="16" FontFamily="Fonts/#KG Red Hands" VerticalAlignment="Top" Width="263"  Height="25" />
-            <Button x:Name="Add" Opacity="0" IsDefault="True" HorizontalAlignment="Center" Margin="0,527,0,0" VerticalAlignment="Top" Width="148" Height="28" Click="Add_Click" Cursor="Hand"/>
-            <Button x:Name="CanacelButton" Opacity="0" IsCancel="True" HorizontalAlignment="Left" Margin="746,37,0,0" VerticalAlignment="Top" Width="32" Click="Cancel_Click" Height="20" Cursor="Hand"/>
+        <Grid x:Name="AddDroneGrid" Visibility="Visible">
+            <Grid.Background>
+                <ImageBrush ImageSource="/Images/AddDroneNew.png"/>
+            </Grid.Background>
+
+            <TextBox x:Name="AddModel"  HorizontalAlignment="Left" Margin="490,185,0,0" FontSize="18" FontFamily="Fonts/#KG Red Hands" TextWrapping="Wrap" VerticalAlignment="Top" Width="248" Height="24" BorderThickness="0"  Background="Transparent" TextChanged="VerifyModel"></TextBox>
+            <TextBox x:Name="AddID" HorizontalAlignment="Left" Margin="42,186,0,0" FontSize="18" FontFamily="Fonts/#KG Red Hands" TextWrapping="Wrap" VerticalAlignment="Top" Width="250" Height="24" BorderThickness="0"  Background="Transparent" TextChanged="verifyID"/>
+            <ComboBox x:Name="AddIdStation" HorizontalAlignment="Left" Margin="483,417,0,0" FontSize="16" FontFamily="Fonts/#KG Red Hands"  VerticalAlignment="Top" Width="284" Height="25" />
+            <ComboBox x:Name="AddMaxWeight" HorizontalAlignment="Left" Margin="39,417,0,0" FontSize="16" FontFamily="Fonts/#KG Red Hands" VerticalAlignment="Top" Width="257"  Height="25" />
+            <Button x:Name="Add" Opacity="0" IsDefault="True" HorizontalAlignment="Center" Margin="0,513,0,0" VerticalAlignment="Top" Width="148" Height="28" Click="Add_Click" Cursor="Hand"/>
+            <Button x:Name="CanacelButton" Opacity="0" IsCancel="True" HorizontalAlignment="Left" Margin="733,50,0,0" VerticalAlignment="Top" Width="32" Click="Cancel_Click" Height="20" Cursor="Hand"/>
 
         </Grid>
     </Grid>
