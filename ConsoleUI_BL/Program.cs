@@ -659,7 +659,7 @@ namespace ConsoleUI_BL
         {
             string input = Console.ReadLine();
             int result;
-            while (!int.TryParse(input, out result) || !isValidOption(result, numOptions))
+            while (!int.TryParse(input, out result)  || !isValidOption(result, numOptions))
             {
                 Console.WriteLine("Not valid option!");
                 input = Console.ReadLine();
