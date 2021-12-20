@@ -33,8 +33,13 @@ namespace PL
         {
             int id;
             if (!int.TryParse(logInBox.Text, out id))
+                return;
+            if (db.GetCustomer(id).permission == IBL.BO.Permissions.Client)
+                new ViewParcelList();
 
-                new MainWindow(db.GetCustomer(id), db.GetCustomer(id).permission);
+            else
+                new MainWindow();
+
         }
     }
 }
