@@ -1,15 +1,14 @@
-﻿<Window x:Class="PL.LogInWindow"
+﻿<Window x:Class="PL.LogWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="LogInWindow" Height="640" Width="800">
+        Title="LogWindow" Height="640" Width="800">
     <Grid>
         <Button x:Name="logInButton" Click="logIn" Content="login" HorizontalAlignment="Center" Margin="0,336,0,0" VerticalAlignment="Top" Height="66" Width="280" Opacity="100"/>
         <Button x:Name="registerButton" Click="Register" Content="register" HorizontalAlignment="Left" Margin="309,442,0,0" VerticalAlignment="Top" Height="42" Width="178" Opacity="100" RenderTransformOrigin="0.5,0.5" />
         <TextBox x:Name="logInBox" HorizontalAlignment="Center" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="280" Height="33" Opacity="100" Margin="0,279,0,0" />
-
     </Grid>
 </Window>

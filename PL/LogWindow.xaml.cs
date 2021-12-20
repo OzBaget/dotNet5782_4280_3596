@@ -15,19 +15,18 @@ using System.Windows.Shapes;
 namespace PL
 {
     /// <summary>
-    /// Interaction logic for LogInWindow.xaml
+    /// Interaction logic for LogWindow.xaml
     /// </summary>
-    public partial class LogInWindow : Window
+    public partial class LogWindow : Window
     {
-        IBL.IBL db;
-        public LogInWindow()
+        public LogWindow()
         {
             InitializeComponent();
         }
-
+        IBL.IBL db;
         private void Register(object sender, RoutedEventArgs e)
         {
-
+            int a;
         }
 
         private void logIn(object sender, RoutedEventArgs e)
@@ -35,8 +34,7 @@ namespace PL
             int id;
             if (!int.TryParse(logInBox.Text, out id))
 
-            new MainWindow(db.GetCustomer(id), db.GetCustomer(id).permission);
+                new MainWindow(db.GetCustomer(id), db.GetCustomer(id).permission);
         }
     }
-
 }
