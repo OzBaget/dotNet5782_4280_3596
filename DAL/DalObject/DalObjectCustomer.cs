@@ -19,7 +19,7 @@ namespace DalObject
             return DataSource.Customers.Find(customer => customer.Id == customerId);
         }
         
-        public void AddCustomer(int id,string name, string phone, double lat, double lng)
+        public void AddCustomer(int id,string name, string phone, double lat, double lng,Permissions permission)
         {
             bool customerExists = false;
 
@@ -30,7 +30,7 @@ namespace DalObject
             if (customerExists)
                 throw new IdAlreadyExistsException($"Customer with ID #{id} already exists!", id);
 
-            DataSource.Customers.Add(new Customer(id, name, phone, lat, lng));
+            DataSource.Customers.Add(new Customer(id, name, phone, lat, lng,permission));
         }
 
         public void DeleteCustomer(int customerId)
@@ -42,7 +42,7 @@ namespace DalObject
         {
             Customer tmpCustomer= GetCustomer(customerId);
             DeleteCustomer(customerId);
-            AddCustomer(tmpCustomer.Id, name, phone, tmpCustomer.Lat, tmpCustomer.Lng);
+            AddCustomer(tmpCustomer.Id, name, phone, tmpCustomer.Lat, tmpCustomer.Lng,tmpCustomer.Permission);
         }
         
         public IEnumerable<Customer> GetAllCustomers()

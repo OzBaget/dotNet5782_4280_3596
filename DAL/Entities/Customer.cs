@@ -7,19 +7,21 @@ namespace IDAL
        
         public struct Customer
         {
-            public Customer(int id, string name, string phone, double lat, double lng)
+            public Customer(int id, string name, string phone, double lat, double lng, Permissions permission)
             {
                 Id = id;
                 Name = name;
                 Phone = phone;
                 Lat = lat;
                 Lng = lng;
+                Permission = permission;
             }
             public int Id { get; set; }
             public string Name { get; set; }
             public string Phone { get; set; }
             public double Lat { get; set; }
             public double Lng { get; set; }
+            public Permissions Permission { get; set; }
 
             public override string ToString()
             {
@@ -27,7 +29,8 @@ namespace IDAL
                     $"Customer ID:  {Id}\n" +
                     $"Name:         {Name}\n" +
                     $"Phone Number: {Phone}\n" +
-                    $"Position:     {coordsToSexag(Lat, Lng)}";
+                    $"Position:     {coordsToSexag(Lat, Lng)}\n"+
+                    $"Customer:     {Permission}";
             }
 
 

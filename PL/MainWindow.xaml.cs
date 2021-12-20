@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IBL.BO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,15 +22,38 @@ namespace PL
     public partial class MainWindow : Window
     {
         public IBL.IBL db = new BL.BL();
+
+        public Customer Customer { get; }
+        public Permissions Permission { get; }
+
         public MainWindow()
         {
             InitializeComponent();
         }
+
+        public MainWindow(Customer customer, Permissions permission)
+        {
+            Customer = customer;
+            Permission = permission;
+            if (permission == Permissions.Administrator)
+                AdministatorWindow();
+            else
+                ClientWindow();
+        }
+
         /// <summary>
         /// Button to drone list
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void AdministatorWindow()
+        {
+
+        }
+        private void ClientWindow()
+        {
+
+        }
         private void openDroneList(object sender, RoutedEventArgs e)
         {
             new ViewDroneList(db).Show();
@@ -39,10 +63,11 @@ namespace PL
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Again_Gif(object sender, RoutedEventArgs e)
+      
+       
+        private void GoToUser_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            GifDrones.Position = new TimeSpan(0, 0, 1);
-            GifDrones.Play();
+
         }
     }
 }

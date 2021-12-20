@@ -12,6 +12,8 @@ namespace IBL
         public enum DroneStatus { Available, UnderMaintenance, Delivery }
         public enum Priorities { Normal, Fast, Urgent }
         public enum ParcelStatus { Created, Scheduled, PickUp, Deliverd }
+        public enum Permissions { Client, Administrator }
+
     }
-    
+
 }
