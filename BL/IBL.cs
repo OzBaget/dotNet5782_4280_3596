@@ -131,5 +131,6 @@ namespace IBL
         IEnumerable<BaseStationToList> GetStationsWithFreeSlots();
 
         IEnumerable<DroneToList> GetFilterdDrones(Predicate<DroneToList> filter);
+        IEnumerable<DroneToList> GetFilterdParcels(Predicate<ParcelToList> filter);
     }
 }

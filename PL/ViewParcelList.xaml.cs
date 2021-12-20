@@ -1,5 +1,4 @@
-﻿using IBL.BO;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,24 +15,18 @@ using System.Windows.Shapes;
 namespace PL
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ViewParcelList.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ViewParcelList : Window
     {
-        public MainWindow()
+        public ViewParcelList()
         {
             InitializeComponent();
         }
-        public void Administrator()
+
+        private void comboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-         
 
         }
-        
-
-        
-
-        public int Customer { get; }
-        public Permissions Permission { get; }
     }
 }
