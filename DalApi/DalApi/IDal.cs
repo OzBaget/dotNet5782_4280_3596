@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using IDAL.DO;
+using DO;
 
-namespace IDAL
+namespace DalApi
 {
     public interface IDal
     {
@@ -101,7 +101,7 @@ namespace IDAL
         /// <param name="lat">the latitude of the station</param>
         /// <param name="lng">the longitude of the station</param>
         /// <param name="chargSlots">hw many charge slosts are in the station</param>
-        void AddStation(int id,string name, double lat, double lng, int chargSlots);
+        void AddStation(int id, string name, double lat, double lng, int chargSlots);
 
         /// <summary>
         /// Add drone to Drones list in DataSource
@@ -109,7 +109,7 @@ namespace IDAL
         /// <param name="id">the ID of the drone</param>
         /// <param name="model">the modle of the drone</param>
         /// <param name="maxWeight">max weight of the drone</param>
-        void AddDrone(int id,string model, WeightCategories maxWeight);
+        void AddDrone(int id, string model, WeightCategories maxWeight);
 
         /// <summary>
         /// Add customer to Customers list in DataSource
@@ -119,7 +119,7 @@ namespace IDAL
         /// <param name="phone">the phone of the customer</param>
         /// <param name="lat">the latitude of the customer</param>
         /// <param name="lng">the longitude of the customer</param>
-        void AddCustomer(int id, string name, string phone, double lat, double lng,Permissions permission);
+        void AddCustomer(int id, string name, string phone, double lat, double lng, Permissions permission);
 
         /// <summary>
         /// Add parcel to Parcels list in DataSource
@@ -143,7 +143,7 @@ namespace IDAL
         /// </summary>
         /// <param name="stationId">the station ID</param>
         void DeleteStation(int stationId);
-        
+
         /// <summary>
         /// Deletes drone by ID
         /// </summary>
@@ -184,7 +184,7 @@ namespace IDAL
         /// </summary>
         /// <param name="parcelId">the parcel ID to update</param>
         void ParcelToCustomer(int parcelId);
-        
+
         /// <summary>
         /// send drone to charge in station
         /// </summary>
@@ -205,7 +205,7 @@ namespace IDAL
         /// <param name="name">new name</param>
         /// <param name="phone">new phone</param>
         void UpdateCustomer(int customerId, string name, string phone);
-        
+
         /// <summary>
         /// updates drone's model
         /// </summary>

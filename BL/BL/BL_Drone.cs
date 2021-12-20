@@ -2,9 +2,7 @@
 using IBL.BO;
 
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace BL
 {
@@ -22,12 +20,12 @@ namespace BL
                 newDrone.Status = DroneStatus.UnderMaintenance;
                 newDrone.CurrentLocation = GetStation(stationId).Location;
 
-                DalObject.AddDrone(drone.Id, drone.Model, (IDAL.DO.WeightCategories)drone.MaxWeight);
+                DalObject.AddDrone(drone.Id, drone.Model, (DO.WeightCategories)drone.MaxWeight);
                 DalObject.DroneToStation(stationId, drone.Id);
 
                 Drones.Add(newDrone);
             }
-            catch (IDAL.DO.IdAlreadyExistsException ex)
+            catch (DO.IdAlreadyExistsException ex)
             { 
                 throw new IBL.BL.IdAlreadyExistsException(ex.Message, ex.Id);
             }
@@ -118,7 +116,7 @@ namespace BL
                 int droneIndex = Drones.FindIndex(drone => drone.Id == id);
                 Drones[droneIndex].Model = model;                
             }
-            catch (IDAL.DO.IdNotFoundException ex)
+            catch (DO.IdNotFoundException ex)
             {
                 throw new IBL.BL.IdNotFoundException(ex.Message, ex.Id);
             }

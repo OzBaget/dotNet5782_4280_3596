@@ -3,7 +3,7 @@ namespace ConsoleUI
 {
     class Program
     {
-        static DalObject.DalObject  db = new DalObject.DalObject();
+        static Dal.DalObject  db = new Dal.DalObject();
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome To DeliverManger!");

@@ -12,13 +12,13 @@ namespace BL
             
             try
             {
-                DalObject.AddParcel(parcel.Sender.Id, parcel.Target.Id, (IDAL.DO.WeightCategories)parcel.Weight, (IDAL.DO.Priorities)parcel.Prioritie, DateTime.Now, null, null, null);
+                DalObject.AddParcel(parcel.Sender.Id, parcel.Target.Id, (DO.WeightCategories)parcel.Weight, (DO.Priorities)parcel.Prioritie, DateTime.Now, null, null, null);
             }
-            catch (IDAL.DO.IdAlreadyExistsException ex)
+            catch (DO.IdAlreadyExistsException ex)
             {
                 throw new IBL.BL.IdAlreadyExistsException(ex.Message, ex.Id);
             }
-            catch(IDAL.DO.IdNotFoundException ex)
+            catch(DO.IdNotFoundException ex)
             {
                 throw new IBL.BL.IdNotFoundException(ex.Message, ex.Id);
             }
@@ -27,7 +27,7 @@ namespace BL
         {
             try
             {
-                IDAL.DO.Parcel tmpParcel = DalObject.GetParcerl(parcelId);
+                DO.Parcel tmpParcel = DalObject.GetParcerl(parcelId);
                 Parcel newParcel = new();
                 newParcel.Id = tmpParcel.Id;
                 newParcel.Prioritie = (Priorities)tmpParcel.Priority;
@@ -56,7 +56,7 @@ namespace BL
                 return newParcel;
 
             }
-            catch (IDAL.DO.IdNotFoundException ex)
+            catch (DO.IdNotFoundException ex)
             {
 
                 throw new IBL.BL.IdNotFoundException(ex.Message, ex.Id);
@@ -66,7 +66,7 @@ namespace BL
         public IEnumerable<ParcelToList> GetAllParcels()
         {
             List<ParcelToList> parcels = new();
-            foreach (IDAL.DO.Parcel oldParcel in DalObject.GetAllParcels())
+            foreach (DO.Parcel oldParcel in DalObject.GetAllParcels())
             {
                 ParcelToList parcel = new();
                 parcel.Id = oldParcel.Id;
@@ -95,7 +95,7 @@ namespace BL
         public IEnumerable<ParcelToList> GetUnassignedParcels()
         {
             List<ParcelToList> filterdParcel = new();
-            foreach (IDAL.DO.Parcel oldParcel in DalObject.GetFilterdParcels(parcel => parcel.Scheduled == null))
+            foreach (DO.Parcel oldParcel in DalObject.GetFilterdParcels(parcel => parcel.Scheduled == null))
             {
                 ParcelToList newParcel = new();
                 newParcel.Id = oldParcel.Id;

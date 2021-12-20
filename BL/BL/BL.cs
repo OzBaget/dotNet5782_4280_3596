@@ -2,14 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace BL
 {
     public partial class BL : IBL.IBL
     {
-        IDAL.IDal DalObject;
+        DalApi.IDal DalObject;
         static List<DroneToList> Drones = new List<DroneToList>();
         double powerUseEmpty;
         double powerUseLight;
@@ -19,7 +18,7 @@ namespace BL
 
         public BL()
         {
-            DalObject = new DalObject.DalObject();
+            DalObject = new Dal.DalObject();
             //precnt to meter
             powerUseEmpty = DalObject.GetPowerUse()[0];
             powerUseLight = DalObject.GetPowerUse()[1];
@@ -29,14 +28,14 @@ namespace BL
             chargingRate = DalObject.GetChargingRate();//precent to hour
 
 
-            foreach (IDAL.DO.Drone drone in DalObject.GetAllDrones())
+            foreach (DO.Drone drone in DalObject.GetAllDrones())
             {
                 DroneToList myDrone = new();
                 myDrone.Id = drone.Id;
                 myDrone.Model = drone.Model;
                 myDrone.MaxWeight =(WeightCategories) drone.MaxWeight;
 
-                foreach (IDAL.DO.Parcel parcel in DalObject.GetAllParcels())
+                foreach (DO.Parcel parcel in DalObject.GetAllParcels())
                 {
                     if (parcel.Delivered == null && parcel.Scheduled != null &&  parcel.DroneId == myDrone.Id) //parcel havn't deliverd but scheduled
                     {

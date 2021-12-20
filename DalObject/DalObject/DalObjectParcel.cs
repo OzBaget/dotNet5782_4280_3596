@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
-using IDAL.DO;
+using DO;
 using System;
-namespace DalObject
+
+namespace Dal
 {
     public partial class DalObject
     {

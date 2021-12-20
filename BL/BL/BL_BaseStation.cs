@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using IBL.BL;
 using IBL.BO;
 
@@ -16,7 +12,7 @@ namespace BL
             {
                 DalObject.AddStation(station.Id, station.Name, station.Location.Latitude, station.Location.Longitude, station.NumFreeChargers);
             }
-            catch (IDAL.DO.IdAlreadyExistsException ex)
+            catch (DO.IdAlreadyExistsException ex)
             {
                 throw new IBL.BL.IdAlreadyExistsException(ex.Message, ex.Id);
             }
@@ -25,7 +21,7 @@ namespace BL
         {
             try
             {
-                IDAL.DO.Station tmpStation= DalObject.GetStation(stationId);
+                DO.Station tmpStation= DalObject.GetStation(stationId);
                 BaseStation newStation = new();
                 newStation.Id = tmpStation.Id;
                 newStation.Name = tmpStation.Name;
@@ -35,7 +31,7 @@ namespace BL
                 newStation.NumFreeChargers = tmpStation.FreeChargeSlots;
                 newStation.DronesInCharging = getDronesInChraging(tmpStation.Id);
                 return newStation;
-            }catch(IDAL.DO.IdNotFoundException ex)
+            }catch(DO.IdNotFoundException ex)
             {
                 throw new IBL.BL.IdNotFoundException(ex.Message, ex.Id);
             }
@@ -43,7 +39,7 @@ namespace BL
         public IEnumerable<BaseStationToList> GetAllStations()
         {
             List<BaseStationToList> stations = new();
-            foreach (IDAL.DO.Station oldStation in DalObject.GetAllStations())
+            foreach (DO.Station oldStation in DalObject.GetAllStations())
             {
                 BaseStationToList newStation = new();
                 newStation.Id = oldStation.Id;
@@ -72,7 +68,7 @@ namespace BL
 
                 DalObject.UpdateStation(stationId, name, numChargers);
             }
-            catch (IDAL.DO.IdNotFoundException ex)
+            catch (DO.IdNotFoundException ex)
             {
                 throw new IBL.BL.IdNotFoundException(ex.Message, ex.Id);
             }
@@ -81,7 +77,7 @@ namespace BL
         public IEnumerable<BaseStationToList> GetStationsWithFreeSlots()
         {
             List<BaseStationToList> filterdStations = new();
-            foreach (IDAL.DO.Station oldStation in DalObject.GetFilterdStations(station => station.FreeChargeSlots > 0))
+            foreach (DO.Station oldStation in DalObject.GetFilterdStations(station => station.FreeChargeSlots > 0))
             {
                 BaseStationToList newStation = new();
                 newStation.Id = oldStation.Id;
@@ -101,7 +97,7 @@ namespace BL
         private List<DroneInCharging> getDronesInChraging(int stationId)
         {
             List<DroneInCharging> drones = new();
-            foreach (IDAL.DO.DroneCharge charger in DalObject.GetAllDroneCharge())
+            foreach (DO.DroneCharge charger in DalObject.GetAllDroneCharge())
             {
                 if (charger.Stationld == stationId) 
                 {

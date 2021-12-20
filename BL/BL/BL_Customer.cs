@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using IBL.BO;
 
 namespace BL
@@ -10,9 +9,9 @@ namespace BL
         {
             try
             {
-                DalObject.AddCustomer(customer.Id, customer.Name, customer.Phone, customer.Location.Latitude, customer.Location.Longitude, (IDAL.DO.Permissions)customer.permission);
+                DalObject.AddCustomer(customer.Id, customer.Name, customer.Phone, customer.Location.Latitude, customer.Location.Longitude, (DO.Permissions)customer.permission);
             }
-            catch (IDAL.DO.IdAlreadyExistsException ex)
+            catch (DO.IdAlreadyExistsException ex)
             {
                 throw new IBL.BL.IdAlreadyExistsException(ex.Message, ex.Id);
             }
@@ -21,7 +20,7 @@ namespace BL
         {
             try
             {
-                IDAL.DO.Customer tmpCustomer= DalObject.GetCustomer(customerId);
+                DO.Customer tmpCustomer= DalObject.GetCustomer(customerId);
                 Customer newCustomer = new();
                 newCustomer.Id = tmpCustomer.Id;
                 newCustomer.Name = tmpCustomer.Name;
@@ -70,7 +69,7 @@ namespace BL
                 }
                 return newCustomer;
             }
-            catch(IDAL.DO.IdNotFoundException ex)
+            catch(DO.IdNotFoundException ex)
             {
                 throw new IBL.BL.IdNotFoundException(ex.Message, ex.Id);
             }
@@ -78,7 +77,7 @@ namespace BL
         public IEnumerable<CustomerToList> GetAllCustomers()
         {
             List<CustomerToList> customers = new();
-            foreach (IDAL.DO.Customer oldCustomer in DalObject.GetAllCustomers())
+            foreach (DO.Customer oldCustomer in DalObject.GetAllCustomers())
             {
                 CustomerToList newCustomer = new();
                 newCustomer.Id = oldCustomer.Id;
@@ -114,7 +113,7 @@ namespace BL
                     phone = GetCustomer(customerId).Phone;
                 DalObject.UpdateCustomer(customerId, name, phone);
             }
-            catch (IDAL.DO.IdNotFoundException ex)
+            catch (DO.IdNotFoundException ex)
             {
                 throw new IBL.BL.IdNotFoundException(ex.Message, ex.Id);
             }

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using IDAL.DO;
+using DO;
 
-namespace DalObject
+namespace Dal
 {
     class DataSource
     {
