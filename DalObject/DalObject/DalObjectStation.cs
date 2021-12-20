@@ -4,9 +4,9 @@ using DO;
 
 namespace Dal
 {
-    public partial class DalObject
+    public partial class DalObject : DalApi.IDal
     {
-        
+
         public Station GetStation(int stationId)
         {
             bool stationExists = false;

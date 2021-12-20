@@ -126,7 +126,10 @@ namespace BL
             return Radios * c;
         }
 
-        
+        public IEnumerable<DroneToList> GetFilterdParcels(Predicate<ParcelToList> filter)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     

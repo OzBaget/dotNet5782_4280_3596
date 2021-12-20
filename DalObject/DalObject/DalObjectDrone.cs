@@ -3,7 +3,7 @@ using DO;
 
 namespace Dal
 {
-    public partial class DalObject
+    public partial class DalObject : DalApi.IDal
     {
         public void AddDrone(int id, string model, WeightCategories maxWeight)
         {

@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using System;
-using DalApi;
 
 namespace Dal
 {
-    public partial class DalObject: IDal
+    public partial class DalObject: DalApi.IDal
     {
         public DalObject()
         {

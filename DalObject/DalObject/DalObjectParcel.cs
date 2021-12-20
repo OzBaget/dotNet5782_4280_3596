@@ -4,9 +4,9 @@ using System;
 
 namespace Dal
 {
-    public partial class DalObject
+    public partial class DalObject : DalApi.IDal
     {
-        
+
         public Parcel GetParcerl(int parcelId)
         {
             bool parcelExists = false;

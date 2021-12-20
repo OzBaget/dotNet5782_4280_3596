@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using DO;
+
+
 namespace Dal
 {
-    public partial class DalObject
+    public partial class DalObject : DalApi.IDal
     {
         public Customer GetCustomer(int customerId)
         {
