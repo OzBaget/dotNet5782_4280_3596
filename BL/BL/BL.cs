@@ -18,7 +18,8 @@ namespace BL
 
         public BL()
         {
-            DalObject = new Dal.DalObject();
+            DalObject = DalApi.DalFactory.GetDal();
+                //new Dal.DalObject();
             //precnt to meter
             powerUseEmpty = DalObject.GetPowerUse()[0];
             powerUseLight = DalObject.GetPowerUse()[1];
