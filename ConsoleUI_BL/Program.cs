@@ -1,5 +1,6 @@
 ﻿using System;
-using IBL.BL;
+using BlApi;
+using BO;
 using System.Globalization;
 
 
@@ -7,9 +8,11 @@ namespace ConsoleUI_BL
 {
     class Program
     {
-        static IBL.IBL db = new BL.BL();
+        static IBL db = BlFactory.GetBl();
+
         static void Main(string[] args)
         {
+            
             Console.WriteLine("Welcome To DeliverManger!");
             bool exit = false;
             while (!exit)
@@ -109,7 +112,7 @@ namespace ConsoleUI_BL
 
             Console.WriteLine("How many charge slots are in the station?");
             int slots = getIntFromUser();
-            IBL.BO.BaseStation s = new();
+            BaseStation s = new();
             s.Id = id;
             s.Name = name;
             s.Location = new();
@@ -137,11 +140,11 @@ namespace ConsoleUI_BL
             int id = getIntFromUser();
             Console.WriteLine("Choose MaxWeight of drone:");
             Console.WriteLine("1. Light\n2. Middle\n3. Heavy");
-            IBL.BO.WeightCategories maxWeight = (IBL.BO.WeightCategories)(getUserSelection(3) - 1);
+            WeightCategories maxWeight = (WeightCategories)(getUserSelection(3) - 1);
             Console.WriteLine("Enter station id:");
             int idStation = getIntFromUser();
 
-            IBL.BO.Drone d = new();
+            Drone d = new();
             d.Id = id;
             d.Model = model;
             d.MaxWeight = maxWeight;
@@ -172,10 +175,11 @@ namespace ConsoleUI_BL
             string phone = Console.ReadLine();
 
             Tuple<double, double> position = getCoordsFromUser();
-            IBL.BO.Customer c = new IBL.BO.Customer();
+            Customer c = new Customer();
             c.Id = id;
             c.Name = name;
             c.Phone = phone;
+            c.Location = new();
             c.Location.Latitude = position.Item1;
             c.Location.Longitude = position.Item2;
             try
@@ -203,15 +207,15 @@ namespace ConsoleUI_BL
 
             Console.WriteLine("Choose parcel weight:");
             Console.WriteLine("1. Light\n2. Middle\n3. Heavy");
-            IBL.BO.WeightCategories weight =(IBL.BO.WeightCategories) getUserSelection(3) - 1;
+            WeightCategories weight =(WeightCategories) getUserSelection(3) - 1;
 
             Console.WriteLine("Choose parcel priority:");
             Console.WriteLine("1. Normal\n2. Fast\n3. Urgent");
-            IBL.BO.Priorities priority = (IBL.BO.Priorities)(getUserSelection(3) - 1);
-            IBL.BO.CustomerInParcel sender = new IBL.BO.CustomerInParcel();
+            Priorities priority = (Priorities)(getUserSelection(3) - 1);
+            CustomerInParcel sender = new CustomerInParcel();
             sender.Id = senderId;
-            IBL.BO.CustomerInParcel target = new IBL.BO.CustomerInParcel();
-            IBL.BO.Parcel p = new IBL.BO.Parcel();
+            CustomerInParcel target = new CustomerInParcel();
+            Parcel p = new Parcel();
             target.Id = targetId;
             p.Sender = sender;
             p.Target = target;

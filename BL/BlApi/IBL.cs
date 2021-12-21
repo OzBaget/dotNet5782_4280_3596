@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using IBL.BO;
+using BO;
 
-namespace IBL
+namespace BlApi
 {
     public interface IBL
     {
@@ -130,7 +130,7 @@ namespace IBL
         /// <returns></returns>
         IEnumerable<BaseStationToList> GetStationsWithFreeSlots();
 
-        IEnumerable<DroneToList> GetFilterdDrones(Predicate<DroneToList> filter);
-        IEnumerable<DroneToList> GetFilterdParcels(Predicate<ParcelToList> filter);
+        IEnumerable<DroneToList> GetFilterdDrones(WeightCategories? weight,Priorities? priority);
+        IEnumerable<DroneToList> GetFilterdParcels(DateTime startDate, DateTime endDate, ParcelStatus status);
     }
 }

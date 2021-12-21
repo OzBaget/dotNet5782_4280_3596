@@ -1,25 +1,27 @@
-﻿using IBL.BO;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using BO;
+using BlApi;
+using DalApi;
 
 namespace BL
 {
-    public partial class BL : IBL.IBL
+    sealed partial class BL : IBL
     {
-        DalApi.IDal DalObject;
         static List<DroneToList> Drones = new List<DroneToList>();
         double powerUseEmpty;
         double powerUseLight;
         double powerUseMiddle;
         double powerUseHeavy;
         double chargingRate;
+        internal IDal DalObject = DalFactory.GetDal();
 
-        public BL()
+        static readonly IBL instance = new BL();
+        public static IBL Instance { get => instance; }        
+
+        BL()
         {
-            DalObject = DalApi.DalFactory.GetDal();
-                //new Dal.DalObject();
             //precnt to meter
             powerUseEmpty = DalObject.GetPowerUse()[0];
             powerUseLight = DalObject.GetPowerUse()[1];
@@ -127,11 +129,6 @@ namespace BL
             return Radios * c;
         }
 
-        public IEnumerable<DroneToList> GetFilterdParcels(Predicate<ParcelToList> filter)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
-
-    
 }

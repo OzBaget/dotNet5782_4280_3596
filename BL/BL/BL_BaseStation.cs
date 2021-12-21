@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using IBL.BL;
-using IBL.BO;
+using BO;
+using BlApi;
 
 namespace BL
 {
-    public partial class BL
+    sealed partial class BL : IBL
     {
         public void AddStation(BaseStation station)
         {
@@ -14,7 +14,7 @@ namespace BL
             }
             catch (DO.IdAlreadyExistsException ex)
             {
-                throw new IBL.BL.IdAlreadyExistsException(ex.Message, ex.Id);
+                throw new IdAlreadyExistsException(ex.Message, ex.Id);
             }
         }
         public BaseStation GetStation(int stationId)
@@ -33,7 +33,7 @@ namespace BL
                 return newStation;
             }catch(DO.IdNotFoundException ex)
             {
-                throw new IBL.BL.IdNotFoundException(ex.Message, ex.Id);
+                throw new IdNotFoundException(ex.Message, ex.Id);
             }
         }
         public IEnumerable<BaseStationToList> GetAllStations()
@@ -70,7 +70,7 @@ namespace BL
             }
             catch (DO.IdNotFoundException ex)
             {
-                throw new IBL.BL.IdNotFoundException(ex.Message, ex.Id);
+                throw new IdNotFoundException(ex.Message, ex.Id);
             }
             
         }

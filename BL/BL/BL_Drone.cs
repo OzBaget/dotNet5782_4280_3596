@@ -1,12 +1,12 @@
 ﻿using System;
-using IBL.BO;
-
 using System.Collections.Generic;
+using BO;
+using BlApi;
 
 
 namespace BL
 {
-    public partial class BL
+    sealed partial class BL : IBL
     {
         public void AddDrone(Drone drone, int stationId)
         {
@@ -27,14 +27,14 @@ namespace BL
             }
             catch (DO.IdAlreadyExistsException ex)
             { 
-                throw new IBL.BL.IdAlreadyExistsException(ex.Message, ex.Id);
+                throw new IdAlreadyExistsException(ex.Message, ex.Id);
             }
         }
         public Drone GetDrone(int droneId)
         {
             int droneIndex = Drones.FindIndex(drone => drone.Id == droneId);
             if (droneIndex==-1)
-                throw new IBL.BL.IdNotFoundException($"Can't find drone with ID #{droneId}", droneId);
+                throw new IdNotFoundException($"Can't find drone with ID #{droneId}", droneId);
             
             DroneToList tmpDrone = Drones[droneIndex];
 
@@ -67,15 +67,20 @@ namespace BL
         {
             return Drones;
         }
+        IEnumerable<DroneToList> IBL.GetFilterdDrones(WeightCategories? weight, Priorities? priority)
+        {
+            throw new NotImplementedException();
+        }
+
 
         public int DroneToStation(int droneId)
         {
             int droneIndex = Drones.FindIndex(drone => drone.Id == droneId);
             if (droneIndex == -1)
-                throw new IBL.BL.IdNotFoundException($"Can't find drone with ID #{droneId}", droneId);
+                throw new IdNotFoundException($"Can't find drone with ID #{droneId}", droneId);
             DroneToList myDrone = Drones[droneIndex];//copy by ref..
             if (Drones[droneIndex].Status != DroneStatus.Available)
-                throw new IBL.BL.CantSendDroneToChargeException("Drone is not available!");
+                throw new CantSendDroneToChargeException("Drone is not available!");
 
             foreach (BaseStationToList station in GetStationsWithFreeSlots())
             {
@@ -89,17 +94,17 @@ namespace BL
                     return station.Id;
                 }
             }
-            throw new IBL.BL.CantSendDroneToChargeException("There is no station that the drone is able to charge at!");
+            throw new CantSendDroneToChargeException("There is no station that the drone is able to charge at!");
         }
         public int FreeDrone(int droneId, TimeSpan droneTime)
         {
             int droneIndex = Drones.FindIndex(drone => drone.Id == droneId);
             if (droneIndex == -1)
-                throw new IBL.BL.IdNotFoundException($"Can't find drone with ID #{droneId}", droneId);
+                throw new IdNotFoundException($"Can't find drone with ID #{droneId}", droneId);
 
             DroneToList myDrone = Drones[droneIndex];//copy by ref
             if (myDrone.Status != DroneStatus.UnderMaintenance)
-                throw new IBL.BL.CantReleaseDroneFromChargeException("Drone is not in charging!");
+                throw new CantReleaseDroneFromChargeException("Drone is not in charging!");
 
             DalObject.FreeDrone(droneId);
 
@@ -107,7 +112,6 @@ namespace BL
             myDrone.Status = DroneStatus.Available;
             return myDrone.Battery;
         }
-
         public void UpdateDrone(int id, string model)
         {
             try
@@ -118,17 +122,13 @@ namespace BL
             }
             catch (DO.IdNotFoundException ex)
             {
-                throw new IBL.BL.IdNotFoundException(ex.Message, ex.Id);
+                throw new IdNotFoundException(ex.Message, ex.Id);
             }
         }
 
 
 
-        public IEnumerable<DroneToList> GetFilterdDrones(Predicate<DroneToList> filter)
-        {
-            return Drones.FindAll(filter);
-        }
-
+        
 
         /// <summary>
         /// calculate the batrry needed for getting from point A to point B with spacific onditions

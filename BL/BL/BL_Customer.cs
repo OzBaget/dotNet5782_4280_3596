@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
-using IBL.BO;
+using BO;
+using BlApi;
 
 namespace BL
 {
-    public partial class BL
+    sealed partial class BL : IBL
     {
         public void AddCustomer(Customer customer)
         {
@@ -13,7 +14,7 @@ namespace BL
             }
             catch (DO.IdAlreadyExistsException ex)
             {
-                throw new IBL.BL.IdAlreadyExistsException(ex.Message, ex.Id);
+                throw new IdAlreadyExistsException(ex.Message, ex.Id);
             }
         }
         public Customer GetCustomer(int customerId)
@@ -71,7 +72,7 @@ namespace BL
             }
             catch(DO.IdNotFoundException ex)
             {
-                throw new IBL.BL.IdNotFoundException(ex.Message, ex.Id);
+                throw new IdNotFoundException(ex.Message, ex.Id);
             }
         }
         public IEnumerable<CustomerToList> GetAllCustomers()
@@ -115,7 +116,7 @@ namespace BL
             }
             catch (DO.IdNotFoundException ex)
             {
-                throw new IBL.BL.IdNotFoundException(ex.Message, ex.Id);
+                throw new IdNotFoundException(ex.Message, ex.Id);
             }
         }
     }
