@@ -4,7 +4,7 @@ using DO;
 
 namespace Dal
 {
-    public partial class DalObject : DalApi.IDal
+    sealed partial class DalObject : DalApi.IDal
     {
 
         public Station GetStation(int stationId)

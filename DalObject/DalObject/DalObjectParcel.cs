@@ -4,7 +4,7 @@ using System;
 
 namespace Dal
 {
-    public partial class DalObject : DalApi.IDal
+    sealed partial class DalObject : DalApi.IDal
     {
 
         public Parcel GetParcerl(int parcelId)
