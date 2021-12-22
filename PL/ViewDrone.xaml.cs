@@ -1,4 +1,5 @@
-﻿using IBL.BO;
+﻿using BlApi;
+using BO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace PL
     /// </summary>
     public partial class ViewDrone : Window
     {
-        IBL.IBL db;
+        IBL db;
         Drone Cdrone;
         bool exit = false;
 
@@ -29,7 +30,7 @@ namespace PL
         /// Add new drone menu
         /// </summary>
         /// <param name="db">dataBase to add too</param>
-        public ViewDrone(IBL.IBL db)
+        public ViewDrone(IBL db)
         {
             this.db = db;
             InitializeComponent();
@@ -47,7 +48,7 @@ namespace PL
         /// </summary>
         /// <param name="drone">the drone to view</param>
         /// <param name="db"></param>
-        public ViewDrone(Drone drone, IBL.IBL db)
+        public ViewDrone(Drone drone, IBL db)
         {
             this.db = db;
             Cdrone = drone;
@@ -185,11 +186,11 @@ namespace PL
                 MessageBox.Show("The drone was added successfully!", "Success!", MessageBoxButton.OK, MessageBoxImage.Information);
                 Close();
             }
-            catch (IBL.BL.IdAlreadyExistsException ex)
+            catch (BlApi.IdAlreadyExistsException ex)
             {
                 MessageBox.Show(ex.Message, "Can't add dorne", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            catch (IBL.BL.IdNotFoundException ex)
+            catch (BlApi.IdNotFoundException ex)
             {
                 MessageBox.Show(ex.Message, "Can't add dorne", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -210,7 +211,7 @@ namespace PL
                 updateButton.Visibility = Visibility.Hidden;
 
             }
-            catch (IBL.BL.IdNotFoundException ex)
+            catch (BlApi.IdNotFoundException ex)
             {
                 MessageBox.Show(ex.Message, "Can't update dorne", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -246,11 +247,11 @@ namespace PL
                 LinkButton.Visibility = Visibility.Visible;
                 ChargeButton.Visibility = Visibility.Visible;
             }
-            catch (IBL.BL.IdNotFoundException ex)
+            catch (BlApi.IdNotFoundException ex)
             {
                 MessageBox.Show(ex.Message, "Can't deliver parcel", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            catch (IBL.BL.CantDeliverParcelException ex)
+            catch (BlApi.CantDeliverParcelException ex)
             {
                 MessageBox.Show(ex.Message, "Can't deliver parcel", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -272,11 +273,11 @@ namespace PL
                 ReleaseButton.Visibility = Visibility.Visible;
                 LinkButton.Visibility = Visibility.Hidden;
             }
-            catch (IBL.BL.IdNotFoundException ex)
+            catch (BlApi.IdNotFoundException ex)
             {
                 MessageBox.Show(ex.Message, "Can't send drone to charge", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            catch (IBL.BL.CantSendDroneToChargeException ex)
+            catch (BlApi.CantSendDroneToChargeException ex)
             {
                 MessageBox.Show(ex.Message, "Can't send drone to charge", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -301,11 +302,11 @@ namespace PL
                     ChargeButton.Visibility = Visibility.Visible;
                     LinkButton.Visibility = Visibility.Visible;
                 }
-                catch (IBL.BL.IdNotFoundException ex)
+                catch (BlApi.IdNotFoundException ex)
                 {
                     MessageBox.Show(ex.Message, "Can't release dorne", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-                catch (IBL.BL.CantReleaseDroneFromChargeException ex)
+                catch (BlApi.CantReleaseDroneFromChargeException ex)
                 {
                     MessageBox.Show(ex.Message, "Can't release dorne", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
@@ -328,11 +329,11 @@ namespace PL
                 PickUpButton.Visibility = Visibility.Hidden;
                 DeliverButton.Visibility = Visibility.Visible;
             }
-            catch (IBL.BL.IdNotFoundException ex)
+            catch (BlApi.IdNotFoundException ex)
             {
                 MessageBox.Show(ex.Message, "Can't pickup parcel", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            catch (IBL.BL.CantPickUpParcelException ex)
+            catch (BlApi.CantPickUpParcelException ex)
             {
                 MessageBox.Show(ex.Message, "Can't pickup parcel", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -354,11 +355,11 @@ namespace PL
                 ChargeButton.Visibility = Visibility.Hidden;
                 PickUpButton.Visibility = Visibility.Visible;
             }
-            catch (IBL.BL.IdNotFoundException ex)
+            catch (BlApi.IdNotFoundException ex)
             {
                 MessageBox.Show(ex.Message, "Can't link parcel", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            catch (IBL.BL.CantLinkParcelException ex)
+            catch (BlApi.CantLinkParcelException ex)
             {
                 MessageBox.Show(ex.Message, "Can't link parcel", MessageBoxButton.OK, MessageBoxImage.Error);
             }

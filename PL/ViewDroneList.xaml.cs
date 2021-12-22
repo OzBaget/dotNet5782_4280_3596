@@ -1,4 +1,6 @@
 ﻿using System;
+using BlApi;
+using BO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,15 +22,15 @@ namespace PL
     /// </summary>
     public partial class ViewDroneList : Window
     {
-        private IBL.IBL db;
+        private IBL db;
         bool exit = false;
-        public ViewDroneList(IBL.IBL database)
+        public ViewDroneList(IBL database)
         {
             InitializeComponent();
             db = database;
             ListViewDrones.ItemsSource = db.GetAllDrones();
-            StatusSelector.ItemsSource = Enum.GetValues(typeof(IBL.BO.DroneStatus));
-            WeightSelector.ItemsSource = Enum.GetValues(typeof(IBL.BO.WeightCategories));
+            StatusSelector.ItemsSource = Enum.GetValues(typeof(BO.DroneStatus));
+            WeightSelector.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
         }
 
         private void WeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -36,9 +38,9 @@ namespace PL
             if (WeightSelector.SelectedItem == null)
                 ListViewDrones.ItemsSource = db.GetAllDrones();
             else if (StatusSelector.SelectedItem != null)
-                ListViewDrones.ItemsSource = db.GetFilterdDrones(d => (IBL.BO.WeightCategories)WeightSelector.SelectedItem == d.MaxWeight && (IBL.BO.DroneStatus)StatusSelector.SelectedItem == d.Status);
+                ListViewDrones.ItemsSource = db.GetFilterdDrones((BO.WeightCategories)WeightSelector.SelectedItem, (BO.DroneStatus)StatusSelector.SelectedItem);
             else
-                ListViewDrones.ItemsSource = db.GetFilterdDrones(d => (IBL.BO.WeightCategories)WeightSelector.SelectedItem == d.MaxWeight);
+                ListViewDrones.ItemsSource = db.GetFilterdDrones((BO.WeightCategories)WeightSelector.SelectedItem, (BO.DroneStatus)StatusSelector.SelectedItem);
 
         }
         private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -46,16 +48,16 @@ namespace PL
             if(StatusSelector.SelectedItem == null)
                 ListViewDrones.ItemsSource = db.GetAllDrones();
             else if (WeightSelector.SelectedItem != null)
-                ListViewDrones.ItemsSource = db.GetFilterdDrones(d => (IBL.BO.DroneStatus)StatusSelector.SelectedItem == d.Status && (IBL.BO.WeightCategories)WeightSelector.SelectedItem == d.MaxWeight);
+                ListViewDrones.ItemsSource = db.GetFilterdDrones((BO.WeightCategories)WeightSelector.SelectedItem, (BO.DroneStatus)StatusSelector.SelectedItem);
             else
-                ListViewDrones.ItemsSource = db.GetFilterdDrones(d => (IBL.BO.DroneStatus)StatusSelector.SelectedItem == d.Status);
+                ListViewDrones.ItemsSource = db.GetFilterdDrones((BO.WeightCategories)WeightSelector.SelectedItem, (BO.DroneStatus)StatusSelector.SelectedItem);
 
         }
         
 
         private void ListViewDrones_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            new ViewDrone(db.GetDrone(((sender as ListView).SelectedItem as IBL.BO.DroneToList).Id), db).ShowDialog();
+            new ViewDrone(db.GetDrone(((sender as ListView).SelectedItem as BO.DroneToList).Id), db).ShowDialog();
             //refresh listView
             ListViewDrones.ItemsSource = null;
             ListViewDrones.ItemsSource =db.GetAllDrones();

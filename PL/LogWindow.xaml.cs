@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BlApi;
+using BO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,7 +25,7 @@ namespace PL
         {
             InitializeComponent();
         }
-        IBL.IBL db;
+        IBL db;
         private void Register(object sender, RoutedEventArgs e)
         {
             int a;
@@ -34,7 +36,7 @@ namespace PL
             int id;
             if (!int.TryParse(logInBox.Text, out id))
                 return;
-            if (db.GetCustomer(id).permission == IBL.BO.Permissions.Client)
+            if (db.GetCustomer(id).permission == BO.Permissions.Client)
                 new ViewParcelList();
 
             else
