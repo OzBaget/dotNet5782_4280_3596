@@ -67,9 +67,21 @@ namespace BL
         {
             return Drones;
         }
-        IEnumerable<DroneToList> IBL.GetFilterdDrones(WeightCategories? weight, Priorities? priority)
+        IEnumerable<DroneToList> IBL.GetFilterdDrones(WeightCategories? weight, DroneStatus? status)
         {
-            throw new NotImplementedException();
+            if (weight==null&& status!=null)
+            {
+                return Drones.FindAll(d => d.Status == status);
+            }
+            if (weight!=null&& status==null)
+            {
+                return Drones.FindAll(d => d.MaxWeight == weight);
+            }
+            if (weight != null && status != null)
+            {
+                return Drones.FindAll(d => d.MaxWeight == weight&&d.Status==status);
+            }
+            return Drones;
         }
 
 
