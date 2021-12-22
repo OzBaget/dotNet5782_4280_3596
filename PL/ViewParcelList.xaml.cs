@@ -3,7 +3,6 @@ using BlApi;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -34,7 +33,9 @@ namespace PL
             InitializeComponent();
             PrioritySelector.ItemsSource = Enum.GetValues(typeof(Priorities));
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
-            ListViewParcels.ItemsSource = db.GetAllCustomers();
+            StatusSelector.ItemsSource = Enum.GetValues(typeof(ParcelStatus));
+
+            ListViewParcels.ItemsSource = db.GetAllParcels();
         }
 
         public ViewParcelList(Customer customer)
@@ -50,7 +51,8 @@ namespace PL
         }
         private void updateFilters(object sender, SelectionChangedEventArgs e)
         {
-
+            ListViewParcels.ItemsSource = null;
+            ListViewParcels.ItemsSource = db.GetFilterdParcels(datePickerStart.SelectedDate, datePickerEnd.SelectedDate,(ParcelStatus?)StatusSelector.SelectedItem,(Priorities?) PrioritySelector.SelectedItem, (WeightCategories?)WeightSelector.SelectedItem);
         }
 
         private void AddDrone_clk(object sender, MouseButtonEventArgs e)
@@ -81,6 +83,22 @@ namespace PL
                 e.Cancel = true;
                 SystemSounds.Beep.Play();
             }
+        }
+
+        private void startDateChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            
+        }
+        private void endDateChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            datePickerStart.DisplayDateEnd = datePickerEnd.SelectedDate;
+            updateFilters(null, null);
+        }
+
+        private void startDateChanged(object sender, RoutedEventArgs e)
+        {
+            datePickerEnd.DisplayDateStart = datePickerStart.SelectedDate;
+            updateFilters(null, null);
         }
     }
 }

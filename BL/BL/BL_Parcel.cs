@@ -65,30 +65,33 @@ namespace BL
         public IEnumerable<ParcelToList> GetAllParcels()
         {
             List<ParcelToList> parcels = new();
-            foreach (DO.Parcel oldParcel in DalObject.GetAllParcels())
+            foreach (var doParcel in DalObject.GetAllParcels())
             {
-                ParcelToList parcel = new();
-                parcel.Id = oldParcel.Id;
-                parcel.SenderName = GetCustomer(oldParcel.SenderId).Name;
-                parcel.TargetName = GetCustomer(oldParcel.TargetId).Name;
-                parcel.Priority = (Priorities)oldParcel.Priority;
-                parcel.Weight = (WeightCategories)oldParcel.Weight;
-
-                if (oldParcel.Requsted!=null)
-                    parcel.Status = ParcelStatus.Created;
-
-                if (oldParcel.Scheduled!=null)
-                    parcel.Status = ParcelStatus.Scheduled;
-
-                if (oldParcel.PickedUp!=null)
-                    parcel.Status = ParcelStatus.PickUp;
-
-                if (oldParcel.Delivered!=null)
-                    parcel.Status = ParcelStatus.Deliverd;
-
-                parcels.Add(parcel);
-            }
+                parcels.Add(doParcelToParcelToList(doParcel));
+            }            
             return parcels;
+        }
+        private ParcelToList doParcelToParcelToList(DO.Parcel oldParcel)
+        {
+            ParcelToList parcel = new();
+            parcel.Id = oldParcel.Id;
+            parcel.SenderName = GetCustomer(oldParcel.SenderId).Name;
+            parcel.TargetName = GetCustomer(oldParcel.TargetId).Name;
+            parcel.Priority = (Priorities)oldParcel.Priority;
+            parcel.Weight = (WeightCategories)oldParcel.Weight;
+
+            if (oldParcel.Requsted != null)
+                parcel.Status = ParcelStatus.Created;
+
+            if (oldParcel.Scheduled != null)
+                parcel.Status = ParcelStatus.Scheduled;
+
+            if (oldParcel.PickedUp != null)
+                parcel.Status = ParcelStatus.PickUp;
+
+            if (oldParcel.Delivered != null)
+                parcel.Status = ParcelStatus.Deliverd;
+            return parcel;
         }
 
         public IEnumerable<ParcelToList> GetUnassignedParcels()
@@ -96,28 +99,28 @@ namespace BL
             List<ParcelToList> filterdParcel = new();
             foreach (DO.Parcel oldParcel in DalObject.GetFilterdParcels(parcel => parcel.Scheduled == null))
             {
-                ParcelToList newParcel = new();
-                newParcel.Id = oldParcel.Id;
-                newParcel.Priority = (Priorities)oldParcel.Priority;
-                newParcel.Weight = (WeightCategories)oldParcel.Weight;
-                newParcel.SenderName = DalObject.GetCustomer(oldParcel.SenderId).Name;
-                newParcel.TargetName = DalObject.GetCustomer(oldParcel.TargetId).Name;
-                newParcel.Status = ParcelStatus.Created;
-                if (oldParcel.Scheduled != null)
-                    newParcel.Status = ParcelStatus.Scheduled;
-                if (oldParcel.PickedUp != null)
-                    newParcel.Status = ParcelStatus.PickUp;
-                if (oldParcel.Delivered != null)
-                    newParcel.Status = ParcelStatus.Deliverd;
-                filterdParcel.Add(newParcel);
+                filterdParcel.Add(doParcelToParcelToList(oldParcel));
+            }
+            return filterdParcel;        
+        }
+        public IEnumerable<ParcelToList> GetFilterdParcels(DateTime? startDate, DateTime? endDate, ParcelStatus? status, Priorities? priority, WeightCategories? weight)
+        {
+            Predicate<DO.Parcel> dateFilter=x=>true;
+            if (startDate!=null && endDate!=null)
+                dateFilter = x => x.Requsted >= startDate && x.Scheduled <= endDate;
+            if (startDate != null && endDate == null)
+                dateFilter = x => x.Requsted >= startDate;
+            if (startDate == null && endDate != null)
+                dateFilter = x => x.Requsted <= endDate;
+
+            List<ParcelToList> filterdParcel = new();
+            foreach (DO.Parcel oldParcel in DalObject.GetFilterdParcels(dateFilter))
+            {
+                filterdParcel.Add(doParcelToParcelToList(oldParcel));
             }
             return filterdParcel;
 
-            
-        }
-        public IEnumerable<DroneToList> GetFilterdParcels(DateTime startDate, DateTime endDate, ParcelStatus? status, Priorities? priority)
-        {
-            throw new NotImplementedException();
+
         }
 
         public int linkParcel(int droneId)
