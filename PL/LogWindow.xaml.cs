@@ -29,7 +29,7 @@ namespace PL
         } 
         private void Register(object sender, RoutedEventArgs e)
         {
-            int a;
+            new Register().ShowDialog();
         }
 
         private void logIn(object sender, RoutedEventArgs e)
