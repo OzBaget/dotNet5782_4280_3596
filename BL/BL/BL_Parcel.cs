@@ -55,11 +55,9 @@ namespace BL
                 }
                 newParcel.Drone = drone;
                 return newParcel;
-
             }
             catch (DO.IdNotFoundException ex)
             {
-
                 throw new IdNotFoundException(ex.Message, ex.Id);
             }
         }
@@ -117,7 +115,7 @@ namespace BL
 
             
         }
-        IEnumerable<DroneToList> IBL.GetFilterdParcels(DateTime startDate, DateTime endDate, ParcelStatus status)
+        public IEnumerable<DroneToList> GetFilterdParcels(DateTime startDate, DateTime endDate, ParcelStatus? status, Priorities? priority)
         {
             throw new NotImplementedException();
         }

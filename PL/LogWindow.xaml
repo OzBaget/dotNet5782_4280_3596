@@ -7,8 +7,10 @@
         mc:Ignorable="d"
         Title="LogWindow" Height="640" Width="800">
     <Grid>
-        <Button x:Name="logInButton" Click="logIn" Content="login" HorizontalAlignment="Center" Margin="0,336,0,0" VerticalAlignment="Top" Height="66" Width="280" Opacity="100"/>
+        <Button x:Name="logInButton" Click="logIn"  IsDefault="True" Content="login" HorizontalAlignment="Center" Margin="0,336,0,0" VerticalAlignment="Top" Height="66" Width="280" Opacity="100"/>
         <Button x:Name="registerButton" Click="Register" Content="register" HorizontalAlignment="Left" Margin="309,442,0,0" VerticalAlignment="Top" Height="42" Width="178" Opacity="100" RenderTransformOrigin="0.5,0.5" />
         <TextBox x:Name="logInBox" HorizontalAlignment="Center" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="280" Height="33" Opacity="100" Margin="0,279,0,0" />
+        <TextBlock x:Name="errorBox" HorizontalAlignment="Left" Margin="260,312,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="238" Height="15" FontSize="10" Foreground="Red" />
+        <Button x:Name="loginAdminBtn" Content="Admin Mode" HorizontalAlignment="Center" Margin="0,187,0,0" VerticalAlignment="Top" Click="loginAdmin"/>
     </Grid>
 </Window>

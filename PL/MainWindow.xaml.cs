@@ -24,16 +24,15 @@ namespace PL
         {
             InitializeComponent();
         }
-        public void Administrator()
+
+        private void ViewDroneList(object sender, RoutedEventArgs e)
         {
-         
-
+            new ViewDroneList().Show();
         }
-        
 
-        
-
-        public int Customer { get; }
-        public Permissions Permission { get; }
+        private void viewParcelList(object sender, RoutedEventArgs e)
+        {
+            new ViewParcelList().Show();
+        }
     }
 }

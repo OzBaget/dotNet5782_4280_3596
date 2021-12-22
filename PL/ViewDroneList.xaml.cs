@@ -22,47 +22,27 @@ namespace PL
     /// </summary>
     public partial class ViewDroneList : Window
     {
-        private IBL db;
+        IBL db=BlFactory.GetBl();
         bool exit = false;
-        public ViewDroneList(IBL database)
+        public ViewDroneList()
         {
             InitializeComponent();
-            db = database;
             ListViewDrones.ItemsSource = db.GetAllDrones();
             StatusSelector.ItemsSource = Enum.GetValues(typeof(BO.DroneStatus));
             WeightSelector.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
         }
 
-        private void WeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void updateFilters(object sender, SelectionChangedEventArgs e)
         {
-            if (WeightSelector.SelectedItem == null)
-                ListViewDrones.ItemsSource = db.GetAllDrones();
-            else if (StatusSelector.SelectedItem != null)
-                ListViewDrones.ItemsSource = db.GetFilterdDrones((BO.WeightCategories)WeightSelector.SelectedItem, (BO.DroneStatus)StatusSelector.SelectedItem);
-            else
-                ListViewDrones.ItemsSource = db.GetFilterdDrones((BO.WeightCategories)WeightSelector.SelectedItem, (BO.DroneStatus)StatusSelector.SelectedItem);
-
+            ListViewDrones.ItemsSource = db.GetFilterdDrones((BO.WeightCategories?)WeightSelector.SelectedItem, (BO.DroneStatus?)StatusSelector.SelectedItem);
         }
-        private void StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if(StatusSelector.SelectedItem == null)
-                ListViewDrones.ItemsSource = db.GetAllDrones();
-            else if (WeightSelector.SelectedItem != null)
-                ListViewDrones.ItemsSource = db.GetFilterdDrones((BO.WeightCategories)WeightSelector.SelectedItem, (BO.DroneStatus)StatusSelector.SelectedItem);
-            else
-                ListViewDrones.ItemsSource = db.GetFilterdDrones((BO.WeightCategories)WeightSelector.SelectedItem, (BO.DroneStatus)StatusSelector.SelectedItem);
 
-        }
-        
 
         private void ListViewDrones_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             new ViewDrone(db.GetDrone(((sender as ListView).SelectedItem as BO.DroneToList).Id), db).ShowDialog();
             //refresh listView
-            ListViewDrones.ItemsSource = null;
-            ListViewDrones.ItemsSource =db.GetAllDrones();
-            WeightSelector_SelectionChanged(null, null);
-            StatusSelector_SelectionChanged(null, null);
+            updateFilters(null, null);
         }
 
         /// <summary>
@@ -99,8 +79,7 @@ namespace PL
             //refresh listView
             ListViewDrones.ItemsSource = null;
             ListViewDrones.ItemsSource = db.GetAllDrones();
-            WeightSelector_SelectionChanged(null, null);
-            StatusSelector_SelectionChanged(null, null);
+            updateFilters(null, null);
         }
 
         /// <summary>
@@ -126,6 +105,7 @@ namespace PL
                 SystemSounds.Beep.Play();
             }
         }
+
     }
 
 }

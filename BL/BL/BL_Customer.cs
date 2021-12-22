@@ -31,7 +31,6 @@ namespace BL
                 newCustomer.Location.Longitude = tmpCustomer.Lng;
                 newCustomer.ReceivedParcels = new();
                 newCustomer.SentParcels = new();
-
                 //update ReceivedParcels and WaitsToSendParcels
                 foreach (var parcel in DalObject.GetAllParcels())
                 {

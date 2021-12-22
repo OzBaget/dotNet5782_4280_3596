@@ -77,8 +77,8 @@ namespace BL
                     }
                     if (myDrone.Status == DroneStatus.Available)
                     {
-                        int index = new Random().Next(GetAllCustomers().Where(customer => customer.ParcelsReceived > 0).Count());
-                        myDrone.CurrentLocation = GetCustomer(GetAllCustomers().ElementAt(index).Id).Location;
+                        int index = new Random().Next(GetAllCustomers().Count(customer => customer.ParcelsReceived > 0));
+                        myDrone.CurrentLocation = GetCustomer(GetAllCustomers().Where(customer => customer.ParcelsReceived > 0).ElementAt(index).Id).Location;
 
                         int minBattry = batteryNeedForTrip(myDrone.CurrentLocation, getClosestStation(myDrone.CurrentLocation).Location);
                         if (minBattry>100)
@@ -128,7 +128,5 @@ namespace BL
             double c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
             return Radios * c;
         }
-
-        
     }
 }

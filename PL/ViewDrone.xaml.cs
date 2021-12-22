@@ -184,6 +184,7 @@ namespace PL
             {
                 db.AddDrone(myDrone, (AddIdStation.SelectedItem as BaseStationToList).Id);
                 MessageBox.Show("The drone was added successfully!", "Success!", MessageBoxButton.OK, MessageBoxImage.Information);
+                exit = true;
                 Close();
             }
             catch (BlApi.IdAlreadyExistsException ex)

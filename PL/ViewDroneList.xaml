@@ -23,8 +23,8 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
 
-            <ComboBox x:Name="StatusSelector" FontFamily="Fonts/#KG Red Hands" HorizontalAlignment="Left" VerticalAlignment="Center" Width="166" SelectionChanged="StatusSelector_SelectionChanged" FontSize="14  " Padding="5,10,0,0" Height="43" Grid.ColumnSpan="2" Margin="221,0,0,0"  />
-            <ComboBox x:Name="WeightSelector" FontFamily="Fonts/#KG Red Hands" HorizontalAlignment="Left" VerticalAlignment="Top" Width="168" SelectionChanged="WeightSelector_SelectionChanged" Grid.Column="1" FontSize="20" Margin="214,12,0,0" Height="43"  Padding="50,0,0,0" VerticalContentAlignment="Center" Grid.ColumnSpan="2"/>
+            <ComboBox x:Name="StatusSelector" FontFamily="Fonts/#KG Red Hands" HorizontalAlignment="Left" VerticalAlignment="Center" Width="166" SelectionChanged="updateFilters" FontSize="14  " Padding="5,10,0,0" Height="43" Grid.ColumnSpan="2" Margin="221,0,0,0"  />
+            <ComboBox x:Name="WeightSelector" FontFamily="Fonts/#KG Red Hands" HorizontalAlignment="Left" VerticalAlignment="Top" Width="168" SelectionChanged="updateFilters" Grid.Column="1" FontSize="20" Margin="214,12,0,0" Height="43"  Padding="50,0,0,0" VerticalContentAlignment="Center" Grid.ColumnSpan="2"/>
 
             <Label x:Name="TextSelector" Content="Filters:"  RenderTransformOrigin="0.586,0.567" FontSize="48" FontFamily="Fonts/#Cotton Butter" Margin="30,-10,0,0" Padding="0,0,0,0" Width="131" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" Foreground="White" ></Label>
             <Image x:Name="WeightKg" Margin="161,-4,0,2" Width="48" Grid.Column="1" HorizontalAlignment="Left" Source="Images\WeightKg.png"/>

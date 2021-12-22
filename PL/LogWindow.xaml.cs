@@ -21,11 +21,12 @@ namespace PL
     /// </summary>
     public partial class LogWindow : Window
     {
+        static IBL db;
         public LogWindow()
         {
             InitializeComponent();
-        }
-        IBL db;
+            db = BlFactory.GetBl();
+        } 
         private void Register(object sender, RoutedEventArgs e)
         {
             int a;
@@ -35,13 +36,28 @@ namespace PL
         {
             int id;
             if (!int.TryParse(logInBox.Text, out id))
+            {
+                errorBox.Text = "Id not valid, try again";
                 return;
-            if (db.GetCustomer(id).permission == BO.Permissions.Client)
-                new ViewParcelList();
+            }
+            try
+            {
+                new ViewParcelList(db.GetCustomer(id)).Show();
+                errorBox.Text = "";
+            }
+            catch (IdNotFoundException)
+            {
+                errorBox.Text = "ID not found in the system, try again";
+                return;
+            }
+            
 
-            else
-                new MainWindow();
+            
+        }
 
+        private void loginAdmin(object sender, RoutedEventArgs e)
+        {
+            new MainWindow().Show();
         }
     }
 }
