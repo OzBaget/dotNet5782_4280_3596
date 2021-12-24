@@ -8,16 +8,22 @@
         Title="Register" Height="270" Width="340">
     <Grid>
         <Label x:Name="NameLable" Content="Name:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="40" Width="68" FontSize="20"/>
-        <TextBox x:Name="NameBox" HorizontalAlignment="Left" Margin="99,18,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="183" Height="27" FontSize="20" />
+        <TextBox x:Name="NameBox" HorizontalAlignment="Left" Margin="99,18,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="231" Height="27" FontSize="20" />
         <Label x:Name="IdLable" Content="Id:" HorizontalAlignment="Left" Margin="10,57,0,0" VerticalAlignment="Top" Height="40" Width="35" FontSize="20"  />
-        <TextBox x:Name="IdBox" HorizontalAlignment="Left" Margin="99,65,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="183" Height="27" FontSize="20"/>
+        <TextBox x:Name="IdBox" HorizontalAlignment="Left" Margin="99,65,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="231" Height="27" FontSize="20"/>
         <Label x:Name="PhoneLable" Content="Phone:" HorizontalAlignment="Left" Margin="10,105,0,0" VerticalAlignment="Top" Height="39" Width="71" FontSize="20" />
-        <TextBox x:Name="PhoneBox" HorizontalAlignment="Left" Margin="99,112,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="183" Height="28" FontSize="20"/>
-        <Button x:Name="Ok" Content="Ok" HorizontalAlignment="Left" Margin="223,165,0,0" VerticalAlignment="Top" IsDefault="True" Click="Ok_Click"/>
-        <Button x:Name="Cancel" Content="Cancel" HorizontalAlignment="Left" Margin="54,165,0,0" VerticalAlignment="Top" IsCancel="True"/>
+        <TextBox x:Name="PhoneBox" HorizontalAlignment="Left" Margin="99,112,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="233" Height="28" FontSize="20"/>
+        <Button x:Name="Ok" Content="Ok" HorizontalAlignment="Left" Margin="261,211,0,0" VerticalAlignment="Top" IsDefault="True" Click="Ok_Click"/>
+        <Button x:Name="Cancel" Content="Cancel" HorizontalAlignment="Left" Margin="92,211,0,0" VerticalAlignment="Top" IsCancel="True"/>
         <TextBlock x:Name="IdErrorBox" HorizontalAlignment="Left" Margin="101,95,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="132" Height="15" FontSize="10" Foreground="Red" />
         <TextBlock x:Name="PhoneErrorBox" HorizontalAlignment="Left" Margin="101,145,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="132" Height="15" FontSize="10" Foreground="Red" />
         <TextBlock x:Name="NameErrorBox" HorizontalAlignment="Left" Margin="101,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="132" Height="15" FontSize="10" Foreground="Red" />
+        <Label x:Name="LatLable" Content="Lat:" HorizontalAlignment="Left" Margin="10,154,0,0" VerticalAlignment="Top" Height="39" Width="71" FontSize="20" />
+        <TextBox x:Name="LatBox" HorizontalAlignment="Left" Margin="99,159,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="71" Height="28" FontSize="20"/>
+        <Label x:Name="LongLable" Content="Long:" HorizontalAlignment="Left" Margin="184,154,0,0" VerticalAlignment="Top" Height="39" Width="72" FontSize="20" />
+        <TextBox x:Name="LongBox" HorizontalAlignment="Left" Margin="260,159,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="72" Height="28" FontSize="20"/>
+        <TextBlock x:Name="LatErrorBox" HorizontalAlignment="Left" Margin="17,191,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="132" Height="15" FontSize="10" Foreground="Red" />
+        <TextBlock x:Name="LongErrorBox" HorizontalAlignment="Left" Margin="190,191,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="132" Height="15" FontSize="10" Foreground="Red" />
 
     </Grid>
 </Window>

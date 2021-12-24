@@ -37,7 +37,7 @@ namespace BlApi
         /// <param name="station"></param>
         void AddStation(BO.BaseStation station);
         /// <summary>
-        /// Get drone add it to the data base
+        /// Get drone and id station add it to the station
         /// </summary>
         /// <param name="drone"></param>
         /// <param name="idStation"></param>
@@ -53,12 +53,12 @@ namespace BlApi
         /// <param name="parcel"></param>
         void AddParcel(BO.Parcel parcel);
          /// <summary>
-         ///  Link parcel to drone
+         ///  Link a parcel to drone
          /// </summary>
          /// <param name="droneId"></param>
         int linkParcel(int droneId);
         /// <summary>
-        /// Pick parcel to the drone
+        /// Pick parcel from the drone
         /// </summary>
         /// <param name="dronelId"></param>
         void PickParcel(int dronelId);
@@ -88,10 +88,10 @@ namespace BlApi
         /// <summary>
         /// Update the datas' base staion
         /// </summary>
-        /// <param name="droneId"></param>
+        /// <param name="stationId"></param>
         /// <param name="name"></param>
-        /// <param name="input"></param>
-        void UpdateStation(int droneId, string name, string input);
+        /// <param name="freeChargers"></param>
+        void UpdateStation(int stationId, string name, string freeChargers);
         /// <summary>
         /// Update the datas' cutomer 
         /// </summary>

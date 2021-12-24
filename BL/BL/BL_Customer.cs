@@ -10,7 +10,7 @@ namespace BL
         {
             try
             {
-                DalObject.AddCustomer(customer.Id, customer.Name, customer.Phone, customer.Location.Latitude, customer.Location.Longitude, (DO.Permissions)customer.permission);
+                DalObject.AddCustomer(customer.Id, customer.Name, customer.Phone, customer.Location.Latitude, customer.Location.Longitude);
             }
             catch (DO.IdAlreadyExistsException ex)
             {

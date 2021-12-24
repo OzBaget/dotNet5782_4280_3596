@@ -8,7 +8,7 @@
         ResizeMode="NoResize"
         Title="ViewDrone" Height="640" Width="800" Closing="CencelClose" >
     <Grid>
-        <Grid x:Name="DroneViewGrid" Visibility="Collapsed">
+        <Grid x:Name="DroneViewGrid" Visibility="Visible" Margin="0,1,0,-1">
             <Grid.Background>
                 <ImageBrush ImageSource="/Images/DoneViewNew.png" Stretch="UniformToFill"/>
             </Grid.Background>
@@ -36,7 +36,7 @@
 
 
         </Grid>
-        <Grid x:Name="AddDroneGrid" Visibility="Visible">
+        <Grid x:Name="AddDroneGrid" Visibility="Collapsed">
             <Grid.Background>
                 <ImageBrush ImageSource="/Images/AddDroneNew.png"/>
             </Grid.Background>
