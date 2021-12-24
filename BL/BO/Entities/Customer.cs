@@ -12,7 +12,6 @@ namespace BO
         public string Name { get; set; }
         public string Phone { get; set; }
         public Location Location { get; set; }
-        public Permissions permission { get; set; }
         public List<ParcelInCustomer> SentParcels { get; set; }
         public List<ParcelInCustomer> ReceivedParcels { get; set; }
         public override string ToString()
@@ -21,9 +20,8 @@ namespace BO
                 $"ID:                            {Id}\n" +
                 $"Name:                          {Name}\n" +
                 $"Location:                      {Location}\n" +
-                $"Phone number:                  {Phone}" +
-                $"Permission:                  {permission}";
-            if (SentParcels.Count > 0)
+                $"Phone number:                  {Phone}";
+                if (SentParcels.Count > 0)
             {
                 int count = 1;
                 toString +=  $"\n - Parcels which wait to send:";

@@ -119,7 +119,7 @@ namespace DalApi
         /// <param name="phone">the phone of the customer</param>
         /// <param name="lat">the latitude of the customer</param>
         /// <param name="lng">the longitude of the customer</param>
-        void AddCustomer(int id, string name, string phone, double lat, double lng, Permissions permission);
+        void AddCustomer(int id, string name, string phone, double lat, double lng);
 
         /// <summary>
         /// Add parcel to Parcels list in DataSource

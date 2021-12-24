@@ -34,5 +34,9 @@ namespace PL
         {
             new ViewParcelList().Show();
         }
+        private void viewStationlList(object sender, RoutedEventArgs e)
+        {
+            new ViewStationList().Show();
+        }
     }
 }

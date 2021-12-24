@@ -31,7 +31,10 @@ namespace PL
             NameErrorBox.Text = "";
             PhoneErrorBox.Text = "";
             IdErrorBox.Text = "";
+            LatErrorBox.Text = "";
+            LongErrorBox.Text = "";
             int id,phone;
+            double lat, longint;
             bool error = false;
             if (NameBox.Text == "")
             {
@@ -47,6 +50,26 @@ namespace PL
             else if (!int.TryParse(IdBox.Text, out id))
             {
                 IdErrorBox.Text = "Id not valid, try again";
+                error = true;
+            }
+            if (LatBox.Text == "")
+            {
+                LatErrorBox.Text = "Write digits, try again";
+                error = true;
+            }
+            else if (!double.TryParse(LatBox.Text, out lat))
+            {
+                LatErrorBox.Text = "Lat not valid, try again";
+                error = true;
+            }
+            if (LongBox.Text == "")
+            {
+                LongErrorBox.Text = "Write digits, try again";
+                error = true;
+            }
+            else if (!double.TryParse(LongBox.Text, out longint))
+            {
+                LongErrorBox.Text = "Long not valid, try again";
                 error = true;
             }
             if (PhoneBox.Text == "")
@@ -66,6 +89,10 @@ namespace PL
             cust.Name = NameBox.Text;
             cust.Id = int.Parse(IdBox.Text);
             cust.Phone = PhoneBox.Text;
+            cust.Location = new();
+            cust.Location.Latitude = double.Parse(LatBox.Text);
+            cust.Location.Longitude= double.Parse(LongBox.Text);
+            
             BlApi.BlFactory.GetBl().AddCustomer(cust);  
             this.Close();
         }
