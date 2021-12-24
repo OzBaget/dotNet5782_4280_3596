@@ -9,8 +9,7 @@ namespace BL
     sealed partial class BL : IBL
     {
         public void AddParcel(Parcel parcel)
-        {
-            
+        {        
             try
             {
                 DalObject.AddParcel(parcel.Sender.Id, parcel.Target.Id, (DO.WeightCategories)parcel.Weight, (DO.Priorities)parcel.Prioritie, DateTime.Now, null, null, null);
@@ -103,24 +102,22 @@ namespace BL
             }
             return filterdParcel;        
         }
-        public IEnumerable<ParcelToList> GetFilterdParcels(DateTime? startDate, DateTime? endDate, ParcelStatus? status, Priorities? priority, WeightCategories? weight)
+        public IEnumerable<ParcelToList> GetFilterdParcels(Customer customer, DateTime? startDate, DateTime? endDate, Priorities? priority, WeightCategories? weight)
         {
-            Predicate<DO.Parcel> dateFilter=x=>true;
-            if (startDate!=null && endDate!=null)
-                dateFilter = x => x.Requsted >= startDate && x.Scheduled <= endDate;
-            if (startDate != null && endDate == null)
-                dateFilter = x => x.Requsted >= startDate;
-            if (startDate == null && endDate != null)
-                dateFilter = x => x.Requsted <= endDate;
+            IEnumerable<DO.Parcel> filterdParcel = DalObject.GetAllParcels();
+            if (customer!=null)
+                filterdParcel = filterdParcel.Intersect(DalObject.GetFilterdParcels(x => x.SenderId == customer.Id|| x.TargetId == customer.Id));
+            if (startDate != null)
+                filterdParcel = filterdParcel.Intersect(DalObject.GetFilterdParcels(x=>x.Requsted>=startDate));
+            if (endDate != null)
+                filterdParcel = filterdParcel.Intersect(DalObject.GetFilterdParcels(x=>x.Requsted<=endDate));
+            if (priority != null)
+                filterdParcel = filterdParcel.Intersect(DalObject.GetFilterdParcels(x => x.Priority == (DO.Priorities)priority));
+            if (weight != null)
+                filterdParcel = filterdParcel.Intersect(DalObject.GetFilterdParcels(x => x.Weight == (DO.WeightCategories)weight));
 
-            List<ParcelToList> filterdParcel = new();
-            foreach (DO.Parcel oldParcel in DalObject.GetFilterdParcels(dateFilter))
-            {
-                filterdParcel.Add(doParcelToParcelToList(oldParcel));
-            }
-            return filterdParcel;
-
-
+            return from parcel in filterdParcel
+                   select doParcelToParcelToList(parcel);
         }
 
         public int linkParcel(int droneId)

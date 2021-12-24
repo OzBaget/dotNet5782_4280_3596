@@ -1,0 +1,34 @@
+﻿<Window x:Class="PL.ViewParcel"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="ViewParcel" Height="640" Width="1000">
+
+    <Grid>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="100,58,0,0" Text="ID:" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBox x:Name="IDTextBox" HorizontalAlignment="Left" Margin="163,57,0,0" Text="{Binding MyParcel.Id, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBlock x:Name="textBlock_Copy" HorizontalAlignment="Left" Margin="100,132,0,0" Text="Created:" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBox_Copy" HorizontalAlignment="Left" Margin="163,132,0,0" Text="{Binding MyParcel.DateCreated}" TextWrapping="Wrap" VerticalAlignment="Top" Width="auto"/>
+        <TextBlock x:Name="textBlock_Copy1" HorizontalAlignment="Left" Margin="101,156,0,0" Text="Scheduled:" TextWrapping="Wrap" VerticalAlignment="Top" Width="76"/>
+        <TextBlock x:Name="textBox_Copy1" HorizontalAlignment="Left" Margin="163,156,0,0" Text="{Binding MyParcel.DateScheduled}" TextWrapping="Wrap" VerticalAlignment="Top" Width="auto"/>
+        <TextBlock x:Name="textBlock_Copy2" HorizontalAlignment="Left" Margin="100,180,0,0" Text="Pick up:" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBox_Copy2" HorizontalAlignment="Left" Margin="163,180,0,0" Text="{Binding MyParcel.DatePickup}" TextWrapping="Wrap" VerticalAlignment="Top" Width="auto"/>
+        <TextBlock x:Name="textBlock_Copy3" HorizontalAlignment="Left" Margin="100,205,0,0" Text="Deliverd" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBox_Copy3" HorizontalAlignment="Left" Margin="163,205,0,0" Text="{Binding MyParcel.DateDeliverd}" TextWrapping="Wrap" VerticalAlignment="Top" Width="auto"/>
+        <TextBlock x:Name="textBlock_Copy4" HorizontalAlignment="Left" Margin="100,84,0,0" Text="Weight:" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <ComboBox x:Name="weightSelector" HorizontalAlignment="Left" Margin="163,81,0,0" VerticalAlignment="Top" Width="120" SelectedItem="{Binding MyParcel.Weight}"/>
+        <TextBlock x:Name="textBlock_Copy5" HorizontalAlignment="Left" Margin="100,112,0,0" Text="Priotiy:" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <ComboBox x:Name="prioritySelector" HorizontalAlignment="Left" Margin="163,109,0,0" VerticalAlignment="Top" Width="120" SelectedItem="{Binding MyParcel.Prioritie}"/>
+        <Button x:Name="button" Content="Reciver details" HorizontalAlignment="Left" Margin="300,253,0,0" VerticalAlignment="Top" Click="reciverDetails_clk"/>
+        <Button x:Name="button_Copy" Content="Sender details" HorizontalAlignment="Left" Margin="300,226,0,0" VerticalAlignment="Top" Click="senderDetails_clk"/>
+        <Button x:Name="button_Copy1" Content="Drone details" HorizontalAlignment="Left" Margin="100,312,0,0" VerticalAlignment="Top" Width="76" Click="droneDetails_clk"/>
+        <TextBlock x:Name="textBlock_Copy6" HorizontalAlignment="Left" Margin="100,227,0,0" Text="Sender:" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock_Copy7" HorizontalAlignment="Left" Margin="100,254,0,0" Text="Reciver:" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBox x:Name="senderIdBox" HorizontalAlignment="Left" Margin="163,228,0,0" Text="{Binding MyParcel.Sender.Id}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="reciverIdBox" HorizontalAlignment="Left" Margin="163,254,0,0" Text="{Binding MyParcel.Target.Id}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+
+    </Grid>
+</Window>
