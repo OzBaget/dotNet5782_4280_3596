@@ -231,9 +231,6 @@ namespace PL
         {
             new ViewDrone(db.GetDrone(((sender as ListView).SelectedItem as BO.DroneInCharging).Id), db).ShowDialog();
         }
-        private void ParcelList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            new ViewParcel(db.GetParcel(((sender as ListView).SelectedItem as BO.ParcelInCustomer).Id), db).ShowDialog();
-        }
+        
     }
 }
