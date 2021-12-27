@@ -38,5 +38,10 @@ namespace PL
         {
             new ViewStationList().Show();
         }
+
+        private void viewCustomerlList(object sender, RoutedEventArgs e)
+        {
+            new ViewCustomerList().ShowDialog();
+        }
     }
 }

@@ -16,6 +16,12 @@ namespace BlApi
         public int Id;
         public IdAlreadyExistsException(string message,int id) : base(message) { Id = id; }
     }
+    [Serializable]
+    public class NameAlreadyExistsException : Exception
+    {
+        public string Name;
+        public NameAlreadyExistsException(string message, string name) : base(message) { Name = name; }
+    }
 
     [Serializable]
     public class CantSendDroneToChargeException : Exception

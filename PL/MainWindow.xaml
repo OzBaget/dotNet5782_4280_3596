@@ -10,8 +10,8 @@
 
         <Button x:Name="DroneListButton" Content="Drone List" HorizontalAlignment="Center" Margin="0,78,0,0" VerticalAlignment="Top" Height="52" Width="120" Click="ViewDroneList"/>
         <Button x:Name="StationListButton" Content="Station List" HorizontalAlignment="Center" Margin="0,173,0,0" VerticalAlignment="Top" Height="52" Width="120" Click="viewStationlList" />
-        <Button x:Name="CustomerListButton" Content="Customer List" HorizontalAlignment="Center" Margin="0,281,0,0" VerticalAlignment="Top" Height="52" Width="120"/>
-        <Button x:Name="ParcelListButton" Content="Parcel List" HorizontalAlignment="Center" Margin="0,364,0,0" VerticalAlignment="Top" Height="52" Width="120" Click="viewParcelList"/>
+        <Button x:Name="CustomerListButton" Content="Customer List" HorizontalAlignment="Center" Margin="0,265,0,0" VerticalAlignment="Top" Height="52" Width="120" Click="viewCustomerlList" />
+        <Button x:Name="ParcelListButton" Content="Parcel List" HorizontalAlignment="Center" Margin="0,348,0,0" VerticalAlignment="Top" Height="52" Width="120" Click="viewParcelList"/>
 
     </Grid>
 </Window>
