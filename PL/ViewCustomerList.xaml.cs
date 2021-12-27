@@ -16,12 +16,12 @@ using System.Windows.Shapes;
 namespace PL
 {
     /// <summary>
-    /// Interaction logic for ViewStationList.xaml
+    /// Interaction logic for ViewCustomerList.xaml
     /// </summary>
-    public partial class ViewStationList : Window
+    public partial class ViewCustomerList : Window
     {
         IBL db = BlFactory.GetBl();
-        public ViewStationList()
+        public ViewCustomerList()
         {
             InitializeComponent();
             ResetList();
@@ -29,18 +29,19 @@ namespace PL
 
         private void listViewStations_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            new ViewStation(db.GetStation(((sender as ListView).SelectedItem as BO.BaseStationToList).Id)).ShowDialog();
+            new ViewCustomer(db.GetCustomer(((sender as ListView).SelectedItem as BO.CustomerToList).Id)).ShowDialog();
             ResetList();
         }
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            new ViewStation().ShowDialog();
+            new ViewCustomer    ().ShowDialog();
             ResetList();
         }
+
         private void ResetList()
         {
-            listViewStations.ItemsSource = db.GetAllStations();
+            listViewStations.ItemsSource = db.GetAllCustomers();
         }
     }
 }
