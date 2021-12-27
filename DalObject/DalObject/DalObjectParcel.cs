@@ -83,6 +83,7 @@ namespace Dal
             int index = DataSource.Parcels.IndexOf(parcelTmp);
             parcelTmp.Delivered = DateTime.Now;
             int droneId = parcelTmp.DroneId;
+            parcelTmp.DroneId = 0;
             DataSource.Parcels[index] = parcelTmp;
 
             Drone droneTmp = GetDrone(droneId);

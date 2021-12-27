@@ -166,7 +166,7 @@ namespace PL
         {
             Drone myDrone = new();
             int id;
-            if (!int.TryParse(AddID.Text, out id)||id<1)
+            if (!int.TryParse(AddID.Text, out id) || id < 1)
             {
                 MessageBox.Show("Drone ID is not vaild!", "Can't add dorne", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;

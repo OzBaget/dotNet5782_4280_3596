@@ -6,6 +6,11 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Images\statusSelecor.png" />
+    <None Remove="statusSelecor.png" />
+  </ItemGroup>
+
   
 
 
@@ -66,6 +71,9 @@
     <Resource Include="Images\ClockSelector.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\statusSelecor.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\upBackgroundViewDroneList.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -90,6 +98,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Parcel details.png" />
+    <Resource Include="statusSelecor.png" />
   </ItemGroup>
 
 

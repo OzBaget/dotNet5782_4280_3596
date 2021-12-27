@@ -131,6 +131,6 @@ namespace BlApi
         IEnumerable<BaseStationToList> GetStationsWithFreeSlots();
 
         IEnumerable<DroneToList> GetFilterdDrones(WeightCategories? weight, DroneStatus? status);
-        IEnumerable<ParcelToList> GetFilterdParcels(Customer customer,DateTime? startDate, DateTime? endDate, Priorities? priority, WeightCategories? weight);
+        IEnumerable<ParcelToList> GetFilterdParcels(Customer customer,DateTime? startDate, DateTime? endDate, Priorities? priority, WeightCategories? weight, ParcelStatus? status);
     }
 }

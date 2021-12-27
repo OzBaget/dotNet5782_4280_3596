@@ -102,7 +102,7 @@ namespace BL
             }
             return filterdParcel;        
         }
-        public IEnumerable<ParcelToList> GetFilterdParcels(Customer customer, DateTime? startDate, DateTime? endDate, Priorities? priority, WeightCategories? weight)
+        public IEnumerable<ParcelToList> GetFilterdParcels(Customer customer, DateTime? startDate, DateTime? endDate, Priorities? priority, WeightCategories? weight, ParcelStatus? status)
         {
             IEnumerable<DO.Parcel> filterdParcel = DalObject.GetAllParcels();
             if (customer!=null)
@@ -115,6 +115,26 @@ namespace BL
                 filterdParcel = filterdParcel.Intersect(DalObject.GetFilterdParcels(x => x.Priority == (DO.Priorities)priority));
             if (weight != null)
                 filterdParcel = filterdParcel.Intersect(DalObject.GetFilterdParcels(x => x.Weight == (DO.WeightCategories)weight));
+            if (status != null)
+            {
+                switch (status)
+                {
+                    case ParcelStatus.Created:
+                        filterdParcel = filterdParcel.Intersect(DalObject.GetFilterdParcels(x => x.Requsted != null && x.Scheduled == null));
+                        break;
+                    case ParcelStatus.Scheduled:
+                        filterdParcel = filterdParcel.Intersect(DalObject.GetFilterdParcels(x => x.Scheduled != null && x.PickedUp == null));
+                        break;
+                    case ParcelStatus.PickUp:
+                        filterdParcel = filterdParcel.Intersect(DalObject.GetFilterdParcels(x => x.PickedUp != null && x.Delivered == null));
+                        break;
+                    case ParcelStatus.Deliverd:
+                        filterdParcel = filterdParcel.Intersect(DalObject.GetFilterdParcels(x => x.Delivered != null));
+                        break;
+                    default:
+                        break;
+                }
+            }
 
             return from parcel in filterdParcel
                    select doParcelToParcelToList(parcel);
@@ -168,17 +188,17 @@ namespace BL
             if (droneIndex == -1)
                 throw new IdNotFoundException($"Can't find drone with ID #{droneId}!", droneId);
             DroneToList myDrone = Drones[droneIndex];
-            if (myDrone.ParcelId == 0) 
+            if (myDrone.ParcelId == null) 
                 throw new CantPickUpParcelException("Drone is not link to any parcel!");
            
-            Parcel myParcel = GetParcel(myDrone.ParcelId);
+            Parcel myParcel = GetParcel(myDrone.ParcelId.Value);
             if (myParcel.DatePickup != null) 
                 throw new CantPickUpParcelException("Parcel alredy picked up!");
 
             myDrone.Battery -= batteryNeedForTrip(GetCustomer(myParcel.Sender.Id).Location, myDrone.CurrentLocation);
             myDrone.CurrentLocation = GetCustomer(myParcel.Sender.Id).Location;
 
-            DalObject.PickParcel(myParcel.Id);
+            DalObject.PickParcel(myParcel.Id.Value);
 
             
         }
@@ -191,10 +211,10 @@ namespace BL
 
             DroneToList myDrone = Drones[droneIndex];//copy by ref
 
-            if (myDrone.ParcelId == 0)
+            if (myDrone.ParcelId == null)
                 throw new CantDeliverParcelException("Drone is not link to any parcel!");
             
-            Parcel myParcel = GetParcel(myDrone.ParcelId);
+            Parcel myParcel = GetParcel(myDrone.ParcelId.Value);
             if (myParcel.DatePickup == null)
                 throw new CantDeliverParcelException($"The drone didn't picked up the parcel #{myParcel.Id}!");
             if(myParcel.DateDeliverd!=null)
@@ -207,8 +227,8 @@ namespace BL
             myDrone.Battery -= batteryNeededForCustomer;
             myDrone.CurrentLocation = GetCustomer(myParcel.Target.Id).Location;
             myDrone.Status = DroneStatus.Available;
-            myDrone.ParcelId = 0;
-            DalObject.ParcelToCustomer(myParcel.Id);
+            myDrone.ParcelId = null;
+            DalObject.ParcelToCustomer(myParcel.Id.Value);
         }
 
         

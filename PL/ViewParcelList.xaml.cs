@@ -35,6 +35,8 @@ namespace PL
 
             PrioritySelector.ItemsSource = Enum.GetValues(typeof(Priorities));
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
+            statusSelector.ItemsSource = Enum.GetValues(typeof(ParcelStatus));
+
 
             ListViewParcels.ItemsSource = db.GetAllParcels();
         }
@@ -48,7 +50,7 @@ namespace PL
 
             PrioritySelector.ItemsSource = Enum.GetValues(typeof(Priorities));
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
-            ListViewParcels.ItemsSource = db.GetFilterdParcels(customer, null, null, null, null);
+            ListViewParcels.ItemsSource = db.GetFilterdParcels(customer, null, null, null, null, null);
         }
 
 
@@ -56,18 +58,25 @@ namespace PL
         {
             PrioritySelector.SelectedItem = null;
             WeightSelector.SelectedItem = null;
+            statusSelector.SelectedItem = null;
             datePickerStart.SelectedDate = null;
             datePickerEnd.SelectedDate = null;
         }
         private void updateFilters(object sender, SelectionChangedEventArgs e)
         {
             ListViewParcels.ItemsSource = null;
-            ListViewParcels.ItemsSource = db.GetFilterdParcels(customer, datePickerStart.SelectedDate, datePickerEnd.SelectedDate, (Priorities?) PrioritySelector.SelectedItem, (WeightCategories?)WeightSelector.SelectedItem);
+            ListViewParcels.ItemsSource = db.GetFilterdParcels(customer, 
+                datePickerStart.SelectedDate,
+                datePickerEnd.SelectedDate,
+                (Priorities?)PrioritySelector.SelectedItem,
+                (WeightCategories?)WeightSelector.SelectedItem,
+                (ParcelStatus?)statusSelector.SelectedItem);
         }
 
         private void AddDrone_clk(object sender, MouseButtonEventArgs e)
         {
             new ViewParcel(customer).ShowDialog();
+            updateFilters(null, null);
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
@@ -79,11 +88,13 @@ namespace PL
         private void viewDrone(object sender, MouseButtonEventArgs e)
         {
             new ViewParcel(db.GetParcel(((sender as ListBox).SelectedItem as ParcelToList).Id), customer).ShowDialog();
+            updateFilters(null, null);
         }
 
         private void Again_Gif(object sender, RoutedEventArgs e)
         {
-
+            GifDrones.Position = new TimeSpan(0, 0, 1);
+            GifDrones.Play();
         }
 
         private void CloseWindow(object sender, System.ComponentModel.CancelEventArgs e)

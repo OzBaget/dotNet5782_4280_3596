@@ -46,18 +46,18 @@ namespace BL
             newDrone.CurrentLocation = tmpDrone.CurrentLocation;
             newDrone.Battery = tmpDrone.Battery;
             ParcelInTransfer parcel = new();
-            if (tmpDrone.ParcelId != 0) 
+            if (tmpDrone.ParcelId != null) 
             {
-            Parcel tmpParcel = GetParcel(tmpDrone.ParcelId);
-            parcel.Id = tmpParcel.Id;
-            parcel.Prioritie = tmpParcel.Prioritie;
-            parcel.Weight = tmpParcel.Weight;
-            parcel.Sender = tmpParcel.Sender;
-            parcel.Target = tmpParcel.Target;
-            parcel.PickupLocation = GetCustomer(tmpParcel.Sender.Id).Location;
-            parcel.TargetLocation = GetCustomer(tmpParcel.Target.Id).Location;
-                parcel.IsInTransfer = tmpParcel.DatePickup != null && tmpParcel.DateDeliverd == null;
-            parcel.Distance = calculateDist(parcel.PickupLocation, parcel.TargetLocation);
+                Parcel tmpParcel = GetParcel(tmpDrone.ParcelId.Value);
+                parcel.Id = tmpParcel.Id.Value;
+                parcel.Prioritie = tmpParcel.Prioritie;
+                parcel.Weight = tmpParcel.Weight;
+                parcel.Sender = tmpParcel.Sender;
+                parcel.Target = tmpParcel.Target;
+                parcel.PickupLocation = GetCustomer(tmpParcel.Sender.Id).Location;
+                parcel.TargetLocation = GetCustomer(tmpParcel.Target.Id).Location;
+                    parcel.IsInTransfer = tmpParcel.DatePickup != null && tmpParcel.DateDeliverd == null;
+                parcel.Distance = calculateDist(parcel.PickupLocation, parcel.TargetLocation);
             }
             newDrone.Parcel = parcel;
             return newDrone;

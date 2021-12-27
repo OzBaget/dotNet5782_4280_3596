@@ -29,23 +29,25 @@
             </Grid.ColumnDefinitions>
 
             <ListBox x:Name="ParcellistBox" Margin="0,80,0,0"/>
-            <ComboBox x:Name="WeightSelector" FontFamily="Fonts/#KG Red Hands" HorizontalAlignment="Left" VerticalAlignment="Top" Width="168" SelectionChanged="updateFilters" Grid.Column="1" FontSize="20" Margin="160,12,0,0" Height="43"  Padding="50,0,0,0" VerticalContentAlignment="Center" Grid.ColumnSpan="2"/>
-            <ComboBox x:Name="PrioritySelector" FontFamily="Fonts/#KG Red Hands" HorizontalAlignment="Left" VerticalAlignment="Top" Width="168" SelectionChanged="updateFilters" FontSize="20" Margin="169,12,0,0" Height="43"  Padding="50,0,0,0" VerticalContentAlignment="Center" Grid.ColumnSpan="2"/>
+            <ComboBox x:Name="WeightSelector" FontFamily="Fonts/#KG Red Hands" HorizontalAlignment="Left" VerticalAlignment="Top" Width="110" SelectionChanged="updateFilters" Grid.Column="1" FontSize="20" Margin="88,12,0,0" Height="43"  VerticalContentAlignment="Center"/>
+            <ComboBox x:Name="PrioritySelector" FontFamily="Fonts/#KG Red Hands" HorizontalAlignment="Left" VerticalAlignment="Top" Width="110" SelectionChanged="updateFilters" FontSize="20" Margin="157,12,0,0" Height="43" VerticalContentAlignment="Center" Grid.ColumnSpan="2"/>
 
-            <Label x:Name="TextSelector" Content="Filters:"  RenderTransformOrigin="0.586,0.567" FontSize="48" FontFamily="Fonts/#Cotton Butter" Margin="30,-10,0,0" Padding="0,0,0,0" Width="131" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" Foreground="White" />
-            <Image x:Name="WeightKg" Margin="107,-4,0,2" Width="48" Grid.Column="1" HorizontalAlignment="Left" Source="Images\WeightKg.png"/>
-            <Image x:Name="ClockSelector" Margin="104,-4,78,4" Width="68" Source="/Images/ClockSelector.png"/>
+            <Label x:Name="TextSelector" Content="Filters:"  RenderTransformOrigin="0.586,0.567" FontSize="48" FontFamily="Fonts/#Cotton Butter" Margin="10,-15,0,0" Width="131" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" Foreground="White" />
+            <Image x:Name="WeightKg" Margin="35,-4,0,2" Width="48" Grid.Column="1" HorizontalAlignment="Left" Source="Images\WeightKg.png"/>
+            <Image x:Name="ClockSelector" Margin="92,-4,90,4" Width="68" Source="/Images/ClockSelector.png"/>
 
-            <Image x:Name="image" Grid.Column="3" HorizontalAlignment="Left" Height="40" VerticalAlignment="Center" Width="40" Source="\Images\refresh-page-option.png" Cursor="Hand" MouseLeftButtonDown="ResetFilters_btn" Margin="33,0,0,0"/>
+            <Image x:Name="image" Grid.Column="3" HorizontalAlignment="Left" Height="40" VerticalAlignment="Center" Width="40" Source="\Images\refresh-page-option.png" Cursor="Hand" MouseLeftButtonDown="ResetFilters_btn" Margin="46,0,0,0"/>
             <Image x:Name="image1" Grid.Column="3" HorizontalAlignment="Center" Height="45" VerticalAlignment="Center" Width="46" Source="\Images\plus-sign.png" Cursor="Hand" MouseLeftButtonDown="AddDrone_clk"/>
             <Image x:Name="image2" Grid.Column="3" HorizontalAlignment="Left" Height="40" Margin="178,13,0,0" VerticalAlignment="Top" Width="40" Source="/Images/Exit Button.png"/>
             <Button x:Name="button" Grid.Column="3" HorizontalAlignment="Left" Margin="178,13,0,0" VerticalAlignment="Top" Width="40" Height="40" Opacity="0" IsCancel="True" Cursor="Hand" Click="Cancel_Click"/>
-            <DatePicker x:Name="datePickerStart" Grid.Column="2" HorizontalAlignment="Left" Margin="148,7,0,0" VerticalAlignment="Top" FontFamily="Fonts/#KG Red Hands" BorderBrush="Transparent" SelectedDateChanged="updateFilters" DisplayDateEnd="{Binding SelectedDate, ElementName=datePickerEnd}" />
+            <DatePicker x:Name="datePickerStart" Grid.Column="2" HorizontalAlignment="Left" Margin="167,7,0,0" VerticalAlignment="Top" FontFamily="Fonts/#KG Red Hands" BorderBrush="Transparent" SelectedDateChanged="updateFilters" DisplayDateEnd="{Binding SelectedDate, ElementName=datePickerEnd}" Grid.ColumnSpan="2" />
 
-            <Label x:Name="TextSelector_Copy" Content="From:"  RenderTransformOrigin="0.456,0.516" FontSize="25" FontFamily="Fonts/#Cotton Butter" Margin="0,-6,0,0" Padding="0,0,0,0" Width="45" HorizontalAlignment="Center" VerticalAlignment="Top" VerticalContentAlignment="Center" Foreground="White" Grid.Column="2" Height="40" />
-            <DatePicker x:Name="datePickerEnd" Grid.Column="2" HorizontalAlignment="Left" Margin="148,35,0,0" VerticalAlignment="Top" FontFamily="Fonts/#KG Red Hands" BorderBrush="Transparent" SelectedDateChanged="updateFilters" DisplayDateStart="{Binding SelectedDate, ElementName=datePickerStart}"/>
-            <Label x:Name="TextSelector_Copy1" Content="To:"  RenderTransformOrigin="0.456,0.516" FontSize="25" FontFamily="Fonts/#Cotton Butter" Margin="125,22,0,0" Padding="0,0,0,0" Width="20" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" Foreground="White" Grid.Column="2" Height="40" />
+            <Label x:Name="TextSelector_Copy" Content="From:"  RenderTransformOrigin="0.456,0.516" FontSize="25" FontFamily="Fonts/#Cotton Butter" Margin="131,-5,0,0" Padding="0,0,0,0" Width="44" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" Foreground="White" Grid.Column="2" Height="40" />
+            <DatePicker x:Name="datePickerEnd" Grid.Column="2" HorizontalAlignment="Left" Margin="167,35,0,0" VerticalAlignment="Top" FontFamily="Fonts/#KG Red Hands" BorderBrush="Transparent" SelectedDateChanged="updateFilters" DisplayDateStart="{Binding SelectedDate, ElementName=datePickerStart}" Grid.ColumnSpan="2"/>
+            <Label x:Name="TextSelector_Copy1" Content="To:"  RenderTransformOrigin="0.456,0.516" FontSize="25" FontFamily="Fonts/#Cotton Butter" Margin="130,22,0,0" Padding="0,0,0,0" Width="20" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" Foreground="White" Grid.Column="2" Height="40" />
             <TextBlock x:Name="textBlock" Foreground="White" HorizontalAlignment="Left" FontFamily="Fonts/#KG Red Hands" Text="{Binding Path='customer', Converter={StaticResource CustomerToWelcomeMessageConvertor}}" TextWrapping="Wrap" VerticalAlignment="Top"/>
+            <Image x:Name="WeightKg_Copy" Margin="203,0,0,3" Width="48" Grid.Column="1" HorizontalAlignment="Left" Source="/Images/statusSelecor.png" Grid.ColumnSpan="2"/>
+            <ComboBox x:Name="statusSelector" FontFamily="Fonts/#KG Red Hands" HorizontalAlignment="Left" VerticalAlignment="Top" Width="110" SelectionChanged="updateFilters" Grid.Column="2" FontSize="15" Margin="5,12,0,0" Height="43"  VerticalContentAlignment="Center"/>
         </Grid>
 
 
