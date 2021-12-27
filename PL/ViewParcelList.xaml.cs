@@ -23,7 +23,7 @@ namespace PL
     public partial class ViewParcelList : Window
     {
         bool exit = false;
-        Customer customer;
+        public Customer customer { get; set; }
         IBL db = BlFactory.GetBl();
 
         
@@ -31,33 +31,43 @@ namespace PL
         public ViewParcelList()
         {
             InitializeComponent();
+            this.DataContext = this;
+
             PrioritySelector.ItemsSource = Enum.GetValues(typeof(Priorities));
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
-            StatusSelector.ItemsSource = Enum.GetValues(typeof(ParcelStatus));
 
             ListViewParcels.ItemsSource = db.GetAllParcels();
         }
 
         public ViewParcelList(Customer customer)
         {
-            InitializeComponent();
             this.customer = customer;
+            this.DataContext = this;
+
+            InitializeComponent();
+
+            PrioritySelector.ItemsSource = Enum.GetValues(typeof(Priorities));
+            WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
+            ListViewParcels.ItemsSource = db.GetFilterdParcels(customer, null, null, null, null);
         }
 
 
         private void ResetFilters_btn(object sender, MouseButtonEventArgs e)
         {
-
+            PrioritySelector.SelectedItem = null;
+            WeightSelector.SelectedItem = null;
+            datePickerStart.SelectedDate = null;
+            datePickerEnd.SelectedDate = null;
         }
         private void updateFilters(object sender, SelectionChangedEventArgs e)
         {
             ListViewParcels.ItemsSource = null;
-            ListViewParcels.ItemsSource = db.GetFilterdParcels(datePickerStart.SelectedDate, datePickerEnd.SelectedDate,(ParcelStatus?)StatusSelector.SelectedItem,(Priorities?) PrioritySelector.SelectedItem, (WeightCategories?)WeightSelector.SelectedItem);
+            ListViewParcels.ItemsSource = db.GetFilterdParcels(customer, datePickerStart.SelectedDate, datePickerEnd.SelectedDate, (Priorities?) PrioritySelector.SelectedItem, (WeightCategories?)WeightSelector.SelectedItem);
         }
 
         private void AddDrone_clk(object sender, MouseButtonEventArgs e)
         {
-
+            new ViewParcel(customer).ShowDialog();
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
@@ -66,9 +76,9 @@ namespace PL
             Close();
         }
 
-        private void ListViewDrones_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void viewDrone(object sender, MouseButtonEventArgs e)
         {
-
+            new ViewParcel(db.GetParcel(((sender as ListBox).SelectedItem as ParcelToList).Id), customer).ShowDialog();
         }
 
         private void Again_Gif(object sender, RoutedEventArgs e)
@@ -83,22 +93,6 @@ namespace PL
                 e.Cancel = true;
                 SystemSounds.Beep.Play();
             }
-        }
-
-        private void startDateChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            
-        }
-        private void endDateChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            datePickerStart.DisplayDateEnd = datePickerEnd.SelectedDate;
-            updateFilters(null, null);
-        }
-
-        private void startDateChanged(object sender, RoutedEventArgs e)
-        {
-            datePickerEnd.DisplayDateStart = datePickerStart.SelectedDate;
-            updateFilters(null, null);
         }
     }
 }
