@@ -7,10 +7,13 @@
         mc:Ignorable="d"
         Title="LogWindow" Height="640" Width="800">
     <Grid>
-        <Button x:Name="logInButton" Click="logIn"  IsDefault="True" Content="login" HorizontalAlignment="Center" Margin="0,336,0,0" VerticalAlignment="Top" Height="66" Width="280" Opacity="100"/>
-        <Button x:Name="registerButton" Click="Register" Content="register" HorizontalAlignment="Left" Margin="309,442,0,0" VerticalAlignment="Top" Height="42" Width="178" Opacity="100" RenderTransformOrigin="0.5,0.5" />
+        <Grid.Background>
+            <ImageBrush ImageSource="/Design/LogWindow/Bacground.png" Stretch="UniformToFill"/>
+        </Grid.Background>
         <TextBox x:Name="logInBox" HorizontalAlignment="Center" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="280" Height="33" Opacity="100" Margin="0,279,0,0" />
         <TextBlock x:Name="errorBox" HorizontalAlignment="Left" Margin="260,312,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="238" Height="15" FontSize="10" Foreground="Red" />
-        <Button x:Name="loginAdminBtn" Content="Admin Mode" HorizontalAlignment="Center" Margin="0,187,0,0" VerticalAlignment="Top" Click="loginAdmin"/>
+        <Image x:Name="pack___siteoforigin_____Admin_png" Source="/Design/LogWindow/Admin.png" MouseLeftButtonDown="loginAdmin" Margin="-99,179,-99,383"  />
+        <Image x:Name="pack___siteoforigin_____Log_in_png" Margin="287,340,291,220"  Source="/Design/LogWindow/Log in.png" MouseLeftButtonDown="logIn"/>
+        <Image x:Name="pack___siteoforigin_____Register_png"  Margin="288,507,302,57"    Source="/Design/LogWindow/Register.png" MouseLeftButtonDown="Register"/>
     </Grid>
 </Window>

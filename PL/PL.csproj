@@ -7,6 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Design\LogWindow\Admin.png" />
+    <None Remove="Design\LogWindow\Bacground.png" />
+    <None Remove="Design\LogWindow\Log in.png" />
+    <None Remove="Design\LogWindow\Register.png" />
+    <None Remove="Design\MainWindow\Customer list.png" />
+    <None Remove="Design\MainWindow\Drone list.png" />
+    <None Remove="Design\MainWindow\Parcel list.png" />
+    <None Remove="Design\MainWindow\Station list.png" />
     <None Remove="Images\statusSelecor.png" />
     <None Remove="statusSelecor.png" />
   </ItemGroup>
@@ -15,6 +23,15 @@
 
 
   <ItemGroup>
+    <Resource Include="Design\LogWindow\Bacground.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Design\LogWindow\Log in.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Design\LogWindow\Register.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Content Include="Fonts\AlfaSlabOne-Regular.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -24,6 +41,21 @@
     <Content Include="Fonts\KGRedHands.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Design\LogWindow\Admin.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Design\MainWindow\Customer list.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Design\MainWindow\Drone list.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Design\MainWindow\Parcel list.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Design\MainWindow\Station list.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\Charge.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
