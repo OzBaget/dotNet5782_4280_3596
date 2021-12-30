@@ -200,7 +200,7 @@ namespace PL
 
         private void DroneList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            new ViewDrone(db.GetDrone(((sender as ListView).SelectedItem as BO.DroneInCharging).Id), db).ShowDialog();
+            new ViewDrone(db.GetDrone(((sender as ListView).SelectedItem as BO.DroneInCharging).Id)).ShowDialog();
         }
     }
 }

@@ -40,7 +40,7 @@ namespace PL
 
         private void ListViewDrones_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            new ViewDrone(db.GetDrone(((sender as ListView).SelectedItem as BO.DroneToList).Id), db).ShowDialog();
+            new ViewDrone(db.GetDrone(((sender as ListView).SelectedItem as BO.DroneToList).Id)).ShowDialog();
             //refresh listView
             updateFilters(null, null);
         }
@@ -75,7 +75,7 @@ namespace PL
         /// <param name="e"></param>
         private void AddDrone_clk(object sender, MouseButtonEventArgs e)
         {
-            new ViewDrone(db).ShowDialog();
+            new ViewDrone().ShowDialog();
             //refresh listView
             ListViewDrones.ItemsSource = null;
             ListViewDrones.ItemsSource = db.GetAllDrones();

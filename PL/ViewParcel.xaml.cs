@@ -106,24 +106,24 @@ namespace PL
 
         private void senderDetails_clk(object sender, RoutedEventArgs e)
         {
-            //MessageBox.Show(MyParcel.Sender.ToString(), "Sender ditalis", MessageBoxButton.OK);
+            new ViewCustomer(db.GetCustomer(MyParcel.Sender.Id)).ShowDialog();
         }
 
         private void reciverDetails_clk(object sender, RoutedEventArgs e)
         {
-            //MessageBox.Show(MyParcel.Target.ToString(), "Target ditalis", MessageBoxButton.OK);
+            new ViewCustomer(db.GetCustomer(MyParcel.Target.Id)).ShowDialog();
         }
 
         private void droneDetails_clk(object sender, RoutedEventArgs e)
         {
             if (MyParcel.Drone.Id !=0 )
             {
+                new ViewDrone(db.GetDrone(MyParcel.Drone.Id)).ShowDialog();
 
-                MessageBox.Show(MyParcel.Drone.ToString(), "Drone ditalis", MessageBoxButton.OK);
             }
             else
             {
-                MessageBox.Show("Parcel is not linked to drone", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Parcel doesn't link to any drone.", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
