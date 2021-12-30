@@ -23,6 +23,7 @@ namespace PL
     public partial class ViewParcelList : Window
     {
         bool exit = false;
+
         public Customer customer { get; set; }
         IBL db = BlFactory.GetBl();
 
@@ -32,6 +33,7 @@ namespace PL
         {
             InitializeComponent();
             this.DataContext = this;
+            
 
             PrioritySelector.ItemsSource = Enum.GetValues(typeof(Priorities));
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
@@ -50,6 +52,8 @@ namespace PL
 
             PrioritySelector.ItemsSource = Enum.GetValues(typeof(Priorities));
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
+            statusSelector.ItemsSource = Enum.GetValues(typeof(ParcelStatus));
+
             ListViewParcels.ItemsSource = db.GetFilterdParcels(customer, null, null, null, null, null);
         }
 

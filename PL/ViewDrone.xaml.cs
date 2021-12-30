@@ -30,9 +30,9 @@ namespace PL
         /// Add new drone menu
         /// </summary>
         /// <param name="db">dataBase to add too</param>
-        public ViewDrone(IBL db)
+        public ViewDrone()
         {
-            this.db = db;
+            this.db = BlFactory.GetBl();
             InitializeComponent();
             DroneViewGrid.Visibility = Visibility.Collapsed;
             AddDroneGrid.Visibility = Visibility.Visible;
@@ -48,9 +48,9 @@ namespace PL
         /// </summary>
         /// <param name="drone">the drone to view</param>
         /// <param name="db"></param>
-        public ViewDrone(Drone drone, IBL db)
+        public ViewDrone(Drone drone)
         {
-            this.db = db;
+            this.db = BlFactory.GetBl(); ;
             Cdrone = drone;
 
             InitializeComponent();
