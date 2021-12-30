@@ -53,16 +53,19 @@ namespace PL
                 return;
             if (NameBox.Text != station.Name)
             {
-                Update.IsEnabled = true;
+                Update.Visibility = Visibility.Visible;
             }
             else
             {
-                Update.IsEnabled = false;
+                Update.Visibility = Visibility.Hidden;
             }
 
         }
 
-
+        private void Exit()
+        {
+            this.Close();
+        }
         private void Update_Click(object sender, RoutedEventArgs e)
         {
             db.UpdateStation(int.Parse(IdBox.Text), NameBox.Text, station.NumFreeChargers.ToString());
@@ -148,16 +151,18 @@ namespace PL
             IdBox.IsReadOnly = true;
             LocationBox.Visibility = Visibility.Visible;
             DroneList.Visibility = Visibility.Visible;
-            DroneInChargingLable.Visibility = Visibility.Visible;
             DroneLable.Visibility = Visibility.Visible; 
             LatBox.Visibility = Visibility.Collapsed;
             LongBox.Visibility = Visibility.Collapsed;
             LatLable.Visibility = Visibility.Collapsed;
             LongLable.Visibility = Visibility.Collapsed;
-            Update.Content = "Update";
-            Update.IsCancel = false;
-            Update.Click += Update_Click;
-            Update.Click -= AddStationToDb;
+            Update.Visibility = Visibility.Visible;
+            Uri resourceUri = new Uri(@"Desgin\StationViews\Update.PNG", UriKind.Relative);
+            Update.Source = new BitmapImage(resourceUri);
+            Update.MouseLeftButtonDown += Update_Click;
+            Update.MouseLeftButtonDown -= AddStationToDb;
+             resourceUri = new Uri(@"Desgin\StationViews\Exit.PNG", UriKind.Relative);
+            ExitButton.Source = new BitmapImage(resourceUri);
             NameBox.Text = station.Name;
             IdBox.Text = station.Id.ToString();
             LocationBox.Text = station.Location.ToString();
@@ -171,16 +176,20 @@ namespace PL
             IdBox.IsReadOnly = false;
             LocationBox.Visibility = Visibility.Collapsed;
             DroneList.Visibility = Visibility.Collapsed;
-            DroneInChargingLable.Visibility = Visibility.Collapsed;
             DroneLable.Visibility = Visibility.Collapsed;
             LatBox.Visibility = Visibility.Visible;
             LongBox.Visibility = Visibility.Visible;
             LatLable.Visibility = Visibility.Visible;
             LongLable.Visibility = Visibility.Visible;
-            Update.Content = "Add";
-            Update.IsEnabled = true;
-            Update.Click += AddStationToDb;
-            Update.Click -= Update_Click;
+            Update.Visibility = Visibility.Visible;
+            ExitButton.Visibility = Visibility.Visible;
+           // Uri resourceUri = new Uri(@"Desgin\StationViews\Add.PNG", UriKind.Relative);
+            //Update.Source = new BitmapImage(resourceUri);
+            Update.MouseLeftButtonDown += AddStationToDb;
+            Update.MouseLeftButtonDown -= Update_Click;
+           // resourceUri = new Uri(@"Desgin\StationViews\Cancel.PNG", UriKind.Relative);
+            //ExitButton.Source = new BitmapImage(resourceUri);
+            
             
         }
         private void initializationBoxes()

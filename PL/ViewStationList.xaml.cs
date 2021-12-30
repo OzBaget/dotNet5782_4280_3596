@@ -24,7 +24,7 @@ namespace PL
         public ViewStationList()
         {
             InitializeComponent();
-            ResetList();
+            listViewStations.ItemsSource = db.GetAllStations();
         }
 
         private void listViewStations_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -37,10 +37,16 @@ namespace PL
         {
             new ViewStation().ShowDialog();
             ResetList();
+        }  
+        private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
         private void ResetList()
         {
+            listViewStations.ItemsSource = null;
             listViewStations.ItemsSource = db.GetAllStations();
+
         }
     }
 }

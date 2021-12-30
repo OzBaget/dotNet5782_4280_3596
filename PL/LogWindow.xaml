@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="LogWindow" Height="640" Width="800">
-    <Grid>
+    <Grid Margin="0,4,0,-4">
         <Grid.Background>
             <ImageBrush ImageSource="/Design/LogWindow/Bacground.png" Stretch="UniformToFill"/>
         </Grid.Background>

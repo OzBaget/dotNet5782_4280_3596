@@ -27,6 +27,7 @@ namespace PL
 
         private void ViewDroneList(object sender, RoutedEventArgs e)
         {
+
             new ViewDroneList().Show();
         }
 
@@ -40,8 +41,8 @@ namespace PL
         }
 
         private void viewCustomerlList(object sender, RoutedEventArgs e)
-        {
-            new ViewCustomerList().ShowDialog();
+        {                       
+           new ViewCustomerList().ShowDialog();
         }
     }
 }

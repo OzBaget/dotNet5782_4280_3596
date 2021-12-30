@@ -44,7 +44,7 @@ namespace PL
             //refresh listView
             updateFilters(null, null);
         }
-
+        
         /// <summary>
         /// Play Gif
         /// </summary>
