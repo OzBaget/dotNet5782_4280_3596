@@ -38,9 +38,10 @@
         <TextBlock x:Name="textBlock_Copy7" HorizontalAlignment="Left" Margin="100,183,0,0" Text="Reciver:" TextWrapping="Wrap" VerticalAlignment="Top"/>
 
         <Button x:Name="confBtn" Content="Confirm delivery" HorizontalAlignment="Left" Margin="101,338,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="AddBtn" Content="Add parcel" HorizontalAlignment="Left" Margin="100,402,0,0" VerticalAlignment="Top" Height="65" Width="186" Click="AddBtn_Click" IsEnabled="False">
+        <Button x:Name="AddBtn" Content="Add parcel" HorizontalAlignment="Left" Margin="100,402,0,0" VerticalAlignment="Top" Height="65" Width="186" Click="AddBtn_Click">
             <Button.Style>
                 <Style TargetType="Button">
+                    <Setter Property="IsEnabled" Value="False" />
                     <Style.Triggers>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
@@ -62,7 +63,7 @@
 
 
         <ComboBox x:Name="senderComboBox" HorizontalAlignment="Left" Margin="163,137,0,0" VerticalAlignment="Top" Width="120"  SelectedValuePath="Id" SelectedValue="{Binding MyParcel.Sender.Id}" ItemTemplate="{StaticResource customerInCombox}" SelectionChanged="senderChange"/>
-        <ComboBox x:Name="reciverComboBox" HorizontalAlignment="Left" Margin="163,180,0,0" VerticalAlignment="Top" Width="120" SelectedValuePath="Id" SelectedValue="{Binding MyParcel.Target.Id}" ItemTemplate="{StaticResource customerInCombox}" SelectionChanged="reciverChanged"/>
+        <ComboBox x:Name="reciverComboBox" HorizontalAlignment="Left" Margin="163,180,0,0" VerticalAlignment="Top" Width="120" SelectedValuePath="Id" SelectedValue="{Binding MyParcel.Target.Id}" ItemTemplate="{StaticResource customerInCombox}" SelectionChanged="senderChange"/>
         <TextBlock x:Name="senderErrorBox" HorizontalAlignment="Left" Margin="284,149,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" FontSize="8" FontFamily="Segoe UI" Foreground="Red"/>
         <TextBlock x:Name="reciverErrorBox" HorizontalAlignment="Left" Margin="283,191,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="8" FontFamily="Segoe UI" Foreground="Red"/>
 

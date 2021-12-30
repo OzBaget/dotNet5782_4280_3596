@@ -93,6 +93,9 @@ namespace PL
             recvDtlsBtn.Visibility = Visibility.Hidden;
 
 
+            senderChange(null, null);
+
+
             if (customer != null) //customer Mode
             {
                 senderComboBox.SelectedValue = customer.Id;
@@ -167,19 +170,22 @@ namespace PL
 
         private void senderChange(object sender, SelectionChangedEventArgs e)
         {
-            if (senderComboBox.SelectedValue == null)
-                senderErrorBox.Text = "Error: Choose sender!";
-            else senderErrorBox.Text = "";
+            if (senderComboBox.SelectedItem == null || reciverComboBox.SelectedItem==null)
+            {
+                senderErrorBox.Text = senderComboBox.SelectedItem == null ? "Error: Choose sender!" : "";
+                reciverErrorBox.Text = reciverComboBox.SelectedItem == null ? "Error: Choose sender!" : "";
+            }
+            else if (senderComboBox.SelectedValue.Equals(reciverComboBox.SelectedValue))
+            {
+                reciverErrorBox.Text = "Error: Reciver must by diffrent from sender!";
+                senderErrorBox.Text = "Error:  Sender must by diffrent from reciver!";
+            }
+            else
+            {
+                senderErrorBox.Text = "";
+                reciverErrorBox.Text = "";
+            }
         }
-
-        private void reciverChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (reciverComboBox.SelectedItem == null)
-                reciverComboBox.Text = "Error: Choose reciver!";
-            else if (reciverComboBox.SelectedItem == senderComboBox.SelectedItem)
-                reciverComboBox.Text = "Error: Reciver must by diffrent from sender!";
-            else reciverComboBox.Text = "";
-
-        }
+        
     }
 }
