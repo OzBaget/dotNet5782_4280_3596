@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Add a station.png" />
+    <None Remove="Cancel.png" />
     <None Remove="Design\LogWindow\Admin.png" />
     <None Remove="Design\LogWindow\Bacground.png" />
     <None Remove="Design\LogWindow\Log in.png" />
@@ -15,14 +17,23 @@
     <None Remove="Design\MainWindow\Drone list.png" />
     <None Remove="Design\MainWindow\Parcel list.png" />
     <None Remove="Design\MainWindow\Station list.png" />
+    <None Remove="Design\StationViews\Add.png" />
+    <None Remove="Design\StationViews\Cancel.png" />
+    <None Remove="Design\StationViews\Exit.png" />
+    <None Remove="Design\StationViews\Update.png" />
+    <None Remove="Exit.png" />
     <None Remove="Images\statusSelecor.png" />
+    <None Remove="OK.png" />
     <None Remove="statusSelecor.png" />
+    <None Remove="Update.png" />
   </ItemGroup>
 
   
 
 
   <ItemGroup>
+    <Resource Include="Add a station.png" />
+    <Resource Include="Cancel.png" />
     <Resource Include="Design\LogWindow\Bacground.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -56,6 +67,19 @@
     <Resource Include="Design\MainWindow\Station list.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Design\StationViews\Add.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Design\StationViews\Cancel.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Design\StationViews\Exit.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Design\StationViews\Update.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Exit.png" />
     <Resource Include="Images\Charge.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -129,8 +153,10 @@
     <Resource Include="Images\AddDroneNew.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="OK.png" />
     <Resource Include="Parcel details.png" />
     <Resource Include="statusSelecor.png" />
+    <Resource Include="Update.png" />
   </ItemGroup>
 
 

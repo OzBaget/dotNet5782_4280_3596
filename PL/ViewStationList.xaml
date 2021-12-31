@@ -7,22 +7,14 @@
         mc:Ignorable="d"
         Title="ViewStationList" Height="640" Width="800">
     <Grid>
-        <ListView x:Name="listViewStations" Margin="0,62,1,0" MouseDoubleClick="listViewStations_MouseDoubleClick" RenderTransformOrigin="0.5,0.5" FontSize="16" >
-            <ListView.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform AngleX="0.144"/>
-                    <RotateTransform/>
-                    <TranslateTransform X="-0.747"/>
-                </TransformGroup>
-            </ListView.RenderTransform>
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Design/LogWindow/Bacground.png" Stretch="UniformToFill"/>
+        </Grid.Background>
+        <ListView x:Name="listViewStations" Margin="0,88,1,61" MouseDoubleClick="listViewStations_MouseDoubleClick" RenderTransformOrigin="0.5,0.5" FontSize="25" Background="Transparent" FontFamily="Fonts/#KG Red Hands">
         </ListView>
-        <Button x:Name="AddStation" Content="Add a Station" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Width="116" Height="42" FontSize="15" Click="Add_Click"/>
+
+        <Image x:Name="Add" HorizontalAlignment="Left" Height="57" Margin="451,544,0,0" VerticalAlignment="Top" Width="174" Source="/Add a station.png" MouseLeftButtonDown="Add_Click" />
+        <Image x:Name="Exit" HorizontalAlignment="Left" Height="37" Margin="194,545,0,0" VerticalAlignment="Top" Width="114" Source="/Exit.png" MouseLeftButtonDown="Exit_Click" />
 
     </Grid>
 </Window>

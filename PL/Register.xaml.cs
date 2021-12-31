@@ -24,8 +24,12 @@ namespace PL
             InitializeComponent();
         }
 
-        
 
+
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
         private void Ok_Click(object sender, RoutedEventArgs e)
         {
             NameErrorBox.Text = "";
