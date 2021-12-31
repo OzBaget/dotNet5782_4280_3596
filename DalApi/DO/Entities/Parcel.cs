@@ -8,18 +8,6 @@ namespace DO
 {
     public struct Parcel
     {
-        public Parcel(int id, int senderId, int targetId, WeightCategories weight, Priorities priority) : this()
-        {
-            Id = id;
-            SenderId = senderId;
-            TargetId = targetId;
-            Weight = weight;
-            Priority = priority;
-
-            Requsted = DateTime.Now;
-            DroneId = 0;
-        }
-
         public int Id { get; set; }
         public int SenderId { get; set; }
         public int TargetId { get; set; }
@@ -30,6 +18,7 @@ namespace DO
         public DateTime? Scheduled { get; set; }
         public DateTime? PickedUp { get; set; }
         public DateTime? Delivered { get; set; }
+        public bool IsActived { get; set; }
 
         public override string ToString()
         {
@@ -41,13 +30,13 @@ namespace DO
                 $"Priority:          {Priority}\n" +
                 $"Assigned Drone ID: {DroneId}\n" +
                 $"Requsted Time:     {Requsted}";
-            if (Scheduled != null) //Scheduled !=null
+            if (Scheduled != null)
                 details += $"\nScheduled Time:    {Scheduled}";
 
-            if (PickedUp != null) //PickedUp !=null
+            if (PickedUp != null)
                 details += $"\nPickedUp Time:     {PickedUp}";
 
-            if (Delivered != null) //Delivered !=null
+            if (Delivered != null)
                 details += $"\nDelivered Time:    {Delivered}";
 
             return details;

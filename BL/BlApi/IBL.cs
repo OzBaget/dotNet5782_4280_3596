@@ -52,6 +52,15 @@ namespace BlApi
         /// </summary>
         /// <param name="parcel"></param>
         void AddParcel(BO.Parcel parcel);
+
+        /// <summary>
+        ///Delete parcel by ID
+        /// </summary>
+        /// <param name="parcelId">The ID of the parcel</param>
+        void DeleteParcel(int parcelId);
+
+
+
          /// <summary>
          ///  Link a parcel to drone
          /// </summary>

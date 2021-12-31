@@ -45,7 +45,11 @@ namespace PL
             weightSelector.IsEnabled = false;
             prioritySelector.IsEnabled = false;
             confBtn.Visibility = Visibility.Hidden;
-            AddBtn.Visibility = Visibility.Collapsed;
+            AddBtn.Content = "Delete parcel";
+            AddBtn.Click -= AddBtn_Click;
+            AddBtn.Click += DeleteBtn_Click;
+
+
 
             if (parcel.Drone.Id==0)
                 drnDlsBtn.Visibility = Visibility.Hidden;
@@ -93,7 +97,7 @@ namespace PL
             recvDtlsBtn.Visibility = Visibility.Hidden;
 
 
-            senderChange(null, null);
+            senderChange(null, null);//updates errorsBox
 
 
             if (customer != null) //customer Mode
@@ -168,7 +172,25 @@ namespace PL
 
         }
 
-        private void senderChange(object sender, SelectionChangedEventArgs e)
+        private void DeleteBtn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                db.DeleteParcel(MyParcel.Id.Value);
+                MessageBox.Show("The parcel was added successfully!", "Success!", MessageBoxButton.OK, MessageBoxImage.Information);
+                //exit = true;
+                Close();
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, "Can't delete parcel!", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            }
+        }
+
+            private void senderChange(object sender, SelectionChangedEventArgs e)
         {
             if (senderComboBox.SelectedItem == null || reciverComboBox.SelectedItem==null)
             {
