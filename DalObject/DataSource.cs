@@ -30,7 +30,7 @@ namespace Dal
         {
             Random r = new Random();
 
-            //Initialize BaseStations
+            #region Initialize BaseStations
             string[] baseNames = { "Jerusalem", "Tel-Aviv" };
             double[] baseLngs = { 35.212140, 34.8 };
             double[] baseLats = { 31.765975, 32.083333 };
@@ -40,8 +40,9 @@ namespace Dal
                 Station myStation = new Station(r.Next(), baseNames[i], baseLats[i], baseLngs[i], r.Next(5, 15));
                 BaseStations.Add(myStation);
             }
+            #endregion
 
-            //Initialize Drones
+            #region Initialize Drones
             for (int i = 0; i < 5; i++)
             {
                 Drone myDrone = new Drone();
@@ -50,8 +51,9 @@ namespace Dal
                 myDrone.MaxWeight = (WeightCategories)r.Next(0, 3);
                 Drones.Add(myDrone);
             }
+            #endregion
 
-            //Initialize Customers
+            #region Initialize Customers
             string[] names = { "Oz", "Ohad", "Abraham", "Yizeck", "Jecobe", "Joshf", "Shimon", "Reuven", "Moshe", "David" };
 
             for (int i = 0; i < 10; i++)
@@ -64,9 +66,9 @@ namespace Dal
                 myCustomer.Lat = (double)r.Next(315000, 330000) / 10000;//somewhere in Israel
                 Customers.Add(myCustomer);
             }
+            #endregion
 
-
-            //Initialize Parcels
+            #region Initialize Parcels
 
             //array of droneId of every Parcel; To make sure that there won't be collisions.
             int[] dronesIds = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
@@ -82,6 +84,7 @@ namespace Dal
             {
                 Parcel myParcel = new Parcel();
                 myParcel.Id = ++Config.ParcelId;
+                myParcel.IsActived = true;
                 myParcel.SenderId = Customers[r.Next(0, 10)].Id;
                 myParcel.TargetId = Customers[r.Next(0, 10)].Id; //TODO: make sure that both sender and target are diffrent..
                 myParcel.DroneId = dronesIds[i];
@@ -108,6 +111,7 @@ namespace Dal
                 myParcel.Priority = (Priorities)r.Next(0, 3);
                 Parcels.Add(myParcel);
             }
+            #endregion
         }
 
         /// <summary>

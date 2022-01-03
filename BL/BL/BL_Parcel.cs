@@ -61,6 +61,21 @@ namespace BL
             }
         }
 
+        public void DeleteParcel(int parcelId)
+        {
+            try
+            {
+                if (DalObject.GetParcerl(parcelId).DroneId != 0)
+                    throw new CantDeleteObject("Parcel is linked to drone!");
+                DalObject.DeleteParcel(parcelId);
+            }
+            catch (DO.IdNotFoundException ex)
+            {
+                throw new IdNotFoundException(ex.Message, ex.Id);
+            }
+        }
+
+
         public IEnumerable<ParcelToList> GetAllParcels()
         {
             List<ParcelToList> parcels = new();

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using DO;
 using System;
+using System.Linq;
 
 namespace Dal
 {
@@ -12,7 +13,7 @@ namespace Dal
             bool parcelExists = false;
 
             foreach (Parcel parcel in DataSource.Parcels)
-                if (parcel.Id == parcelId)
+                if (parcel.Id == parcelId && parcel.IsActived)
                     parcelExists = true;
 
             if (!parcelExists)
@@ -49,12 +50,16 @@ namespace Dal
             myParcel.Scheduled = scheduled;
             myParcel.PickedUp = pickedUp;
             myParcel.Delivered = delivered;
+            myParcel.IsActived = true;
             DataSource.Parcels.Add(myParcel);
         }
 
         public void DeleteParcel(int parcelId)
         {
-            DataSource.Parcels.Remove(GetParcerl(parcelId));
+            Parcel myParcel = GetParcerl(parcelId);
+            int parcelIndex = DataSource.Parcels.IndexOf(myParcel);
+            myParcel.IsActived = false;
+            DataSource.Parcels[parcelIndex] = myParcel;
         }
 
         
@@ -94,12 +99,12 @@ namespace Dal
        
         public IEnumerable<Parcel> GetAllParcels()
         {
-            return new List<Parcel>(DataSource.Parcels);
+            return new List<Parcel>(DataSource.Parcels.Where(p => p.IsActived));
         }
 
         public IEnumerable<Parcel> GetFilterdParcels(Predicate<Parcel> filter)
         {
-            return DataSource.Parcels.FindAll(filter);
+            return DataSource.Parcels.Where(p => filter(p) && p.IsActived);
         }
     }
 }

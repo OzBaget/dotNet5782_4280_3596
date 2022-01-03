@@ -56,4 +56,9 @@ namespace BlApi
     {
         public LessChargersThanDronesInCharchingException(string message) : base(message) { }
     }
+    [Serializable]
+    public class CantDeleteObject : Exception
+    {
+        public CantDeleteObject(string message) : base(message) { }
+    }
 }
