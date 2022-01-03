@@ -26,7 +26,10 @@ namespace PL
         {
             InitializeComponent();
             db = BlFactory.GetBl();
-        } 
+
+            box.ItemsSource = Enum.GetValues(typeof(ParcelStatus));
+
+        }
         private void Register(object sender, RoutedEventArgs e)
         {
             new Register().ShowDialog();

@@ -42,6 +42,7 @@ namespace PL
             NameBox.Text = station.Name;
             IdBox.Text = station.Id.ToString();
             LocationBox.Text = station.Location.ToString();
+            FreeBox.Text = station.NumFreeChargers.ToString();
             DroneList.ItemsSource = station.DronesInCharging;
 
         }
@@ -150,6 +151,9 @@ namespace PL
         {
             IdBox.IsReadOnly = true;
             LocationBox.Visibility = Visibility.Visible;
+            LocationLable.Visibility = Visibility.Visible;
+            FreeBox.Visibility = Visibility.Visible;
+            FreeLable.Visibility = Visibility.Visible;
             DroneList.Visibility = Visibility.Visible;
             DroneLable.Visibility = Visibility.Visible; 
             LatBox.Visibility = Visibility.Collapsed;
@@ -157,12 +161,13 @@ namespace PL
             LatLable.Visibility = Visibility.Collapsed;
             LongLable.Visibility = Visibility.Collapsed;
             Update.Visibility = Visibility.Visible;
-            Uri resourceUri = new Uri(@"Desgin\StationViews\Update.PNG", UriKind.Relative);
-            Update.Source = new BitmapImage(resourceUri);
+            
+          //  Update.Source = new BitmapImage(new Uri(@"C:\Users\User\Source\Repos\OzBaget\dotNet5782_4280_3596\PL\Design\StationViews\Update.png"));
             Update.MouseLeftButtonDown += Update_Click;
             Update.MouseLeftButtonDown -= AddStationToDb;
-             resourceUri = new Uri(@"Desgin\StationViews\Exit.PNG", UriKind.Relative);
-            ExitButton.Source = new BitmapImage(resourceUri);
+
+
+            //         ExitButton.Source = new BitmapImage(new Uri(@"Desgin\StationViews\Exit.PNG", UriKind.Relative));
             NameBox.Text = station.Name;
             IdBox.Text = station.Id.ToString();
             LocationBox.Text = station.Location.ToString();
@@ -175,16 +180,19 @@ namespace PL
             initializationBoxes();
             IdBox.IsReadOnly = false;
             LocationBox.Visibility = Visibility.Collapsed;
+            LocationLable.Visibility = Visibility.Collapsed;
             DroneList.Visibility = Visibility.Collapsed;
             DroneLable.Visibility = Visibility.Collapsed;
+            FreeBox.Visibility = Visibility.Collapsed;
+            FreeLable.Visibility = Visibility.Collapsed;
             LatBox.Visibility = Visibility.Visible;
             LongBox.Visibility = Visibility.Visible;
             LatLable.Visibility = Visibility.Visible;
             LongLable.Visibility = Visibility.Visible;
             Update.Visibility = Visibility.Visible;
             ExitButton.Visibility = Visibility.Visible;
-           // Uri resourceUri = new Uri(@"Desgin\StationViews\Add.PNG", UriKind.Relative);
-            //Update.Source = new BitmapImage(resourceUri);
+          // Uri resourceUri = new Uri(@"Desgin\StationViews\Add.PNG", UriKind.Relative);
+          //  Update.Source = new BitmapImage(resourceUri);
             Update.MouseLeftButtonDown += AddStationToDb;
             Update.MouseLeftButtonDown -= Update_Click;
            // resourceUri = new Uri(@"Desgin\StationViews\Cancel.PNG", UriKind.Relative);
@@ -197,6 +205,7 @@ namespace PL
             IdBox.Text = "";
             NameBox.Text = "";
             LocationBox.Text = "";
+            FreeBox.Text = "";
             LatBox.Text = "";
             LongBox.Text = "";
             NameErrorBox.Text = "";
@@ -209,6 +218,8 @@ namespace PL
 
         private void DroneList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            if ((sender as ListView).SelectedItem == null)
+                return;
             new ViewDrone(db.GetDrone(((sender as ListView).SelectedItem as BO.DroneInCharging).Id)).ShowDialog();
         }
     }

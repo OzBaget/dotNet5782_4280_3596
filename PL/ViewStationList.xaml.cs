@@ -29,6 +29,8 @@ namespace PL
 
         private void listViewStations_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            if ((sender as ListView).SelectedItem == null)
+                return;
             new ViewStation(db.GetStation(((sender as ListView).SelectedItem as BO.BaseStationToList).Id)).ShowDialog();
             ResetList();
         }
