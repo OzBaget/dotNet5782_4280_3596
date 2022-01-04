@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System;
+using System.Xml.Linq;
+using System.Reflection;
 
 namespace Dal
 {
@@ -7,9 +9,11 @@ namespace Dal
     {
         static readonly DalApi.IDal instance = new DalObject();
         public static DalApi.IDal Instance { get => instance; }
-        public DalObject()
+        DalObject()
         {
             DataSource.Initialize();
+            
         }
+        
     }
 }

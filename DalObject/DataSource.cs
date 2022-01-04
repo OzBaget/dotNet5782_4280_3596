@@ -54,9 +54,9 @@ namespace Dal
             #endregion
 
             #region Initialize Customers
-            string[] names = { "Oz", "Ohad", "Abraham", "Yizeck", "Jecobe", "Joshf", "Shimon", "Reuven", "Moshe", "David" };
+            string[] names = { "Oz", "Ohad", "Abraham", "Yizeck", "Jecobe", "Joshf", "Shimon", "Reuven", "Moshe", "David", "Shmuel", "Eyal", "Levi", "Dan", "Gad", "Judah", "Asher","Joshef","Naphtali" ,"Daniel"};
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 20; i++)
             {
                 Customer myCustomer = new Customer();
                 myCustomer.Id = r.Next();
@@ -71,7 +71,7 @@ namespace Dal
             #region Initialize Parcels
 
             //array of droneId of every Parcel; To make sure that there won't be collisions.
-            int[] dronesIds = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            int[] dronesIds = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
             int j = 0;
             foreach (Drone drone in Drones)
             {
@@ -80,7 +80,7 @@ namespace Dal
                 j++;
             }
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 20; i++)
             {
                 Parcel myParcel = new Parcel();
                 myParcel.Id = ++Config.ParcelId;

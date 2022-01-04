@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Drones>
+  <Drone>
+    <Id>180528917</Id>
+    <Model>MK3</Model>
+    <MaxWeight>Light</MaxWeight>
+  </Drone>
+  <Drone>
+    <Id>638421235</Id>
+    <Model>MK2</Model>
+    <MaxWeight>Middle</MaxWeight>
+  </Drone>
+  <Drone>
+    <Id>1189618199</Id>
+    <Model>MK1</Model>
+    <MaxWeight>Middle</MaxWeight>
+  </Drone>
+  <Drone>
+    <Id>1638946612</Id>
+    <Model>MK3</Model>
+    <MaxWeight>Light</MaxWeight>
+  </Drone>
+  <Drone>
+    <Id>1824269246</Id>
+    <Model>MK2</Model>
+    <MaxWeight>Middle</MaxWeight>
+  </Drone>
+</Drones>
