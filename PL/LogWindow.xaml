@@ -15,5 +15,6 @@
         <Image x:Name="pack___siteoforigin_____Admin_png" Source="/Design/LogWindow/Admin.png" MouseLeftButtonDown="loginAdmin" Margin="-99,179,-99,383"  />
         <Image x:Name="pack___siteoforigin_____Log_in_png" Margin="287,340,291,220"  Source="/Design/LogWindow/Log in.png" MouseLeftButtonDown="logIn"/>
         <Image x:Name="pack___siteoforigin_____Register_png"  Margin="288,507,302,57"    Source="/Design/LogWindow/Register.png" MouseLeftButtonDown="Register"/>
+        <ComboBox x:Name="box" HorizontalAlignment="Left" Margin="600,241,0,0" VerticalAlignment="Top" Width="120"/>
     </Grid>
 </Window>
