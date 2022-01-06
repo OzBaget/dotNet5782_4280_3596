@@ -173,10 +173,7 @@ namespace PL
             LongBox.Visibility = Visibility.Collapsed;
             LatLable.Visibility = Visibility.Collapsed;
             LongLable.Visibility = Visibility.Collapsed;
-            Update.Content = "Update";
-            Update.IsCancel = false;
-            Update.Click += Update_Click;
-            Update.Click -= AddCustomerToDb;
+            
             NameBox.Text = customer.Name;
             IdBox.Text = customer.Id.ToString();
             LocationBox.Text = customer.Location.ToString();
@@ -198,10 +195,7 @@ namespace PL
             LongBox.Visibility = Visibility.Visible;
             LatLable.Visibility = Visibility.Visible;
             LongLable.Visibility = Visibility.Visible;
-            Update.Content = "Add";
-            Update.IsEnabled = true;
-            Update.Click += AddCustomerToDb;
-            Update.Click -= Update_Click;
+            
             PhoneBox.TextChanged -= IsChanged;
             NameBox.TextChanged -= IsChanged;
 
@@ -232,5 +226,6 @@ namespace PL
         {
             new ViewParcel(db.GetParcel(((sender as ListView).SelectedItem as BO.ParcelInCustomer).Id), customer).ShowDialog();
         }
+
     }
 }

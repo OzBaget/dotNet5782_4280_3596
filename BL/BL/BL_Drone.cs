@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using BO;
 using BlApi;
+using System.Runtime.CompilerServices;
 
 
 namespace BL
 {
     sealed partial class BL : IBL
     {
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void AddDrone(Drone drone, int stationId)
         {
             try
@@ -26,88 +29,106 @@ namespace BL
                 Drones.Add(newDrone);
             }
             catch (DO.IdAlreadyExistsException ex)
-            { 
+            {
                 throw new IdAlreadyExistsException(ex.Message, ex.Id);
             }
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public Drone GetDrone(int droneId)
         {
-            int droneIndex = Drones.FindIndex(drone => drone.Id == droneId);
-            if (droneIndex==-1)
-                throw new IdNotFoundException($"Can't find drone with ID #{droneId}", droneId);
-            
-            DroneToList tmpDrone = Drones[droneIndex];
-
-            Drone newDrone = new();
-            newDrone.Id = tmpDrone.Id;
-            newDrone.Model = tmpDrone.Model;
-            newDrone.Status = tmpDrone.Status;
-            newDrone.MaxWeight = tmpDrone.MaxWeight;
-            newDrone.CurrentLocation = tmpDrone.CurrentLocation;
-            newDrone.Battery = tmpDrone.Battery;
-            ParcelInTransfer parcel = new();
-            if (tmpDrone.ParcelId != null) 
+            lock (DalObject)
             {
-                Parcel tmpParcel = GetParcel(tmpDrone.ParcelId.Value);
-                parcel.Id = tmpParcel.Id.Value;
-                parcel.Prioritie = tmpParcel.Prioritie;
-                parcel.Weight = tmpParcel.Weight;
-                parcel.Sender = tmpParcel.Sender;
-                parcel.Target = tmpParcel.Target;
-                parcel.PickupLocation = GetCustomer(tmpParcel.Sender.Id).Location;
-                parcel.TargetLocation = GetCustomer(tmpParcel.Target.Id).Location;
+                int droneIndex = Drones.FindIndex(drone => drone.Id == droneId);
+                if (droneIndex == -1)
+                    throw new IdNotFoundException($"Can't find drone with ID #{droneId}", droneId);
+
+                DroneToList tmpDrone = Drones[droneIndex];
+
+                Drone newDrone = new();
+                newDrone.Id = tmpDrone.Id;
+                newDrone.Model = tmpDrone.Model;
+                newDrone.Status = tmpDrone.Status;
+                newDrone.MaxWeight = tmpDrone.MaxWeight;
+                newDrone.CurrentLocation = tmpDrone.CurrentLocation;
+                newDrone.Battery = tmpDrone.Battery;
+                ParcelInTransfer parcel = new();
+                if (tmpDrone.ParcelId != null)
+                {
+                    Parcel tmpParcel = GetParcel(tmpDrone.ParcelId.Value);
+                    parcel.Id = tmpParcel.Id.Value;
+                    parcel.Prioritie = tmpParcel.Prioritie;
+                    parcel.Weight = tmpParcel.Weight;
+                    parcel.Sender = tmpParcel.Sender;
+                    parcel.Target = tmpParcel.Target;
+                    parcel.PickupLocation = GetCustomer(tmpParcel.Sender.Id).Location;
+                    parcel.TargetLocation = GetCustomer(tmpParcel.Target.Id).Location;
                     parcel.IsInTransfer = tmpParcel.DatePickup != null && tmpParcel.DateDeliverd == null;
-                parcel.Distance = calculateDist(parcel.PickupLocation, parcel.TargetLocation);
+                    parcel.Distance = calculateDist(parcel.PickupLocation, parcel.TargetLocation);
+                }
+                newDrone.Parcel = parcel;
+                return newDrone;
             }
-            newDrone.Parcel = parcel;
-            return newDrone;
 
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public IEnumerable<DroneToList> GetAllDrones()
         {
             return Drones;
         }
-        IEnumerable<DroneToList> IBL.GetFilterdDrones(WeightCategories? weight, DroneStatus? status)
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
+        public IEnumerable<DroneToList> GetFilterdDrones(WeightCategories? weight, DroneStatus? status)
         {
-            if (weight==null&& status!=null)
+            lock (DalObject)
             {
-                return Drones.FindAll(d => d.Status == status);
+                if (weight == null && status != null)
+                {
+                    return Drones.FindAll(d => d.Status == status);
+                }
+                if (weight != null && status == null)
+                {
+                    return Drones.FindAll(d => d.MaxWeight == weight);
+                }
+                if (weight != null && status != null)
+                {
+                    return Drones.FindAll(d => d.MaxWeight == weight && d.Status == status);
+                }
+                return Drones;
             }
-            if (weight!=null&& status==null)
-            {
-                return Drones.FindAll(d => d.MaxWeight == weight);
-            }
-            if (weight != null && status != null)
-            {
-                return Drones.FindAll(d => d.MaxWeight == weight&&d.Status==status);
-            }
-            return Drones;
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
 
         public int DroneToStation(int droneId)
         {
-            int droneIndex = Drones.FindIndex(drone => drone.Id == droneId);
-            if (droneIndex == -1)
-                throw new IdNotFoundException($"Can't find drone with ID #{droneId}", droneId);
-            DroneToList myDrone = Drones[droneIndex];//copy by ref..
-            if (Drones[droneIndex].Status != DroneStatus.Available)
-                throw new CantSendDroneToChargeException("Drone is not available!");
-
-            foreach (BaseStationToList station in GetStationsWithFreeSlots())
+            lock (DalObject)
             {
-                int batteryNeeded = batteryNeedForTrip(GetStation(station.Id).Location, myDrone.CurrentLocation);
-                if (myDrone.Battery >= batteryNeeded)
+                int droneIndex = Drones.FindIndex(drone => drone.Id == droneId);
+                if (droneIndex == -1)
+                    throw new IdNotFoundException($"Can't find drone with ID #{droneId}", droneId);
+                DroneToList myDrone = Drones[droneIndex];//copy by ref..
+                if (Drones[droneIndex].Status != DroneStatus.Available)
+                    throw new CantSendDroneToChargeException("Drone is not available!");
+
+                foreach (BaseStationToList station in GetStationsWithFreeSlots())
                 {
-                    myDrone.Battery -= batteryNeeded;
-                    myDrone.Status = DroneStatus.UnderMaintenance;
-                    myDrone.CurrentLocation = GetStation(station.Id).Location;
-                    DalObject.DroneToStation(station.Id, droneId);
-                    return station.Id;
+                    int batteryNeeded = batteryNeedForTrip(GetStation(station.Id).Location, myDrone.CurrentLocation);
+                    if (myDrone.Battery >= batteryNeeded)
+                    {
+                        myDrone.Battery -= batteryNeeded;
+                        myDrone.Status = DroneStatus.UnderMaintenance;
+                        myDrone.CurrentLocation = GetStation(station.Id).Location;
+                        DalObject.DroneToStation(station.Id, droneId);
+                        return station.Id;
+                    }
                 }
             }
             throw new CantSendDroneToChargeException("There is no station that the drone is able to charge at!");
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public int FreeDrone(int droneId, TimeSpan droneTime)
         {
             int droneIndex = Drones.FindIndex(drone => drone.Id == droneId);
@@ -120,17 +141,23 @@ namespace BL
 
             DalObject.FreeDrone(droneId);
 
-            myDrone.Battery = (int)(droneTime.TotalHours * chargingRate)+myDrone.Battery < 100 ? myDrone.Battery + (int)(droneTime.TotalHours * chargingRate) : 100;
+            myDrone.Battery = (int)(droneTime.TotalHours * chargingRate) + myDrone.Battery < 100 ? myDrone.Battery + (int)(droneTime.TotalHours * chargingRate) : 100;
             myDrone.Status = DroneStatus.Available;
             return myDrone.Battery;
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
+
         public void UpdateDrone(int id, string model)
         {
+
             try
             {
-                DalObject.UpdateDrone(id, model);
-                int droneIndex = Drones.FindIndex(drone => drone.Id == id);
-                Drones[droneIndex].Model = model;                
+                lock (DalObject)
+                {
+                    DalObject.UpdateDrone(id, model);
+                    int droneIndex = Drones.FindIndex(drone => drone.Id == id);
+                    Drones[droneIndex].Model = model;
+                }
             }
             catch (DO.IdNotFoundException ex)
             {
@@ -140,7 +167,7 @@ namespace BL
 
 
 
-        
+
 
         /// <summary>
         /// calculate the batrry needed for getting from point A to point B with spacific onditions
@@ -150,7 +177,7 @@ namespace BL
         /// <param name="empty">if dorne isn't empty-false</param>
         /// <param name="weight">if the drone isn't empty, the wight of the parcel that it carrying</param>
         /// <returns>the precnts battry needed</returns>
-        private int batteryNeedForTrip(Location dest, Location currentLoc, bool empty = true, WeightCategories weight=WeightCategories.Light)
+        private int batteryNeedForTrip(Location dest, Location currentLoc, bool empty = true, WeightCategories weight = WeightCategories.Light)
         {
             double powerUse = 0;
             if (empty)
@@ -161,7 +188,7 @@ namespace BL
                 {
                     case WeightCategories.Light:
                         powerUse = powerUseLight;
-                    break;
+                        break;
                     case WeightCategories.Middle:
                         powerUse = powerUseMiddle;
                         break;

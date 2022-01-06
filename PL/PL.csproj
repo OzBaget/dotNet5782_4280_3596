@@ -8,6 +8,8 @@
 
   <ItemGroup>
     <None Remove="Add a station.png" />
+    <None Remove="Add.png" />
+    <None Remove="Bacground.png" />
     <None Remove="Cancel.png" />
     <None Remove="Design\LogWindow\Admin.png" />
     <None Remove="Design\LogWindow\Bacground.png" />
@@ -22,8 +24,10 @@
     <None Remove="Design\StationViews\Exit.png" />
     <None Remove="Design\StationViews\Update.png" />
     <None Remove="Exit.png" />
+    <None Remove="GreenBlock.png" />
     <None Remove="Images\statusSelecor.png" />
     <None Remove="OK.png" />
+    <None Remove="OnlyTriangels.png" />
     <None Remove="statusSelecor.png" />
     <None Remove="Update.png" />
   </ItemGroup>
@@ -33,6 +37,8 @@
 
   <ItemGroup>
     <Resource Include="Add a station.png" />
+    <Resource Include="Add.png" />
+    <Resource Include="Bacground.png" />
     <Resource Include="Cancel.png" />
     <Resource Include="Design\LogWindow\Bacground.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -80,6 +86,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Exit.png" />
+    <Resource Include="GreenBlock.png" />
     <Resource Include="Images\Charge.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -154,6 +161,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="OK.png" />
+    <Resource Include="OnlyTriangels.png" />
     <Resource Include="Parcel details.png" />
     <Resource Include="statusSelecor.png" />
     <Resource Include="Update.png" />

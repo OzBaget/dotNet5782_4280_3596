@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Navigation;
 
 namespace PL
 {
@@ -71,6 +72,7 @@ namespace PL
         {
             db.UpdateStation(int.Parse(IdBox.Text), NameBox.Text, station.NumFreeChargers.ToString());
             MessageBox.Show("Update succeed", "Update station", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+            Exit();
 
 
         }
@@ -86,7 +88,7 @@ namespace PL
             IdErrorBox.Text = "";
             LatErrorBox.Text = "";
             LongErrorBox.Text = "";
-            int id;
+            int id,free;
             double lat, longint;
             bool error = false;
             if (NameBox.Text == "")
@@ -103,6 +105,16 @@ namespace PL
             else if (!int.TryParse(IdBox.Text, out id))
             {
                 IdErrorBox.Text = "Id not valid, try again";
+                error = true;
+            }
+            if (FreeBox.Text == "")
+            {
+                FreeErrorBox.Text = "Write digits, try again";
+                error = true;
+            }
+            else if (!int.TryParse(FreeBox.Text, out free))
+            {
+                FreeErrorBox.Text = "Num of free chargers not valid, try again";
                 error = true;
             }
             if (LatBox.Text == "")
@@ -131,6 +143,7 @@ namespace PL
             BO.BaseStation sBase = new BO.BaseStation();
             sBase.Name = NameBox.Text;
             sBase.Id = int.Parse(IdBox.Text);
+            sBase.NumFreeChargers = int.Parse(FreeBox.Text);
             sBase.Location = new();
             sBase.Location.Latitude = double.Parse(LatBox.Text);
             sBase.Location.Longitude = double.Parse(LongBox.Text);
@@ -150,24 +163,23 @@ namespace PL
         private void ViewAStation(object sender, RoutedEventArgs e)
         {
             IdBox.IsReadOnly = true;
+            FreeBox.IsReadOnly = true;
             LocationBox.Visibility = Visibility.Visible;
             LocationLable.Visibility = Visibility.Visible;
-            FreeBox.Visibility = Visibility.Visible;
-            FreeLable.Visibility = Visibility.Visible;
             DroneList.Visibility = Visibility.Visible;
             DroneLable.Visibility = Visibility.Visible; 
+            Update.Visibility = Visibility.Visible;
+            ExitButton.Visibility = Visibility.Visible;
+
             LatBox.Visibility = Visibility.Collapsed;
             LongBox.Visibility = Visibility.Collapsed;
             LatLable.Visibility = Visibility.Collapsed;
             LongLable.Visibility = Visibility.Collapsed;
-            Update.Visibility = Visibility.Visible;
+            CancelButton.Visibility = Visibility.Collapsed;
+            AddButton.Visibility = Visibility.Collapsed;
             
-          //  Update.Source = new BitmapImage(new Uri(@"C:\Users\User\Source\Repos\OzBaget\dotNet5782_4280_3596\PL\Design\StationViews\Update.png"));
-            Update.MouseLeftButtonDown += Update_Click;
-            Update.MouseLeftButtonDown -= AddStationToDb;
 
 
-            //         ExitButton.Source = new BitmapImage(new Uri(@"Desgin\StationViews\Exit.PNG", UriKind.Relative));
             NameBox.Text = station.Name;
             IdBox.Text = station.Id.ToString();
             LocationBox.Text = station.Location.ToString();
@@ -179,26 +191,25 @@ namespace PL
         {
             initializationBoxes();
             IdBox.IsReadOnly = false;
+            FreeBox.IsReadOnly = false;
             LocationBox.Visibility = Visibility.Collapsed;
             LocationLable.Visibility = Visibility.Collapsed;
             DroneList.Visibility = Visibility.Collapsed;
             DroneLable.Visibility = Visibility.Collapsed;
-            FreeBox.Visibility = Visibility.Collapsed;
-            FreeLable.Visibility = Visibility.Collapsed;
+            Update.Visibility = Visibility.Collapsed;
+            ExitButton.Visibility = Visibility.Collapsed;
+
             LatBox.Visibility = Visibility.Visible;
             LongBox.Visibility = Visibility.Visible;
             LatLable.Visibility = Visibility.Visible;
             LongLable.Visibility = Visibility.Visible;
-            Update.Visibility = Visibility.Visible;
-            ExitButton.Visibility = Visibility.Visible;
-          // Uri resourceUri = new Uri(@"Desgin\StationViews\Add.PNG", UriKind.Relative);
-          //  Update.Source = new BitmapImage(resourceUri);
-            Update.MouseLeftButtonDown += AddStationToDb;
-            Update.MouseLeftButtonDown -= Update_Click;
-           // resourceUri = new Uri(@"Desgin\StationViews\Cancel.PNG", UriKind.Relative);
-            //ExitButton.Source = new BitmapImage(resourceUri);
-            
-            
+            CancelButton.Visibility = Visibility.Visible;
+            AddButton.Visibility = Visibility.Visible;
+
+
+
+
+
         }
         private void initializationBoxes()
         {

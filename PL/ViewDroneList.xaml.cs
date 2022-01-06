@@ -50,11 +50,6 @@ namespace PL
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Again_Gif(object sender, RoutedEventArgs e)
-        {
-            GifDrones.Position = new TimeSpan(0, 0, 1);
-            GifDrones.Play();
-        }
 
 
         /// <summary>
