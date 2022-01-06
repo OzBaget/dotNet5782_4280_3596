@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using DO;
 
 namespace Dal
 {
     sealed partial class DalObject : DalApi.IDal
     {
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddDrone(int id, string model, WeightCategories maxWeight)
         {
             bool droneExists = false;
@@ -16,7 +18,8 @@ namespace Dal
 
             DataSource.Drones.Add(new Drone(id,model, maxWeight));
         }
-        
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public Drone GetDrone(int droneId)
         {
             bool droneExists = false;
@@ -31,11 +34,13 @@ namespace Dal
             return DataSource.Drones.Find(drone => drone.Id == droneId);
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void DeleteDrone(int droneId)
         {
             DataSource.Drones.Remove(GetDrone(droneId));
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdateDrone(int droneId, string model)
         {
             Drone tmpDrone = GetDrone(droneId);
@@ -43,6 +48,7 @@ namespace Dal
             AddDrone(tmpDrone.Id, model, tmpDrone.MaxWeight);
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public double[] GetPowerUse()
         {
             double[] powerUse = { DataSource.Config.Free,
@@ -51,14 +57,16 @@ namespace Dal
                 DataSource.Config.HeavyPacket };
             return powerUse;
         }
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public double GetChargingRate()
         {
             return DataSource.Config.ChargingRate;
         }
 
-        
 
-       
+
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void DroneToStation(int stationId, int droneId)
         {
             DataSource.Charges.Add(new DroneCharge(droneId, stationId));
@@ -73,7 +81,8 @@ namespace Dal
             DataSource.Drones[index] = droneTmp;
         }
 
-        
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void FreeDrone(int droneId)
         {
             DroneCharge charger = DataSource.Charges.Find(charger => charger.Droneld == droneId);
@@ -85,7 +94,8 @@ namespace Dal
             DataSource.BaseStations[index] = stationTmp;
         }
 
-        
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<Drone> GetAllDrones()
         {
             return new List<Drone>(DataSource.Drones);

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using DO;
 
 
@@ -7,6 +8,7 @@ namespace Dal
 {
     sealed partial class DalObject : DalApi.IDal
     {
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public Customer GetCustomer(int customerId)
         {
             bool customerExists = false;
@@ -20,7 +22,8 @@ namespace Dal
 
             return DataSource.Customers.Find(customer => customer.Id == customerId);
         }
-        
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddCustomer(int id,string name, string phone, double lat, double lng)
         {
             bool customerExists = false;
@@ -35,18 +38,21 @@ namespace Dal
             DataSource.Customers.Add(new Customer(id, name, phone, lat, lng));
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void DeleteCustomer(int customerId)
         {
             DataSource.Customers.Remove(GetCustomer(customerId));
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdateCustomer(int customerId, string name, string phone)
         {
             Customer tmpCustomer= GetCustomer(customerId);
             DeleteCustomer(customerId);
             AddCustomer(tmpCustomer.Id, name, phone, tmpCustomer.Lat, tmpCustomer.Lng);
         }
-        
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<Customer> GetAllCustomers()
         {
             return new List<Customer>(DataSource.Customers);

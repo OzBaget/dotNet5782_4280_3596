@@ -140,4 +140,11 @@
     <Lat>31.8586</Lat>
     <Lng>34.6481</Lng>
   </Customer>
+  <Customer>
+    <Id>1654</Id>
+    <Name>ohad</Name>
+    <Phone>0585161171</Phone>
+    <Lat>22.4343749837498</Lat>
+    <Lng>-32.8473983704</Lng>
+  </Customer>
 </Customers>
