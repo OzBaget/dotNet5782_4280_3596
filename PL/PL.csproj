@@ -11,6 +11,8 @@
     <None Remove="Add.png" />
     <None Remove="Bacground.png" />
     <None Remove="Cancel.png" />
+    <None Remove="Charge.png" />
+    <None Remove="checked.png" />
     <None Remove="Design\LogWindow\Admin.png" />
     <None Remove="Design\LogWindow\Bacground.png" />
     <None Remove="Design\LogWindow\Log in.png" />
@@ -40,6 +42,8 @@
     <Resource Include="Add.png" />
     <Resource Include="Bacground.png" />
     <Resource Include="Cancel.png" />
+    <Resource Include="Charge.png" />
+    <Resource Include="checked.png" />
     <Resource Include="Design\LogWindow\Bacground.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>

@@ -11,6 +11,7 @@
     <Model>MK2</Model>
     <MaxWeight>Heavy</MaxWeight>
     <IsActived>true</IsActived>
+    <IsActived>true</IsActived>
   </Drone>
   <Drone>
     <Id>2068563087</Id>

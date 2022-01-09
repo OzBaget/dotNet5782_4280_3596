@@ -25,6 +25,7 @@ namespace PL
         IBL db;
         Drone Cdrone;
         bool exit = false;
+        
 
         /// <summary>
         /// Add new drone menu
@@ -32,8 +33,8 @@ namespace PL
         /// <param name="db">dataBase to add too</param>
         public ViewDrone()
         {
-            this.db = BlFactory.GetBl();
             InitializeComponent();
+            this.db = BlFactory.GetBl();
             DroneViewGrid.Visibility = Visibility.Collapsed;
             AddDroneGrid.Visibility = Visibility.Visible;
             AddMaxWeight.ItemsSource = Enum.GetValues(typeof(WeightCategories));
@@ -50,9 +51,9 @@ namespace PL
         /// <param name="db"></param>
         public ViewDrone(Drone drone)
         {
-            this.db = BlFactory.GetBl(); ;
+            this.db = BlFactory.GetBl();
             Cdrone = drone;
-
+            DataContext = this;
             InitializeComponent();
 
             AddDroneGrid.Visibility = Visibility.Collapsed;            
@@ -88,8 +89,8 @@ namespace PL
                     {
                         ChargeButton.Visibility = Visibility.Hidden;
                         ReleaseButton.Visibility = Visibility.Hidden;
-                        PickUpButton.Visibility = Visibility.Hidden;
-                        LinkButton.Visibility = Visibility.Visible;
+                        PickUpButton.Visibility = Visibility.Visible;
+                        LinkButton.Visibility = Visibility.Hidden;
                         DeliverButton.Visibility = Visibility.Hidden;
                     }
                     break;
@@ -111,17 +112,14 @@ namespace PL
             LocationBox.Text = Cdrone.CurrentLocation.ToString();
             IdBox.Text = Cdrone.Id.ToString();
             ModelBox.Text = Cdrone.Model;
-
-            if (Cdrone.Parcel.Id != 0)
+            /*if (Cdrone.Parcel.Id != 0)
             {
-                IdParcel.Text = "ID: " + Cdrone.Parcel.Id;
-                ParcelDetials.Visibility = Visibility.Visible;
+                ParcelBox.Visibility = Visibility.Visible;
+                ParcelBox.Text = Cdrone.Parcel.ToString();
             }
             else
-            {
-                IdParcel.Text = "No parcel";
-                ParcelDetials.Visibility = Visibility.Hidden;
-            }
+                ParcelBox.Visibility = Visibility.Collapsed;*/
+
         }
         
         /// <summary>
@@ -226,6 +224,8 @@ namespace PL
         private void ModelChanged(object sender, TextChangedEventArgs e)
         {
             if (Cdrone == null)
+                return;
+            if (updateButton == null)
                 return;
             if (ModelBox.Text != Cdrone.Model)
             {
