@@ -12,10 +12,12 @@ namespace DO
         {
             Droneld = droneld;
             Stationld = stationld;
+            PlugedIn = null;
         }
 
         public int Droneld { get; set; }
         public int Stationld { get; set; }
+        public DateTime? PlugedIn { get; set; }
         public override string ToString()
         {
             return

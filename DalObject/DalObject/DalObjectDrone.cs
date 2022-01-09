@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using DO;
 
@@ -69,21 +70,20 @@ namespace Dal
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void DroneToStation(int stationId, int droneId)
         {
-            DataSource.Charges.Add(new DroneCharge(droneId, stationId));
+            DroneCharge myDC = new();
+            myDC.Droneld = droneId;
+            myDC.Stationld = stationId;
+            myDC.PlugedIn = DateTime.Now;
+            DataSource.Charges.Add(myDC);
             Station stationTmp = GetStation(stationId);
             int index = DataSource.BaseStations.IndexOf(stationTmp);
             stationTmp.FreeChargeSlots--;
             DataSource.BaseStations[index] = stationTmp;
-
-
-            /*Drone droneTmp = GetDrone(droneId);
-            index = DataSource.Drones.IndexOf(droneTmp);
-            DataSource.Drones[index] = droneTmp;*/
         }
 
 
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public void FreeDrone(int droneId)
+        public TimeSpan FreeDrone(int droneId)
         {
             DroneCharge charger = DataSource.Charges.Find(charger => charger.Droneld == droneId);
             DataSource.Charges.Remove(charger);
@@ -92,6 +92,7 @@ namespace Dal
             int index = DataSource.BaseStations.IndexOf(stationTmp);
             stationTmp.FreeChargeSlots++;
             DataSource.BaseStations[index] = stationTmp;
+            return (DateTime.Now - charger.PlugedIn).Value;
         }
 
 

@@ -28,7 +28,7 @@ namespace BL
             powerUseMiddle = DalObject.GetPowerUse()[2];
             powerUseHeavy = DalObject.GetPowerUse()[3];
 
-            chargingRate = DalObject.GetChargingRate();//precent to hour
+            chargingRate = DalObject.GetChargingRate();//precent to mintues
 
 
             foreach (DO.Drone drone in DalObject.GetAllDrones())

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DO;
 
 namespace Dal
@@ -66,7 +67,11 @@ namespace Dal
         public void DroneToStation(int stationId, int droneId)
         {
             List<DroneCharge> myChargeList = loadXmlToList<DroneCharge>();
-            myChargeList.Add(new DroneCharge(droneId, stationId));
+            DroneCharge myDC = new();
+            myDC.Droneld = droneId;
+            myDC.Stationld = stationId;
+            myDC.PlugedIn = DateTime.Now;
+            myChargeList.Add(myDC);
             saveListToXml(myChargeList);
 
             Station stationTmp = GetStation(stationId);
@@ -84,7 +89,7 @@ namespace Dal
         }
 
         
-        public void FreeDrone(int droneId)
+        public TimeSpan FreeDrone(int droneId)
         {
             List<DroneCharge> myChargeList = loadXmlToList<DroneCharge>();
             DroneCharge charger = myChargeList.Find(charger => charger.Droneld == droneId);
@@ -97,6 +102,7 @@ namespace Dal
             stationTmp.FreeChargeSlots++;
             myStationList[index] = stationTmp;
             saveListToXml(myStationList);
+            return (DateTime.Now - charger.PlugedIn).Value;
         }
 
         

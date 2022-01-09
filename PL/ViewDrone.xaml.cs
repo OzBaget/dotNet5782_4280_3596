@@ -291,28 +291,23 @@ namespace PL
         /// <param name="e"></param>
         private void Release_Click(object sender, MouseButtonEventArgs e)
         {
-            TimeSpan? result = ReleaseDroneDialog.GetResult();
-            if (result != null)
+            try
             {
-                try
-                {
-                    int newBattery = db.FreeDrone(Cdrone.Id, (TimeSpan)result);
-                    MessageBox.Show("The drone released successfully!", "Success!", MessageBoxButton.OK, MessageBoxImage.Information);
-                    updateTextBoxs();
-                    ReleaseButton.Visibility = Visibility.Hidden;
-                    ChargeButton.Visibility = Visibility.Visible;
-                    LinkButton.Visibility = Visibility.Visible;
-                }
-                catch (BlApi.IdNotFoundException ex)
-                {
-                    MessageBox.Show(ex.Message, "Can't release dorne", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                catch (BlApi.CantReleaseDroneFromChargeException ex)
-                {
-                    MessageBox.Show(ex.Message, "Can't release dorne", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                int newBattery = db.FreeDrone(Cdrone.Id);
+                MessageBox.Show("The drone released successfully!", "Success!", MessageBoxButton.OK, MessageBoxImage.Information);
+                updateTextBoxs();
+                ReleaseButton.Visibility = Visibility.Hidden;
+                ChargeButton.Visibility = Visibility.Visible;
+                LinkButton.Visibility = Visibility.Visible;
             }
-
+            catch (BlApi.IdNotFoundException ex)
+            {
+                MessageBox.Show(ex.Message, "Can't release dorne", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (BlApi.CantReleaseDroneFromChargeException ex)
+            {
+                MessageBox.Show(ex.Message, "Can't release dorne", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         /// <summary>

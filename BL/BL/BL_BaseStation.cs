@@ -36,7 +36,6 @@ namespace BL
                 newStation.NumFreeChargers = tmpStation.FreeChargeSlots;
                 newStation.DronesInCharging = getDronesInChraging(tmpStation.Id);
                 return newStation;
-
             }
             catch (DO.IdNotFoundException ex)
             {

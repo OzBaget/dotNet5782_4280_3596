@@ -86,8 +86,7 @@ namespace BlApi
         /// Reales the drone from charging
         /// </summary>
         /// <param name="droneId"></param>
-        /// <param name="droneTime"></param>
-        int FreeDrone(int droneId,TimeSpan droneTime);
+        int FreeDrone(int droneId);
         /// <summary>
         /// Update the model's drone
         /// </summary>
