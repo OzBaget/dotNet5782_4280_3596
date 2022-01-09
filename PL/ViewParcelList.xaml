@@ -13,13 +13,14 @@
     </Window.Resources>
 
     <Grid x:Name="MainGrid">
+
         <Grid.RowDefinitions>
             <RowDefinition Height="50*"/>
             <RowDefinition Height="400*"/>
         </Grid.RowDefinitions>
         <Grid x:Name="UpGrid" HorizontalAlignment="Stretch" Grid.Row="0">
             <Grid.Background>
-                <ImageBrush ImageSource="Images\upBackgroundViewDroneList.png" />
+                <ImageBrush ImageSource="/GreenBlock.png" Stretch="Fill" ViewboxUnits="RelativeToBoundingBox" TileMode="None"></ImageBrush>
             </Grid.Background>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -38,8 +39,8 @@
 
             <Image x:Name="image" Grid.Column="3" HorizontalAlignment="Left" Height="40" VerticalAlignment="Center" Width="40" Source="\Images\refresh-page-option.png" Cursor="Hand" MouseLeftButtonDown="ResetFilters_btn" Margin="46,0,0,0"/>
             <Image x:Name="image1" Grid.Column="3" HorizontalAlignment="Center" Height="45" VerticalAlignment="Center" Width="46" Source="\Images\plus-sign.png" Cursor="Hand" MouseLeftButtonDown="AddDrone_clk"/>
-            <Image x:Name="image2" Grid.Column="3" HorizontalAlignment="Left" Height="40" Margin="178,13,0,0" VerticalAlignment="Top" Width="40" Source="/Images/Exit Button.png"/>
-            <Button x:Name="button" Grid.Column="3" HorizontalAlignment="Left" Margin="178,13,0,0" VerticalAlignment="Top" Width="40" Height="40" Opacity="0" IsCancel="True" Cursor="Hand" Click="Cancel_Click"/>
+            <Image x:Name="image2" Grid.Column="3" Cursor="Hand" HorizontalAlignment="Left" Height="25" Margin="152,0,0,0" VerticalAlignment="Center" Width="102" Source="/Exit.png" MouseLeftButtonDown="Cancel_Click"/>
+
             <DatePicker x:Name="datePickerStart" Grid.Column="2" HorizontalAlignment="Left" Margin="167,7,0,0" VerticalAlignment="Top" FontFamily="Fonts/#KG Red Hands" BorderBrush="Transparent" SelectedDateChanged="updateFilters" DisplayDateEnd="{Binding SelectedDate, ElementName=datePickerEnd}" Grid.ColumnSpan="2" />
 
             <Label x:Name="TextSelector_Copy" Content="From:"  RenderTransformOrigin="0.456,0.516" FontSize="25" FontFamily="Fonts/#Cotton Butter" Margin="131,-5,0,0" Padding="0,0,0,0" Width="44" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" Foreground="White" Grid.Column="2" Height="40" />
@@ -51,13 +52,11 @@
         </Grid>
 
 
+
         <ListView x:Name="ListViewParcels" FontFamily="Fonts/#KG Red Hands"  FontSize="17" MouseDoubleClick="viewDrone" Margin="0,66,0,3" Grid.RowSpan="2" Foreground="Black" >
             <ListView.Background>
-                <VisualBrush>
-                    <VisualBrush.Visual>
-                        <MediaElement x:Name ="GifDrones" Source="Images/GIF.gif" LoadedBehavior="Play" MediaEnded="Again_Gif" UnloadedBehavior="Manual"/>
-                    </VisualBrush.Visual>
-                </VisualBrush>
+                <ImageBrush ImageSource="/OnlyTriangels.png" Stretch="Fill" ViewboxUnits="RelativeToBoundingBox" TileMode="None">
+                </ImageBrush>
             </ListView.Background>
         </ListView>
 

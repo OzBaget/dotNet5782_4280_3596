@@ -10,7 +10,7 @@
     <Grid>
         <Grid x:Name="DroneViewGrid" Visibility="Visible" Margin="0,1,0,-1">
             <Grid.Background>
-                <ImageBrush ImageSource="/Images/DoneViewNew.png" Stretch="UniformToFill"/>
+                <ImageBrush ImageSource="/Bacground.png" Stretch="UniformToFill"/>
             </Grid.Background>
 
             <Button x:Name="Cancel" Foreground="White" IsCancel="True" FontFamily="Fonts/#Alfa Slab One"  Opacity="0" HorizontalAlignment="Left" Margin="710,47,0,0" VerticalAlignment="Top" Width="48" Height="36" Click="Cancel_Click" Cursor="Hand"/>

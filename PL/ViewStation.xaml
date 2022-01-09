@@ -10,29 +10,32 @@
         <Grid.Background>
             <ImageBrush ImageSource="/Design/LogWindow/Bacground.png" Stretch="UniformToFill"/>
         </Grid.Background>
-        <Label x:Name="IdLable" Content="Id: " HorizontalAlignment="Left"    Margin="446,166,0,0" VerticalAlignment="Top" Height="56" Width="66" FontSize="22" FontFamily="Fonts/#KG Red Hands"/>
+        <Label x:Name="IdLable" Content="Id " HorizontalAlignment="Left"    Margin="478,166,0,0" VerticalAlignment="Top" Height="56" Width="66" FontSize="22" FontFamily="Fonts/#KG Red Hands"/>
         <TextBox x:Name="IdBox" Text="" HorizontalAlignment="Left"    Margin="549,166,0,0" VerticalAlignment="Top" Height="56" Width="189" FontSize="22" TextChanged="IsChanged" IsReadOnly="True" FontFamily="Fonts/#KG Red Hands"/>
-        <Label x:Name="FreeLable" Content="Free chargers: " HorizontalAlignment="Left"    Margin="446,282,0,0" VerticalAlignment="Top" Height="56" Width="212" FontSize="22" FontFamily="Fonts/#KG Red Hands"/>
+        <Label x:Name="FreeLable" Content="Free chargers" HorizontalAlignment="Left"    Margin="446,286,0,0" VerticalAlignment="Top" Height="56" Width="212" FontSize="22" FontFamily="Fonts/#KG Red Hands"/>
         <TextBox x:Name="FreeBox" Text="" HorizontalAlignment="Left"    Margin="644,283,0,0" VerticalAlignment="Top" Height="56" Width="94" FontSize="22" TextChanged="IsChanged" IsReadOnly="True" FontFamily="Fonts/#KG Red Hands"/>
         <Label x:Name="NameLable" Content="Name: " HorizontalAlignment="Left"    Margin="49,166,0,0" VerticalAlignment="Top" Height="56" Width="82" FontSize="22" FontFamily="Fonts/#KG Red Hands"/>
         <TextBox  x:Name="NameBox" Text="" HorizontalAlignment="Left" Margin="153,162,0,0" VerticalAlignment="Top" Height="60" Width="190" FontSize="24" Padding="5,5,5,5" TextChanged="IsChanged" FontFamily="Fonts/#KG Red Hands"/>
-        <Label x:Name="LocationLable" Content="Location: " HorizontalAlignment="Left"    Margin="40,274,0,0" VerticalAlignment="Top" Height="56" Width="113" FontSize="22" Visibility="Collapsed" FontFamily="Fonts/#KG Red Hands"/>
+        <Label x:Name="LocationLable" Content="Location " HorizontalAlignment="Left"    Margin="35,286,0,0" VerticalAlignment="Top" Height="56" Width="113" FontSize="22" Visibility="Visible" FontFamily="Fonts/#KG Red Hands"/>
         <TextBox x:Name="LocationBox" Text="" HorizontalAlignment="Left"    Margin="144,274,0,0" VerticalAlignment="Top" Height="56" Width="190" FontSize="12" IsReadOnly="True" Visibility="Collapsed" FontFamily="Fonts/#KG Red Hands"/>
-        <Label x:Name="LatLable" Content="Lat: " HorizontalAlignment="Left"    Margin="49,283,0,0" VerticalAlignment="Top" Height="56" Width="66" FontSize="22" FontFamily="Fonts/#KG Red Hands"/>
+        <Label x:Name="LatLable" Content="Lat: " HorizontalAlignment="Left"    Margin="49,286,0,0" VerticalAlignment="Top" Height="56" Width="66" FontSize="22" FontFamily="Fonts/#KG Red Hands"/>
         <TextBox x:Name="LatBox" Text="" HorizontalAlignment="Left"    Margin="153,283,0,0" VerticalAlignment="Top" Height="56" Width="56" FontSize="12" FontFamily="Fonts/#KG Red Hands"/>
-        <Label x:Name="LongLable" Content="Long: " HorizontalAlignment="Left"    Margin="446,286,0,0" VerticalAlignment="Top" Height="56" Width="66" FontSize="22" FontFamily="Fonts/#KG Red Hands"/>
-        <TextBox x:Name="LongBox" Text="" HorizontalAlignment="Left"    Margin="549,286,0,0" VerticalAlignment="Top" Height="56" Width="55" FontSize="12"  FontFamily="Fonts/#KG Red Hands"/>
+        <Label x:Name="LongLable" Content="Long: " HorizontalAlignment="Left"    Margin="242,286,0,0" VerticalAlignment="Top" Height="56" Width="66" FontSize="22" FontFamily="Fonts/#KG Red Hands"/>
+        <TextBox x:Name="LongBox" Text="" HorizontalAlignment="Left"    Margin="345,286,0,0" VerticalAlignment="Top" Height="56" Width="55" FontSize="12"  FontFamily="Fonts/#KG Red Hands"/>
 
 
         <TextBlock x:Name="NameErrorBox" HorizontalAlignment="Left" Margin="154,239,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="132" Height="15" FontSize="10" Foreground="Red" />
         <TextBlock x:Name="IdErrorBox" HorizontalAlignment="Left" Margin="556,239,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="132" Height="15" FontSize="10" Foreground="Red" />
         <TextBlock x:Name="LatErrorBox" HorizontalAlignment="Left" Margin="151,353,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="112" Height="16" FontSize="10" Foreground="Red" />
-        <TextBlock x:Name="LongErrorBox" HorizontalAlignment="Left" Margin="550,354,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="108" Height="15" FontSize="10" Foreground="Red" />
+        <TextBlock x:Name="FreeErrorBox" HorizontalAlignment="Left" Margin="622,353,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="112" Height="16" FontSize="10" Foreground="Red" />
+        <TextBlock x:Name="LongErrorBox" HorizontalAlignment="Center" Margin="0,354,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="108" Height="15" FontSize="10" Foreground="Red" />
 
-        <Label x:Name="DroneLable" Content="Drones in charging" HorizontalAlignment="Left" Margin="275,361,0,0" VerticalAlignment="Top" Height="42" Width="270" FontSize="23" FontFamily="Fonts/#KG Red Hands"/>
+        <Label x:Name="DroneLable" Content="Drones in charging" HorizontalAlignment="Left" Margin="249,361,0,0" VerticalAlignment="Top" Height="42" Width="270" FontSize="23" FontFamily="Fonts/#KG Red Hands"/>
         <ListView x:Name="DroneList" Margin="-3,403,-3,130" Visibility="Visible" MouseDoubleClick="DroneList_MouseDoubleClick" Background="Transparent" FontSize="25" FontFamily="Fonts/#KG Red Hands"/>
-        <Image x:Name="ExitButton" HorizontalAlignment="Left" Height="54" Margin="181,533,0,0" VerticalAlignment="Top" Width="165" Source="/Exit.png" MouseLeftButtonDown="Exit_Click" />
-        <Image x:Name="Update" HorizontalAlignment="Left" Height="51" Margin="488,534,0,0" VerticalAlignment="Top" Width="158" Source="/Update.png" MouseLeftButtonDown="Update_Click" />
+        <Image x:Name="ExitButton" Cursor="Hand"  HorizontalAlignment="Left" Height="54" Margin="181,533,0,0" VerticalAlignment="Top" Width="165" Source="/Exit.png" MouseLeftButtonDown="Exit_Click" />
+        <Image x:Name="Update" Cursor="Hand"  HorizontalAlignment="Left" Height="51" Margin="488,534,0,0" VerticalAlignment="Top" Width="158" Source="/Update.png" MouseLeftButtonDown="Update_Click" />
+        <Image x:Name="CancelButton" Cursor="Hand"  HorizontalAlignment="Left" Height="54" Margin="181,533,0,0" VerticalAlignment="Top" Width="165" Source="/Cancel.png" MouseLeftButtonDown="Exit_Click" />
+        <Image x:Name="AddButton" Cursor="Hand"  HorizontalAlignment="Left" Height="51" Margin="488,534,0,0" VerticalAlignment="Top" Width="158" Source="/Add.png" MouseLeftButtonDown="AddStationToDb" />
 
 
 

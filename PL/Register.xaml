@@ -26,8 +26,9 @@
         <TextBox x:Name="LongBox" HorizontalAlignment="Left" Margin="274,219,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="72" Height="28" FontSize="20"/>
         <TextBlock x:Name="LatErrorBox" HorizontalAlignment="Left" Margin="31,251,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="132" Height="15" FontSize="10" Foreground="Red" />
         <TextBlock x:Name="LongErrorBox" HorizontalAlignment="Left" Margin="204,251,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="132" Height="15" FontSize="10" Foreground="Red" />
-        <Image x:Name="OK" HorizontalAlignment="Left" Height="100" Margin="217,271,0,0" VerticalAlignment="Top" Width="100" Source="/OK.png" MouseLeftButtonDown="Ok_Click"/>
-        <Image x:Name="Cancel" HorizontalAlignment="Left" Height="100" Margin="58,271,0,0" VerticalAlignment="Top" Width="100" Source="/Cancel.png" MouseLeftButtonDown="Cancel_Click"/>
+
+        <Image x:Name="OK" Cursor="Hand"  HorizontalAlignment="Left" Height="100" Margin="217,271,0,0" VerticalAlignment="Top" Width="100" Source="/OK.png" MouseLeftButtonDown="Ok_Click"/>
+        <Image x:Name="Cancel" Cursor="Hand"  HorizontalAlignment="Left" Height="100" Margin="58,271,0,0" VerticalAlignment="Top" Width="100" Source="/Cancel.png" MouseLeftButtonDown="Cancel_Click"/>
 
     </Grid>
 </Window>

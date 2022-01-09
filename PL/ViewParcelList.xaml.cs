@@ -95,11 +95,6 @@ namespace PL
             updateFilters(null, null);
         }
 
-        private void Again_Gif(object sender, RoutedEventArgs e)
-        {
-            GifDrones.Position = new TimeSpan(0, 0, 1);
-            GifDrones.Play();
-        }
 
         private void CloseWindow(object sender, System.ComponentModel.CancelEventArgs e)
         {

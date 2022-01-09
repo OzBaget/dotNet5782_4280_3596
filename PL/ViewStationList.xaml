@@ -13,8 +13,8 @@
         <ListView x:Name="listViewStations" Margin="0,88,1,61" MouseDoubleClick="listViewStations_MouseDoubleClick" RenderTransformOrigin="0.5,0.5" FontSize="25" Background="Transparent" FontFamily="Fonts/#KG Red Hands">
         </ListView>
 
-        <Image x:Name="Add" HorizontalAlignment="Left" Height="57" Margin="451,544,0,0" VerticalAlignment="Top" Width="174" Source="/Add a station.png" MouseLeftButtonDown="Add_Click" />
-        <Image x:Name="Exit" HorizontalAlignment="Left" Height="37" Margin="194,545,0,0" VerticalAlignment="Top" Width="114" Source="/Exit.png" MouseLeftButtonDown="Exit_Click" />
+        <Image x:Name="Add" HorizontalAlignment="Left" Height="57" Cursor="Hand" Margin="451,544,0,0" VerticalAlignment="Top" Width="174" Source="/Add a station.png" MouseLeftButtonDown="Add_Click" />
+        <Image x:Name="Exit" HorizontalAlignment="Left" Height="37" Cursor="Hand" Margin="194,545,0,0" VerticalAlignment="Top" Width="114" Source="/Exit.png" MouseLeftButtonDown="Exit_Click" />
 
     </Grid>
 </Window>

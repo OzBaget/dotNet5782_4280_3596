@@ -11,10 +11,10 @@
             <ImageBrush ImageSource="/Design/LogWindow/Bacground.png" Stretch="UniformToFill"/>
         </Grid.Background>
 
-        <Image x:Name="CustomerList" Source="/Design/MainWindow/Customer list.png" MouseLeftButtonDown="viewCustomerlList" Margin="-99,161,-99,401"  />
-        <Image x:Name="DroneList" Source="/Design/MainWindow/Drone list.png" MouseLeftButtonDown="ViewDroneList" Margin="-99,253,-99,309"  />
-        <Image x:Name="ParcelList" Source="/Design/MainWindow/Parcel list.png" MouseLeftButtonDown="viewParcelList" Margin="-99,347,-99,215"  />
-        <Image x:Name="StationList" Source="/Design/MainWindow/Station list.png" MouseLeftButtonDown="viewStationlList" Margin="-99,439,-99,123"  />
+        <Image x:Name="CustomerList" Cursor="Hand" Source="/Design/MainWindow/Customer list.png" MouseLeftButtonDown="viewCustomerlList" Margin="-99,161,-99,401"  />
+        <Image x:Name="DroneList" Cursor="Hand" Source="/Design/MainWindow/Drone list.png" MouseLeftButtonDown="ViewDroneList" Margin="-99,253,-99,309"  />
+        <Image x:Name="ParcelList" Cursor="Hand" Source="/Design/MainWindow/Parcel list.png" MouseLeftButtonDown="viewParcelList" Margin="-99,347,-99,215"  />
+        <Image x:Name="StationList" Cursor="Hand" Source="/Design/MainWindow/Station list.png" MouseLeftButtonDown="viewStationlList" Margin="-99,439,-99,123"  />
 
 
     </Grid>
