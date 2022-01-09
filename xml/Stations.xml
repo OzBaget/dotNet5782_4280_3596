@@ -5,13 +5,13 @@
     <Name>Jerusalem</Name>
     <Lat>31.765975</Lat>
     <Lng>35.21214</Lng>
-    <FreeChargeSlots>8</FreeChargeSlots>
+    <FreeChargeSlots>7</FreeChargeSlots>
   </Station>
   <Station>
     <Id>1761302361</Id>
     <Name>Tel-Aviv</Name>
     <Lat>32.083333</Lat>
     <Lng>34.8</Lng>
-    <FreeChargeSlots>7</FreeChargeSlots>
+    <FreeChargeSlots>6</FreeChargeSlots>
   </Station>
 </Stations>

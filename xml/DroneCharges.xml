@@ -1,2 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<DroneCharges />
+<DroneCharges>
+  <DroneCharge>
+    <Droneld>1824269246</Droneld>
+    <Stationld>1141521409</Stationld>
+  </DroneCharge>
+  <DroneCharge>
+    <Droneld>1189618199</Droneld>
+    <Stationld>1761302361</Stationld>
+  </DroneCharge>
+</DroneCharges>

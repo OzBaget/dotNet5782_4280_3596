@@ -162,9 +162,9 @@
     <TargetId>56227803</TargetId>
     <Weight>Light</Weight>
     <Priority>Normal</Priority>
-    <DroneId>0</DroneId>
+    <DroneId>180528917</DroneId>
     <Requsted>2022-01-02T23:27:14.6605427+02:00</Requsted>
-    <Scheduled />
+    <Scheduled>2022-01-09T23:25:42.552755+02:00</Scheduled>
     <PickedUp />
     <Delivered />
     <IsActived>true</IsActived>
@@ -201,10 +201,10 @@
     <TargetId>284893085</TargetId>
     <Weight>Light</Weight>
     <Priority>Normal</Priority>
-    <DroneId>0</DroneId>
+    <DroneId>638421235</DroneId>
     <Requsted>2022-01-04T12:00:14.6605964+02:00</Requsted>
-    <Scheduled />
-    <PickedUp />
+    <Scheduled>2022-01-09T23:26:44.5689093+02:00</Scheduled>
+    <PickedUp>2022-01-09T23:58:51.5783645+02:00</PickedUp>
     <Delivered />
     <IsActived>true</IsActived>
   </Parcel>
@@ -242,9 +242,9 @@
     <Priority>Normal</Priority>
     <DroneId>0</DroneId>
     <Requsted>2022-01-03T12:46:14.6606388+02:00</Requsted>
-    <Scheduled />
-    <PickedUp />
-    <Delivered />
+    <Scheduled>2022-01-09T23:29:06.8853742+02:00</Scheduled>
+    <PickedUp>2022-01-09T23:55:15.2523496+02:00</PickedUp>
+    <Delivered>2022-01-09T23:55:18.3032192+02:00</Delivered>
     <IsActived>true</IsActived>
   </Parcel>
   <Parcel>
@@ -266,9 +266,9 @@
     <TargetId>1643269183</TargetId>
     <Weight>Light</Weight>
     <Priority>Normal</Priority>
-    <DroneId>0</DroneId>
+    <DroneId>1638946612</DroneId>
     <Requsted>2022-01-05T00:31:28.6594736+02:00</Requsted>
-    <Scheduled />
+    <Scheduled>2022-01-09T23:38:15.4088578+02:00</Scheduled>
     <PickedUp />
     <Delivered />
     <IsActived>true</IsActived>
@@ -279,9 +279,9 @@
     <TargetId>56227803</TargetId>
     <Weight>Light</Weight>
     <Priority>Normal</Priority>
-    <DroneId>0</DroneId>
+    <DroneId>12345</DroneId>
     <Requsted>2022-01-05T00:31:36.9874354+02:00</Requsted>
-    <Scheduled />
+    <Scheduled>2022-01-09T23:56:23.55782+02:00</Scheduled>
     <PickedUp />
     <Delivered />
     <IsActived>true</IsActived>
