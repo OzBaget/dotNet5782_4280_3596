@@ -37,7 +37,13 @@ namespace Dal
 
             for (int i = 0; i < 2; i++)
             {
-                Station myStation = new Station(r.Next(), baseNames[i], baseLats[i], baseLngs[i], r.Next(5, 15));
+                Station myStation = new();
+                myStation.Id = r.Next();
+                myStation.Name = baseNames[i];
+                myStation.Lat = baseLats[i];
+                myStation.Lng = baseLngs[i];
+                myStation.FreeChargeSlots = r.Next(5, 15);
+                myStation.IsActived = true;
                 BaseStations.Add(myStation);
             }
             #endregion
@@ -49,6 +55,7 @@ namespace Dal
                 myDrone.Id = r.Next();
                 myDrone.Model = "MK" + r.Next(1, 4).ToString();
                 myDrone.MaxWeight = (WeightCategories)r.Next(0, 3);
+                myDrone.IsActived = true;
                 Drones.Add(myDrone);
             }
             #endregion
@@ -64,6 +71,7 @@ namespace Dal
                 myCustomer.Phone = "+972" + r.Next(100000000, 999999999).ToString();//ten digits phone number
                 myCustomer.Lng = (double)r.Next(345000, 355000) / 10000;//v         
                 myCustomer.Lat = (double)r.Next(315000, 330000) / 10000;//somewhere in Israel
+                myCustomer.IsActived = true;
                 Customers.Add(myCustomer);
             }
             #endregion

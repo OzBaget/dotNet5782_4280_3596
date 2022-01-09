@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Linq;
 using System.Collections.Generic;
 using DO;
 
@@ -12,7 +12,7 @@ namespace Dal
             bool customerExists = false;
 
             foreach (Customer customer in loadXmlToList<Customer>())
-                if (customer.Id == customerId)
+                if (customer.Id == customerId && customer.IsActived)
                     customerExists = true;
 
             if (!customerExists)
@@ -31,7 +31,14 @@ namespace Dal
 
             if (customerExists)
                 throw new IdAlreadyExistsException($"Customer with ID #{id} already exists!", id);
-            myList.Add(new Customer(id, name, phone, lat, lng));
+            Customer myCustomer = new();
+            myCustomer.Id = id;
+            myCustomer.Name = name;
+            myCustomer.Phone = phone;
+            myCustomer.Lat = lat;
+            myCustomer.Lng = lng;
+            myCustomer.IsActived = true;
+            myList.Add(myCustomer);
             saveListToXml(myList);
         }
 
@@ -51,7 +58,7 @@ namespace Dal
         
         public IEnumerable<Customer> GetAllCustomers()
         {
-            return loadXmlToList<Customer>();
+            return loadXmlToList<Customer>().Where(c => c.IsActived);
         }
     }
 }

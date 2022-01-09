@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using DO;
@@ -16,8 +17,12 @@ namespace Dal
                     droneExists = true;
             if(droneExists)
                 throw new IdAlreadyExistsException($"Drone with ID #{id} already exists!", id);
-
-            DataSource.Drones.Add(new Drone(id,model, maxWeight));
+            Drone myDrone = new();
+            myDrone.Id = id;
+            myDrone.Model = model;
+            myDrone.MaxWeight = maxWeight;
+            myDrone.IsActived = true;
+            DataSource.Drones.Add(myDrone);
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
@@ -26,7 +31,7 @@ namespace Dal
             bool droneExists = false;
 
             foreach (Drone drone in GetAllDrones())
-                if (drone.Id == droneId)
+                if (drone.Id == droneId && drone.IsActived) 
                     droneExists = true;
 
             if (!droneExists)
@@ -99,7 +104,7 @@ namespace Dal
         [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<Drone> GetAllDrones()
         {
-            return new List<Drone>(DataSource.Drones);
+            return DataSource.Drones.Where(d=>d.IsActived);
         }
     }
 }

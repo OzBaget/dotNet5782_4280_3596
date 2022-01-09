@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using DO;
 
@@ -15,8 +16,12 @@ namespace Dal
                     droneExists = true;
             if(droneExists)
                 throw new IdAlreadyExistsException($"Drone with ID #{id} already exists!", id);
-
-            myList.Add(new Drone(id,model, maxWeight));
+            Drone myDrone = new();
+            myDrone.Id = id;
+            myDrone.Model = model;
+            myDrone.MaxWeight = maxWeight;
+            myDrone.IsActived = true;
+            myList.Add(myDrone);
             saveListToXml(myList);
         }
         
@@ -25,7 +30,7 @@ namespace Dal
             bool droneExists = false;
             List<Drone> myList = loadXmlToList<Drone>();
             foreach (Drone drone in myList)
-                if (drone.Id == droneId)
+                if (drone.Id == droneId && drone.IsActived)
                     droneExists = true;
 
             if (!droneExists)
@@ -80,12 +85,6 @@ namespace Dal
             stationTmp.FreeChargeSlots--;
             myStationList[index] = stationTmp;
             saveListToXml(myStationList);
-
-            List<Drone> myDroneList = loadXmlToList<Drone>();
-            Drone droneTmp = GetDrone(droneId);
-            index = myDroneList.IndexOf(droneTmp);
-            myDroneList[index] = droneTmp;
-            saveListToXml(myDroneList);
         }
 
         
@@ -108,7 +107,7 @@ namespace Dal
         
         public IEnumerable<Drone> GetAllDrones()
         {
-            return loadXmlToList<Drone>();
+            return loadXmlToList<Drone>().Where(d => d.IsActived);
         }
     }
 }
