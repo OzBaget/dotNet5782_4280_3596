@@ -2,11 +2,12 @@
 using BO;
 using BlApi;
 using System.Runtime.CompilerServices;
+using System.Linq;
 
 namespace BL
 {
     sealed partial class BL : IBL
-    {
+    { 
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddStation(BaseStation station)
         {
@@ -25,20 +26,17 @@ namespace BL
         {
             try
             {
-              
+                DO.Station tmpStation = DalObject.GetStation(stationId);
+                BaseStation newStation = new();
+                newStation.Id = tmpStation.Id;
+                newStation.Name = tmpStation.Name;
+                newStation.Location = new();
+                newStation.Location.Latitude = tmpStation.Lat;
+                newStation.Location.Longitude = tmpStation.Lng;
+                newStation.NumFreeChargers = tmpStation.FreeChargeSlots;
+                newStation.DronesInCharging = getDronesInChraging(tmpStation.Id);
+                return newStation;
 
-
-                    DO.Station tmpStation = DalObject.GetStation(stationId);
-                    BaseStation newStation = new();
-                    newStation.Id = tmpStation.Id;
-                    newStation.Name = tmpStation.Name;
-                    newStation.Location = new();
-                    newStation.Location.Latitude = tmpStation.Lat;
-                    newStation.Location.Longitude = tmpStation.Lng;
-                    newStation.NumFreeChargers = tmpStation.FreeChargeSlots;
-                    newStation.DronesInCharging = getDronesInChraging(tmpStation.Id);
-                    return newStation;
-                
             }
             catch (DO.IdNotFoundException ex)
             {
@@ -115,14 +113,14 @@ namespace BL
         private List<DroneInCharging> getDronesInChraging(int stationId)
         {
             List<DroneInCharging> drones = new();
-            foreach (DO.DroneCharge charger in DalObject.GetAllDroneCharge())
+            foreach (DroneToList drone in GetAllDrones())
             {
-                if (charger.Stationld == stationId)
+                if (DalObject.GetAllDroneCharge().Any(dc => dc.Stationld == stationId && dc.Droneld == drone.Id)) 
                 {
-                    DroneInCharging drone = new();
-                    drone.Id = charger.Droneld;
-                    drone.Battery = GetDrone(charger.Droneld).Battery;
-                    drones.Add(drone);
+                    DroneInCharging droneInCharge = new();
+                    droneInCharge.Id = drone.Id;
+                    droneInCharge.Battery = GetDrone(drone.Id).Battery;
+                    drones.Add(droneInCharge);
                 }
             }
             return drones;

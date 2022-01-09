@@ -76,9 +76,9 @@ namespace Dal
             DataSource.BaseStations[index] = stationTmp;
 
 
-            Drone droneTmp = GetDrone(droneId);
+            /*Drone droneTmp = GetDrone(droneId);
             index = DataSource.Drones.IndexOf(droneTmp);
-            DataSource.Drones[index] = droneTmp;
+            DataSource.Drones[index] = droneTmp;*/
         }
 
 
