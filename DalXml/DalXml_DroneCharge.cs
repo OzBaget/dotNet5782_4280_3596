@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Linq;
 using System.Collections.Generic;
 using DO;
 
@@ -9,7 +9,7 @@ namespace Dal
     {
         public IEnumerable<DroneCharge> GetAllDroneCharge()
         {
-            return loadXmlToList<DroneCharge>();
+            return loadXmlToList<DroneCharge>().Where(dc => dc.IsActived);
         }
     }
 }

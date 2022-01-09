@@ -6,20 +6,12 @@ namespace DO
 
     public struct Customer
     {
-        public Customer(int id, string name, string phone, double lat, double lng)
-        {
-            Id = id;
-            Name = name;
-            Phone = phone;
-            Lat = lat;
-            Lng = lng;
-        }
         public int Id { get; set; }
         public string Name { get; set; }
         public string Phone { get; set; }
         public double Lat { get; set; }
         public double Lng { get; set; }
-        
+        public bool IsActived { get; set; }
 
         public override string ToString()
         {

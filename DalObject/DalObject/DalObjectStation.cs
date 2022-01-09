@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using DO;
@@ -14,7 +15,7 @@ namespace Dal
             bool stationExists = false;
 
             foreach (Station station in GetAllStations())
-                if (station.Id == stationId)
+                if (station.Id == stationId && station.IsActived) 
                     stationExists = true;
             
             if (!stationExists)
@@ -34,7 +35,14 @@ namespace Dal
                     throw new IdAlreadyExistsException($"Station with ID #{id} already exists!", id);
                 }
             }
-            DataSource.BaseStations.Add(new Station(id, name, lat, lng, chargSlots));
+            Station myStation = new();
+            myStation.Id = id;
+            myStation.Name = name;
+            myStation.Lat = lat;
+            myStation.Lng = lng;
+            myStation.FreeChargeSlots = chargSlots;
+            myStation.IsActived = true;
+            DataSource.BaseStations.Add(myStation);
         }
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void DeleteStation(int id)
@@ -54,7 +62,7 @@ namespace Dal
         [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<Station> GetAllStations()
         {
-            return new List<Station>(DataSource.BaseStations);
+            return DataSource.BaseStations.Where(s => s.IsActived);
         }
 
         /// <summary>
@@ -64,7 +72,7 @@ namespace Dal
         [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<Station> GetFilterdStations(Predicate<Station> filter)
         {
-            return DataSource.BaseStations.FindAll(filter);
+            return DataSource.BaseStations.Where(s => filter(s) && s.IsActived);
         }
     }
 }

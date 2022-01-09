@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using DO;
 
@@ -12,7 +13,7 @@ namespace Dal
             bool stationExists = false;
             List<Station> myList = loadXmlToList<Station>();
             foreach (Station station in myList)
-                if (station.Id == stationId)
+                if (station.Id == stationId && station.IsActived) 
                     stationExists = true;
             
             if (!stationExists)
@@ -33,13 +34,23 @@ namespace Dal
                     throw new IdAlreadyExistsException($"Station with ID #{id} already exists!", id);
                 }
             }
-            myList.Add(new Station(id, name, lat, lng, chargSlots));
+            Station myStation = new();
+            myStation.Id = id;
+            myStation.Name = name;
+            myStation.Lat = lat;
+            myStation.Lng = lng;
+            myStation.FreeChargeSlots = chargSlots;
+            myStation.IsActived = true;
+            myList.Add(myStation);
             saveListToXml(myList);
         }
         public void DeleteStation(int id)
         {
             List<Station> myList = loadXmlToList<Station>();
-            myList.Remove(GetStation(id));
+            int index = myList.IndexOf(GetStation(id));
+            Station myStation =myList[index];
+            myStation.IsActived = false;
+            myList[index] = myStation;
             saveListToXml(myList);
         }
         public void UpdateStation(int stationId, string name, int numChargers)
@@ -52,7 +63,7 @@ namespace Dal
         
         public IEnumerable<Station> GetAllStations()
         {
-            return loadXmlToList<Station>();
+            return loadXmlToList<Station>().Where(s => s.IsActived);
         }
 
         /// <summary>
@@ -61,7 +72,7 @@ namespace Dal
         /// <returns>array of all the base stations that has free charge slots</returns>
         public IEnumerable<Station> GetFilterdStations(Predicate<Station> filter)
         {
-            return loadXmlToList<Station>().FindAll(filter);
+            return loadXmlToList<Station>().Where(s => filter(s) && s.IsActived);
         }
     }
 }

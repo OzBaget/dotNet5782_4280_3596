@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using DO;
@@ -11,7 +12,7 @@ namespace Dal
         [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<DroneCharge> GetAllDroneCharge()
         {
-            return new List<DroneCharge>(DataSource.Charges);
+            return DataSource.Charges.Where(dc=>dc.IsActived);
         }
     }
 }
