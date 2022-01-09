@@ -8,20 +8,12 @@ namespace DO
 {
     public struct Station
     {
-        public Station(int id, string name, double lat, double lng, int chargSlots)
-        {
-            Id = id;
-            Name = name;
-            Lat = lat;
-            Lng = lng;
-            FreeChargeSlots = chargSlots;
-        }
-
         public int Id { get; set; }
         public string Name { get; set; }
         public double Lat { get; set; }
         public double Lng { get; set; }
         public int FreeChargeSlots { get; set; }
+        public bool IsActived { get; set; }
         public override string ToString()
         {
             return

@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Linq;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using DO;
@@ -14,7 +14,7 @@ namespace Dal
             bool customerExists = false;
 
             foreach (Customer customer in DataSource.Customers)
-                if (customer.Id == customerId)
+                if (customer.Id == customerId && customer.IsActived)
                     customerExists = true;
 
             if (!customerExists)
@@ -29,33 +29,44 @@ namespace Dal
             bool customerExists = false;
 
             foreach (Customer customer in DataSource.Customers)
-                if (customer.Id == id)
+                if (customer.Id == id) 
                     customerExists = true;
 
             if (customerExists)
                 throw new IdAlreadyExistsException($"Customer with ID #{id} already exists!", id);
-
-            DataSource.Customers.Add(new Customer(id, name, phone, lat, lng));
+            Customer myCustomer = new();
+            myCustomer.Id = id;
+            myCustomer.Name = name;
+            myCustomer.Phone = phone;
+            myCustomer.Lat = lat;
+            myCustomer.Lng = lng;
+            myCustomer.IsActived = true;
+            DataSource.Customers.Add(myCustomer);
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void DeleteCustomer(int customerId)
         {
-            DataSource.Customers.Remove(GetCustomer(customerId));
+            int index = DataSource.Customers.IndexOf(GetCustomer(customerId));
+            Customer myCustomer = DataSource.Customers[index];
+            myCustomer.IsActived = false;
+            DataSource.Customers[index] = myCustomer;
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdateCustomer(int customerId, string name, string phone)
         {
-            Customer tmpCustomer= GetCustomer(customerId);
-            DeleteCustomer(customerId);
-            AddCustomer(tmpCustomer.Id, name, phone, tmpCustomer.Lat, tmpCustomer.Lng);
+            int index = DataSource.Customers.IndexOf(GetCustomer(customerId));
+            Customer myCustomer = DataSource.Customers[index];
+            myCustomer.Name = name;
+            myCustomer.Phone = phone;
+            DataSource.Customers[index] = myCustomer;
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<Customer> GetAllCustomers()
         {
-            return new List<Customer>(DataSource.Customers);
+            return DataSource.Customers.Where(c=>c.IsActived);
         }
     }
 }

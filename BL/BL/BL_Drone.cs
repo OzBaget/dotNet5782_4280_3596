@@ -129,7 +129,7 @@ namespace BL
         }
         [MethodImpl(MethodImplOptions.Synchronized)]
 
-        public int FreeDrone(int droneId, TimeSpan droneTime)
+        public int FreeDrone(int droneId)
         {
             int droneIndex = Drones.FindIndex(drone => drone.Id == droneId);
             if (droneIndex == -1)
@@ -139,9 +139,9 @@ namespace BL
             if (myDrone.Status != DroneStatus.UnderMaintenance)
                 throw new CantReleaseDroneFromChargeException("Drone is not in charging!");
 
-            DalObject.FreeDrone(droneId);
+            TimeSpan chargeTime= DalObject.FreeDrone(droneId);
 
-            myDrone.Battery = (int)(droneTime.TotalHours * chargingRate) + myDrone.Battery < 100 ? myDrone.Battery + (int)(droneTime.TotalHours * chargingRate) : 100;
+            myDrone.Battery = (int)(chargeTime.TotalMinutes * chargingRate) + myDrone.Battery < 100 ? myDrone.Battery + (int)(chargeTime.TotalMinutes * chargingRate) : 100;
             myDrone.Status = DroneStatus.Available;
             return myDrone.Battery;
         }

@@ -196,7 +196,8 @@ namespace DalApi
         /// release drone from charging
         /// </summary>
         /// <param name="droneId">the drone ID to release</param>
-        void FreeDrone(int droneId);
+        /// <returns>The time span between drone plug in and now</returns>
+        TimeSpan FreeDrone(int droneId);
 
         /// <summary>
         /// updates customer ditails

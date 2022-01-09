@@ -1,17 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Stations>
   <Station>
-    <Id>1141521409</Id>
+    <Id>651051009</Id>
     <Name>Jerusalem</Name>
     <Lat>31.765975</Lat>
     <Lng>35.21214</Lng>
-    <FreeChargeSlots>7</FreeChargeSlots>
+    <FreeChargeSlots>5</FreeChargeSlots>
+    <IsActived>true</IsActived>
   </Station>
   <Station>
-    <Id>1761302361</Id>
+    <Id>1407054720</Id>
     <Name>Tel-Aviv</Name>
     <Lat>32.083333</Lat>
     <Lng>34.8</Lng>
-    <FreeChargeSlots>6</FreeChargeSlots>
+    <FreeChargeSlots>11</FreeChargeSlots>
+    <IsActived>true</IsActived>
   </Station>
 </Stations>
