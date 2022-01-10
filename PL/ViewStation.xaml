@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="ViewStation" Height="640" Width="800">
+        Title="ViewStation" x:Name ="ViewStationName" Height="640" Width="800">
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/Design/LogWindow/Bacground.png" Stretch="UniformToFill"/>
         </Grid.Background>
         <Label x:Name="IdLable" Content="Id " HorizontalAlignment="Left"    Margin="478,166,0,0" VerticalAlignment="Top" Height="56" Width="66" FontSize="22" FontFamily="Fonts/#KG Red Hands"/>
-        <TextBox x:Name="IdBox" Text="" HorizontalAlignment="Left"    Margin="549,166,0,0" VerticalAlignment="Top" Height="56" Width="189" FontSize="22" TextChanged="IsChanged" IsReadOnly="True" FontFamily="Fonts/#KG Red Hands"/>
+        <TextBox x:Name="IdBox" Text="{Binding station.Id}" HorizontalAlignment="Left"    Margin="549,166,0,0" VerticalAlignment="Top" Height="56" Width="189" FontSize="22" TextChanged="IsChanged" IsReadOnly="True" FontFamily="Fonts/#KG Red Hands"/>
         <Label x:Name="FreeLable" Content="Free chargers" HorizontalAlignment="Left"    Margin="446,286,0,0" VerticalAlignment="Top" Height="56" Width="212" FontSize="22" FontFamily="Fonts/#KG Red Hands"/>
         <TextBox x:Name="FreeBox" Text="" HorizontalAlignment="Left"    Margin="644,283,0,0" VerticalAlignment="Top" Height="56" Width="94" FontSize="22" TextChanged="IsChanged" IsReadOnly="True" FontFamily="Fonts/#KG Red Hands"/>
         <Label x:Name="NameLable" Content="Name: " HorizontalAlignment="Left"    Margin="49,166,0,0" VerticalAlignment="Top" Height="56" Width="82" FontSize="22" FontFamily="Fonts/#KG Red Hands"/>

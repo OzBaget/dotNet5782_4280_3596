@@ -48,6 +48,11 @@ namespace PL
             PhoneBox.Text = customer.Phone;
             IdBox.Text = customer.Id.ToString();
             LocationBox.Text = customer.Location.ToString();
+            
+            CancelButton.Visibility = Visibility.Collapsed;
+            ExitButton.Visibility = Visibility.Visible;            
+            AddButton.Visibility = Visibility.Collapsed;
+
         }
 
         private void IsChanged(object sender, TextChangedEventArgs e)
@@ -63,11 +68,13 @@ namespace PL
             {
                 changed = true;
             }
-            if(changed)
-                Update.IsEnabled = true;
+            if (changed)
+                UpdateButton.Visibility = Visibility.Visible; 
+
             else
-                Update.IsEnabled = false;
-        
+                UpdateButton.Visibility = Visibility.Collapsed;
+
+
 
         }
 
@@ -199,6 +206,10 @@ namespace PL
             PhoneBox.TextChanged -= IsChanged;
             NameBox.TextChanged -= IsChanged;
 
+            CancelButton.Visibility = Visibility.Visible;
+            ExitButton.Visibility = Visibility.Collapsed;
+            AddButton.Visibility = Visibility.Visible;
+            UpdateButton.Visibility = Visibility.Collapsed;
         }
         private void initializationBoxes()
         {

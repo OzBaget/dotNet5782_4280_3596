@@ -1,21 +1,2 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<DroneCharges>
-  <DroneCharge>
-    <Droneld>294376531</Droneld>
-    <Stationld>651051009</Stationld>
-    <PlugedIn>2022-01-09T23:37:10.7111963+02:00</PlugedIn>
-    <IsActived>false</IsActived>
-  </DroneCharge>
-  <DroneCharge>
-    <Droneld>294376531</Droneld>
-    <Stationld>1407054720</Stationld>
-    <PlugedIn>2022-01-09T23:37:31.3954376+02:00</PlugedIn>
-    <IsActived>false</IsActived>
-  </DroneCharge>
-  <DroneCharge>
-    <Droneld>1219953957</Droneld>
-    <Stationld>651051009</Stationld>
-    <PlugedIn>2022-01-09T23:37:31.4187517+02:00</PlugedIn>
-    <IsActived>false</IsActived>
-  </DroneCharge>
-</DroneCharges>
+<DroneCharges />

@@ -22,14 +22,15 @@ namespace PL
     /// </summary>
     public partial class ViewStation : Window
     {
-        BaseStation station;
+        public BaseStation station { get; set; }
         IBL db;
         public ViewStation(BaseStation Cstation)
         {
-            InitializeComponent();
             station = Cstation;
+            this.DataContext = this;
+            InitializeComponent();
             db = BlFactory.GetBl();
-            showStation();
+            showStation();            
         } 
         public ViewStation()
         {
@@ -40,11 +41,11 @@ namespace PL
         private void showStation()
         {
             ViewAStation(null, null);
-            NameBox.Text = station.Name;
+         /*   NameBox.Text = station.Name;
             IdBox.Text = station.Id.ToString();
             LocationBox.Text = station.Location.ToString();
             FreeBox.Text = station.NumFreeChargers.ToString();
-            DroneList.ItemsSource = station.DronesInCharging;
+            DroneList.ItemsSource = station.DronesInCharging;*/
 
         }
 
@@ -70,7 +71,7 @@ namespace PL
         }
         private void Update_Click(object sender, RoutedEventArgs e)
         {
-            db.UpdateStation(int.Parse(IdBox.Text), NameBox.Text, station.NumFreeChargers.ToString());
+            //db.UpdateStation(int.Parse(IdBox.Text), NameBox.Text, station.NumFreeChargers.ToString());
             MessageBox.Show("Update succeed", "Update station", MessageBoxButton.OK, MessageBoxImage.Asterisk);
             Exit();
 
@@ -180,10 +181,10 @@ namespace PL
             
 
 
-            NameBox.Text = station.Name;
+            /*NameBox.Text = station.Name;
             IdBox.Text = station.Id.ToString();
             LocationBox.Text = station.Location.ToString();
-            DroneList.ItemsSource = station.DronesInCharging;
+            DroneList.ItemsSource = station.DronesInCharging;*/
 
 
         }
@@ -213,7 +214,7 @@ namespace PL
         }
         private void initializationBoxes()
         {
-            IdBox.Text = "";
+            /*IdBox.Text = "";
             NameBox.Text = "";
             LocationBox.Text = "";
             FreeBox.Text = "";
@@ -222,7 +223,7 @@ namespace PL
             NameErrorBox.Text = "";
             IdErrorBox.Text = "";
             LatErrorBox.Text = "";
-            LongErrorBox.Text = "";
+            LongErrorBox.Text = "";*/
         }
 
 

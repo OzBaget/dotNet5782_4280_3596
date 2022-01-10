@@ -41,7 +41,7 @@ namespace PL
             reciverComboBox.ItemsSource = db.GetAllCustomers();
             senderComboBox.IsEnabled = false;
             reciverComboBox.IsEnabled = false;
-            IDTextBox.IsReadOnly = true;
+            IdBox.IsReadOnly = true;
             weightSelector.IsEnabled = false;
             prioritySelector.IsEnabled = false;
             confBtn.Visibility = Visibility.Hidden;
@@ -89,7 +89,7 @@ namespace PL
             senderComboBox.ItemsSource = db.GetAllCustomers();
             reciverComboBox.ItemsSource = db.GetAllCustomers();
 
-            IDTextBox.IsEnabled = false;
+            IdBox.IsEnabled = false;
 
             drnDlsBtn.Visibility = Visibility.Hidden;
             confBtn.Visibility = Visibility.Hidden;
@@ -144,6 +144,7 @@ namespace PL
             else
                 confBtn.Visibility = Visibility.Hidden;
         }
+
 
         private void confDeliveryClk(object sender, RoutedEventArgs e)
         {
