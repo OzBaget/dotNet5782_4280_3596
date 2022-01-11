@@ -8,11 +8,11 @@ namespace BO
 {
     public class BaseStation
     {
-        public int Id;
-        public string Name;
-        public Location Location;
-        public int NumFreeChargers;
-        public List<DroneInCharging> DronesInCharging;
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public Location Location { get; set; }
+        public int NumFreeChargers { get; set; }
+        public List<DroneInCharging> DronesInCharging { get; set; }
 
         public override string ToString()
         {

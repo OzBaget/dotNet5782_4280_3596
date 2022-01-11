@@ -12,7 +12,7 @@
         </Grid.Background>
         <TextBox x:Name="logInBox" HorizontalAlignment="Center" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="280" Height="33" Opacity="100" Margin="0,279,0,0" />
         <TextBlock x:Name="errorBox" HorizontalAlignment="Left" Margin="260,312,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="238" Height="15" FontSize="10" Foreground="Red" />
-        <Image x:Name="Admin" Cursor="Hand" Source="/Design/LogWindow/Admin.png" MouseLeftButtonDown="loginAdmin" Margin="-99,179,-99,383"  />
+        <Image x:Name="Admin" Cursor="Hand" Source="/Design/LogWindow/Admin.png" MouseLeftButtonDown="loginAdmin" Margin="-103,179,-95,383"  />
         <Image x:Name="Login" Cursor="Hand" Margin="287,340,291,220"  Source="/Design/LogWindow/Log in.png" MouseLeftButtonDown="logIn"/>
         <Image x:Name="register" Cursor="Hand" Margin="288,507,302,57"    Source="/Design/LogWindow/Register.png" MouseLeftButtonDown="Register"/>
     </Grid>

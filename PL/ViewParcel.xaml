@@ -19,26 +19,26 @@
         <Grid.Background>
             <ImageBrush ImageSource="/Bacground.png" Stretch="Fill" ViewboxUnits="RelativeToBoundingBox" TileMode="None"></ImageBrush>
         </Grid.Background>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="97,114,0,0" Text="ID:" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBox x:Name="IDTextBox" HorizontalAlignment="Left" Margin="160,113,0,0" Text="{Binding MyParcel.Id}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBlock x:Name="textBlock_Copy" HorizontalAlignment="Left" Margin="97,308,0,0" Text="Created:" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock x:Name="textBox_Copy" HorizontalAlignment="Left" Margin="160,308,0,0" Text="{Binding MyParcel.DateCreated}" TextWrapping="Wrap" VerticalAlignment="Top" Width="auto"/>
-        <TextBlock x:Name="textBlock_Copy1" HorizontalAlignment="Left" Margin="98,333,0,0" Text="Scheduled:" TextWrapping="Wrap" VerticalAlignment="Top" Width="76"/>
-        <TextBlock x:Name="textBox_Copy1" HorizontalAlignment="Left" Margin="160,333,0,0" Text="{Binding MyParcel.DateScheduled}" TextWrapping="Wrap" VerticalAlignment="Top" Width="auto"/>
-        <TextBlock x:Name="textBlock_Copy2" HorizontalAlignment="Left" Margin="97,356,0,0" Text="Pick up:" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock x:Name="textBox_Copy2" HorizontalAlignment="Left" Margin="160,356,0,0" Text="{Binding MyParcel.DatePickup}" TextWrapping="Wrap" VerticalAlignment="Top" Width="auto"/>
-        <TextBlock x:Name="textBlock_Copy3" HorizontalAlignment="Left" Margin="97,382,0,0" Text="Deliverd" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock x:Name="textBox_Copy3" HorizontalAlignment="Left" Margin="160,382,0,0" Text="{Binding MyParcel.DateDeliverd}" TextWrapping="Wrap" VerticalAlignment="Top" Width="auto"/>
-        <TextBlock x:Name="textBlock_Copy4" HorizontalAlignment="Left" Margin="97,140,0,0" Text="Weight:" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <ComboBox x:Name="weightSelector" HorizontalAlignment="Left" Margin="160,137,0,0" VerticalAlignment="Top" Width="120" SelectedItem="{Binding MyParcel.Weight}"/>
-        <TextBlock x:Name="textBlock_Copy5" HorizontalAlignment="Left" Margin="97,168,0,0" Text="Priotiy:" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <ComboBox x:Name="prioritySelector" HorizontalAlignment="Left" Margin="160,165,0,0" VerticalAlignment="Top" Width="120" SelectedItem="{Binding MyParcel.Prioritie}"/>
-        <Button x:Name="recvDtlsBtn" Content="View reciver details" HorizontalAlignment="Left" Margin="297,238,0,0" VerticalAlignment="Top" Click="reciverDetails_clk"/>
-        <Button x:Name="sndDtlsBtn" Content="View sender details" HorizontalAlignment="Left" Margin="297,193,0,0" VerticalAlignment="Top" Click="senderDetails_clk"/>
-        <Button x:Name="drnDlsBtn" Content="View drone details" HorizontalAlignment="Left" Margin="551,183,0,0" VerticalAlignment="Top" Click="droneDetails_clk"/>
-        <TextBlock x:Name="senderLabel" HorizontalAlignment="Left" Margin="97,194,0,0" Text="Sender:" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock x:Name="IdBlock" FontFamily="Fonts/#KG Red Hands" HorizontalAlignment="Left" Margin="97,114,0,0" Text="ID:" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBox x:Name="IdBox" FontFamily="Fonts/#KG Red Hands" HorizontalAlignment="Left" Margin="160,113,0,0" Text="{Binding MyParcel.Id, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBlock x:Name="CreatedBlock" FontFamily="Fonts/#KG Red Hands" HorizontalAlignment="Left" Margin="97,285,0,0" Text="Created:" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock x:Name="CreatedBox" FontFamily="Fonts/#KG Red Hands" HorizontalAlignment="Left" Margin="160,285,0,0" Text="{Binding MyParcel.DateCreated}" TextWrapping="Wrap" VerticalAlignment="Top" Width="auto"/>
+        <TextBlock x:Name="ScheduledBlock" FontFamily="Fonts/#KG Red Hands" HorizontalAlignment="Left" Margin="98,309,0,0" Text="Scheduled:" TextWrapping="Wrap" VerticalAlignment="Top" Width="76"/>
+        <TextBlock x:Name="ScheduledBox" FontFamily="Fonts/#KG Red Hands" HorizontalAlignment="Left" Margin="160,309,0,0" Text="{Binding MyParcel.DateScheduled}" TextWrapping="Wrap" VerticalAlignment="Top" Width="auto"/>
+        <TextBlock x:Name="PickUpBlock" FontFamily="Fonts/#KG Red Hands" HorizontalAlignment="Left" Margin="97,332,0,0" Text="Pick up:" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock x:Name="PickUpBox" FontFamily="Fonts/#KG Red Hands" HorizontalAlignment="Left" Margin="160,332,0,0" Text="{Binding MyParcel.DatePickup}" TextWrapping="Wrap" VerticalAlignment="Top" Width="auto"/>
+        <TextBlock x:Name="DeliverBlock" FontFamily="Fonts/#KG Red Hands" HorizontalAlignment="Left" Margin="97,358,0,0" Text="Deliverd" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock x:Name="DeliverBox" FontFamily="Fonts/#KG Red Hands" HorizontalAlignment="Left" Margin="160,358,0,0" Text="{Binding MyParcel.DateDeliverd}" TextWrapping="Wrap" VerticalAlignment="Top" Width="auto"/>
+        <TextBlock x:Name="WeightBlock" FontFamily="Fonts/#KG Red Hands" HorizontalAlignment="Left" Margin="97,140,0,0" Text="Weight:" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <ComboBox x:Name="weightSelector" FontFamily="Fonts/#KG Red Hands" HorizontalAlignment="Left" Margin="160,137,0,0" VerticalAlignment="Top" Width="120" SelectedItem="{Binding MyParcel.Weight}"/>
+        <TextBlock x:Name="PriorityBlock" FontFamily="Fonts/#KG Red Hands" HorizontalAlignment="Left" Margin="97,168,0,0" Text="Priotiy:" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <ComboBox x:Name="prioritySelector" FontFamily="Fonts/#KG Red Hands" HorizontalAlignment="Left" Margin="160,165,0,0" VerticalAlignment="Top" Width="120" SelectedItem="{Binding MyParcel.Prioritie}"/>
+        <Button x:Name="recvDtlsBtn" FontFamily="Fonts/#KG Red Hands" Content="View reciver details" HorizontalAlignment="Left" Margin="297,238,0,0" VerticalAlignment="Top" Click="reciverDetails_clk"/>
+        <Button x:Name="sndDtlsBtn" FontFamily="Fonts/#KG Red Hands" Content="View sender details" HorizontalAlignment="Left" Margin="297,193,0,0" VerticalAlignment="Top" Click="senderDetails_clk"/>
+        <Button x:Name="drnDlsBtn" FontFamily="Fonts/#KG Red Hands" Content="View drone details" HorizontalAlignment="Left" Margin="97,420,0,0" VerticalAlignment="Top" Click="droneDetails_clk"/>
+        <TextBlock x:Name="senderLabel" FontFamily="Fonts/#KG Red Hands" HorizontalAlignment="Left" Margin="97,194,0,0" Text="Sender:" TextWrapping="Wrap" VerticalAlignment="Top"/>
 
-        <TextBlock x:Name="textBlock_Copy7" HorizontalAlignment="Left" Margin="97,239,0,0" Text="Reciver:" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock_Copy7" FontFamily="Fonts/#KG Red Hands" HorizontalAlignment="Left" Margin="97,239,0,0" Text="Reciver:" TextWrapping="Wrap" VerticalAlignment="Top"/>
 
         <Button x:Name="confBtn" Content="Confirm delivery" HorizontalAlignment="Left" Margin="98,407,0,0" VerticalAlignment="Top"/>
         <Button x:Name="AddBtn" Content="Add parcel" HorizontalAlignment="Left" Margin="97,458,0,0" VerticalAlignment="Top" Height="65" Width="186" Click="AddBtn_Click">

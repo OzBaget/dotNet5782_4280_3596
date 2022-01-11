@@ -7,32 +7,20 @@
         mc:Ignorable="d"
         Title="ViewCustomerList" Height="640" Width="800">
     <Grid>
-        <ListView x:Name="listViewStations" Margin="0,62,1,0" MouseDoubleClick="listViewStations_MouseDoubleClick" RenderTransformOrigin="0.5,0.5" FontSize="16" >
+        <ListView x:Name="listViewStations" Margin="0,62,1,0" MouseDoubleClick="listViewStations_MouseDoubleClick" RenderTransformOrigin="0.5,0.5" FontSize="16" FontFamily="Fonts/#KG Red Hands">
             <ListView.Background>
                 <ImageBrush ImageSource="/OnlyTriangels.png" Stretch="Fill" ViewboxUnits="RelativeToBoundingBox" TileMode="None">
                 </ImageBrush>
             </ListView.Background>
-            <ListView.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform AngleX="0.144"/>
-                    <RotateTransform/>
-                    <TranslateTransform X="-0.747"/>
-                </TransformGroup>
-            </ListView.RenderTransform>
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
         </ListView>
 
         <Grid x:Name="UpGrid" Margin="0,0,0,550">
-        <Grid.Background>
-            <ImageBrush ImageSource="/GreenBlock.png" Stretch="Fill" ViewboxUnits="RelativeToBoundingBox" TileMode="None"></ImageBrush>
-        </Grid.Background>
-            <Button x:Name="AddStation" Content="Add a customer" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Width="116" Height="42" FontSize="15" Cursor="Hand" Click="Add_Click"/>
+            <Grid.Background>
+                <ImageBrush ImageSource="/GreenBlock.png" Stretch="Fill" ViewboxUnits="RelativeToBoundingBox" TileMode="None"></ImageBrush>
+            </Grid.Background>
+            <Image x:Name="AddStation" Source= "/Add a customer.png" HorizontalAlignment="Left" Margin="472,0,0,0" VerticalAlignment="Center" Width="176" Height="30"  Cursor="Hand" MouseLeftButtonUp="Add_Click"/>
+            <Image x:Name="Exit" Source= "/Exit.png" HorizontalAlignment="Left" Margin="180,0,0,0" VerticalAlignment="Center" Width="103" Height="28"  Cursor="Hand" MouseLeftButtonUp="Exit_Click"/>
         </Grid>
-        
+
     </Grid>
 </Window>

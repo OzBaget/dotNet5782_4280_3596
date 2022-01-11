@@ -10,18 +10,18 @@
         <Grid.Background>
             <ImageBrush ImageSource="/Design/LogWindow/Bacground.png" Stretch="UniformToFill"/>
         </Grid.Background>
-        <TextBox  x:Name="NameBox" Text="" HorizontalAlignment="Left" Margin="132,119,0,0" VerticalAlignment="Top" Height="60" Width="190" FontSize="24" Padding="5,5,5,5"  FontFamily="Fonts/#KG Red Hands"/>
-        <Label x:Name="IdLable" Content="Id: " HorizontalAlignment="Left"    Margin="36,213,0,0" VerticalAlignment="Top" Height="56" Width="66" FontSize="22" FontFamily="Fonts/#KG Red Hands"/>
+        <TextBox  x:Name="NameBox" Text="{Binding Path = Name}" HorizontalAlignment="Left" Margin="132,119,0,0" VerticalAlignment="Top" Height="60" Width="190" FontSize="24" Padding="5,5,5,5"  FontFamily="Fonts/#KG Red Hands"/>
         <Label x:Name="NameLable" Content="Name: " HorizontalAlignment="Left"    Margin="28,123,0,0" VerticalAlignment="Top" Height="56" Width="82" FontSize="22" FontFamily="Fonts/#KG Red Hands"/>
-        <TextBox x:Name="IdBox" Text="" HorizontalAlignment="Left"    Margin="135,213,0,0" VerticalAlignment="Top" Height="56" Width="189" FontSize="22"  IsReadOnly="True" FontFamily="Fonts/#KG Red Hands"/>
+        <Label x:Name="IdLable" Content="Id: " HorizontalAlignment="Left"    Margin="36,213,0,0" VerticalAlignment="Top" Height="56" Width="66" FontSize="22" FontFamily="Fonts/#KG Red Hands"/>
+        <TextBox x:Name="IdBox" Text="{Binding Path = Id}" HorizontalAlignment="Left"    Margin="135,213,0,0" VerticalAlignment="Top" Height="56" Width="189" FontSize="22"  IsReadOnly="True" FontFamily="Fonts/#KG Red Hands"/>
         <Label x:Name="LocationLable" Content="Location: " HorizontalAlignment="Left"    Margin="462,212,0,0" VerticalAlignment="Top" Height="56" Width="100" FontSize="22" Visibility="Visible" FontFamily="Fonts/#KG Red Hands"/>
-        <TextBox x:Name="LocationBox" Text="" HorizontalAlignment="Left"    Margin="560,212,0,0" VerticalAlignment="Top" Height="56" Width="190" FontSize="12" IsReadOnly="True" Visibility="Visible" FontFamily="Fonts/#KG Red Hands"/>
+        <TextBox x:Name="LocationBox" Text="{Binding Path = Location,Mode = OneWay}" HorizontalAlignment="Left"    Margin="560,212,0,0" VerticalAlignment="Top" Height="56" Width="190" FontSize="12" IsReadOnly="True" Visibility="Visible" FontFamily="Fonts/#KG Red Hands"/>
         <Label x:Name="LatLable" Content="Lat: " HorizontalAlignment="Left"    Margin="354,213,0,0" VerticalAlignment="Top" Height="56" Width="66" FontSize="22" FontFamily="Fonts/#KG Red Hands"/>
-        <TextBox x:Name="LatBox" Text="" HorizontalAlignment="Left"    Margin="458,213,0,0" VerticalAlignment="Top" Height="56" Width="56" FontSize="12" FontFamily="Fonts/#KG Red Hands"/>
+        <TextBox x:Name="LatBox" Text="{Binding Path = Location.Latitude}" HorizontalAlignment="Left"    Margin="458,213,0,0" VerticalAlignment="Top" Height="56" Width="56" FontSize="12" FontFamily="Fonts/#KG Red Hands"/>
         <Label x:Name="LongLable" Content="Long: " HorizontalAlignment="Left"    Margin="578,213,0,0" VerticalAlignment="Top" Height="56" Width="66" FontSize="22" FontFamily="Fonts/#KG Red Hands"/>
-        <TextBox x:Name="LongBox" Text="" HorizontalAlignment="Left"    Margin="680,213,0,0" VerticalAlignment="Top" Height="56" Width="56" FontSize="12"  FontFamily="Fonts/#KG Red Hands"/>
+        <TextBox x:Name="LongBox" Text="{Binding Path = Location.Longitude}" HorizontalAlignment="Left"    Margin="680,213,0,0" VerticalAlignment="Top" Height="56" Width="56" FontSize="12"  FontFamily="Fonts/#KG Red Hands"/>
         <Label x:Name="ParcelLable" Content="Parcel's own:" HorizontalAlignment="Left" Margin="328,361,0,0" VerticalAlignment="Top" Height="42" Width="210" FontSize="23" FontFamily="Fonts/#KG Red Hands"/>
-        <TextBox  x:Name="PhoneBox" Text="" HorizontalAlignment="Left" Margin="560,119,0,0" VerticalAlignment="Top" Height="60" Width="190" FontSize="24" Padding="5,5,5,5" FontFamily="Fonts/#KG Red Hands"/>
+        <TextBox  x:Name="PhoneBox" Text="{Binding Path = Phone}" HorizontalAlignment="Left" Margin="560,119,0,0" VerticalAlignment="Top" Height="60" Width="190" FontSize="24" Padding="5,5,5,5" FontFamily="Fonts/#KG Red Hands"/>
         <Label x:Name="PhoneLable" Content="Phone: " HorizontalAlignment="Left"    Margin="456,123,0,0" VerticalAlignment="Top" Height="56" Width="82" FontSize="22" FontFamily="Fonts/#KG Red Hands"/>
 
         <TextBlock x:Name="NameErrorBox" HorizontalAlignment="Left" Margin="135,186,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="132" Height="15" FontSize="10" Foreground="Red" />
@@ -31,9 +31,11 @@
         <TextBlock x:Name="PhoneErrorBox" HorizontalAlignment="Left" Margin="566,187,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="108" Height="15" FontSize="10" Foreground="Red" />
 
         <Image x:Name="ExitButton" Cursor="Hand"  HorizontalAlignment="Left" Height="54" Margin="118,305,0,0" VerticalAlignment="Top" Width="166" Source="/Exit.png" MouseLeftButtonDown="Exit_Click" />
-        <Image x:Name="Update" Cursor="Hand"  HorizontalAlignment="Left" Height="51" Margin="578,305,0,0" VerticalAlignment="Top" Width="158" Source="/Update.png" MouseLeftButtonDown="Update_Click" />
+        <Image x:Name="UpdateButton" Cursor="Hand"  HorizontalAlignment="Left" Height="51" Margin="578,305,0,0" VerticalAlignment="Top" Width="158" Source="/Update.png" MouseLeftButtonDown="Update_Click" />
         <Image x:Name="CancelButton" Cursor="Hand"  HorizontalAlignment="Left" Height="54" Margin="113,305,0,0" VerticalAlignment="Top" Width="165" Source="/Cancel.png" MouseLeftButtonDown="Exit_Click" />
-        <Image x:Name="AddButton" Cursor="Hand"  HorizontalAlignment="Left" Height="51" Margin="576,305,0,0" VerticalAlignment="Top" Width="158" Source="/Add.png" MouseLeftButtonDown="AddCustomerToDb" />
+        <Image x:Name="AddImage"   HorizontalAlignment="Left" Height="51" Margin="576,305,0,0" VerticalAlignment="Top" Width="158" Source="/Add.png" />
+        <Button x:Name="AddButton" Cursor="Hand" Content="" Opacity="0" Click="AddCustomerToDb" HorizontalAlignment="Left" Margin="578,305,0,0" VerticalAlignment="Top" Width="158" Height="43"/>
+
 
         <ListView x:Name="ParcelList" Margin="-8,408,2,10" Visibility="Visible" MouseDoubleClick="ParcelList_MouseDoubleClick" Background="Transparent"/>
 
