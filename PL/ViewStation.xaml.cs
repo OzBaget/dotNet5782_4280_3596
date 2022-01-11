@@ -22,48 +22,51 @@ namespace PL
     /// </summary>
     public partial class ViewStation : Window
     {
+        
         public BaseStation station { get; set; }
         IBL db;
         public ViewStation(BaseStation Cstation)
         {
             station = Cstation;
-            this.DataContext = this;
+            this.DataContext = station;
             InitializeComponent();
             db = BlFactory.GetBl();
             showStation();            
         } 
         public ViewStation()
         {
+            station = new();
+            station.Location = new();
+            this.DataContext = station;
             InitializeComponent();
             db = BlFactory.GetBl();
             GoAddView();
         }
         private void showStation()
         {
-            ViewAStation(null, null);
-         /*   NameBox.Text = station.Name;
-            IdBox.Text = station.Id.ToString();
-            LocationBox.Text = station.Location.ToString();
-            FreeBox.Text = station.NumFreeChargers.ToString();
-            DroneList.ItemsSource = station.DronesInCharging;*/
+            IdBox.IsReadOnly = true;
+            LocationBox.Visibility = Visibility.Visible;
+            LocationLable.Visibility = Visibility.Visible;
+            DroneList.Visibility = Visibility.Visible;
+            DroneLable.Visibility = Visibility.Visible;
+            Update.Visibility = Visibility.Visible;
+            ExitButton.Visibility = Visibility.Visible;
+
+            LatBox.Visibility = Visibility.Collapsed;
+            LongBox.Visibility = Visibility.Collapsed;
+            LatLable.Visibility = Visibility.Collapsed;
+            LongLable.Visibility = Visibility.Collapsed;
+            CancelButton.Visibility = Visibility.Collapsed;
+            AddButton.Visibility = Visibility.Collapsed;
+            AddImage.Visibility = Visibility.Collapsed;
+            /*   NameBox.Text = station.Name;
+               IdBox.Text = station.Id.ToString();
+               LocationBox.Text = station.Location.ToString();
+               FreeBox.Text = station.NumFreeChargers.ToString();
+               DroneList.ItemsSource = station.DronesInCharging;*/
 
         }
 
-        private void IsChanged(object sender, TextChangedEventArgs e)
-        {
-            
-            if (station == null)
-                return;
-            if (NameBox.Text != station.Name)
-            {
-                Update.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                Update.Visibility = Visibility.Hidden;
-            }
-
-        }
 
         private void Exit()
         {
@@ -71,11 +74,16 @@ namespace PL
         }
         private void Update_Click(object sender, RoutedEventArgs e)
         {
-            //db.UpdateStation(int.Parse(IdBox.Text), NameBox.Text, station.NumFreeChargers.ToString());
+            int free;
+
+                if (!int.TryParse(FreeBox.Text, out free) || free <= 0)
+                {
+                    FreeErrorBox.Text = "Num of free chargers not valid, try again";
+                    return;
+                }                                 
+            db.UpdateStation(station.Id, station.Name, station.NumFreeChargers.ToString());
             MessageBox.Show("Update succeed", "Update station", MessageBoxButton.OK, MessageBoxImage.Asterisk);
-            Exit();
-
-
+            FreeErrorBox.Text = "";
         }
 
 
@@ -103,7 +111,7 @@ namespace PL
                 IdErrorBox.Text = "Write digits, try again";
                 error = true;
             }
-            else if (!int.TryParse(IdBox.Text, out id))
+            else if (!int.TryParse(IdBox.Text, out id) || id <= 0)
             {
                 IdErrorBox.Text = "Id not valid, try again";
                 error = true;
@@ -113,7 +121,7 @@ namespace PL
                 FreeErrorBox.Text = "Write digits, try again";
                 error = true;
             }
-            else if (!int.TryParse(FreeBox.Text, out free))
+            else if (!int.TryParse(FreeBox.Text, out free) || free <= 0)
             {
                 FreeErrorBox.Text = "Num of free chargers not valid, try again";
                 error = true;
@@ -123,7 +131,7 @@ namespace PL
                 LatErrorBox.Text = "Write digits, try again";
                 error = true;
             }
-            else if (!double.TryParse(LatBox.Text, out lat))
+            else if (!double.TryParse(LatBox.Text, out lat) || lat < -90 || lat > 90)
             {
                 LatErrorBox.Text = "Lat not valid, try again";
                 error = true;
@@ -133,7 +141,7 @@ namespace PL
                 LongErrorBox.Text = "Write digits, try again";
                 error = true;
             }
-            else if (!double.TryParse(LongBox.Text, out longint))
+            else if (!double.TryParse(LongBox.Text, out longint)|| longint < -180 || longint > 180)
             {
                 LongErrorBox.Text = "Long not valid, try again";
                 error = true;
@@ -141,17 +149,11 @@ namespace PL
             if (error)
                 return;
 
-            BO.BaseStation sBase = new BO.BaseStation();
-            sBase.Name = NameBox.Text;
-            sBase.Id = int.Parse(IdBox.Text);
-            sBase.NumFreeChargers = int.Parse(FreeBox.Text);
-            sBase.Location = new();
-            sBase.Location.Latitude = double.Parse(LatBox.Text);
-            sBase.Location.Longitude = double.Parse(LongBox.Text);
+            
 
             try
             {
-                BlApi.BlFactory.GetBl().AddStation(sBase);
+                BlApi.BlFactory.GetBl().AddStation(station);
                 Exit_Click(sender,e);
             }
             catch (BlApi.IdAlreadyExistsException ex)
@@ -163,21 +165,9 @@ namespace PL
         }
         private void ViewAStation(object sender, RoutedEventArgs e)
         {
-            IdBox.IsReadOnly = true;
-            FreeBox.IsReadOnly = true;
-            LocationBox.Visibility = Visibility.Visible;
-            LocationLable.Visibility = Visibility.Visible;
-            DroneList.Visibility = Visibility.Visible;
-            DroneLable.Visibility = Visibility.Visible; 
-            Update.Visibility = Visibility.Visible;
-            ExitButton.Visibility = Visibility.Visible;
-
-            LatBox.Visibility = Visibility.Collapsed;
-            LongBox.Visibility = Visibility.Collapsed;
-            LatLable.Visibility = Visibility.Collapsed;
-            LongLable.Visibility = Visibility.Collapsed;
-            CancelButton.Visibility = Visibility.Collapsed;
-            AddButton.Visibility = Visibility.Collapsed;
+           
+            
+            
             
 
 
@@ -192,7 +182,6 @@ namespace PL
         {
             initializationBoxes();
             IdBox.IsReadOnly = false;
-            FreeBox.IsReadOnly = false;
             LocationBox.Visibility = Visibility.Collapsed;
             LocationLable.Visibility = Visibility.Collapsed;
             DroneList.Visibility = Visibility.Collapsed;
@@ -206,6 +195,7 @@ namespace PL
             LongLable.Visibility = Visibility.Visible;
             CancelButton.Visibility = Visibility.Visible;
             AddButton.Visibility = Visibility.Visible;
+            AddImage.Visibility = Visibility.Visible;
 
 
 

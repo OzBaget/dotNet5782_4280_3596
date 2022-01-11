@@ -43,5 +43,9 @@ namespace PL
         {
             listViewStations.ItemsSource = db.GetAllCustomers();
         }
+        private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

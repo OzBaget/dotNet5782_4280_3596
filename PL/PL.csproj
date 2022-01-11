@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Add a customer.png" />
     <None Remove="Add a station.png" />
     <None Remove="Add.png" />
     <None Remove="Bacground.png" />
@@ -38,6 +39,7 @@
 
 
   <ItemGroup>
+    <Resource Include="Add a customer.png" />
     <Resource Include="Add a station.png" />
     <Resource Include="Add.png" />
     <Resource Include="Bacground.png" />

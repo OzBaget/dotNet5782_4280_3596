@@ -25,18 +25,21 @@ namespace PL
         /// Interaction logic for ViewStation.xaml
         /// </summary>
         List<ParcelInCustomer> midList;
-        Customer customer;
+        public Customer customer { get; set; }
         IBL db;
-        bool changed;
         public ViewCustomer(Customer Cstation)
         {
-            InitializeComponent();
             customer = Cstation;
+            this.DataContext = customer;
+            InitializeComponent();
             db = BlFactory.GetBl();
             showCustomer();
         }
         public ViewCustomer()
         {
+            customer = new();
+            customer.Location = new();
+            this.DataContext = customer;
             InitializeComponent();
             db = BlFactory.GetBl();
             GoAddView();
@@ -44,14 +47,12 @@ namespace PL
         private void showCustomer()
         {
             ViewACustomer(null, null);
-            NameBox.Text = customer.Name;
+           /* NameBox.Text = customer.Name;
             PhoneBox.Text = customer.Phone;
             IdBox.Text = customer.Id.ToString();
-            LocationBox.Text = customer.Location.ToString();
+            LocationBox.Text = customer.Location.ToString();*/
             
-            CancelButton.Visibility = Visibility.Collapsed;
-            ExitButton.Visibility = Visibility.Visible;            
-            AddButton.Visibility = Visibility.Collapsed;
+            
 
         }
 
@@ -62,20 +63,12 @@ namespace PL
                 return;
             if (NameBox.Text == customer.Name && PhoneBox.Text == customer.Phone)
             {
-                changed = false;
+                UpdateButton.Visibility = Visibility.Collapsed;
             }
             else
             {
-                changed = true;
+                UpdateButton.Visibility = Visibility.Visible;
             }
-            if (changed)
-                UpdateButton.Visibility = Visibility.Visible; 
-
-            else
-                UpdateButton.Visibility = Visibility.Collapsed;
-
-
-
         }
 
 
@@ -149,17 +142,17 @@ namespace PL
             if (error)
                 return;
 
-            BO.Customer tmpCustomer = new BO.Customer();
+            /*BO.Customer tmpCustomer = new BO.Customer();
             tmpCustomer.Name = NameBox.Text;
             tmpCustomer.Id = int.Parse(IdBox.Text);
             tmpCustomer.Phone = PhoneBox.Text;
             tmpCustomer.Location = new();
             tmpCustomer.Location.Latitude = double.Parse(LatBox.Text);
-            tmpCustomer.Location.Longitude = double.Parse(LongBox.Text);
+            tmpCustomer.Location.Longitude = double.Parse(LongBox.Text);*/
 
             try
             {
-                BlApi.BlFactory.GetBl().AddCustomer(tmpCustomer);
+                BlApi.BlFactory.GetBl().AddCustomer(customer);
                 Exit_Click(sender, e);
             }
             catch (BlApi.IdAlreadyExistsException ex)
@@ -176,16 +169,21 @@ namespace PL
             LocationLable.Visibility = Visibility.Visible;
             ParcelList.Visibility = Visibility.Visible;
             ParcelLable.Visibility = Visibility.Visible;
+            ExitButton.Visibility = Visibility.Visible;
+
             LatBox.Visibility = Visibility.Collapsed;
             LongBox.Visibility = Visibility.Collapsed;
             LatLable.Visibility = Visibility.Collapsed;
             LongLable.Visibility = Visibility.Collapsed;
-            
-            NameBox.Text = customer.Name;
+            CancelButton.Visibility = Visibility.Collapsed;
+            AddButton.Visibility = Visibility.Collapsed;
+            AddImage.Visibility = Visibility.Collapsed;
+
+            /*NameBox.Text = customer.Name;
             IdBox.Text = customer.Id.ToString();
             LocationBox.Text = customer.Location.ToString();
             PhoneBox.TextChanged += IsChanged;
-            NameBox.TextChanged += IsChanged;
+            NameBox.TextChanged += IsChanged;*/
             IntilaizeList();
 
 
@@ -202,18 +200,20 @@ namespace PL
             LongBox.Visibility = Visibility.Visible;
             LatLable.Visibility = Visibility.Visible;
             LongLable.Visibility = Visibility.Visible;
-            
-            PhoneBox.TextChanged -= IsChanged;
-            NameBox.TextChanged -= IsChanged;
 
+            /*PhoneBox.TextChanged -= IsChanged;
+            NameBox.TextChanged -= IsChanged;*/
+
+            AddImage.Visibility = Visibility.Visible;
             CancelButton.Visibility = Visibility.Visible;
-            ExitButton.Visibility = Visibility.Collapsed;
             AddButton.Visibility = Visibility.Visible;
+
             UpdateButton.Visibility = Visibility.Collapsed;
+            ExitButton.Visibility = Visibility.Collapsed;
         }
         private void initializationBoxes()
         {
-            IdBox.Text = "";
+           /* IdBox.Text = "";
             NameBox.Text = "";
             PhoneBox.Text = "";
             LocationBox.Text = "";
@@ -222,7 +222,7 @@ namespace PL
             NameErrorBox.Text = "";
             IdErrorBox.Text = "";
             LatErrorBox.Text = "";
-            LongErrorBox.Text = "";
+            LongErrorBox.Text = "";*/
         }
 
         private void IntilaizeList()
