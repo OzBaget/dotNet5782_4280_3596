@@ -14,9 +14,9 @@ namespace BO
         public override string ToString()
         {
             string toString =
-                $"ID:                            {Id}\n" +
-                $"Battery:                       {Battery}%\n" +
-                $"Location:                      {CurrentLocation}";
+                $"ID:           {Id}\n" +
+                $"Battery:      {Battery}%\n" +
+                $"Location:     {CurrentLocation}";
 
             return toString;
         }

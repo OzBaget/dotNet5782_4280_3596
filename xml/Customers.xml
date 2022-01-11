@@ -1,163 +1,163 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Customers>
   <Customer>
-    <Id>619971375</Id>
+    <Id>1270191174</Id>
     <Name>Oz</Name>
-    <Phone>+972416305555</Phone>
-    <Lat>32.5343</Lat>
-    <Lng>35.3681</Lng>
+    <Phone>+972918466270</Phone>
+    <Lat>31.5041</Lat>
+    <Lng>35.2499</Lng>
     <IsActived>true</IsActived>
   </Customer>
   <Customer>
-    <Id>213001711</Id>
+    <Id>1442445287</Id>
     <Name>Ohad</Name>
-    <Phone>+972976777001</Phone>
-    <Lat>32.3198</Lat>
-    <Lng>35.049</Lng>
+    <Phone>+972231468712</Phone>
+    <Lat>32.5371</Lat>
+    <Lng>34.9552</Lng>
     <IsActived>true</IsActived>
   </Customer>
   <Customer>
-    <Id>113808020</Id>
+    <Id>1453803628</Id>
     <Name>Abraham</Name>
-    <Phone>+972781061068</Phone>
-    <Lat>31.8936</Lat>
-    <Lng>35.1601</Lng>
+    <Phone>+972332504528</Phone>
+    <Lat>31.9202</Lat>
+    <Lng>34.5782</Lng>
     <IsActived>true</IsActived>
   </Customer>
   <Customer>
-    <Id>162920139</Id>
+    <Id>485217943</Id>
     <Name>Yizeck</Name>
-    <Phone>+972204828442</Phone>
-    <Lat>32.0143</Lat>
-    <Lng>35.3948</Lng>
+    <Phone>+972601287534</Phone>
+    <Lat>31.8862</Lat>
+    <Lng>34.7381</Lng>
     <IsActived>true</IsActived>
   </Customer>
   <Customer>
-    <Id>1107382157</Id>
+    <Id>695192649</Id>
     <Name>Jecobe</Name>
-    <Phone>+972469384012</Phone>
-    <Lat>32.9447</Lat>
-    <Lng>34.8959</Lng>
+    <Phone>+972712281845</Phone>
+    <Lat>32.6402</Lat>
+    <Lng>34.6709</Lng>
     <IsActived>true</IsActived>
   </Customer>
   <Customer>
-    <Id>588723210</Id>
+    <Id>1622355339</Id>
     <Name>Joshf</Name>
-    <Phone>+972227425982</Phone>
-    <Lat>32.2087</Lat>
-    <Lng>35.2807</Lng>
+    <Phone>+972457720389</Phone>
+    <Lat>32.5431</Lat>
+    <Lng>35.0949</Lng>
     <IsActived>true</IsActived>
   </Customer>
   <Customer>
-    <Id>1433242458</Id>
+    <Id>1400197017</Id>
     <Name>Shimon</Name>
-    <Phone>+972792440013</Phone>
-    <Lat>31.5222</Lat>
-    <Lng>34.5342</Lng>
+    <Phone>+972106547638</Phone>
+    <Lat>32.8328</Lat>
+    <Lng>35.0705</Lng>
     <IsActived>true</IsActived>
   </Customer>
   <Customer>
-    <Id>1648660157</Id>
+    <Id>228940779</Id>
     <Name>Reuven</Name>
-    <Phone>+972562394344</Phone>
-    <Lat>31.7876</Lat>
-    <Lng>34.592</Lng>
+    <Phone>+972857046249</Phone>
+    <Lat>32.5493</Lat>
+    <Lng>35.3249</Lng>
     <IsActived>true</IsActived>
   </Customer>
   <Customer>
-    <Id>1034174368</Id>
+    <Id>441070104</Id>
     <Name>Moshe</Name>
-    <Phone>+972910910403</Phone>
-    <Lat>31.8165</Lat>
-    <Lng>35.2564</Lng>
+    <Phone>+972260128708</Phone>
+    <Lat>32.8983</Lat>
+    <Lng>35.0584</Lng>
     <IsActived>true</IsActived>
   </Customer>
   <Customer>
-    <Id>934129488</Id>
+    <Id>1664616573</Id>
     <Name>David</Name>
-    <Phone>+972617667100</Phone>
-    <Lat>32.6662</Lat>
-    <Lng>35.056</Lng>
+    <Phone>+972239792399</Phone>
+    <Lat>32.2252</Lat>
+    <Lng>35.3233</Lng>
     <IsActived>true</IsActived>
   </Customer>
   <Customer>
-    <Id>2138071622</Id>
+    <Id>861556391</Id>
     <Name>Shmuel</Name>
-    <Phone>+972411818159</Phone>
-    <Lat>32.5211</Lat>
-    <Lng>35.0515</Lng>
+    <Phone>+972359824945</Phone>
+    <Lat>31.8144</Lat>
+    <Lng>34.8924</Lng>
     <IsActived>true</IsActived>
   </Customer>
   <Customer>
-    <Id>2066056031</Id>
+    <Id>1451654808</Id>
     <Name>Eyal</Name>
-    <Phone>+972751522679</Phone>
-    <Lat>32.6409</Lat>
-    <Lng>35.3873</Lng>
+    <Phone>+972155354738</Phone>
+    <Lat>31.9916</Lat>
+    <Lng>35.1136</Lng>
     <IsActived>true</IsActived>
   </Customer>
   <Customer>
-    <Id>1175357195</Id>
+    <Id>1632429158</Id>
     <Name>Levi</Name>
-    <Phone>+972814780299</Phone>
-    <Lat>32.6606</Lat>
-    <Lng>35.208</Lng>
+    <Phone>+972605206782</Phone>
+    <Lat>32.7952</Lat>
+    <Lng>35.0763</Lng>
     <IsActived>true</IsActived>
   </Customer>
   <Customer>
-    <Id>369650472</Id>
+    <Id>223969890</Id>
     <Name>Dan</Name>
-    <Phone>+972704928065</Phone>
-    <Lat>31.7206</Lat>
-    <Lng>34.6345</Lng>
+    <Phone>+972301044080</Phone>
+    <Lat>31.791</Lat>
+    <Lng>35.3683</Lng>
     <IsActived>true</IsActived>
   </Customer>
   <Customer>
-    <Id>1225532423</Id>
+    <Id>675357295</Id>
     <Name>Gad</Name>
-    <Phone>+972456106189</Phone>
-    <Lat>31.9947</Lat>
-    <Lng>34.5221</Lng>
+    <Phone>+972149108085</Phone>
+    <Lat>32.4966</Lat>
+    <Lng>34.8507</Lng>
     <IsActived>true</IsActived>
   </Customer>
   <Customer>
-    <Id>2018454355</Id>
+    <Id>1235837304</Id>
     <Name>Judah</Name>
-    <Phone>+972580866275</Phone>
-    <Lat>32.3088</Lat>
-    <Lng>35.2788</Lng>
+    <Phone>+972610077596</Phone>
+    <Lat>32.7537</Lat>
+    <Lng>35.0848</Lng>
     <IsActived>true</IsActived>
   </Customer>
   <Customer>
-    <Id>1427395652</Id>
+    <Id>930630166</Id>
     <Name>Asher</Name>
-    <Phone>+972521566062</Phone>
-    <Lat>31.7622</Lat>
-    <Lng>35.2808</Lng>
+    <Phone>+972440874704</Phone>
+    <Lat>31.572</Lat>
+    <Lng>34.5747</Lng>
     <IsActived>true</IsActived>
   </Customer>
   <Customer>
-    <Id>773142009</Id>
+    <Id>2144442470</Id>
     <Name>Joshef</Name>
-    <Phone>+972715455233</Phone>
-    <Lat>32.9107</Lat>
-    <Lng>35.4078</Lng>
+    <Phone>+972375261579</Phone>
+    <Lat>31.7525</Lat>
+    <Lng>34.9823</Lng>
     <IsActived>true</IsActived>
   </Customer>
   <Customer>
-    <Id>1834815223</Id>
+    <Id>1840311358</Id>
     <Name>Naphtali</Name>
-    <Phone>+972656611394</Phone>
-    <Lat>32.8915</Lat>
-    <Lng>35.4675</Lng>
+    <Phone>+972718721386</Phone>
+    <Lat>32.2001</Lat>
+    <Lng>34.8589</Lng>
     <IsActived>true</IsActived>
   </Customer>
   <Customer>
-    <Id>1267036125</Id>
+    <Id>10845300</Id>
     <Name>Daniel</Name>
-    <Phone>+972189976296</Phone>
-    <Lat>32.9152</Lat>
-    <Lng>35.0104</Lng>
+    <Phone>+972446768109</Phone>
+    <Lat>32.3857</Lat>
+    <Lng>34.5194</Lng>
     <IsActived>true</IsActived>
   </Customer>
 </Customers>

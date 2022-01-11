@@ -15,12 +15,11 @@ namespace Dal
         internal class Config
         {
             //Precent To Meter
-            public static double Free { get; } = 0.0001; 
-            public static double LightPacket { get; } = 0.0002; 
-            public static double MediumPacket { get; } = 0.0004; 
-            public static double HeavyPacket { get; } = 0.0008; 
-            public static double ChargingRate { get; } = 25; //precent to hour
-
+            public static double Free { get; } = 0.0001;
+            public static double LightPacket { get; } = 0.0002;
+            public static double MediumPacket { get; } = 0.0004;
+            public static double HeavyPacket { get; } = 0.0008;
+            public static double ChargingRate { get; } = 200; //precent to mintue
             public static int ParcelId{ get; set; }
         }
         /// <summary>

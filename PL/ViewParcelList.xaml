@@ -29,7 +29,6 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <ListBox x:Name="ParcellistBox" Margin="0,80,0,0"/>
             <ComboBox x:Name="WeightSelector" FontFamily="Fonts/#KG Red Hands" HorizontalAlignment="Left" VerticalAlignment="Top" Width="110" SelectionChanged="updateFilters" Grid.Column="1" FontSize="20" Margin="88,12,0,0" Height="43"  VerticalContentAlignment="Center"/>
             <ComboBox x:Name="PrioritySelector" FontFamily="Fonts/#KG Red Hands" HorizontalAlignment="Left" VerticalAlignment="Top" Width="110" SelectionChanged="updateFilters" FontSize="20" Margin="157,12,0,0" Height="43" VerticalContentAlignment="Center" Grid.ColumnSpan="2"/>
 
@@ -39,25 +38,54 @@
 
             <Image x:Name="image" Grid.Column="3" HorizontalAlignment="Left" Height="40" VerticalAlignment="Center" Width="40" Source="\Images\refresh-page-option.png" Cursor="Hand" MouseLeftButtonDown="ResetFilters_btn" Margin="46,0,0,0"/>
             <Image x:Name="image1" Grid.Column="3" HorizontalAlignment="Center" Height="45" VerticalAlignment="Center" Width="46" Source="\Images\plus-sign.png" Cursor="Hand" MouseLeftButtonDown="AddDrone_clk"/>
-            <Image x:Name="image2" Grid.Column="3" Cursor="Hand" HorizontalAlignment="Left" Height="25" Margin="152,0,0,0" VerticalAlignment="Center" Width="102" Source="/Exit.png" MouseLeftButtonDown="Cancel_Click"/>
-
-            <DatePicker x:Name="datePickerStart" Grid.Column="2" HorizontalAlignment="Left" Margin="167,7,0,0" VerticalAlignment="Top" FontFamily="Fonts/#KG Red Hands" BorderBrush="Transparent" SelectedDateChanged="updateFilters" DisplayDateEnd="{Binding SelectedDate, ElementName=datePickerEnd}" Grid.ColumnSpan="2" />
+            <Image x:Name="image2" Grid.Column="3" Cursor="Hand" HorizontalAlignment="Left" Height="25" Margin="152,0,0,0" VerticalAlignment="Center" Width="102" Source="/Exit.png" />
 
             <Label x:Name="TextSelector_Copy" Content="From:"  RenderTransformOrigin="0.456,0.516" FontSize="25" FontFamily="Fonts/#Cotton Butter" Margin="131,-5,0,0" Padding="0,0,0,0" Width="44" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" Foreground="White" Grid.Column="2" Height="40" />
-            <DatePicker x:Name="datePickerEnd" Grid.Column="2" HorizontalAlignment="Left" Margin="167,35,0,0" VerticalAlignment="Top" FontFamily="Fonts/#KG Red Hands" BorderBrush="Transparent" SelectedDateChanged="updateFilters" DisplayDateStart="{Binding SelectedDate, ElementName=datePickerStart}" Grid.ColumnSpan="2"/>
+            <DatePicker x:Name="datePickerStart" Grid.Column="2" HorizontalAlignment="Left" Margin="167,7,0,0" VerticalAlignment="Top" FontFamily="Fonts/#KG Red Hands" BorderBrush="Transparent" SelectedDateChanged="updateFilters" DisplayDateEnd="{Binding SelectedDate, ElementName=datePickerEnd}" Grid.ColumnSpan="2" />
+
             <Label x:Name="TextSelector_Copy1" Content="To:"  RenderTransformOrigin="0.456,0.516" FontSize="25" FontFamily="Fonts/#Cotton Butter" Margin="130,22,0,0" Padding="0,0,0,0" Width="20" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" Foreground="White" Grid.Column="2" Height="40" />
+            <DatePicker x:Name="datePickerEnd" Grid.Column="2" HorizontalAlignment="Left" Margin="167,35,0,0" VerticalAlignment="Top" FontFamily="Fonts/#KG Red Hands" BorderBrush="Transparent" SelectedDateChanged="updateFilters" DisplayDateStart="{Binding SelectedDate, ElementName=datePickerStart}" Grid.ColumnSpan="2"/>
+            
             <TextBlock x:Name="textBlock" Foreground="White" HorizontalAlignment="Left" FontFamily="Fonts/#KG Red Hands" Text="{Binding Path='customer', Converter={StaticResource CustomerToWelcomeMessageConvertor}}" TextWrapping="Wrap" VerticalAlignment="Top"/>
             <Image x:Name="WeightKg_Copy" Margin="203,0,0,3" Width="48" Grid.Column="1" HorizontalAlignment="Left" Source="/Images/statusSelecor.png" Grid.ColumnSpan="2"/>
             <ComboBox x:Name="statusSelector" FontFamily="Fonts/#KG Red Hands" HorizontalAlignment="Left" VerticalAlignment="Top" Width="110" SelectionChanged="updateFilters" Grid.Column="2" FontSize="15" Margin="5,12,0,0" Height="43"  VerticalContentAlignment="Center"/>
+            <Button x:Name="Cancel" IsCancel="True" FontFamily="Fonts/#Alfa Slab One"  Opacity="0" HorizontalAlignment="Left" Margin="152,0,0,0" VerticalAlignment="Center" Width="88" Height="25" Click="Cancel_Click" Cursor="Hand" Grid.Column="3"/>
+
         </Grid>
 
 
 
-        <ListView x:Name="ListViewParcels" FontFamily="Fonts/#KG Red Hands"  FontSize="17" MouseDoubleClick="viewDrone" Margin="0,66,0,3" Grid.RowSpan="2" Foreground="Black" >
+        <ListView x:Name="ListViewParcels" ItemsSource="{Binding listItems}" FontFamily="Fonts/#KG Red Hands"  FontSize="17" MouseDoubleClick="viewDrone" Margin="0,66,0,3" Grid.RowSpan="2" Foreground="Black" >
             <ListView.Background>
                 <ImageBrush ImageSource="/OnlyTriangels.png" Stretch="Fill" ViewboxUnits="RelativeToBoundingBox" TileMode="None">
                 </ImageBrush>
             </ListView.Background>
+
+            <ListView.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.ContainerStyle>
+                        <Style TargetType="{x:Type GroupItem}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <Expander IsExpanded="True">
+                                            <Expander.Header>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="{Binding Name}" FontWeight="Bold" Foreground="Gray" FontSize="22" VerticalAlignment="Bottom" />
+                                                    <TextBlock Text="{Binding ItemCount}" FontSize="22" Foreground="Green" FontWeight="Bold" FontStyle="Italic" Margin="10,0,0,0" VerticalAlignment="Bottom" />
+                                                    <TextBlock Text=" item(s)" FontSize="22" Foreground="Silver" FontStyle="Italic" VerticalAlignment="Bottom" />
+                                                </StackPanel>
+                                            </Expander.Header>
+                                            <ItemsPresenter />
+                                        </Expander>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </GroupStyle.ContainerStyle>
+
+                </GroupStyle>
+            </ListView.GroupStyle>
         </ListView>
 
     </Grid>

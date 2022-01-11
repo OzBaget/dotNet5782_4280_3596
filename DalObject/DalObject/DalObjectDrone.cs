@@ -79,6 +79,7 @@ namespace Dal
             myDC.Droneld = droneId;
             myDC.Stationld = stationId;
             myDC.PlugedIn = DateTime.Now;
+            myDC.IsActived = true;
             DataSource.Charges.Add(myDC);
             Station stationTmp = GetStation(stationId);
             int index = DataSource.BaseStations.IndexOf(stationTmp);
@@ -99,7 +100,6 @@ namespace Dal
             DataSource.BaseStations[index] = stationTmp;
             return (DateTime.Now - charger.PlugedIn).Value;
         }
-
 
         [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<Drone> GetAllDrones()

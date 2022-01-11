@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Media;
+using System.Collections.ObjectModel;
 
 
 namespace PL
@@ -23,24 +24,25 @@ namespace PL
     public partial class ViewParcelList : Window
     {
         bool exit = false;
-
         public Customer customer { get; set; }
         IBL db = BlFactory.GetBl();
-
+        public ObservableCollection<ParcelToList> listItems { get; set; }
         
-
         public ViewParcelList()
         {
             InitializeComponent();
-            this.DataContext = this;
-            
 
             PrioritySelector.ItemsSource = Enum.GetValues(typeof(Priorities));
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
             statusSelector.ItemsSource = Enum.GetValues(typeof(ParcelStatus));
+            listItems = new ObservableCollection<ParcelToList>(db.GetAllParcels());
+            this.DataContext = this;
 
+            /*CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ListViewParcels.ItemsSource);
+            PropertyGroupDescription groupDescription = new PropertyGroupDescription("SenderName");
 
-            ListViewParcels.ItemsSource = db.GetAllParcels();
+            view.GroupDescriptions.Add(groupDescription);*/
+
         }
 
         public ViewParcelList(Customer customer)
@@ -68,13 +70,21 @@ namespace PL
         }
         private void updateFilters(object sender, SelectionChangedEventArgs e)
         {
-            ListViewParcels.ItemsSource = null;
-            ListViewParcels.ItemsSource = db.GetFilterdParcels(customer, 
+            while (listItems.Count > 0) 
+                listItems.RemoveAt(0);
+            foreach (var item in db.GetFilterdParcels(customer,
                 datePickerStart.SelectedDate,
                 datePickerEnd.SelectedDate,
                 (Priorities?)PrioritySelector.SelectedItem,
                 (WeightCategories?)WeightSelector.SelectedItem,
-                (ParcelStatus?)statusSelector.SelectedItem);
+                (ParcelStatus?)statusSelector.SelectedItem))
+                    listItems.Add(item);
+           
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ListViewParcels.ItemsSource);
+            view.GroupDescriptions.Clear();
+            PropertyGroupDescription groupDescription = new PropertyGroupDescription("SenderName");
+
+            view.GroupDescriptions.Add(groupDescription);
         }
 
         private void AddDrone_clk(object sender, MouseButtonEventArgs e)
