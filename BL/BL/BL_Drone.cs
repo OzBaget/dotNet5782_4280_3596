@@ -10,7 +10,19 @@ namespace BL
     sealed partial class BL : IBL
     {
         [MethodImpl(MethodImplOptions.Synchronized)]
+        public void StartSimulator(int droneId, Action updateDrone, Func<bool> checkStop)
+        {
+            new Simulator((BL)Instance, droneId, updateDrone, checkStop);
+        }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        public void UpdateDroneBattry(int droneId, double newBattry)
+        {
+            Drones.Find(d => d.Id == droneId).Battery = newBattry;
+        }
+
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddDrone(Drone drone, int stationId)
         {
             try
@@ -129,7 +141,7 @@ namespace BL
         }
         [MethodImpl(MethodImplOptions.Synchronized)]
 
-        public int FreeDrone(int droneId)
+        public double FreeDrone(int droneId)
         {
             int droneIndex = Drones.FindIndex(drone => drone.Id == droneId);
             if (droneIndex == -1)
@@ -147,16 +159,20 @@ namespace BL
         }
         [MethodImpl(MethodImplOptions.Synchronized)]
 
-        public void UpdateDrone(int id, string model)
+        public void UpdateDrone(int droneId, string model, double? newBattery = null, Location newLoc = null)
         {
 
             try
             {
                 lock (DalObject)
                 {
-                    DalObject.UpdateDrone(id, model);
-                    int droneIndex = Drones.FindIndex(drone => drone.Id == id);
+                    DalObject.UpdateDrone(droneId, model);
+                    int droneIndex = Drones.FindIndex(drone => drone.Id == droneId);
                     Drones[droneIndex].Model = model;
+                    if (newBattery != null)
+                        Drones[droneIndex].Battery = newBattery.Value;
+                    if (newLoc != null)
+                        Drones[droneIndex].CurrentLocation = newLoc;
                 }
             }
             catch (DO.IdNotFoundException ex)

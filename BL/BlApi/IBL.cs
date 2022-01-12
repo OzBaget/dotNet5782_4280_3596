@@ -86,13 +86,13 @@ namespace BlApi
         /// Reales the drone from charging
         /// </summary>
         /// <param name="droneId"></param>
-        int FreeDrone(int droneId);
+        double FreeDrone(int droneId);
         /// <summary>
         /// Update the model's drone
         /// </summary>
         /// <param name="droneId"></param>
         /// <param name="model"></param>
-        void UpdateDrone(int droneId, string model);
+        void UpdateDrone(int droneId, string model, double? newBattery = null, Location newLoc = null);
         /// <summary>
         /// Update the datas' base staion
         /// </summary>
@@ -137,8 +137,9 @@ namespace BlApi
         /// </summary>
         /// <returns></returns>
         IEnumerable<BaseStationToList> GetStationsWithFreeSlots();
-
         IEnumerable<DroneToList> GetFilterdDrones(WeightCategories? weight, DroneStatus? status);
         IEnumerable<ParcelToList> GetFilterdParcels(Customer customer,DateTime? startDate, DateTime? endDate, Priorities? priority, WeightCategories? weight, ParcelStatus? status);
+
+        void StartSimulator(int droneId, Action updateDrone, Func<bool> checkStop);
     }
 }

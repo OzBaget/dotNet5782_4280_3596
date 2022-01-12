@@ -386,7 +386,7 @@ namespace ConsoleUI_BL
             }
             try
             {
-                int newBattery=db.FreeDrone(droneId, chargingTime);
+                double newBattery=db.FreeDrone(droneId);
                 Console.WriteLine($"The drone charged successfully, current battry is {newBattery}%");
             }
             catch (IdNotFoundException ex)

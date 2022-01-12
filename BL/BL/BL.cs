@@ -102,7 +102,7 @@ namespace BL
             }
         }
 
-
+        
         /// <summary>
         /// get the closest station of spasific location
         /// </summary>
@@ -121,7 +121,7 @@ namespace BL
         /// <param name="lat2">latituse of point 2</param>
         /// <param name="lng2">longtude of point 2</param>
         /// <returns>the distance bitween the two coords in meters</returns>
-        private double calculateDist(Location loc1, Location loc2)
+        public double calculateDist(Location loc1, Location loc2)
         {
             const double Radios = 6371000;//meters
             //deg to radians

@@ -293,7 +293,7 @@ namespace PL
         {
             try
             {
-                int newBattery = db.FreeDrone(Cdrone.Id);
+                double newBattery = db.FreeDrone(Cdrone.Id);
                 MessageBox.Show("The drone released successfully!", "Success!", MessageBoxButton.OK, MessageBoxImage.Information);
                 updateTextBoxs();
                 ReleaseButton.Visibility = Visibility.Hidden;
