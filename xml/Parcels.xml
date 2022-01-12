@@ -213,7 +213,7 @@
     <SenderId>1926888119</SenderId>
     <TargetId>856296944</TargetId>
     <Weight>Heavy</Weight>
-    <Priority>Fast</Priority>
+    <Priority>Normal</Priority>
     <DroneId>0</DroneId>
     <Requsted>2022-01-10T21:41:52.0147949+02:00</Requsted>
     <Scheduled>2022-01-12T11:37:52.0147949+02:00</Scheduled>
