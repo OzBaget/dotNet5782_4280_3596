@@ -471,7 +471,7 @@ namespace PL
         }
         private void startSimulator(object? sender, DoWorkEventArgs e)
         {
-            db.StartSimulator(Cdrone.Id, () => work.ReportProgress(0), work.CancellationPending);
+            db.StartSimulator(Cdrone.Id, () => work.ReportProgress(0),()=> work.CancellationPending);
         }
         private void SimulatorComplete(object? sender, RunWorkerCompletedEventArgs e)
         {
