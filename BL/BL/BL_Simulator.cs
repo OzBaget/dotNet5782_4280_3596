@@ -16,7 +16,7 @@ namespace BL
         const int LIGHT = 1;
         const int MIDDLE = 2;
         const int HEAVY = 3;
-        const double SPPED = 5000;// M/S
+        const double SPPED = 10000;// M/S
         const double DELAY = 500;// MS
         public Simulator(BL db, int droneId, Action updteDrone, Func<bool> checkStop)
         {
@@ -44,6 +44,7 @@ namespace BL
                             try
                             {
                                 int parcelId = db.linkParcel(droneId);
+                                myDrone = db.GetDrone(droneId);
                                 tripReminning = db.calculateDist(myDrone.CurrentLocation, myDrone.Parcel.PickupLocation);
                             }
                             catch (CantLinkParcelException)
@@ -77,7 +78,7 @@ namespace BL
                             {
                                 if (tripReminning > 0)
                                 {
-                                    double newBattery = myDrone.Battery - (DELAY / 1000) * SPPED * db.DalObject.GetPowerUse()[EMPTY];
+                                    double newBattery = myDrone.Battery - (DELAY / 1000) * db.DalObject.GetPowerUse()[EMPTY];
                                     db.UpdateDrone(droneId, myDrone.Model, newBattery);
                                     tripReminning -= (DELAY / 1000) * SPPED;
                                     tripReminning = tripReminning < 0 ? 0 : tripReminning;// dont get underflow
@@ -93,7 +94,7 @@ namespace BL
                             {
                                 if (tripReminning > 0)
                                 {
-                                    double newBattery = myDrone.Battery - (DELAY / 1000) * SPPED * db.DalObject.GetPowerUse()[(int)myDrone.Parcel.Weight + 1];
+                                    double newBattery = myDrone.Battery - (DELAY / 1000) * db.DalObject.GetPowerUse()[(int)myDrone.Parcel.Weight + 1];
                                     db.UpdateDrone(droneId, myDrone.Model, newBattery);
                                     tripReminning -= (DELAY / 1000) * SPPED;
                                     tripReminning = tripReminning < 0 ? 0 : tripReminning;// dont get underflow
@@ -110,6 +111,8 @@ namespace BL
                     default:
                         break;
                 }
+                updteDrone();
+                Thread.Sleep((int)DELAY);
                 
             }
         }
