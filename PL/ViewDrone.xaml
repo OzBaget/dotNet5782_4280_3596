@@ -41,6 +41,7 @@
             <Image x:Name="LinkButton" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="178" Source="/Images/Link to parcel.png" MouseLeftButtonDown="Link_Click" Margin="535,495,0,0" Cursor="Hand" Visibility="Collapsed"/>
             <Image x:Name="DeliverButton" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="178" Source="/Images/Deliver parcel.png" MouseLeftButtonDown="Deliver_Click" Margin="535,495,0,0" Cursor="Hand" Visibility="Hidden"/>
             <Image x:Name="ChargeButton" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="178" Source="/Charge.png" MouseLeftButtonDown="ChargeDrone_Click" Margin="112,497,0,0" Cursor="Hand" Visibility="Hidden"/>
+            <CheckBox x:Name="SimulatorButton" Content="Simulator" HorizontalAlignment="Left" Margin="345,573,0,0" VerticalAlignment="Top" Height="19" FontFamily="Fontes/#KG Red Hands" FontSize="14" MinHeight="32" Width="99"/>
 
 
         </Grid>

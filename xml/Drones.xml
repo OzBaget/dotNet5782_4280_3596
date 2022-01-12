@@ -1,31 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Drones>
   <Drone>
-    <Id>852225907</Id>
-    <Model>MK2</Model>
+    <Id>334052909</Id>
+    <Model>MK1</Model>
     <MaxWeight>Light</MaxWeight>
     <IsActived>true</IsActived>
   </Drone>
   <Drone>
-    <Id>741886663</Id>
-    <Model>MK2</Model>
+    <Id>1826657281</Id>
+    <Model>MK1</Model>
     <MaxWeight>Heavy</MaxWeight>
     <IsActived>true</IsActived>
   </Drone>
   <Drone>
-    <Id>1397497746</Id>
+    <Id>1274450335</Id>
     <Model>MK3</Model>
     <MaxWeight>Heavy</MaxWeight>
     <IsActived>true</IsActived>
   </Drone>
   <Drone>
-    <Id>480584800</Id>
+    <Id>93663072</Id>
     <Model>MK3</Model>
-    <MaxWeight>Light</MaxWeight>
+    <MaxWeight>Middle</MaxWeight>
     <IsActived>true</IsActived>
   </Drone>
   <Drone>
-    <Id>40692083</Id>
+    <Id>1373918178</Id>
     <Model>MK3</Model>
     <MaxWeight>Light</MaxWeight>
     <IsActived>true</IsActived>
