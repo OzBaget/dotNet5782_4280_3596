@@ -36,7 +36,6 @@
         <Image x:Name="Update" Cursor="Hand"  HorizontalAlignment="Left" Height="51" Margin="488,534,0,0" VerticalAlignment="Top" Width="158" Source="/Update.png" MouseLeftButtonDown="Update_Click" />
         <Image x:Name="CancelButton" Cursor="Hand"  HorizontalAlignment="Left" Height="54" Margin="181,533,0,0" VerticalAlignment="Top" Width="165" Source="/Cancel.png" MouseLeftButtonDown="Exit_Click" />
         <Image x:Name="AddImage" Cursor="Hand" HorizontalAlignment="Left" Height="51" Margin="488,534,0,0" VerticalAlignment="Top" Width="158" Source="/Add.png" />
-
         <Button x:Name="AddButton" Cursor="Hand" Click ="AddStationToDb" Content="" Opacity="0" HorizontalAlignment="Left" Margin="488,533,0,0" VerticalAlignment="Top" Height="46" Width="156"/>
 
 

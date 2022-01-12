@@ -115,11 +115,17 @@ namespace PL
         private void senderDetails_clk(object sender, RoutedEventArgs e)
         {
             new ViewCustomer(db.GetCustomer(MyParcel.Sender.Id)).ShowDialog();
+            MyCustomer = db.GetCustomer(MyCustomer.Id);
+            this.DataContext = this;
+
+
         }
 
         private void reciverDetails_clk(object sender, RoutedEventArgs e)
         {
             new ViewCustomer(db.GetCustomer(MyParcel.Target.Id)).ShowDialog();
+            MyCustomer = db.GetCustomer(MyCustomer.Id);
+            this.DataContext = this;
         }
 
         private void droneDetails_clk(object sender, RoutedEventArgs e)
@@ -199,6 +205,9 @@ namespace PL
                 MessageBox.Show("The parcel was deleted successfully!", "Success!", MessageBoxButton.OK, MessageBoxImage.Information);
                 exit = true;
                 Close();
+                //  MyParcel = db.GetParcel(MyParcel.Id.Value);
+                this.DataContext = this;
+
             }
             catch (Exception ex)
             {

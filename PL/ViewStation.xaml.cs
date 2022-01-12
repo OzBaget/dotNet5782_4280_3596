@@ -223,6 +223,8 @@ namespace PL
             if ((sender as ListView).SelectedItem == null)
                 return;
             new ViewDrone(db.GetDrone(((sender as ListView).SelectedItem as BO.DroneInCharging).Id)).ShowDialog();
+            station = db.GetStation(station.Id);
+            this.DataContext = station;
         }
     }
 }

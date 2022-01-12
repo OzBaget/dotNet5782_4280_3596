@@ -167,7 +167,8 @@ namespace PL
             IdBox.IsReadOnly = true;
             LocationBox.Visibility = Visibility.Visible;
             LocationLable.Visibility = Visibility.Visible;
-            ParcelList.Visibility = Visibility.Visible;
+            RecivevdParcelList.Visibility = Visibility.Visible;
+            SendParcelList.Visibility = Visibility.Visible;
             ParcelLable.Visibility = Visibility.Visible;
             ExitButton.Visibility = Visibility.Visible;
 
@@ -194,7 +195,8 @@ namespace PL
             IdBox.IsReadOnly = false;
             LocationBox.Visibility = Visibility.Collapsed;
             LocationLable.Visibility = Visibility.Collapsed;
-            ParcelList.Visibility = Visibility.Collapsed;
+            RecivevdParcelList.Visibility = Visibility.Collapsed;
+            SendParcelList.Visibility = Visibility.Collapsed;
             ParcelLable.Visibility = Visibility.Collapsed;
             LatBox.Visibility = Visibility.Visible;
             LongBox.Visibility = Visibility.Visible;
@@ -227,15 +229,28 @@ namespace PL
 
         private void IntilaizeList()
         {
-            midList = customer.ReceivedParcels;
+          /*  midList = customer.ReceivedParcels;
             midList.AddRange(customer.SentParcels);
-            ParcelList.ItemsSource = midList;
+            ParcelList.ItemsSource = midList;*/
         }
 
 
         private void ParcelList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             new ViewParcel(db.GetParcel(((sender as ListView).SelectedItem as BO.ParcelInCustomer).Id), customer).ShowDialog();
+            /* try
+             {
+                 db.GetParcel(((sender as ListView).SelectedItem as BO.ParcelInCustomer).Id);
+             }
+
+             catch (BlApi.IdNotFoundException ex)
+             {
+                 this.Close();
+             }*/
+            customer = db.GetCustomer(customer.Id);
+            this.DataContext = customer;
+
+
         }
 
     }
