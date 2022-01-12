@@ -25,6 +25,7 @@ namespace PL
     {
         bool exit = false;
         public Customer customer { get; set; }
+        public bool GroupingMode { get; set; }
         IBL db = BlFactory.GetBl();
         public ObservableCollection<ParcelToList> listItems { get; set; }
         
@@ -38,10 +39,6 @@ namespace PL
             listItems = new ObservableCollection<ParcelToList>(db.GetAllParcels());
             this.DataContext = this;
 
-            /*CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ListViewParcels.ItemsSource);
-            PropertyGroupDescription groupDescription = new PropertyGroupDescription("SenderName");
-
-            view.GroupDescriptions.Add(groupDescription);*/
 
         }
 
@@ -70,7 +67,7 @@ namespace PL
         }
         private void updateFilters(object sender, SelectionChangedEventArgs e)
         {
-            while (listItems.Count > 0) 
+            while (listItems.Count > 0)
                 listItems.RemoveAt(0);
             foreach (var item in db.GetFilterdParcels(customer,
                 datePickerStart.SelectedDate,
@@ -79,12 +76,6 @@ namespace PL
                 (WeightCategories?)WeightSelector.SelectedItem,
                 (ParcelStatus?)statusSelector.SelectedItem))
                     listItems.Add(item);
-           
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ListViewParcels.ItemsSource);
-            view.GroupDescriptions.Clear();
-            PropertyGroupDescription groupDescription = new PropertyGroupDescription("SenderName");
-
-            view.GroupDescriptions.Add(groupDescription);
         }
 
         private void AddDrone_clk(object sender, MouseButtonEventArgs e)
@@ -112,6 +103,22 @@ namespace PL
             {
                 e.Cancel = true;
                 SystemSounds.Beep.Play();
+            }
+        }
+
+        private void groupingModeChanged(object sender, RoutedEventArgs e)
+        {
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ListViewParcels.ItemsSource);
+            if (GroupingMode)
+            {
+                view.GroupDescriptions.Clear();
+                PropertyGroupDescription groupDescription = new PropertyGroupDescription("SenderName");
+                view.GroupDescriptions.Add(groupDescription);
+            }
+            else
+            {
+                view.GroupDescriptions.Clear();
+
             }
         }
     }

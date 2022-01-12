@@ -31,8 +31,6 @@
 
             <ComboBox x:Name="WeightSelector" FontFamily="Fonts/#KG Red Hands" HorizontalAlignment="Left" VerticalAlignment="Top" Width="110" SelectionChanged="updateFilters" Grid.Column="1" FontSize="20" Margin="88,12,0,0" Height="43"  VerticalContentAlignment="Center"/>
             <ComboBox x:Name="PrioritySelector" FontFamily="Fonts/#KG Red Hands" HorizontalAlignment="Left" VerticalAlignment="Top" Width="110" SelectionChanged="updateFilters" FontSize="20" Margin="157,12,0,0" Height="43" VerticalContentAlignment="Center" Grid.ColumnSpan="2"/>
-
-            <Label x:Name="TextSelector" Content="Filters:"  RenderTransformOrigin="0.586,0.567" FontSize="48" FontFamily="Fonts/#Cotton Butter" Margin="10,-15,0,0" Width="131" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" Foreground="White" />
             <Image x:Name="WeightKg" Margin="35,-4,0,2" Width="48" Grid.Column="1" HorizontalAlignment="Left" Source="Images\WeightKg.png"/>
             <Image x:Name="ClockSelector" Margin="92,-4,90,4" Width="68" Source="/Images/ClockSelector.png"/>
 
@@ -45,11 +43,12 @@
 
             <Label x:Name="TextSelector_Copy1" Content="To:"  RenderTransformOrigin="0.456,0.516" FontSize="25" FontFamily="Fonts/#Cotton Butter" Margin="130,22,0,0" Padding="0,0,0,0" Width="20" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" Foreground="White" Grid.Column="2" Height="40" />
             <DatePicker x:Name="datePickerEnd" Grid.Column="2" HorizontalAlignment="Left" Margin="167,35,0,0" VerticalAlignment="Top" FontFamily="Fonts/#KG Red Hands" BorderBrush="Transparent" SelectedDateChanged="updateFilters" DisplayDateStart="{Binding SelectedDate, ElementName=datePickerStart}" Grid.ColumnSpan="2"/>
-            
+
             <TextBlock x:Name="textBlock" Foreground="White" HorizontalAlignment="Left" FontFamily="Fonts/#KG Red Hands" Text="{Binding Path='customer', Converter={StaticResource CustomerToWelcomeMessageConvertor}}" TextWrapping="Wrap" VerticalAlignment="Top"/>
             <Image x:Name="WeightKg_Copy" Margin="203,0,0,3" Width="48" Grid.Column="1" HorizontalAlignment="Left" Source="/Images/statusSelecor.png" Grid.ColumnSpan="2"/>
             <ComboBox x:Name="statusSelector" FontFamily="Fonts/#KG Red Hands" HorizontalAlignment="Left" VerticalAlignment="Top" Width="110" SelectionChanged="updateFilters" Grid.Column="2" FontSize="15" Margin="5,12,0,0" Height="43"  VerticalContentAlignment="Center"/>
             <Button x:Name="Cancel" IsCancel="True" FontFamily="Fonts/#Alfa Slab One"  Opacity="0" HorizontalAlignment="Left" Margin="152,0,0,0" VerticalAlignment="Center" Width="88" Height="25" Click="Cancel_Click" Cursor="Hand" Grid.Column="3"/>
+            <CheckBox x:Name="checkBox" Content="Groping" IsChecked="{Binding GroupingMode}" HorizontalAlignment="Left" Margin="25,21,0,0" VerticalAlignment="Top" Height="18" Width="62" Click="groupingModeChanged"/>
 
         </Grid>
 
