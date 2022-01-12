@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Stations>
   <Station>
-    <Id>1622726175</Id>
+    <Id>201340281</Id>
     <Name>Jerusalem</Name>
     <Lat>31.765975</Lat>
     <Lng>35.21214</Lng>
@@ -9,11 +9,11 @@
     <IsActived>true</IsActived>
   </Station>
   <Station>
-    <Id>1072104995</Id>
+    <Id>1841086735</Id>
     <Name>Tel-Aviv</Name>
     <Lat>32.083333</Lat>
     <Lng>34.8</Lng>
-    <FreeChargeSlots>7</FreeChargeSlots>
+    <FreeChargeSlots>10</FreeChargeSlots>
     <IsActived>true</IsActived>
   </Station>
 </Stations>

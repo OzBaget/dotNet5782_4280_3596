@@ -23,7 +23,7 @@ namespace PL
     public partial class ViewDrone : Window
     {
         IBL db;
-        Drone Cdrone;
+        public Drone Cdrone { get; set; }
         bool exit = false;
         
 

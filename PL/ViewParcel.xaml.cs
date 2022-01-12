@@ -24,6 +24,7 @@ namespace PL
         IBL db = BlFactory.GetBl();
         public Parcel MyParcel { get; set; }
         public Customer MyCustomer { get; set; }
+        private bool exit;
         /// <summary>
         /// View parcel window constractor
         /// </summary>
@@ -51,8 +52,11 @@ namespace PL
 
 
 
-            if (parcel.Drone.Id==0)
+            if (parcel.Drone.Id == 0)
+            { 
                 drnDlsBtn.Visibility = Visibility.Hidden;
+
+            }
             if ((customer == null || customer.Id == parcel.Sender.Id) && parcel.DatePickup == null && parcel.DateScheduled != null)
             {
                 confBtn.Content = "Confirm pick-up";
@@ -134,7 +138,10 @@ namespace PL
         private void confPickUpClk(object sender, RoutedEventArgs e)
         {
             db.PickParcel(MyParcel.Drone.Id);
-            MyParcel = null;
+            MyParcel = db.GetParcel(MyParcel.Id.Value);
+            this.DataContext = null;
+            this.DataContext = this;
+
             if (MyCustomer == null)//admin
             {
                 confBtn.Click -= confPickUpClk;
@@ -148,9 +155,22 @@ namespace PL
 
         private void confDeliveryClk(object sender, RoutedEventArgs e)
         {
-            db.ParcelToCustomer(MyParcel.Drone.Id);
-            confBtn.Visibility = Visibility.Hidden;
-            MyParcel = db.GetParcel(MyParcel.Id.Value);
+            try
+            {
+                db.ParcelToCustomer(MyParcel.Drone.Id);
+                MyParcel = db.GetParcel(MyParcel.Id.Value);
+                this.DataContext = null;
+                this.DataContext = this;
+                MessageBox.Show("The parcel was deliverd successfully!", "Success!", MessageBoxButton.OK, MessageBoxImage.Information);
+                confBtn.Visibility = Visibility.Hidden;
+                MyParcel = db.GetParcel(MyParcel.Id.Value);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Can't add parcel!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            
+            
         }
 
         private void AddBtn_Click(object sender, RoutedEventArgs e)
@@ -161,13 +181,11 @@ namespace PL
             {
                 db.AddParcel(MyParcel);
                 MessageBox.Show("The parcel was added successfully!", "Success!", MessageBoxButton.OK, MessageBoxImage.Information);
-                //exit = true;
+                exit = true;
                 Close();
-
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.Message, "Can't add parcel!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
@@ -178,20 +196,17 @@ namespace PL
             try
             {
                 db.DeleteParcel(MyParcel.Id.Value);
-                MessageBox.Show("The parcel was added successfully!", "Success!", MessageBoxButton.OK, MessageBoxImage.Information);
-                //exit = true;
+                MessageBox.Show("The parcel was deleted successfully!", "Success!", MessageBoxButton.OK, MessageBoxImage.Information);
+                exit = true;
                 Close();
-
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.Message, "Can't delete parcel!", MessageBoxButton.OK, MessageBoxImage.Error);
-
             }
         }
 
-            private void senderChange(object sender, SelectionChangedEventArgs e)
+        private void senderChange(object sender, SelectionChangedEventArgs e)
         {
             if (senderComboBox.SelectedItem == null || reciverComboBox.SelectedItem==null)
             {
@@ -209,6 +224,16 @@ namespace PL
                 reciverErrorBox.Text = "";
             }
         }
-        
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {         
+            e.Cancel = !exit;
+        }
+
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            exit = true;
+            Close();
+        }
     }
 }

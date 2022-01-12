@@ -9,13 +9,13 @@ namespace BO
     public class ParcelInTransfer
     {
         public int Id { get; set; }
-        public bool IsInTransfer { get; set; }
-        public Priorities Prioritie { get; set; }
-        public WeightCategories Weight { get; set; }
-        public CustomerInParcel Sender { get; set; }
-        public CustomerInParcel Target { get; set; }
-        public Location PickupLocation { get; set; }
-        public Location TargetLocation { get; set; }
+        public bool IsInTransfer { get; set; } = true;
+        public Priorities Prioritie { get; set; } = new();
+        public WeightCategories Weight { get; set; } = new();
+        public CustomerInParcel Sender { get; set; } = new();
+        public CustomerInParcel Target { get; set; } = new();
+        public Location PickupLocation { get; set; } = new();
+        public Location TargetLocation { get; set; } = new();
         public double Distance { get; set; }
         public override string ToString()
         {

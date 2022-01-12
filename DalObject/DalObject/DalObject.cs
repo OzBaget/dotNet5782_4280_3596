@@ -12,11 +12,11 @@ namespace Dal
         DalObject()
         {
             DataSource.Initialize();
-            saveListToXml(DataSource.BaseStations);
+           /* saveListToXml(DataSource.BaseStations);
             saveListToXml(DataSource.Charges);
             saveListToXml(DataSource.Customers);
             saveListToXml(DataSource.Drones);
-            saveListToXml(DataSource.Parcels);
+            saveListToXml(DataSource.Parcels);*/
         }
         private void saveListToXml<T>(List<T> myList)
         {

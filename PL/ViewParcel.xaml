@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="ViewParcel" Height="640" Width="800">
+        Title="ViewParcel" Height="640" Width="800" Closing="Window_Closing">
     <Window.Resources>
         <DataTemplate x:Key="customerInCombox"
                       DataType="local:MyParcel.Sender">
@@ -40,7 +40,7 @@
 
         <TextBlock x:Name="textBlock_Copy7" FontFamily="Fonts/#KG Red Hands" HorizontalAlignment="Left" Margin="97,239,0,0" Text="Reciver:" TextWrapping="Wrap" VerticalAlignment="Top"/>
 
-        <Button x:Name="confBtn" Content="Confirm delivery" HorizontalAlignment="Left" Margin="98,394,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="confBtn" Content="Confirm delivery" HorizontalAlignment="Left" Margin="98,407,0,0" VerticalAlignment="Top"/>
         <Button x:Name="AddBtn" Content="Add parcel" HorizontalAlignment="Left" Margin="97,458,0,0" VerticalAlignment="Top" Height="65" Width="186" Click="AddBtn_Click">
             <Button.Style>
                 <Style TargetType="Button">
@@ -58,9 +58,9 @@
                     </Style.Triggers>
                 </Style>
             </Button.Style>
-
-
         </Button>
+        <Image x:Name="ExitButton" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="103" Source="/Exit.png" Margin="659,33,0,0" Cursor="Hand"/>
+        <Button x:Name="Cancel" IsCancel="True" FontFamily="Fonts/#Alfa Slab One"  Opacity="0" HorizontalAlignment="Left" Margin="659,33,0,0" VerticalAlignment="Top" Width="103" Height="29" Click="Cancel_Click" Cursor="Hand"/>
 
 
 
@@ -69,6 +69,19 @@
         <ComboBox x:Name="reciverComboBox" HorizontalAlignment="Left" Margin="160,236,0,0" VerticalAlignment="Top" Width="120" SelectedValuePath="Id" SelectedValue="{Binding MyParcel.Target.Id}" ItemTemplate="{StaticResource customerInCombox}" SelectionChanged="senderChange"/>
         <TextBlock x:Name="senderErrorBox" HorizontalAlignment="Left" Margin="281,205,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" FontSize="8" FontFamily="Segoe UI" Foreground="Red"/>
         <TextBlock x:Name="reciverErrorBox" HorizontalAlignment="Left" Margin="280,247,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="8" FontFamily="Segoe UI" Foreground="Red"/>
+        <TextBlock x:Name="textBlock_Copy6" HorizontalAlignment="Left" Margin="489,115,0,0" Text="Drone:" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBox_Copy4" HorizontalAlignment="Left" Margin="551,115,0,0" Text="{Binding MyParcel.Drone}" TextWrapping="Wrap" VerticalAlignment="Top" Width="auto">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Visibility" Value="Visible" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding MyParcel.Drone.Id}" Value="0">
+                            <Setter Property="Visibility" Value="Hidden" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
 
 
     </Grid>

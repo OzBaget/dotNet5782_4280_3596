@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Media;
+using System.Collections.ObjectModel;
 
 
 namespace PL
@@ -23,24 +24,22 @@ namespace PL
     public partial class ViewParcelList : Window
     {
         bool exit = false;
-
         public Customer customer { get; set; }
+        public bool GroupingMode { get; set; }
         IBL db = BlFactory.GetBl();
-
+        public ObservableCollection<ParcelToList> listItems { get; set; }
         
-
         public ViewParcelList()
         {
             InitializeComponent();
-            this.DataContext = this;
-            
 
             PrioritySelector.ItemsSource = Enum.GetValues(typeof(Priorities));
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
             statusSelector.ItemsSource = Enum.GetValues(typeof(ParcelStatus));
+            listItems = new ObservableCollection<ParcelToList>(db.GetAllParcels());
+            this.DataContext = this;
 
 
-            ListViewParcels.ItemsSource = db.GetAllParcels();
         }
 
         public ViewParcelList(Customer customer)
@@ -68,13 +67,15 @@ namespace PL
         }
         private void updateFilters(object sender, SelectionChangedEventArgs e)
         {
-            ListViewParcels.ItemsSource = null;
-            ListViewParcels.ItemsSource = db.GetFilterdParcels(customer, 
+            while (listItems.Count > 0)
+                listItems.RemoveAt(0);
+            foreach (var item in db.GetFilterdParcels(customer,
                 datePickerStart.SelectedDate,
                 datePickerEnd.SelectedDate,
                 (Priorities?)PrioritySelector.SelectedItem,
                 (WeightCategories?)WeightSelector.SelectedItem,
-                (ParcelStatus?)statusSelector.SelectedItem);
+                (ParcelStatus?)statusSelector.SelectedItem))
+                    listItems.Add(item);
         }
 
         private void AddDrone_clk(object sender, MouseButtonEventArgs e)
@@ -102,6 +103,22 @@ namespace PL
             {
                 e.Cancel = true;
                 SystemSounds.Beep.Play();
+            }
+        }
+
+        private void groupingModeChanged(object sender, RoutedEventArgs e)
+        {
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ListViewParcels.ItemsSource);
+            if (GroupingMode)
+            {
+                view.GroupDescriptions.Clear();
+                PropertyGroupDescription groupDescription = new PropertyGroupDescription("SenderName");
+                view.GroupDescriptions.Add(groupDescription);
+            }
+            else
+            {
+                view.GroupDescriptions.Clear();
+
             }
         }
     }
