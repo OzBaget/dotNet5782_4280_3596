@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace BO
 {
@@ -21,10 +17,10 @@ namespace BO
                 $"Name:                          {Name}\n" +
                 $"Location:                      {Location}\n" +
                 $"Phone number:                  {Phone}";
-                if (SentParcels.Count > 0)
+            if (SentParcels.Count > 0)
             {
                 int count = 1;
-                toString +=  $"\n - Parcels which wait to send:";
+                toString += $"\n - Parcels which wait to send:";
                 foreach (var parcel in SentParcels)
                 {
                     toString += $"\n\t===========Parcel #{count}===========\n\t" + parcel.ToString().Replace("\n", "\n\t");

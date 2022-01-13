@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace BO
 {
@@ -23,7 +19,7 @@ namespace BO
                 $"Free chargers:                 {NumFreeChargers}";
             if (DronesInCharging.Count > 0)
             {
-                toString+=   $"\n - Drones in charging:";
+                toString += $"\n - Drones in charging:";
                 int count = 1;
                 foreach (var droneInChargeing in DronesInCharging)
                 {
@@ -33,7 +29,7 @@ namespace BO
                 }
             }
             return toString;
-                
+
         }
     }
 }

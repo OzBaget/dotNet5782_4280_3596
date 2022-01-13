@@ -1,11 +1,11 @@
-﻿using System;
-using System.Linq;
+﻿using DO;
+using System;
 using System.Collections.Generic;
-using DO;
+using System.Linq;
 
 namespace Dal
 {
-    sealed partial class DalXml : DalApi.IDal
+    internal sealed partial class DalXml : DalApi.IDal
     {
         public void AddDrone(int id, string model, WeightCategories maxWeight)
         {
@@ -14,7 +14,7 @@ namespace Dal
             foreach (Drone drone in myList)
                 if (drone.Id == id)
                     droneExists = true;
-            if(droneExists)
+            if (droneExists)
                 throw new IdAlreadyExistsException($"Drone with ID #{id} already exists!", id);
             Drone myDrone = new();
             myDrone.Id = id;
@@ -24,7 +24,7 @@ namespace Dal
             myList.Add(myDrone);
             saveListToXml(myList);
         }
-        
+
         public Drone GetDrone(int droneId)
         {
             bool droneExists = false;
@@ -56,8 +56,8 @@ namespace Dal
         public double[] GetPowerUse()
         {
             double[] powerUse = { Config.Free,
-                Config.LightParcel, 
-                Config.MediumParcel, 
+                Config.LightParcel,
+                Config.MediumParcel,
                 Config.HeavyParcel };
             return powerUse;
         }
@@ -66,9 +66,9 @@ namespace Dal
             return Config.ChargingRate;
         }
 
-        
 
-       
+
+
         public void DroneToStation(int stationId, int droneId)
         {
             List<DroneCharge> myChargeList = loadXmlToList<DroneCharge>();
@@ -80,21 +80,21 @@ namespace Dal
             saveListToXml(myChargeList);
 
             Station stationTmp = GetStation(stationId);
-            List<Station> myStationList= loadXmlToList<Station>();
+            List<Station> myStationList = loadXmlToList<Station>();
             int index = myStationList.IndexOf(stationTmp);
             stationTmp.FreeChargeSlots--;
             myStationList[index] = stationTmp;
             saveListToXml(myStationList);
         }
 
-        
+
         public TimeSpan FreeDrone(int droneId)
         {
             List<DroneCharge> myChargeList = loadXmlToList<DroneCharge>();
             DroneCharge charger = myChargeList.Find(charger => charger.Droneld == droneId);
             myChargeList.Remove(charger);
             saveListToXml(myChargeList);
-            
+
             Station stationTmp = GetStation(charger.Stationld);
             List<Station> myStationList = loadXmlToList<Station>();
             int index = myStationList.IndexOf(stationTmp);
@@ -104,7 +104,7 @@ namespace Dal
             return (DateTime.Now - charger.PlugedIn).Value;
         }
 
-        
+
         public IEnumerable<Drone> GetAllDrones()
         {
             return loadXmlToList<Drone>().Where(d => d.IsActived);

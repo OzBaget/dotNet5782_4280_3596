@@ -1,12 +1,12 @@
-﻿using System;
-using System.Linq;
+﻿using DO;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
-using DO;
 
 namespace Dal
 {
-    sealed partial class DalObject : DalApi.IDal
+    internal sealed partial class DalObject : DalApi.IDal
     {
 
         [MethodImpl(MethodImplOptions.Synchronized)]
@@ -15,9 +15,9 @@ namespace Dal
             bool stationExists = false;
 
             foreach (Station station in GetAllStations())
-                if (station.Id == stationId && station.IsActived) 
+                if (station.Id == stationId && station.IsActived)
                     stationExists = true;
-            
+
             if (!stationExists)
                 throw new IdNotFoundException($"Can't find station with ID #{stationId}", stationId);
 
@@ -26,11 +26,11 @@ namespace Dal
 
 
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public void AddStation(int id,string name, double lat, double lng, int chargSlots)
+        public void AddStation(int id, string name, double lat, double lng, int chargSlots)
         {
             foreach (Station station in DataSource.BaseStations)
             {
-                if (station.Id==id)
+                if (station.Id == id)
                 {
                     throw new IdAlreadyExistsException($"Station with ID #{id} already exists!", id);
                 }

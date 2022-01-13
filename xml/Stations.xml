@@ -5,7 +5,7 @@
     <Name>Jerusalem</Name>
     <Lat>31.765975</Lat>
     <Lng>35.21214</Lng>
-    <FreeChargeSlots>5</FreeChargeSlots>
+    <FreeChargeSlots>-1</FreeChargeSlots>
     <IsActived>true</IsActived>
   </Station>
   <Station>
@@ -13,7 +13,7 @@
     <Name>Tel-Aviv</Name>
     <Lat>32.083333</Lat>
     <Lng>34.8</Lng>
-    <FreeChargeSlots>10</FreeChargeSlots>
+    <FreeChargeSlots>4</FreeChargeSlots>
     <IsActived>true</IsActived>
   </Station>
 </Stations>

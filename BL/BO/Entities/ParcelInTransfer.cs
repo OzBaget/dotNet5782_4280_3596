@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BO
+﻿namespace BO
 {
     public class ParcelInTransfer
     {
@@ -25,11 +19,11 @@ namespace BO
                 $"Prioritie status:              {Prioritie}\n" +
                 $"Weight status:                 {Weight}\n" +
                 $"        ==========Receiver=============\n\t{Target.ToString().Replace("\n", "\n\t")}\n" +
-                $"        ==========Sender===============\n\t{Sender.ToString().Replace("\n", "\n\t")}\n" +                
+                $"        ==========Sender===============\n\t{Sender.ToString().Replace("\n", "\n\t")}\n" +
                 $"Pick up location:              {PickupLocation}\n" +
                 $"Target location:               {TargetLocation}\n" +
                 $"Distance frome target:         {Distance}";
-                
+
 
             return toString;
         }

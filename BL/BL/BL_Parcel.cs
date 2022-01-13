@@ -1,18 +1,17 @@
-﻿using System;
-using System.Linq;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-
+﻿using BlApi;
 using BO;
-using BlApi;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace BL
 {
-    sealed partial class BL : IBL
+    internal sealed partial class BL : IBL
     {
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddParcel(Parcel parcel)
-        {        
+        {
             try
             {
                 DalObject.AddParcel(parcel.Sender.Id, parcel.Target.Id, (DO.WeightCategories)parcel.Weight, (DO.Priorities)parcel.Prioritie, DateTime.Now, null, null, null);
@@ -21,7 +20,7 @@ namespace BL
             {
                 throw new IdAlreadyExistsException(ex.Message, ex.Id);
             }
-            catch(DO.IdNotFoundException ex)
+            catch (DO.IdNotFoundException ex)
             {
                 throw new IdNotFoundException(ex.Message, ex.Id);
             }
@@ -32,35 +31,35 @@ namespace BL
         {
             try
             {
-                lock(DalObject)
-                { 
-                DO.Parcel tmpParcel = DalObject.GetParcerl(parcelId);
-                Parcel newParcel = new();
-                newParcel.Id = tmpParcel.Id;
-                newParcel.Prioritie = (Priorities)tmpParcel.Priority;
-                newParcel.Weight = (WeightCategories)tmpParcel.Weight;
-                newParcel.DateCreated = tmpParcel.Requsted;
-                newParcel.DateScheduled = tmpParcel.Scheduled;
-                newParcel.DatePickup = tmpParcel.PickedUp;
-                newParcel.DateDeliverd = tmpParcel.Delivered;
-
-                newParcel.Target = new();
-                newParcel.Target.Id = tmpParcel.TargetId;
-                newParcel.Target.Name = DalObject.GetCustomer(tmpParcel.TargetId).Name;
-
-                newParcel.Sender = new();
-                newParcel.Sender.Id = tmpParcel.SenderId;
-                newParcel.Sender.Name = DalObject.GetCustomer(tmpParcel.SenderId).Name;
-
-                DroneInParcel drone=new();
-                if (tmpParcel.DroneId != 0)
+                lock (DalObject)
                 {
-                    drone.Id = tmpParcel.DroneId;
-                    drone.Battery = Drones.Find(drone => drone.Id == tmpParcel.DroneId).Battery;
-                    drone.CurrentLocation = Drones.Find(drone => drone.Id == tmpParcel.DroneId).CurrentLocation;
-                }
-                newParcel.Drone = drone;
-                return newParcel;
+                    DO.Parcel tmpParcel = DalObject.GetParcerl(parcelId);
+                    Parcel newParcel = new();
+                    newParcel.Id = tmpParcel.Id;
+                    newParcel.Prioritie = (Priorities)tmpParcel.Priority;
+                    newParcel.Weight = (WeightCategories)tmpParcel.Weight;
+                    newParcel.DateCreated = tmpParcel.Requsted;
+                    newParcel.DateScheduled = tmpParcel.Scheduled;
+                    newParcel.DatePickup = tmpParcel.PickedUp;
+                    newParcel.DateDeliverd = tmpParcel.Delivered;
+
+                    newParcel.Target = new();
+                    newParcel.Target.Id = tmpParcel.TargetId;
+                    newParcel.Target.Name = DalObject.GetCustomer(tmpParcel.TargetId).Name;
+
+                    newParcel.Sender = new();
+                    newParcel.Sender.Id = tmpParcel.SenderId;
+                    newParcel.Sender.Name = DalObject.GetCustomer(tmpParcel.SenderId).Name;
+
+                    DroneInParcel drone = new();
+                    if (tmpParcel.DroneId != 0)
+                    {
+                        drone.Id = tmpParcel.DroneId;
+                        drone.Battery = Drones.Find(drone => drone.Id == tmpParcel.DroneId).Battery;
+                        drone.CurrentLocation = Drones.Find(drone => drone.Id == tmpParcel.DroneId).CurrentLocation;
+                    }
+                    newParcel.Drone = drone;
+                    return newParcel;
                 }
             }
             catch (DO.IdNotFoundException ex)
@@ -74,11 +73,11 @@ namespace BL
         {
             try
             {
-                lock(DalObject)
-                { 
-                if (DalObject.GetParcerl(parcelId).DroneId != 0)
-                    throw new CantDeleteObject("Parcel is linked to drone!");
-                DalObject.DeleteParcel(parcelId);
+                lock (DalObject)
+                {
+                    if (DalObject.GetParcerl(parcelId).DroneId != 0)
+                        throw new CantDeleteObject("Parcel is linked to drone!");
+                    DalObject.DeleteParcel(parcelId);
                 }
             }
             catch (DO.IdNotFoundException ex)
@@ -91,13 +90,13 @@ namespace BL
         public IEnumerable<ParcelToList> GetAllParcels()
         {
             lock (DalObject)
-            { 
-                List<ParcelToList> parcels = new();
-            foreach (var doParcel in DalObject.GetAllParcels())
             {
-                parcels.Add(doParcelToParcelToList(doParcel));
-            }            
-            return parcels;
+                List<ParcelToList> parcels = new();
+                foreach (var doParcel in DalObject.GetAllParcels())
+                {
+                    parcels.Add(doParcelToParcelToList(doParcel));
+                }
+                return parcels;
             }
         }
 
@@ -132,19 +131,19 @@ namespace BL
             {
                 filterdParcel.Add(doParcelToParcelToList(oldParcel));
             }
-            return filterdParcel;        
+            return filterdParcel;
         }
-        
+
         [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<ParcelToList> GetFilterdParcels(Customer customer, DateTime? startDate, DateTime? endDate, Priorities? priority, WeightCategories? weight, ParcelStatus? status)
         {
             IEnumerable<DO.Parcel> filterdParcel = DalObject.GetAllParcels();
-            if (customer!=null)
-                filterdParcel = filterdParcel.Intersect(DalObject.GetFilterdParcels(x => x.SenderId == customer.Id|| x.TargetId == customer.Id));
+            if (customer != null)
+                filterdParcel = filterdParcel.Intersect(DalObject.GetFilterdParcels(x => x.SenderId == customer.Id || x.TargetId == customer.Id));
             if (startDate != null)
-                filterdParcel = filterdParcel.Intersect(DalObject.GetFilterdParcels(x=>x.Requsted>=startDate));
+                filterdParcel = filterdParcel.Intersect(DalObject.GetFilterdParcels(x => x.Requsted >= startDate));
             if (endDate != null)
-                filterdParcel = filterdParcel.Intersect(DalObject.GetFilterdParcels(x=>x.Requsted<=endDate));
+                filterdParcel = filterdParcel.Intersect(DalObject.GetFilterdParcels(x => x.Requsted <= endDate));
             if (priority != null)
                 filterdParcel = filterdParcel.Intersect(DalObject.GetFilterdParcels(x => x.Priority == (DO.Priorities)priority));
             if (weight != null)
@@ -173,50 +172,50 @@ namespace BL
             return from parcel in filterdParcel
                    select doParcelToParcelToList(parcel);
         }
-        
+
         [MethodImpl(MethodImplOptions.Synchronized)]
         public int linkParcel(int droneId)
         {
             int droneIndex = Drones.FindIndex(drone => drone.Id == droneId);
-            if(droneIndex==-1)
+            if (droneIndex == -1)
                 throw new IdNotFoundException($"Can't find drone with ID #{droneId}!", droneId);
 
             DroneToList myDrone = Drones[droneIndex];//copy by ref
             if (myDrone.Status != DroneStatus.Available)
                 throw new CantLinkParcelException("Drone is not available!");
-            
-            IEnumerable<ParcelToList> myParcels = GetUnassignedParcels();
-            myParcels= myParcels.Where(parcel=>
-            batteryNeedForTrip(GetCustomer(GetParcel(parcel.Id).Sender.Id).Location,myDrone.CurrentLocation)+//baterry for currnt location->sender
-            batteryNeedForTrip(GetCustomer(GetParcel(parcel.Id).Target.Id).Location, GetCustomer(GetParcel(parcel.Id).Sender.Id).Location,false,parcel.Weight) +//baterry for sender->target (with weight)
-            batteryNeedForTrip(getClosestStation(GetCustomer(GetParcel(parcel.Id).Sender.Id).Location).Location, GetCustomer(GetParcel(parcel.Id).Sender.Id).Location)//baterry for target->closer station to target
-            <=myDrone.Battery);//remove too far parcels            
-            if (myParcels.Count() == 0)
-                throw new CantLinkParcelException("Can't find parcel to link too!");
 
+            IEnumerable<ParcelToList> myParcels = GetUnassignedParcels();
 
             myParcels = myParcels.Where(parcel => parcel.Weight <= myDrone.MaxWeight);//remove too heavy parcels
             if (myParcels.Count() == 0)
                 throw new CantLinkParcelException("Can't find parcel to link too!");
 
-            
-            myParcels.OrderBy(parcel => parcel.Priority); //sort by Priority
+            myParcels = myParcels.Where(parcel =>
+             batteryNeedForTrip(GetCustomer(GetParcel(parcel.Id).Sender.Id).Location, myDrone.CurrentLocation) +//baterry for currnt location->sender
+             batteryNeedForTrip(GetCustomer(GetParcel(parcel.Id).Target.Id).Location, GetCustomer(GetParcel(parcel.Id).Sender.Id).Location, parcel.Weight) +//baterry for sender->target (with weight)
+             batteryNeedForTrip(getClosestStation(GetCustomer(GetParcel(parcel.Id).Sender.Id).Location).Location, GetCustomer(GetParcel(parcel.Id).Sender.Id).Location)//baterry for target->closer station to target
+             <= myDrone.Battery);//remove too far parcels            
+            if (myParcels.Count() == 0)
+                throw new CantLinkParcelException("Can't find parcel to link too!");
+
+
+            myParcels = myParcels.OrderBy(parcel => parcel.Priority); //sort by Priority
             Priorities topPriority = myParcels.Last().Priority;
             myParcels = myParcels.Where(parcel => parcel.Priority == topPriority);//remove all parcel that less pariority
 
-            myParcels.OrderBy(parcel => parcel.Weight);//sort by Weight
+            myParcels = myParcels.OrderBy(parcel => parcel.Weight);//sort by Weight
             WeightCategories topWeight = myParcels.Last().Weight;
-            myParcels = myParcels.Where(parcel => parcel.Weight ==topWeight);//remove all parcel that less weight
+            myParcels = myParcels.Where(parcel => parcel.Weight == topWeight);//remove all parcel that less weight
 
-            myParcels.OrderBy(parcel => calculateDist(GetCustomer(GetParcel(parcel.Id).Sender.Id).Location, myDrone.CurrentLocation));//sort by distance
-            
+            myParcels = myParcels.OrderBy(parcel => calculateDist(GetCustomer(GetParcel(parcel.Id).Sender.Id).Location, myDrone.CurrentLocation));//sort by distance
+
 
             myDrone.Status = DroneStatus.Delivery;
             myDrone.ParcelId = myParcels.First().Id;
             DalObject.linkParcel(myParcels.First().Id, myDrone.Id);
             return myParcels.First().Id;
         }
-        
+
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void PickParcel(int droneId)
         {
@@ -224,11 +223,11 @@ namespace BL
             if (droneIndex == -1)
                 throw new IdNotFoundException($"Can't find drone with ID #{droneId}!", droneId);
             DroneToList myDrone = Drones[droneIndex];
-            if (myDrone.ParcelId == null) 
+            if (myDrone.ParcelId == null)
                 throw new CantPickUpParcelException("Drone is not link to any parcel!");
-           
+
             Parcel myParcel = GetParcel(myDrone.ParcelId.Value);
-            if (myParcel.DatePickup != null) 
+            if (myParcel.DatePickup != null)
                 throw new CantPickUpParcelException("Parcel alredy picked up!");
 
             myDrone.Battery -= batteryNeedForTrip(GetCustomer(myParcel.Sender.Id).Location, myDrone.CurrentLocation);
@@ -236,28 +235,28 @@ namespace BL
 
             DalObject.PickParcel(myParcel.Id.Value);
 
-            
+
         }
-        
+
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void ParcelToCustomer(int droneId)
         {
             int droneIndex = Drones.FindIndex(drone => drone.Id == droneId);
-            if(droneIndex==-1)
+            if (droneIndex == -1)
                 throw new IdNotFoundException($"Can't find drone with ID #{droneId}!", droneId);
 
             DroneToList myDrone = Drones[droneIndex];//copy by ref
 
             if (myDrone.ParcelId == null)
                 throw new CantDeliverParcelException("Drone is not link to any parcel!");
-            
+
             Parcel myParcel = GetParcel(myDrone.ParcelId.Value);
             if (myParcel.DatePickup == null)
                 throw new CantDeliverParcelException($"The drone didn't picked up the parcel #{myParcel.Id}!");
-            if(myParcel.DateDeliverd!=null)
+            if (myParcel.DateDeliverd != null)
                 throw new CantDeliverParcelException($"The drone deliverd parcel #{myParcel.Id} already!");
 
-            int batteryNeededForCustomer = batteryNeedForTrip(GetCustomer(myParcel.Target.Id).Location, myDrone.CurrentLocation, false, myParcel.Weight);
+            double batteryNeededForCustomer = batteryNeedForTrip(GetCustomer(myParcel.Target.Id).Location, myDrone.CurrentLocation, myParcel.Weight);
             if (batteryNeededForCustomer > myDrone.Battery)
                 throw new CantDeliverParcelException($"Not enough battery to deliver parcel! (battry needed: {batteryNeededForCustomer}%)");
 

@@ -1,11 +1,11 @@
-﻿using System;
-using System.Linq;
+﻿using DO;
+using System;
 using System.Collections.Generic;
-using DO;
+using System.Linq;
 
 namespace Dal
 {
-    sealed partial class DalXml : DalApi.IDal
+    internal sealed partial class DalXml : DalApi.IDal
     {
 
         public Station GetStation(int stationId)
@@ -13,23 +13,23 @@ namespace Dal
             bool stationExists = false;
             List<Station> myList = loadXmlToList<Station>();
             foreach (Station station in myList)
-                if (station.Id == stationId && station.IsActived) 
+                if (station.Id == stationId && station.IsActived)
                     stationExists = true;
-            
+
             if (!stationExists)
                 throw new IdNotFoundException($"Can't find station with ID #{stationId}", stationId);
 
             return myList.Find(station => station.Id == stationId);
         }
 
-       
-        public void AddStation(int id,string name, double lat, double lng, int chargSlots)
+
+        public void AddStation(int id, string name, double lat, double lng, int chargSlots)
         {
             List<Station> myList = loadXmlToList<Station>();
 
             foreach (Station station in myList)
             {
-                if (station.Id==id)
+                if (station.Id == id)
                 {
                     throw new IdAlreadyExistsException($"Station with ID #{id} already exists!", id);
                 }
@@ -48,7 +48,7 @@ namespace Dal
         {
             List<Station> myList = loadXmlToList<Station>();
             int index = myList.IndexOf(GetStation(id));
-            Station myStation =myList[index];
+            Station myStation = myList[index];
             myStation.IsActived = false;
             myList[index] = myStation;
             saveListToXml(myList);
@@ -60,7 +60,7 @@ namespace Dal
             AddStation(tmpStation.Id, name, tmpStation.Lat, tmpStation.Lng, numChargers);
         }
 
-        
+
         public IEnumerable<Station> GetAllStations()
         {
             return loadXmlToList<Station>().Where(s => s.IsActived);

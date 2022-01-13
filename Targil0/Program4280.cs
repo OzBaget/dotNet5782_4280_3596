@@ -2,9 +2,9 @@
 
 namespace Targil0
 {
-    partial class Program
+    internal partial class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Welcome4280();
             Welcome3596();

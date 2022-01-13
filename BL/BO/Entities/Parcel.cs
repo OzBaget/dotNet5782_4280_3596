@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BO
 {
@@ -25,18 +21,18 @@ namespace BO
                 $"ID:                            {Id}\n" +
                 $"Weight status:                 {Weight}\n" +
                 $"Prioritie status:              {Prioritie}";
-                if (DateCreated != null)
-                    toString += $"\nCreated date:                  {DateCreated}";
-                if (DateScheduled != null)
-                    toString += $"\nScheduled date:                {DateScheduled}";
-                if (DatePickup != null)
-                    toString += $"\nPick up date:                  {DatePickup}";
-                if (DateDeliverd != null)
-                    toString += $"\nDeliverd date:                 {DateDeliverd}";
-                toString += $"\n        ===========Receiver============\n\t{Target.ToString().Replace("\n", "\n\t")}" +
-                $"\n        ===========Sender==============\n\t{Sender.ToString().Replace("\n", "\n\t")}";
-                if (Drone.Id != 0)
-                    toString += $"\n        ===========Drone===============\n\t{Drone.ToString().Replace("\n", "\n\t")}";                
+            if (DateCreated != null)
+                toString += $"\nCreated date:                  {DateCreated}";
+            if (DateScheduled != null)
+                toString += $"\nScheduled date:                {DateScheduled}";
+            if (DatePickup != null)
+                toString += $"\nPick up date:                  {DatePickup}";
+            if (DateDeliverd != null)
+                toString += $"\nDeliverd date:                 {DateDeliverd}";
+            toString += $"\n        ===========Receiver============\n\t{Target.ToString().Replace("\n", "\n\t")}" +
+            $"\n        ===========Sender==============\n\t{Sender.ToString().Replace("\n", "\n\t")}";
+            if (Drone.Id != 0)
+                toString += $"\n        ===========Drone===============\n\t{Drone.ToString().Replace("\n", "\n\t")}";
             return toString;
         }
     }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BO
+﻿namespace BO
 {
     public class Drone
     {
@@ -23,7 +17,7 @@ namespace BO
                 $"Model:                         {Model}\n" +
                 $"Max weight:                    {MaxWeight}\n" +
                 $"Battery:                       {Battery}%\n" +
-                $"Status:                        {Status}\n"+
+                $"Status:                        {Status}\n" +
                 $"Current location:              {CurrentLocation}";
             if (Parcel.Id != 0)
                 tostringText += $"\n        ============Parcel=============\n\t{Parcel.ToString().Replace("\n", "\n\t")}\n";

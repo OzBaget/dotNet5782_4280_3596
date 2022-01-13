@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using BlApi;
 using BO;
-using BlApi;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 
 namespace BL
 {
-    sealed partial class BL : IBL
+    internal sealed partial class BL : IBL
     {
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddCustomer(Customer customer)
@@ -76,12 +76,12 @@ namespace BL
                     return newCustomer;
                 }
             }
-            catch(DO.IdNotFoundException ex)
+            catch (DO.IdNotFoundException ex)
             {
                 throw new IdNotFoundException(ex.Message, ex.Id);
             }
         }
-        
+
         [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<CustomerToList> GetAllCustomers()
         {

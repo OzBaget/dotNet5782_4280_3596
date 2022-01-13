@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BO
+﻿namespace BO
 {
     public class DroneToList
     {
@@ -18,7 +12,7 @@ namespace BO
 
         public override string ToString()
         {
-            return            
+            return
                 $"ID:                            {Id}\n" +
                 $"Model:                         {Model}\n" +
                 $"Max weight:                    {MaxWeight}\n" +

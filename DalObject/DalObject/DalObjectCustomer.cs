@@ -1,12 +1,12 @@
-﻿using System.Linq;
+﻿using DO;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
-using DO;
 
 
 namespace Dal
 {
-    sealed partial class DalObject : DalApi.IDal
+    internal sealed partial class DalObject : DalApi.IDal
     {
         [MethodImpl(MethodImplOptions.Synchronized)]
         public Customer GetCustomer(int customerId)
@@ -24,12 +24,12 @@ namespace Dal
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public void AddCustomer(int id,string name, string phone, double lat, double lng)
+        public void AddCustomer(int id, string name, string phone, double lat, double lng)
         {
             bool customerExists = false;
 
             foreach (Customer customer in DataSource.Customers)
-                if (customer.Id == id) 
+                if (customer.Id == id)
                     customerExists = true;
 
             if (customerExists)
@@ -66,7 +66,7 @@ namespace Dal
         [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<Customer> GetAllCustomers()
         {
-            return DataSource.Customers.Where(c=>c.IsActived);
+            return DataSource.Customers.Where(c => c.IsActived);
         }
     }
 }

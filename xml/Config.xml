@@ -2,8 +2,8 @@
 <Config>
   <Free>0.0001</Free>
   <LightParcel>0.0002</LightParcel>
-  <MediumParcel>0.0004</MediumParcel>
-  <HeavyParcel>0.0008</HeavyParcel>
-  <ChargingRate>200</ChargingRate>
+  <MediumParcel>0.0002</MediumParcel>
+  <HeavyParcel>0.0002</HeavyParcel>
+  <ChargingRate>5</ChargingRate>
   <ParcelId>32</ParcelId>
 </Config>

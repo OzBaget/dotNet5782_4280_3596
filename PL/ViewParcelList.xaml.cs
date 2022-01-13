@@ -1,19 +1,12 @@
-﻿using BO;
-using BlApi;
+﻿using BlApi;
+using BO;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Collections.ObjectModel;
+using System.Media;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Media;
-using System.Collections.ObjectModel;
 
 
 
@@ -24,12 +17,13 @@ namespace PL
     /// </summary>
     public partial class ViewParcelList : Window
     {
-        bool exit = false;
+        private bool exit = false;
         public Customer customer { get; set; }
         public bool GroupingMode { get; set; }
-        IBL db = BlFactory.GetBl();
+
+        private IBL db = BlFactory.GetBl();
         public ObservableCollection<ParcelToList> listItems { get; set; }
-        
+
         public ViewParcelList()
         {
             InitializeComponent();
@@ -38,7 +32,7 @@ namespace PL
             WeightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
             statusSelector.ItemsSource = Enum.GetValues(typeof(ParcelStatus));
             listItems = new ObservableCollection<ParcelToList>(db.GetAllParcels());
-            this.DataContext = this;
+            DataContext = this;
 
 
         }
@@ -46,7 +40,7 @@ namespace PL
         public ViewParcelList(Customer customer)
         {
             this.customer = customer;
-            this.DataContext = this;
+            DataContext = this;
 
             InitializeComponent();
 
@@ -76,7 +70,7 @@ namespace PL
                 (Priorities?)PrioritySelector.SelectedItem,
                 (WeightCategories?)WeightSelector.SelectedItem,
                 (ParcelStatus?)statusSelector.SelectedItem))
-                    listItems.Add(item);
+                listItems.Add(item);
         }
 
         private void AddDrone_clk(object sender, MouseButtonEventArgs e)
@@ -98,7 +92,7 @@ namespace PL
         }
 
 
-       
+
 
         private void groupingModeChanged(object sender, RoutedEventArgs e)
         {

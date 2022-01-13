@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BO
 {
@@ -13,7 +9,7 @@ namespace BO
 
         public override string ToString()
         {
-            return coordsToSexag(Latitude,Longitude);
+            return coordsToSexag(Latitude, Longitude);
         }
 
 

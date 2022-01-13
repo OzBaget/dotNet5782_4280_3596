@@ -1,8 +1,7 @@
-﻿using System;
+﻿using BO;
+using System;
 using System.Globalization;
-using System.Windows;
 using System.Windows.Data;
-using BO;
 
 namespace PL
 {

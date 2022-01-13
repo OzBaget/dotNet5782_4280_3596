@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using BlApi;
 using BO;
-using BlApi;
-using System.Runtime.CompilerServices;
+using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace BL
 {
-    sealed partial class BL : IBL
-    { 
+    internal sealed partial class BL : IBL
+    {
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddStation(BaseStation station)
         {
@@ -58,7 +58,7 @@ namespace BL
             }
             return stations;
         }
-        
+
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdateStation(int stationId, string name, string input)
         {
@@ -114,7 +114,7 @@ namespace BL
             List<DroneInCharging> drones = new();
             foreach (DroneToList drone in GetAllDrones())
             {
-                if (DalObject.GetAllDroneCharge().Any(dc => dc.Stationld == stationId && dc.Droneld == drone.Id)) 
+                if (DalObject.GetAllDroneCharge().Any(dc => dc.Stationld == stationId && dc.Droneld == drone.Id))
                 {
                     DroneInCharging droneInCharge = new();
                     droneInCharge.Id = drone.Id;

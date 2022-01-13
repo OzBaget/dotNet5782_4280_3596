@@ -1,19 +1,10 @@
 ﻿using BlApi;
 using BO;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Media;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Media;
 
 
 namespace PL
@@ -26,15 +17,16 @@ namespace PL
         /// <summary>
         /// Interaction logic for ViewStation.xaml
         /// </summary>
-        List<ParcelInCustomer> midList;
-        bool exit = false;
+        private List<ParcelInCustomer> midList;
+        private bool exit = false;
 
         public Customer customer { get; set; }
-        IBL db;
+
+        private IBL db;
         public ViewCustomer(Customer Cstation)
         {
             customer = Cstation;
-            this.DataContext = customer;
+            DataContext = customer;
             InitializeComponent();
             db = BlFactory.GetBl();
             ViewACustomer(null, null);
@@ -43,12 +35,12 @@ namespace PL
         {
             customer = new();
             customer.Location = new();
-            this.DataContext = customer;
+            DataContext = customer;
             InitializeComponent();
             db = BlFactory.GetBl();
             GoAddView();
         }
-       
+
 
         private void IsChanged(object sender, TextChangedEventArgs e)
         {
@@ -76,7 +68,7 @@ namespace PL
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
             exit = true;
-            this.Close();
+            Close();
         }
         private void AddCustomerToDb(object sender, RoutedEventArgs e)
         {
@@ -137,7 +129,7 @@ namespace PL
             if (error)
                 return;
 
-         
+
             try
             {
                 BlApi.BlFactory.GetBl().AddCustomer(customer);
@@ -168,7 +160,7 @@ namespace PL
             AddButton.Visibility = Visibility.Collapsed;
             AddImage.Visibility = Visibility.Collapsed;
 
-           
+
 
 
         }
@@ -185,7 +177,7 @@ namespace PL
             LatLable.Visibility = Visibility.Visible;
             LongLable.Visibility = Visibility.Visible;
 
-       
+
 
             AddImage.Visibility = Visibility.Visible;
             CancelButton.Visibility = Visibility.Visible;
@@ -194,15 +186,15 @@ namespace PL
             UpdateButton.Visibility = Visibility.Collapsed;
             ExitButton.Visibility = Visibility.Collapsed;
         }
-      
+
         private void ParcelList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (db.GetParcel(((sender as ListView).SelectedItem as BO.ParcelInCustomer).Id) == null)
                 return;
             new ViewParcel(db.GetParcel(((sender as ListView).SelectedItem as BO.ParcelInCustomer).Id), customer).ShowDialog();
-       
+
             customer = db.GetCustomer(customer.Id);
-            this.DataContext = customer;
+            DataContext = customer;
 
 
         }
@@ -214,7 +206,7 @@ namespace PL
                 SystemSounds.Beep.Play();
             }
         }
-      
+
 
     }
 }

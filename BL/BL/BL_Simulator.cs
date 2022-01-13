@@ -6,15 +6,14 @@ using System.Threading;
 
 namespace BL
 {
-    class Simulator
+    internal class Simulator
     {
-        const int EMPTY = 0;
-        const double SPPED = 5000;// M/S
-        const double DELAY = 1000;// MS
+        private const int EMPTY = 0;
+        private const double SPPED = 5000;// M/S
+        private const double DELAY = 1000;// MS
         public Simulator(BL db, int droneId, Action updteDrone, Func<bool> checkStop)
         {
             Drone myDrone;
-            double tripReminning = 0; //meters
             bool droneIsWaitnigForCharging = false;
             while (!checkStop())
             {
@@ -25,9 +24,7 @@ namespace BL
                         if (droneIsWaitnigForCharging)
                             try
                             {
-                                int stationId = db.DroneToStation(droneId);
-                                droneIsWaitnigForCharging = false;
-                                tripReminning = db.calculateDist(myDrone.CurrentLocation, db.GetStation(stationId).Location);
+                                db.DroneToStation(droneId);
                             }
                             catch (CantSendDroneToChargeException)
                             {
@@ -37,8 +34,6 @@ namespace BL
                             try
                             {
                                 db.linkParcel(droneId);
-                                myDrone = db.GetDrone(droneId);
-                                tripReminning = db.calculateDist(myDrone.CurrentLocation, myDrone.Parcel.PickupLocation);
                             }
                             catch (CantLinkParcelException)
                             {
@@ -47,54 +42,44 @@ namespace BL
                             }
                         break;
                     case DroneStatus.UnderMaintenance:
-                        if (tripReminning > 0)
+                        if (myDrone.Battery < 100)
                         {
-                            double newBattery = myDrone.Battery - (DELAY / 1000) * SPPED * db.DalObject.GetPowerUse()[EMPTY];
+                            double newBattery = myDrone.Battery + (DELAY / 1000) * db.DalObject.GetChargingRate();
+                            newBattery = newBattery < 100 ? newBattery : 100;
                             db.UpdateDrone(droneId, myDrone.Model, newBattery);
-                            tripReminning -= (DELAY / 1000) * SPPED;
-                            tripReminning = tripReminning < 0 ? 0 : tripReminning;// dont get underflow
                         }
                         else
                         {
-                            if (myDrone.Battery < 100)
-                            {
-                                double newBattery = myDrone.Battery + DELAY / 1000 * db.DalObject.GetChargingRate();
-                                db.UpdateDrone(droneId, myDrone.Model, newBattery);
-                            }
-                            else
-                                db.FreeDrone(droneId);
+                            db.FreeDrone(droneId);
+                            droneIsWaitnigForCharging = false;
                         }
                         break;
                     case DroneStatus.Delivery:
                         {
                             if (!myDrone.Parcel.IsInTransfer) //drone is on the way to sender
                             {
-                                if (tripReminning > 0)
+                                if (myDrone.Parcel.Distance > (DELAY / 1000) * SPPED)
                                 {
+                                    Location newLocation = calculateCurrnetLocation(myDrone.CurrentLocation, myDrone.Parcel.PickupLocation, (DELAY / 1000) * SPPED);
                                     double newBattery = myDrone.Battery - (DELAY / 1000) * SPPED * db.DalObject.GetPowerUse()[EMPTY];
-                                    db.UpdateDrone(droneId, myDrone.Model, newBattery);
-                                    tripReminning -= (DELAY / 1000) * SPPED;
-                                    tripReminning = tripReminning < 0 ? 0 : tripReminning;// dont get underflow
+                                    db.UpdateDrone(droneId, myDrone.Model, newBattery, newLocation);
+
                                 }
                                 else
                                 {
-                                    db.UpdateDrone(droneId, myDrone.Model, null, myDrone.Parcel.PickupLocation);
                                     db.PickParcel(droneId);
-                                    tripReminning = db.calculateDist(myDrone.Parcel.PickupLocation, myDrone.Parcel.TargetLocation);
                                 }
                             }
                             else//drone is on the way to reciver
                             {
-                                if (tripReminning > 0)
+                                if (myDrone.Parcel.Distance > (DELAY / 1000) * SPPED)
                                 {
+                                    Location newLocation = calculateCurrnetLocation(myDrone.CurrentLocation, myDrone.Parcel.TargetLocation, (DELAY / 1000) * SPPED);
                                     double newBattery = myDrone.Battery - (DELAY / 1000) * SPPED * db.DalObject.GetPowerUse()[(int)myDrone.Parcel.Weight + 1];
-                                    db.UpdateDrone(droneId, myDrone.Model, newBattery);
-                                    tripReminning -= (DELAY / 1000) * SPPED;
-                                    tripReminning = tripReminning < 0 ? 0 : tripReminning;// dont get underflow
+                                    db.UpdateDrone(droneId, myDrone.Model, newBattery, newLocation);
                                 }
                                 else
                                 {
-                                    db.UpdateDrone(droneId, myDrone.Model, null, myDrone.Parcel.TargetLocation);
                                     db.ParcelToCustomer(droneId);
                                 }
                             }
@@ -106,6 +91,33 @@ namespace BL
                 updteDrone();
                 Thread.Sleep((int)DELAY);
             }
+        }
+        private Location calculateCurrnetLocation(Location startLoc, Location endLoc, double step)
+        {
+            double ratio = step / calculateDist(startLoc, endLoc);
+            double latDelta = endLoc.Latitude - startLoc.Latitude;
+            double lngDelta = endLoc.Longitude - startLoc.Longitude;
+            Location newLoc = new();
+            newLoc.Latitude = startLoc.Latitude + ratio * latDelta;
+            newLoc.Longitude = startLoc.Longitude + ratio * lngDelta;
+            return newLoc;
+
+        }
+        private double calculateDist(Location loc1, Location loc2)
+        {
+            const double Radios = 6371000;//meters
+            //deg to radians
+            double lat1 = loc1.Latitude * Math.PI / 180;
+            double lat2 = loc2.Latitude * Math.PI / 180;
+            double lng1 = loc1.Longitude * Math.PI / 180;
+            double lng2 = loc2.Longitude * Math.PI / 180;
+
+            //Haversine formula
+            double a = Math.Pow(Math.Sin((lat2 - lat1) / 2), 2) +
+                Math.Cos(lat1) * Math.Cos(lat2) *
+                Math.Pow(Math.Sin((lng2 - lng1) / 2), 2);
+            double c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
+            return Radios * c;
         }
     }
 }

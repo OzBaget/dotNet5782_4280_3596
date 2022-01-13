@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Xml.Linq;
 using System.Reflection;
+using System.Xml.Linq;
 
 namespace Dal
 {
-    sealed partial class DalXml :DalApi.IDal
+    internal sealed partial class DalXml : DalApi.IDal
     {
-        static readonly DalApi.IDal instance = new DalXml();
+        private static readonly DalApi.IDal instance = new DalXml();
         public static DalApi.IDal Instance { get => instance; }
 
-        DalXml()
+        private DalXml()
         {
         }
 
@@ -18,8 +18,8 @@ namespace Dal
         {
             //Precent To KM
             public static double Free
-            { 
-                get 
+            {
+                get
                 {
                     XElement configRoot = XElement.Load(@"xml\Config.xml");
                     return double.Parse(configRoot.Element("Free").Value);
@@ -58,7 +58,8 @@ namespace Dal
                 }
             }
 
-            public static int ParcelId {
+            public static int ParcelId
+            {
                 //return the ParcelID and update it to next number.
                 get
                 {

@@ -1,18 +1,8 @@
 ﻿using BlApi;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Media;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Media;
 
 
 namespace PL
@@ -22,8 +12,8 @@ namespace PL
     /// </summary>
     public partial class ViewCustomerList : Window
     {
-        IBL db = BlFactory.GetBl();
-        bool exit = false;
+        private IBL db = BlFactory.GetBl();
+        private bool exit = false;
 
         public ViewCustomerList()
         {
@@ -50,7 +40,7 @@ namespace PL
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
             exit = true;
-            this.Close();
+            Close();
         }
         private void CloseWindow(object sender, System.ComponentModel.CancelEventArgs e)
         {

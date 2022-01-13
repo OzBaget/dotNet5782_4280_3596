@@ -1,11 +1,11 @@
-﻿using System.Linq;
+﻿using DO;
 using System.Collections.Generic;
-using DO;
+using System.Linq;
 
 
 namespace Dal
 {
-    sealed partial class DalXml : DalApi.IDal
+    internal sealed partial class DalXml : DalApi.IDal
     {
         public IEnumerable<DroneCharge> GetAllDroneCharge()
         {

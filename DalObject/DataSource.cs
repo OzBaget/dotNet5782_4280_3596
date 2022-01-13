@@ -1,10 +1,10 @@
-﻿using System;
+﻿using DO;
+using System;
 using System.Collections.Generic;
-using DO;
 
 namespace Dal
 {
-    class DataSource
+    internal class DataSource
     {
         internal static List<Drone> Drones = new List<Drone>();
         internal static List<Station> BaseStations = new List<Station>();
@@ -19,8 +19,8 @@ namespace Dal
             public static double LightPacket { get; } = 0.0002;
             public static double MediumPacket { get; } = 0.0004;
             public static double HeavyPacket { get; } = 0.0008;
-            public static double ChargingRate { get; } = 200; //precent to mintue
-            public static int ParcelId{ get; set; }
+            public static double ChargingRate { get; } = 5; //precent to second
+            public static int ParcelId { get; set; }
         }
         /// <summary>
         /// Initialize all lists with random data
@@ -60,7 +60,7 @@ namespace Dal
             #endregion
 
             #region Initialize Customers
-            string[] names = { "Oz", "Ohad", "Abraham", "Yizeck", "Jecobe", "Joshf", "Shimon", "Reuven", "Moshe", "David", "Shmuel", "Eyal", "Levi", "Dan", "Gad", "Judah", "Asher","Joshef","Naphtali" ,"Daniel"};
+            string[] names = { "Oz", "Ohad", "Abraham", "Yizeck", "Jecobe", "Joshf", "Shimon", "Reuven", "Moshe", "David", "Shmuel", "Eyal", "Levi", "Dan", "Gad", "Judah", "Asher", "Joshef", "Naphtali", "Daniel" };
 
             for (int i = 0; i < 20; i++)
             {
@@ -76,24 +76,31 @@ namespace Dal
             #endregion
 
             #region Initialize Parcels
-
+            int parcelCount = 100;
             //array of droneId of every Parcel; To make sure that there won't be collisions.
-            int[] dronesIds = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            int[] dronesIds = new int[parcelCount];
+            for (int i = 0; i < dronesIds.Length; i++)
+
+                dronesIds[i] = 0;
+
             int j = 0;
             foreach (Drone drone in Drones)
             {
-                if(r.Next(2)==0)
+                if (r.Next(2) == 0)
                     dronesIds[j] = drone.Id;
                 j++;
             }
 
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < parcelCount; i++)
             {
                 Parcel myParcel = new Parcel();
                 myParcel.Id = ++Config.ParcelId;
                 myParcel.IsActived = true;
-                myParcel.SenderId = Customers[r.Next(0, 10)].Id;
-                myParcel.TargetId = Customers[r.Next(0, 10)].Id; //TODO: make sure that both sender and target are diffrent..
+                while (myParcel.TargetId == myParcel.SenderId)
+                {
+                    myParcel.SenderId = Customers[r.Next(0, 10)].Id;
+                    myParcel.TargetId = Customers[r.Next(0, 10)].Id;
+                }
                 myParcel.DroneId = dronesIds[i];
                 myParcel.Requsted = randomDateBetween(DateTime.Now.AddDays(-2), DateTime.Now);//date&time in the last two days
                 if (myParcel.DroneId != 0)//myParcel is under delivery

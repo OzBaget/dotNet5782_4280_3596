@@ -1,6 +1,6 @@
-﻿using System;
+﻿using BO;
+using System;
 using System.Collections.Generic;
-using BO;
 
 namespace BlApi
 {
@@ -41,7 +41,7 @@ namespace BlApi
         /// </summary>
         /// <param name="drone"></param>
         /// <param name="idStation"></param>
-        void AddDrone(BO.Drone drone,int idStation);
+        void AddDrone(BO.Drone drone, int idStation);
         /// <summary>
         /// Get customer add it to the data base
         /// </summary>
@@ -61,10 +61,10 @@ namespace BlApi
 
 
 
-         /// <summary>
-         ///  Link a parcel to drone
-         /// </summary>
-         /// <param name="droneId"></param>
+        /// <summary>
+        ///  Link a parcel to drone
+        /// </summary>
+        /// <param name="droneId"></param>
         int linkParcel(int droneId);
         /// <summary>
         /// Pick parcel from the drone
@@ -138,7 +138,7 @@ namespace BlApi
         /// <returns></returns>
         IEnumerable<BaseStationToList> GetStationsWithFreeSlots();
         IEnumerable<DroneToList> GetFilterdDrones(WeightCategories? weight, DroneStatus? status);
-        IEnumerable<ParcelToList> GetFilterdParcels(Customer customer,DateTime? startDate, DateTime? endDate, Priorities? priority, WeightCategories? weight, ParcelStatus? status);
+        IEnumerable<ParcelToList> GetFilterdParcels(Customer customer, DateTime? startDate, DateTime? endDate, Priorities? priority, WeightCategories? weight, ParcelStatus? status);
 
         void StartSimulator(int droneId, Action updateDrone, Func<bool> checkStop);
     }

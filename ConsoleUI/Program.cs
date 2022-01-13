@@ -1,10 +1,11 @@
 ﻿using System;
 namespace ConsoleUI
 {
-    class Program
+    internal class Program
     {
-        static Dal.DalObject  db = new Dal.DalObject();
-        static void Main(string[] args)
+        private static Dal.DalObject db = new Dal.DalObject();
+
+        private static void Main(string[] args)
         {
             Console.WriteLine("Welcome To DeliverManger!");
             bool exit = false;
@@ -41,7 +42,7 @@ namespace ConsoleUI
                         back = viewListMenu();
                     break;
                 case 5:
-                        calculateDistMenu();
+                    calculateDistMenu();
                     break;
                 case 6:
                     Console.WriteLine("Exiting...");
@@ -53,7 +54,7 @@ namespace ConsoleUI
             return false;
         }
 
-        
+
 
         /// <summary>
         /// The add-object menu
@@ -103,7 +104,7 @@ namespace ConsoleUI
 
             Console.WriteLine("How many charge slots are in the station?");
             int slots = getIntFromUser();
-         //   db.AddBase(name, location.Item1, location.Item2, slots);
+            //   db.AddBase(name, location.Item1, location.Item2, slots);
         }
         /// <summary>
         /// get drone info from the user, and add the drone.
@@ -116,7 +117,7 @@ namespace ConsoleUI
             Console.WriteLine("Choose MaxWeight of drone:");
             Console.WriteLine("1. Light\n2. Middle\n3. Heavy");
             int maxWeightInt = getUserSelection(3) - 1;
-         //   db.AddDrone(model, maxWeightInt);
+            //   db.AddDrone(model, maxWeightInt);
         }
         /// <summary>
         /// get customer info from the user, and add the customer.
@@ -130,7 +131,7 @@ namespace ConsoleUI
             string phone = Console.ReadLine();
 
             Tuple<double, double> position = getCoordsFromUser();
-           // db.AddCustomer(name, phone, position.Item1, position.Item2);
+            // db.AddCustomer(name, phone, position.Item1, position.Item2);
         }
         /// <summary>
         /// get parcel info from the user, and add the parcel.
@@ -320,7 +321,7 @@ namespace ConsoleUI
             Console.WriteLine("What list do you want to view?");
             Console.WriteLine("1. Base stations\n2. Drones\n3. Customers\n4. Parcels\n5. Unassigned parcels\n6. Available stations\n7. Back");
             int userChoose = getUserSelection(7);
-            if (userChoose==7)//back..
+            if (userChoose == 7)//back..
             {
                 return true;
             }
@@ -369,11 +370,11 @@ namespace ConsoleUI
                     break;
                 case printType.UnassignedParcel:
                     Console.WriteLine("==Unassigned Parcels==");
-                   /* foreach (var parcel in db.GetUnassignedParcels())
-                    {
-                        Console.WriteLine(parcel);
-                        Console.WriteLine("======================");
-                    }*/
+                    /* foreach (var parcel in db.GetUnassignedParcels())
+                     {
+                         Console.WriteLine(parcel);
+                         Console.WriteLine("======================");
+                     }*/
                     break;
                 case printType.AvailableStation:
                     Console.WriteLine("==Available Stations==");
@@ -392,9 +393,9 @@ namespace ConsoleUI
         /// </summary>
         private static void calculateDistMenu()
         {
-         /*   Tuple<double, double> coords = getCoordsFromUser();
-            var myCustomer = db.GetAllCustomers()[0];
-            Console.WriteLine($"Distance to customer #{myCustomer.Id} is: {CalculateDist(coords.Item1, coords.Item2, myCustomer.Lat, myCustomer.Lng)}");*/
+            /*   Tuple<double, double> coords = getCoordsFromUser();
+               var myCustomer = db.GetAllCustomers()[0];
+               Console.WriteLine($"Distance to customer #{myCustomer.Id} is: {CalculateDist(coords.Item1, coords.Item2, myCustomer.Lat, myCustomer.Lng)}");*/
         }
 
         /// <summary>
@@ -406,7 +407,7 @@ namespace ConsoleUI
         {
             string input = Console.ReadLine();
             int result;
-            while (!int.TryParse(input, out result) || !isValidOption(result, numOptions)) 
+            while (!int.TryParse(input, out result) || !isValidOption(result, numOptions))
             {
                 Console.WriteLine("Not valid option!");
                 input = Console.ReadLine();
@@ -448,7 +449,7 @@ namespace ConsoleUI
             Console.WriteLine("Enter Lattitude (as decimal): ");
             double lat;
             string input = Console.ReadLine();
-            while (!double.TryParse(input, out lat)) 
+            while (!double.TryParse(input, out lat))
             {
                 Console.WriteLine("Not Valid Lattitude");
                 input = Console.ReadLine();
@@ -490,6 +491,6 @@ namespace ConsoleUI
             return Radios * c;
         }
 
-        enum printType { BaseStation, Drone, Customer, Parcel, UnassignedParcel, AvailableStation};
+        private enum printType { BaseStation, Drone, Customer, Parcel, UnassignedParcel, AvailableStation };
     }
 }

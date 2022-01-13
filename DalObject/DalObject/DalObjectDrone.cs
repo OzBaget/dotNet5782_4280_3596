@@ -1,12 +1,12 @@
-﻿using System;
-using System.Linq;
+﻿using DO;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
-using DO;
 
 namespace Dal
 {
-    sealed partial class DalObject : DalApi.IDal
+    internal sealed partial class DalObject : DalApi.IDal
     {
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void AddDrone(int id, string model, WeightCategories maxWeight)
@@ -15,7 +15,7 @@ namespace Dal
             foreach (Drone drone in DataSource.Drones)
                 if (drone.Id == id)
                     droneExists = true;
-            if(droneExists)
+            if (droneExists)
                 throw new IdAlreadyExistsException($"Drone with ID #{id} already exists!", id);
             Drone myDrone = new();
             myDrone.Id = id;
@@ -31,7 +31,7 @@ namespace Dal
             bool droneExists = false;
 
             foreach (Drone drone in GetAllDrones())
-                if (drone.Id == droneId && drone.IsActived) 
+                if (drone.Id == droneId && drone.IsActived)
                     droneExists = true;
 
             if (!droneExists)
@@ -58,8 +58,8 @@ namespace Dal
         public double[] GetPowerUse()
         {
             double[] powerUse = { DataSource.Config.Free,
-                DataSource.Config.LightPacket, 
-                DataSource.Config.MediumPacket, 
+                DataSource.Config.LightPacket,
+                DataSource.Config.MediumPacket,
                 DataSource.Config.HeavyPacket };
             return powerUse;
         }
@@ -104,7 +104,7 @@ namespace Dal
         [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<Drone> GetAllDrones()
         {
-            return DataSource.Drones.Where(d=>d.IsActived);
+            return DataSource.Drones.Where(d => d.IsActived);
         }
     }
 }

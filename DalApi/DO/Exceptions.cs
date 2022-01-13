@@ -6,14 +6,14 @@ namespace DO
     public class IdNotFoundException : Exception
     {
         public int Id;
-        public IdNotFoundException(string message,int id) : base(message) { Id = id; }
+        public IdNotFoundException(string message, int id) : base(message) { Id = id; }
     }
 
     [Serializable]
     public class IdAlreadyExistsException : Exception
     {
         public int Id;
-        public IdAlreadyExistsException(string message,int id) : base(message) { Id = id; }
+        public IdAlreadyExistsException(string message, int id) : base(message) { Id = id; }
     }
     [Serializable]
     public class NameAlreadyExistsException : Exception

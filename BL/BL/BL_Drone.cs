@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 
 namespace BL
 {
-    sealed partial class BL : IBL
+    internal sealed partial class BL : IBL
     {
         public void StartSimulator(int droneId, Action updateDrone, Func<bool> checkStop)
         {
@@ -41,7 +41,8 @@ namespace BL
         [MethodImpl(MethodImplOptions.Synchronized)]
         public Drone GetDrone(int droneId)
         {
-            lock (DalObject) {
+            lock (DalObject)
+            {
                 int droneIndex = Drones.FindIndex(drone => drone.Id == droneId);
                 if (droneIndex == -1)
                     throw new IdNotFoundException($"Can't find drone with ID #{droneId}", droneId);
@@ -67,11 +68,11 @@ namespace BL
 
                     parcel.PickupLocation = new();
                     parcel.PickupLocation.Latitude = DalObject.GetCustomer(tmpParcel.Sender.Id).Lat;
-                    parcel.PickupLocation.Latitude = DalObject.GetCustomer(tmpParcel.Sender.Id).Lng;
+                    parcel.PickupLocation.Longitude = DalObject.GetCustomer(tmpParcel.Sender.Id).Lng;
 
                     parcel.TargetLocation = new();
                     parcel.TargetLocation.Latitude = DalObject.GetCustomer(tmpParcel.Target.Id).Lat;
-                    parcel.TargetLocation.Latitude = DalObject.GetCustomer(tmpParcel.Target.Id).Lng;
+                    parcel.TargetLocation.Longitude = DalObject.GetCustomer(tmpParcel.Target.Id).Lng;
 
                     parcel.IsInTransfer = tmpParcel.DatePickup != null && tmpParcel.DateDeliverd == null;
                     if (parcel.IsInTransfer)
@@ -125,7 +126,7 @@ namespace BL
 
                     foreach (BaseStationToList station in GetStationsWithFreeSlots())
                     {
-                        int batteryNeeded = batteryNeedForTrip(GetStation(station.Id).Location, myDrone.CurrentLocation);
+                        double batteryNeeded = batteryNeedForTrip(GetStation(station.Id).Location, myDrone.CurrentLocation);
                         if (myDrone.Battery >= batteryNeeded)
                         {
                             myDrone.Battery -= batteryNeeded;
@@ -195,10 +196,10 @@ namespace BL
         /// <param name="empty">if dorne isn't empty-false</param>
         /// <param name="weight">if the drone isn't empty, the wight of the parcel that it carrying</param>
         /// <returns>the precnts battry needed</returns>
-        private int batteryNeedForTrip(Location dest, Location currentLoc, bool empty = true, WeightCategories weight = WeightCategories.Light)
+        private double batteryNeedForTrip(Location dest, Location currentLoc, WeightCategories? weight = null)
         {
             double powerUse = 0;
-            if (empty)
+            if (weight == null)
                 powerUse = powerUseEmpty;
             else
             {
@@ -217,7 +218,7 @@ namespace BL
                         break;
                 }
             }
-            return (int)(calculateDist(currentLoc, dest) * powerUse);
+            return (double)(calculateDist(currentLoc, dest) * powerUse);
         }
     }
 }

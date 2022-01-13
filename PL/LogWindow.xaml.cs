@@ -1,19 +1,6 @@
 ﻿using BlApi;
-using BO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Media;
+using System.Windows;
 
 
 namespace PL
@@ -23,8 +10,8 @@ namespace PL
     /// </summary>
     public partial class LogWindow : Window
     {
-        static IBL db;
-        bool exit = false;
+        private static IBL db;
+        private bool exit = false;
         public LogWindow()
         {
             InitializeComponent();
@@ -55,9 +42,9 @@ namespace PL
                 errorBox.Text = "ID not found in the system, try again";
                 return;
             }
-            
 
-            
+
+
         }
 
         private void loginAdmin(object sender, RoutedEventArgs e)
@@ -67,7 +54,7 @@ namespace PL
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
             exit = true;
-            this.Close();
+            Close();
         }
         private void CloseWindow(object sender, System.ComponentModel.CancelEventArgs e)
         {

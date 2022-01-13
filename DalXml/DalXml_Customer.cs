@@ -1,11 +1,11 @@
-﻿using System.Linq;
+﻿using DO;
 using System.Collections.Generic;
-using DO;
+using System.Linq;
 
 
 namespace Dal
 {
-    sealed partial class DalXml : DalApi.IDal
+    internal sealed partial class DalXml : DalApi.IDal
     {
         public Customer GetCustomer(int customerId)
         {
@@ -20,8 +20,8 @@ namespace Dal
 
             return loadXmlToList<Customer>().Find(customer => customer.Id == customerId);
         }
-        
-        public void AddCustomer(int id,string name, string phone, double lat, double lng)
+
+        public void AddCustomer(int id, string name, string phone, double lat, double lng)
         {
             bool customerExists = false;
             List<Customer> myList = loadXmlToList<Customer>();
@@ -51,11 +51,11 @@ namespace Dal
 
         public void UpdateCustomer(int customerId, string name, string phone)
         {
-            Customer tmpCustomer= GetCustomer(customerId);
+            Customer tmpCustomer = GetCustomer(customerId);
             DeleteCustomer(customerId);
             AddCustomer(tmpCustomer.Id, name, phone, tmpCustomer.Lat, tmpCustomer.Lng);
         }
-        
+
         public IEnumerable<Customer> GetAllCustomers()
         {
             return loadXmlToList<Customer>().Where(c => c.IsActived);

@@ -1,21 +1,11 @@
 ﻿using BlApi;
 using BO;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Media;
-using System.ComponentModel;
-using System.Media;
 
 
 namespace PL
@@ -25,10 +15,11 @@ namespace PL
     /// </summary>
     public partial class ViewDrone : Window
     {
-        IBL db;
+        private IBL db;
         public Drone Cdrone { get; set; }
-        bool exit = false;
-        BackgroundWorker work;
+
+        private bool exit = false;
+        private BackgroundWorker work;
 
 
         /// <summary>
@@ -39,9 +30,9 @@ namespace PL
         {
             Cdrone = new();
             Cdrone.CurrentLocation = new();
-            this.DataContext = Cdrone;
+            DataContext = Cdrone;
             InitializeComponent();
-            this.db = BlFactory.GetBl();         
+            db = BlFactory.GetBl();
             AddMaxWeight.ItemsSource = Enum.GetValues(typeof(WeightCategories));
             AddMaxWeight.SelectedIndex = 0;
 
@@ -65,9 +56,9 @@ namespace PL
         /// <param name="db"></param>
         public ViewDrone(Drone drone)
         {
-            this.db = BlFactory.GetBl();
+            db = BlFactory.GetBl();
             Cdrone = drone;
-            this.DataContext = Cdrone;
+            DataContext = Cdrone;
             InitializeComponent();
             work = new();
             work.WorkerReportsProgress = true;
@@ -135,8 +126,8 @@ namespace PL
         /// <summary>
         /// update all textboxs to the currnt status of Cdrone
         /// </summary>
-        
-        
+
+
         /// <summary>
         /// Close window
         /// </summary>
@@ -149,8 +140,8 @@ namespace PL
         }
 
 
-           
-       
+
+
         /// <summary>
         /// Add new Drone to db
         /// </summary>
@@ -165,7 +156,7 @@ namespace PL
                 MessageBox.Show("Drone ID is not vaild!", "Can't add dorne", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            if (ModelBox.Text=="")
+            if (ModelBox.Text == "")
             {
                 MessageBox.Show("Model is not valid!", "Can't add dorne", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
@@ -207,7 +198,7 @@ namespace PL
                 MessageBox.Show(ex.Message, "Can't update dorne", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-  
+
         /// <summary>
         /// Show confirm button if the model changed 
         /// </summary>
@@ -239,7 +230,7 @@ namespace PL
                 LinkButton.Visibility = Visibility.Visible;
                 ChargeButton.Visibility = Visibility.Visible;
                 Cdrone = db.GetDrone(Cdrone.Id);
-                this.DataContext = Cdrone;
+                DataContext = Cdrone;
 
             }
             catch (BlApi.IdNotFoundException ex)
@@ -267,7 +258,7 @@ namespace PL
                 ReleaseButton.Visibility = Visibility.Visible;
                 LinkButton.Visibility = Visibility.Hidden;
                 Cdrone = db.GetDrone(Cdrone.Id);
-                this.DataContext = Cdrone;
+                DataContext = Cdrone;
 
 
             }
@@ -296,7 +287,7 @@ namespace PL
                 ChargeButton.Visibility = Visibility.Visible;
                 LinkButton.Visibility = Visibility.Visible;
                 Cdrone = db.GetDrone(Cdrone.Id);
-                this.DataContext = Cdrone;
+                DataContext = Cdrone;
 
             }
             catch (BlApi.IdNotFoundException ex)
@@ -323,7 +314,7 @@ namespace PL
                 PickUpButton.Visibility = Visibility.Hidden;
                 DeliverButton.Visibility = Visibility.Visible;
                 Cdrone = db.GetDrone(Cdrone.Id);
-                this.DataContext = Cdrone;
+                DataContext = Cdrone;
 
             }
             catch (BlApi.IdNotFoundException ex)
@@ -351,7 +342,7 @@ namespace PL
                 ChargeButton.Visibility = Visibility.Hidden;
                 PickUpButton.Visibility = Visibility.Visible;
                 Cdrone = db.GetDrone(Cdrone.Id);
-                this.DataContext = Cdrone;
+                DataContext = Cdrone;
 
             }
             catch (BlApi.IdNotFoundException ex)
@@ -371,7 +362,7 @@ namespace PL
         /// <param name="e"></param>
         private void VerifyModel(object sender, TextChangedEventArgs e)
         {
-            if (AddModel.Text=="")
+            if (AddModel.Text == "")
             {
                 AddModel.Background = Brushes.Red;
             }
@@ -411,7 +402,7 @@ namespace PL
             {
                 exit = true;
                 work.CancelAsync();
-            }                  
+            }
         }
 
         private void SimulatorButton_Checked(object sender, RoutedEventArgs e)
@@ -432,17 +423,16 @@ namespace PL
         private void SimulatorComplete(object? sender, RunWorkerCompletedEventArgs e)
         {
             if (exit)
-                this.Close();
+                Close();
         }
         private void UpdateView(object? sender, ProgressChangedEventArgs e)
         {
-            Cdrone=db.GetDrone(Cdrone.Id);
-            this.DataContext = Cdrone;
+            Cdrone = db.GetDrone(Cdrone.Id);
+            DataContext = Cdrone;
         }
         private void Exit_Click(object sender, MouseButtonEventArgs e)
         {
-            this.Close();
+            Close();
         }
     }
 }
- 

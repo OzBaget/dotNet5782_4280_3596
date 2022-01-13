@@ -1,18 +1,18 @@
-﻿using System;
-using BlApi;
+﻿using BlApi;
 using BO;
+using System;
 using System.Globalization;
 
 
 namespace ConsoleUI_BL
 {
-    class Program
+    internal class Program
     {
-        static IBL db = BlFactory.GetBl();
+        private static IBL db = BlFactory.GetBl();
 
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            
+
             Console.WriteLine("Welcome To DeliverManger!");
             bool exit = false;
             while (!exit)
@@ -207,7 +207,7 @@ namespace ConsoleUI_BL
 
             Console.WriteLine("Choose parcel weight:");
             Console.WriteLine("1. Light\n2. Middle\n3. Heavy");
-            WeightCategories weight =(WeightCategories) getUserSelection(3) - 1;
+            WeightCategories weight = (WeightCategories)getUserSelection(3) - 1;
 
             Console.WriteLine("Choose parcel priority:");
             Console.WriteLine("1. Normal\n2. Fast\n3. Urgent");
@@ -230,7 +230,7 @@ namespace ConsoleUI_BL
             {
                 Console.WriteLine(ex.Message);
             }
-            catch(IdNotFoundException ex)
+            catch (IdNotFoundException ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -333,9 +333,9 @@ namespace ConsoleUI_BL
             Console.WriteLine("Enter customer id:");
             int id = getIntFromUser();
             Console.WriteLine("Enter customer new name: ");
-            string newName = Console.ReadLine();            
+            string newName = Console.ReadLine();
             Console.WriteLine("Enter customer new phone number: ");
-            string newPhone = Console.ReadLine() ;
+            string newPhone = Console.ReadLine();
             try
             {
                 db.UpdateCustomer(id, newName, newPhone);
@@ -347,14 +347,14 @@ namespace ConsoleUI_BL
             }
 
         }
-        
+
         private static void sendDroneToCharge()
         {
             Console.WriteLine("Enter drone ID:");
             int droneId = getIntFromUser();
             try
             {
-                int stationId=db.DroneToStation(droneId);
+                int stationId = db.DroneToStation(droneId);
                 Console.WriteLine($"The drone sent to charge at station #{stationId} successfully!");
             }
             catch (IdNotFoundException ex)
@@ -374,9 +374,9 @@ namespace ConsoleUI_BL
         {
             Console.WriteLine("Enter drone ID:");
             int droneId = getIntFromUser();
-            
+
             Console.WriteLine("Enter how much time the drone charged (hh:mm):");
-          
+
             TimeSpan chargingTime;
             string input = Console.ReadLine();
             while (!TimeSpan.TryParseExact(input, "h\\:mm", CultureInfo.CurrentCulture, out chargingTime))
@@ -386,7 +386,7 @@ namespace ConsoleUI_BL
             }
             try
             {
-                double newBattery=db.FreeDrone(droneId);
+                double newBattery = db.FreeDrone(droneId);
                 Console.WriteLine($"The drone charged successfully, current battry is {newBattery}%");
             }
             catch (IdNotFoundException ex)
@@ -411,7 +411,7 @@ namespace ConsoleUI_BL
             int droneId = getIntFromUser();
             try
             {
-                int parcelId=db.linkParcel(droneId);
+                int parcelId = db.linkParcel(droneId);
                 Console.WriteLine($"The drone linked to parcel #{parcelId} successfully!");
             }
             catch (IdNotFoundException ex)
@@ -527,7 +527,7 @@ namespace ConsoleUI_BL
         {
             Console.WriteLine("Enter drone ID:");
             int droneId = getIntFromUser();
-           Console.WriteLine("===============================");
+            Console.WriteLine("===============================");
             try
             {
                 Console.WriteLine(db.GetDrone(droneId));
@@ -663,7 +663,7 @@ namespace ConsoleUI_BL
         {
             string input = Console.ReadLine();
             int result;
-            while (!int.TryParse(input, out result)  || !isValidOption(result, numOptions))
+            while (!int.TryParse(input, out result) || !isValidOption(result, numOptions))
             {
                 Console.WriteLine("Not valid option!");
                 input = Console.ReadLine();
@@ -749,6 +749,6 @@ namespace ConsoleUI_BL
             return Radios * c;
         }
 
-        enum printType { BaseStation, Drone, Customer, Parcel, UnassignedParcel, AvailableStation };
+        private enum printType { BaseStation, Drone, Customer, Parcel, UnassignedParcel, AvailableStation };
     }
 }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BO
+﻿namespace BO
 {
     public class ParcelInCustomer
     {
@@ -19,8 +13,8 @@ namespace BO
                  $"ID:                            {Id}\n" +
                  $"Weight status:                 {Weight}\n" +
                  $"Prioritie status:              {Prioritie}\n" +
-                 $"Parcel status:                 {StatusParcel}\n"+
-                 $"        ============Customer===========\n\t{Customer.ToString().Replace("\n", "\n\t")}";                                
+                 $"Parcel status:                 {StatusParcel}\n" +
+                 $"        ============Customer===========\n\t{Customer.ToString().Replace("\n", "\n\t")}";
             return toString;
         }
     }

@@ -1,20 +1,9 @@
-﻿using BO;
-using BlApi;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BlApi;
+using BO;
+using System.Media;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Windows.Navigation;
-using System.Media;
 
 
 namespace PL
@@ -24,23 +13,24 @@ namespace PL
     /// </summary>
     public partial class ViewStation : Window
     {
-        
+
         public BaseStation station { get; set; }
-        IBL db;
-        bool exit = false;
+
+        private IBL db;
+        private bool exit = false;
         public ViewStation(BaseStation Cstation)
         {
             station = Cstation;
-            this.DataContext = station;
+            DataContext = station;
             InitializeComponent();
             db = BlFactory.GetBl();
-            showStation();            
-        } 
+            showStation();
+        }
         public ViewStation()
         {
             station = new();
             station.Location = new();
-            this.DataContext = station;
+            DataContext = station;
             InitializeComponent();
             db = BlFactory.GetBl();
             GoAddView();
@@ -62,24 +52,24 @@ namespace PL
             CancelButton.Visibility = Visibility.Collapsed;
             AddButton.Visibility = Visibility.Collapsed;
             AddImage.Visibility = Visibility.Collapsed;
-           
+
 
         }
 
 
         private void Exit()
         {
-            this.Close();
+            Close();
         }
         private void Update_Click(object sender, RoutedEventArgs e)
         {
             int free;
 
-                if (!int.TryParse(FreeBox.Text, out free) || free <= 0)
-                {
-                    FreeErrorBox.Text = "Num of free chargers not valid, try again";
-                    return;
-                }                                 
+            if (!int.TryParse(FreeBox.Text, out free) || free <= 0)
+            {
+                FreeErrorBox.Text = "Num of free chargers not valid, try again";
+                return;
+            }
             db.UpdateStation(station.Id, station.Name, station.NumFreeChargers.ToString());
             MessageBox.Show("Update succeed", "Update station", MessageBoxButton.OK, MessageBoxImage.Asterisk);
             FreeErrorBox.Text = "";
@@ -89,7 +79,7 @@ namespace PL
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
             exit = true;
-            this.Close();
+            Close();
         }
         private void AddStationToDb(object sender, RoutedEventArgs e)
         {
@@ -97,7 +87,7 @@ namespace PL
             IdErrorBox.Text = "";
             LatErrorBox.Text = "";
             LongErrorBox.Text = "";
-            int id,free;
+            int id, free;
             double lat, longint;
             bool error = false;
             if (NameBox.Text == "")
@@ -141,7 +131,7 @@ namespace PL
                 LongErrorBox.Text = "Write digits, try again";
                 error = true;
             }
-            else if (!double.TryParse(LongBox.Text, out longint)|| longint < -180 || longint > 180)
+            else if (!double.TryParse(LongBox.Text, out longint) || longint < -180 || longint > 180)
             {
                 LongErrorBox.Text = "Long not valid, try again";
                 error = true;
@@ -149,12 +139,12 @@ namespace PL
             if (error)
                 return;
 
-            
+
 
             try
             {
                 BlApi.BlFactory.GetBl().AddStation(station);
-                Exit_Click(sender,e);
+                Exit_Click(sender, e);
             }
             catch (BlApi.IdAlreadyExistsException ex)
             {
@@ -163,7 +153,7 @@ namespace PL
 
 
         }
-       
+
         private void GoAddView()
         {
             IdBox.IsReadOnly = false;
@@ -187,7 +177,7 @@ namespace PL
 
 
         }
-        
+
 
 
         private void DroneList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -196,7 +186,7 @@ namespace PL
                 return;
             new ViewDrone(db.GetDrone(((sender as ListView).SelectedItem as BO.DroneInCharging).Id)).ShowDialog();
             station = db.GetStation(station.Id);
-            this.DataContext = station;
+            DataContext = station;
         }
         private void CloseWindow(object sender, System.ComponentModel.CancelEventArgs e)
         {

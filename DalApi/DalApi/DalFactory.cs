@@ -10,7 +10,7 @@ namespace DalApi
             string dalType = DalConfig.DalName;
             string dalPkg = DalConfig.DalPackages[dalType];
             string dalNamespace = DalConfig.DalNamespaces[dalType];
-            string dalClass= DalConfig.DalClasses[dalType];
+            string dalClass = DalConfig.DalClasses[dalType];
             if (dalPkg == null) throw new DalConfigException($"Package {dalType} is not found in packages list in dal-config.xml");
 
             try { Assembly.Load(dalPkg); }

@@ -1,19 +1,13 @@
-﻿using System;
-using BlApi;
+﻿using BlApi;
 using BO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Media;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Media;
 
 namespace PL
 {
@@ -22,8 +16,9 @@ namespace PL
     /// </summary>
     public partial class ViewDroneList : Window
     {
-        IBL db=BlFactory.GetBl();
-        bool exit = false;
+        private IBL db = BlFactory.GetBl();
+        private bool exit = false;
+        private List<int> Id = new List<int>();
         public bool GroupingMode { get; set; }
 
         public ViewDroneList()
@@ -32,7 +27,7 @@ namespace PL
             ListViewDrones.ItemsSource = db.GetAllDrones();
             StatusSelector.ItemsSource = Enum.GetValues(typeof(BO.DroneStatus));
             WeightSelector.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
-            this.DataContext = this;
+            DataContext = this;
         }
 
         private void updateFilters(object sender, SelectionChangedEventArgs e)
@@ -43,11 +38,17 @@ namespace PL
 
         private void ListViewDrones_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            ViewDrone window = new ViewDrone(db.GetDrone(((sender as ListView).SelectedItem as BO.DroneToList).Id));
-            window.DataContextChanged +=updateList;
-            //refresh listView
-            window.Show();
-            //updateFilters(null, null);
+            Drone dr = db.GetDrone(((sender as ListView).SelectedItem as BO.DroneToList).Id);
+            if (!Id.Any(id => id == dr.Id))//make sure that the simulator is not run on this drone in another window
+            {
+                Id.Add(dr.Id);
+                ViewDrone window = new ViewDrone(dr);
+                window.Closing += (sender, e) => Id.Remove(dr.Id);
+                window.DataContextChanged += updateList;
+                //refresh listView
+                window.Show();
+            }
+
         }
 
         private void updateList(object sender, DependencyPropertyChangedEventArgs e)

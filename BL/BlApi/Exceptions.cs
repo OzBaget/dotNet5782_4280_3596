@@ -7,14 +7,14 @@ namespace BlApi
     public class IdNotFoundException : Exception
     {
         public int Id;
-        public IdNotFoundException(string message,int id) : base(message) { Id = id; }
+        public IdNotFoundException(string message, int id) : base(message) { Id = id; }
     }
 
     [Serializable]
     public class IdAlreadyExistsException : Exception
     {
         public int Id;
-        public IdAlreadyExistsException(string message,int id) : base(message) { Id = id; }
+        public IdAlreadyExistsException(string message, int id) : base(message) { Id = id; }
     }
     [Serializable]
     public class NameAlreadyExistsException : Exception
@@ -46,7 +46,7 @@ namespace BlApi
     {
         public CantDeliverParcelException(string message) : base(message) { }
     }
-       [Serializable]
+    [Serializable]
     public class CantLinkParcelException : Exception
     {
         public CantLinkParcelException(string message) : base(message) { }

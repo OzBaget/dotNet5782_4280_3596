@@ -4,25 +4,23 @@ using DalApi;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 
 
 namespace BL
 {
-    sealed partial class BL : IBL
+    internal sealed partial class BL : IBL
     {
-        static List<DroneToList> Drones = new List<DroneToList>();
-        double powerUseEmpty;
-        double powerUseLight;
-        double powerUseMiddle;
-        double powerUseHeavy;
-        double chargingRate;
+        private static List<DroneToList> Drones = new List<DroneToList>();
+        private double powerUseEmpty;
+        private double powerUseLight;
+        private double powerUseMiddle;
+        private double powerUseHeavy;
+        private double chargingRate;
         internal IDal DalObject = DalFactory.GetDal();
-
-        static readonly BL instance = new BL();
+        private static readonly BL instance = new BL();
         public static BL Instance { get => instance; }
 
-        BL()
+        private BL()
         {
             //precnt to meter
             powerUseEmpty = DalObject.GetPowerUse()[0];
@@ -55,10 +53,10 @@ namespace BL
                             myDrone.CurrentLocation = GetCustomer(parcel.SenderId).Location;
                         }
 
-                        int minBattery = batteryNeedForTrip(GetCustomer(parcel.TargetId).Location, myDrone.CurrentLocation, false, (WeightCategories)parcel.Weight) +//battry needed for delivering the parcel
+                        double minBattery = batteryNeedForTrip(GetCustomer(parcel.TargetId).Location, myDrone.CurrentLocation, (WeightCategories)parcel.Weight) +//battry needed for delivering the parcel
                             batteryNeedForTrip(getClosestStation(GetCustomer(parcel.TargetId).Location).Location, myDrone.CurrentLocation); //battry for arriving closest station to customer.
 
-                        myDrone.Battery = minBattery < 100 ? new Random().Next(minBattery, 101) : 100;
+                        myDrone.Battery = minBattery < 100 ? new Random().Next((int)minBattery, 101) : 100;
 
                     }
                 }
@@ -89,13 +87,13 @@ namespace BL
                             int index = new Random().Next(GetAllCustomers().Count(customer => customer.ParcelsReceived > 0));
                             myDrone.CurrentLocation = GetCustomer(GetAllCustomers().Where(customer => customer.ParcelsReceived > 0).ElementAt(index).Id).Location;
 
-                            int minBattry = batteryNeedForTrip(myDrone.CurrentLocation, getClosestStation(myDrone.CurrentLocation).Location);
+                            double minBattry = batteryNeedForTrip(myDrone.CurrentLocation, getClosestStation(myDrone.CurrentLocation).Location);
                             if (minBattry > 100)
                             {
                                 minBattry = 100;
                             }
 
-                            myDrone.Battery = new Random().Next(minBattry, 101);
+                            myDrone.Battery = new Random().Next((int)minBattry, 101);
                         }
                     }
                 }
@@ -123,8 +121,7 @@ namespace BL
         /// <param name="lat2">latituse of point 2</param>
         /// <param name="lng2">longtude of point 2</param>
         /// <returns>the distance bitween the two coords in meters</returns>
-        [MethodImpl(MethodImplOptions.Synchronized)]
-        public double calculateDist(Location loc1, Location loc2)
+        private double calculateDist(Location loc1, Location loc2)
         {
             const double Radios = 6371000;//meters
             //deg to radians

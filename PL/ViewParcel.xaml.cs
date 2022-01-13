@@ -1,19 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BlApi;
+using BO;
+using System;
+using System.Media;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using BlApi;
-using BO;
-using System.Media;
 
 
 namespace PL
@@ -23,7 +13,7 @@ namespace PL
     /// </summary>
     public partial class ViewParcel : Window
     {
-        IBL db = BlFactory.GetBl();
+        private IBL db = BlFactory.GetBl();
         public Parcel MyParcel { get; set; }
         public Customer MyCustomer { get; set; }
         private bool exit;
@@ -32,14 +22,14 @@ namespace PL
         /// </summary>
         /// <param name="parcel">the parcel to show</param>
         /// <param name="customer">custome who view call this window (null if admin mode)</param>
-        public ViewParcel(Parcel parcel,Customer customer)
+        public ViewParcel(Parcel parcel, Customer customer)
         {
             MyParcel = parcel;
             MyCustomer = customer;
-            this.DataContext = this;
+            DataContext = this;
             InitializeComponent();
             weightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
-            prioritySelector.ItemsSource= Enum.GetValues(typeof(Priorities));
+            prioritySelector.ItemsSource = Enum.GetValues(typeof(Priorities));
             senderComboBox.ItemsSource = db.GetAllCustomers();
             reciverComboBox.ItemsSource = db.GetAllCustomers();
             senderComboBox.IsEnabled = false;
@@ -55,7 +45,7 @@ namespace PL
 
 
             if (parcel.Drone.Id == 0)
-            { 
+            {
                 drnDlsBtn.Visibility = Visibility.Hidden;
 
             }
@@ -88,7 +78,7 @@ namespace PL
             MyParcel.Drone = new();
 
 
-            this.DataContext = this;
+            DataContext = this;
             InitializeComponent();
             weightSelector.ItemsSource = Enum.GetValues(typeof(WeightCategories));
             prioritySelector.ItemsSource = Enum.GetValues(typeof(Priorities));
@@ -112,13 +102,13 @@ namespace PL
                 MyParcel.Sender.Id = customer.Id;
                 senderComboBox.IsEnabled = false;
             }
-        }   
+        }
 
         private void senderDetails_clk(object sender, RoutedEventArgs e)
         {
             new ViewCustomer(db.GetCustomer(MyParcel.Sender.Id)).ShowDialog();
             MyCustomer = db.GetCustomer(MyCustomer.Id);
-            this.DataContext = this;
+            DataContext = this;
 
 
         }
@@ -127,12 +117,12 @@ namespace PL
         {
             new ViewCustomer(db.GetCustomer(MyParcel.Target.Id)).ShowDialog();
             MyCustomer = db.GetCustomer(MyCustomer.Id);
-            this.DataContext = this;
+            DataContext = this;
         }
 
         private void droneDetails_clk(object sender, RoutedEventArgs e)
         {
-            if (MyParcel.Drone.Id !=0 )
+            if (MyParcel.Drone.Id != 0)
             {
                 new ViewDrone(db.GetDrone(MyParcel.Drone.Id)).ShowDialog();
 
@@ -147,8 +137,8 @@ namespace PL
         {
             db.PickParcel(MyParcel.Drone.Id);
             MyParcel = db.GetParcel(MyParcel.Id.Value);
-            this.DataContext = null;
-            this.DataContext = this;
+            DataContext = null;
+            DataContext = this;
 
             if (MyCustomer == null)//admin
             {
@@ -167,8 +157,8 @@ namespace PL
             {
                 db.ParcelToCustomer(MyParcel.Drone.Id);
                 MyParcel = db.GetParcel(MyParcel.Id.Value);
-                this.DataContext = null;
-                this.DataContext = this;
+                DataContext = null;
+                DataContext = this;
                 MessageBox.Show("The parcel was deliverd successfully!", "Success!", MessageBoxButton.OK, MessageBoxImage.Information);
                 confBtn.Visibility = Visibility.Hidden;
                 MyParcel = db.GetParcel(MyParcel.Id.Value);
@@ -177,8 +167,8 @@ namespace PL
             {
                 MessageBox.Show(ex.Message, "Can't add parcel!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            
-            
+
+
         }
 
         private void AddBtn_Click(object sender, RoutedEventArgs e)
@@ -207,7 +197,7 @@ namespace PL
                 MessageBox.Show("The parcel was deleted successfully!", "Success!", MessageBoxButton.OK, MessageBoxImage.Information);
                 exit = true;
                 Close();
-                this.DataContext = this;
+                DataContext = this;
 
             }
             catch (Exception ex)
@@ -218,7 +208,7 @@ namespace PL
 
         private void senderChange(object sender, SelectionChangedEventArgs e)
         {
-            if (senderComboBox.SelectedItem == null || reciverComboBox.SelectedItem==null)
+            if (senderComboBox.SelectedItem == null || reciverComboBox.SelectedItem == null)
             {
                 senderErrorBox.Text = senderComboBox.SelectedItem == null ? "Error: Choose sender!" : "";
                 reciverErrorBox.Text = reciverComboBox.SelectedItem == null ? "Error: Choose sender!" : "";
@@ -236,7 +226,7 @@ namespace PL
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {         
+        {
             e.Cancel = !exit;
         }
 

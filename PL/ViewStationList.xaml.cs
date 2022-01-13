@@ -1,18 +1,9 @@
 ﻿using BlApi;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Media;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Media;
 
 
 namespace PL
@@ -22,14 +13,15 @@ namespace PL
     /// </summary>
     public partial class ViewStationList : Window
     {
-        IBL db = BlFactory.GetBl();
+        private IBL db = BlFactory.GetBl();
         public bool GroupingMode { get; set; }
-        bool exit = false;
+
+        private bool exit = false;
         public ViewStationList()
         {
             InitializeComponent();
             listViewStations.ItemsSource = db.GetAllStations();
-            this.DataContext = this;
+            DataContext = this;
         }
 
         private void listViewStations_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -44,11 +36,11 @@ namespace PL
         {
             new ViewStation().ShowDialog();
             ResetList();
-        }  
+        }
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
             exit = true;
-            this.Close();
+            Close();
         }
         private void ResetList()
         {
@@ -70,7 +62,7 @@ namespace PL
                 view.GroupDescriptions.Clear();
 
             }
-            
+
         }
         private void CloseWindow(object sender, System.ComponentModel.CancelEventArgs e)
         {

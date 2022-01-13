@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using DO;
+﻿using DO;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Dal
 {
-    sealed partial class DalXml : DalApi.IDal
+    internal sealed partial class DalXml : DalApi.IDal
     {
 
         public Parcel GetParcerl(int parcelId)
@@ -22,7 +22,7 @@ namespace Dal
             return myList.Find(parcel => parcel.Id == parcelId);
         }
 
-        
+
         public void AddParcel(int senderId, int targetId, WeightCategories weight, Priorities priority, DateTime? requsted, DateTime? scheduled, DateTime? pickedUp, DateTime? delivered)
         {
             bool customerExists = false;
@@ -68,7 +68,7 @@ namespace Dal
             saveListToXml(myList);
         }
 
-        
+
         public void linkParcel(int parcelId, int droneId)
         {
             List<Parcel> myList = loadXmlToList<Parcel>();
@@ -80,7 +80,7 @@ namespace Dal
             saveListToXml(myList);
         }
 
-        
+
         public void PickParcel(int parcelId)
         {
             List<Parcel> myList = loadXmlToList<Parcel>();
@@ -92,7 +92,7 @@ namespace Dal
             saveListToXml(myList);
         }
 
-        
+
         public void ParcelToCustomer(int parcelId)
         {
             List<Parcel> myParcelList = loadXmlToList<Parcel>();
@@ -111,7 +111,7 @@ namespace Dal
             saveListToXml(myDroneList);
         }
 
-       
+
         public IEnumerable<Parcel> GetAllParcels()
         {
             return loadXmlToList<Parcel>().Where(p => p.IsActived);

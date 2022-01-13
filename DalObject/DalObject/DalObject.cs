@@ -1,22 +1,21 @@
 ﻿using System.Collections.Generic;
-using System;
 using System.Xml.Linq;
-using System.Reflection;
 
 namespace Dal
 {
-    sealed partial class DalObject: DalApi.IDal
+    internal sealed partial class DalObject : DalApi.IDal
     {
-        static readonly DalApi.IDal instance = new DalObject();
+        private static readonly DalApi.IDal instance = new DalObject();
         public static DalApi.IDal Instance { get => instance; }
-        DalObject()
+
+        private DalObject()
         {
             DataSource.Initialize();
-           /* saveListToXml(DataSource.BaseStations);
-            saveListToXml(DataSource.Charges);
-            saveListToXml(DataSource.Customers);
-            saveListToXml(DataSource.Drones);
-            saveListToXml(DataSource.Parcels);*/
+            /* saveListToXml(DataSource.BaseStations);
+             saveListToXml(DataSource.Charges);
+             saveListToXml(DataSource.Customers);
+             saveListToXml(DataSource.Drones);
+             saveListToXml(DataSource.Parcels);*/
         }
         private void saveListToXml<T>(List<T> myList)
         {
