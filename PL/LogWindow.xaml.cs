@@ -13,6 +13,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Media;
+
 
 namespace PL
 {
@@ -22,6 +24,7 @@ namespace PL
     public partial class LogWindow : Window
     {
         static IBL db;
+        bool exit = false;
         public LogWindow()
         {
             InitializeComponent();
@@ -31,7 +34,7 @@ namespace PL
         }
         private void Register(object sender, RoutedEventArgs e)
         {
-            new Register().ShowDialog();
+            new ViewCustomer().ShowDialog();
         }
 
         private void logIn(object sender, RoutedEventArgs e)
@@ -60,6 +63,19 @@ namespace PL
         private void loginAdmin(object sender, RoutedEventArgs e)
         {
             new MainWindow().Show();
+        }
+        private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+            exit = true;
+            this.Close();
+        }
+        private void CloseWindow(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (!exit)
+            {
+                e.Cancel = true;
+                SystemSounds.Beep.Play();
+            }
         }
     }
 }

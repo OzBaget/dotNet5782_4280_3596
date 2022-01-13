@@ -12,6 +12,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Media;
+
 
 namespace PL
 {
@@ -22,7 +24,7 @@ namespace PL
     {
         IBL db = BlFactory.GetBl();
         public bool GroupingMode { get; set; }
-
+        bool exit = false;
         public ViewStationList()
         {
             InitializeComponent();
@@ -45,6 +47,7 @@ namespace PL
         }  
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
+            exit = true;
             this.Close();
         }
         private void ResetList()
@@ -66,6 +69,15 @@ namespace PL
             {
                 view.GroupDescriptions.Clear();
 
+            }
+            
+        }
+        private void CloseWindow(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (!exit)
+            {
+                e.Cancel = true;
+                SystemSounds.Beep.Play();
             }
         }
     }

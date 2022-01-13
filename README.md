@@ -1,6 +1,7 @@
 
 # dotNet5782_4280_3596
-עשינו שימוש ב בדאטה טריגר, סגנון ,גרפיקה 
-ה
-ממשק לקוח, אפשרות כניסה של מנהל לקוח	
-מבנה 2, 
+Bounes
+We used data trigger, style, graphics
+Client interface, client manager login option
+Building 2,
+

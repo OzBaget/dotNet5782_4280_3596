@@ -12,6 +12,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Media;
+
 
 namespace PL
 {
@@ -20,6 +22,7 @@ namespace PL
     /// </summary>
     public partial class MainWindow : Window
     {
+        bool exit = false;
         public MainWindow()
         {
             InitializeComponent();
@@ -43,6 +46,19 @@ namespace PL
         private void viewCustomerlList(object sender, RoutedEventArgs e)
         {                       
            new ViewCustomerList().ShowDialog();
+        }
+        private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+            exit = true;
+            this.Close();
+        }
+        private void CloseWindow(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (!exit)
+            {
+                e.Cancel = true;
+                SystemSounds.Beep.Play();
+            }
         }
     }
 }

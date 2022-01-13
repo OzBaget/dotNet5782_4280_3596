@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="ViewParcelList" Height="640" Width="1000" Closing="CloseWindow" ResizeMode="NoResize">
+        ResizeMode="NoResize"
+        Title="ViewParcelList" Height="640" Width="1000" Closing="CloseWindow" >
     <Window.Resources>
         <local:CustomerToWelcomeMessageConvertor 
             x:Key="CustomerToWelcomeMessageConvertor" />

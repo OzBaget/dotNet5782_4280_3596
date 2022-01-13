@@ -13,6 +13,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Media;
+
 
 namespace PL
 {
@@ -25,6 +27,8 @@ namespace PL
         /// Interaction logic for ViewStation.xaml
         /// </summary>
         List<ParcelInCustomer> midList;
+        bool exit = false;
+
         public Customer customer { get; set; }
         IBL db;
         public ViewCustomer(Customer Cstation)
@@ -71,6 +75,7 @@ namespace PL
 
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
+            exit = true;
             this.Close();
         }
         private void AddCustomerToDb(object sender, RoutedEventArgs e)
@@ -201,6 +206,15 @@ namespace PL
 
 
         }
+        private void CloseWindow(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (!exit)
+            {
+                e.Cancel = true;
+                SystemSounds.Beep.Play();
+            }
+        }
+      
 
     }
 }
