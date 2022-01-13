@@ -96,7 +96,7 @@ namespace PL
             updateFilters(null, null);
         }
 
-
+        
         private void CloseWindow(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (!exit)

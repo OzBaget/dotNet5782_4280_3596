@@ -41,7 +41,7 @@
                 <Style TargetType="TextBlock">
                     <Setter Property="Visibility" Value="Visible" />
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding Path = Id}" Value="0">
+                        <DataTrigger Binding="{Binding Path = Parcel.Id}" Value="0">
                             <Setter Property="Visibility" Value="Hidden" />
                         </DataTrigger>
                     </Style.Triggers>

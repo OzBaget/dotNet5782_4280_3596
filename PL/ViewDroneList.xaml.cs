@@ -24,12 +24,15 @@ namespace PL
     {
         IBL db=BlFactory.GetBl();
         bool exit = false;
+        public bool GroupingMode { get; set; }
+
         public ViewDroneList()
         {
             InitializeComponent();
             ListViewDrones.ItemsSource = db.GetAllDrones();
             StatusSelector.ItemsSource = Enum.GetValues(typeof(BO.DroneStatus));
             WeightSelector.ItemsSource = Enum.GetValues(typeof(BO.WeightCategories));
+            this.DataContext = this;
         }
 
         private void updateFilters(object sender, SelectionChangedEventArgs e)
@@ -40,17 +43,17 @@ namespace PL
 
         private void ListViewDrones_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            new ViewDrone(db.GetDrone(((sender as ListView).SelectedItem as BO.DroneToList).Id)).ShowDialog();
+            ViewDrone window = new ViewDrone(db.GetDrone(((sender as ListView).SelectedItem as BO.DroneToList).Id));
+            window.DataContextChanged +=updateList;
             //refresh listView
-            updateFilters(null, null);
+            window.Show();
+            //updateFilters(null, null);
         }
-        
-        /// <summary>
-        /// Play Gif
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
 
+        private void updateList(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            ListViewDrones.Items.Refresh();
+        }
 
         /// <summary>
         /// Reset filters
@@ -100,7 +103,21 @@ namespace PL
                 SystemSounds.Beep.Play();
             }
         }
+        private void groupingModeChanged(object sender, RoutedEventArgs e)
+        {
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ListViewDrones.ItemsSource);
+            if (GroupingMode)
+            {
+                view.GroupDescriptions.Clear();
+                PropertyGroupDescription groupDescription = new PropertyGroupDescription("Status");
+                view.GroupDescriptions.Add(groupDescription);
+            }
+            else
+            {
+                view.GroupDescriptions.Clear();
 
+            }
+        }
     }
 
 }

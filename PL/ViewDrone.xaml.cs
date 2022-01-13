@@ -128,10 +128,13 @@ namespace PL
                     break;
             }
 
-          
         }
 
-
+        /// <summary>
+        /// update all textboxs to the currnt status of Cdrone
+        /// </summary>
+        
+        
         /// <summary>
         /// Close window
         /// </summary>
@@ -166,9 +169,6 @@ namespace PL
                 return;
             }
 
-            /*myDrone.Id =id ;
-            myDrone.Model = AddModel.Text;
-            myDrone.MaxWeight = (WeightCategories)AddMaxWeight.SelectedItem;*/
             try
             {
                 db.AddDrone(Cdrone, (StationCombo.SelectedItem as BaseStationToList).Id);

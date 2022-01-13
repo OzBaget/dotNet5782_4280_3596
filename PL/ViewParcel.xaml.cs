@@ -205,7 +205,6 @@ namespace PL
                 MessageBox.Show("The parcel was deleted successfully!", "Success!", MessageBoxButton.OK, MessageBoxImage.Information);
                 exit = true;
                 Close();
-                //  MyParcel = db.GetParcel(MyParcel.Id.Value);
                 this.DataContext = this;
 
             }

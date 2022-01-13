@@ -59,11 +59,7 @@ namespace PL
             CancelButton.Visibility = Visibility.Collapsed;
             AddButton.Visibility = Visibility.Collapsed;
             AddImage.Visibility = Visibility.Collapsed;
-            /*   NameBox.Text = station.Name;
-               IdBox.Text = station.Id.ToString();
-               LocationBox.Text = station.Location.ToString();
-               FreeBox.Text = station.NumFreeChargers.ToString();
-               DroneList.ItemsSource = station.DronesInCharging;*/
+           
 
         }
 
@@ -163,24 +159,9 @@ namespace PL
 
 
         }
-        private void ViewAStation(object sender, RoutedEventArgs e)
-        {
-           
-            
-            
-            
-
-
-            /*NameBox.Text = station.Name;
-            IdBox.Text = station.Id.ToString();
-            LocationBox.Text = station.Location.ToString();
-            DroneList.ItemsSource = station.DronesInCharging;*/
-
-
-        }
+       
         private void GoAddView()
         {
-            initializationBoxes();
             IdBox.IsReadOnly = false;
             LocationBox.Visibility = Visibility.Collapsed;
             LocationLable.Visibility = Visibility.Collapsed;
@@ -202,20 +183,7 @@ namespace PL
 
 
         }
-        private void initializationBoxes()
-        {
-            /*IdBox.Text = "";
-            NameBox.Text = "";
-            LocationBox.Text = "";
-            FreeBox.Text = "";
-            LatBox.Text = "";
-            LongBox.Text = "";
-            NameErrorBox.Text = "";
-            IdErrorBox.Text = "";
-            LatErrorBox.Text = "";
-            LongErrorBox.Text = "";*/
-        }
-
+        
 
 
         private void DroneList_MouseDoubleClick(object sender, MouseButtonEventArgs e)

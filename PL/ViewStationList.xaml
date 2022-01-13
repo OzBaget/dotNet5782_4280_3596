@@ -11,10 +11,37 @@
             <ImageBrush ImageSource="/Design/LogWindow/Bacground.png" Stretch="UniformToFill"/>
         </Grid.Background>
         <ListView x:Name="listViewStations" Margin="0,88,1,61" MouseDoubleClick="listViewStations_MouseDoubleClick" RenderTransformOrigin="0.5,0.5" FontSize="25" Background="Transparent" FontFamily="Fonts/#KG Red Hands">
+            <ListView.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.ContainerStyle>
+                        <Style TargetType="{x:Type GroupItem}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <Expander IsExpanded="True">
+                                            <Expander.Header>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="{Binding Name}" FontWeight="Bold" Foreground="Gray" FontSize="22" VerticalAlignment="Bottom" />
+                                                    <TextBlock Text="{Binding ItemCount}" FontSize="22" Foreground="Green" FontWeight="Bold" FontStyle="Italic" Margin="10,0,0,0" VerticalAlignment="Bottom" />
+                                                    <TextBlock Text=" item(s)" FontSize="22" Foreground="Silver" FontStyle="Italic" VerticalAlignment="Bottom" />
+                                                </StackPanel>
+                                            </Expander.Header>
+                                            <ItemsPresenter />
+                                        </Expander>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </GroupStyle.ContainerStyle>
+
+                </GroupStyle>
+            </ListView.GroupStyle>
         </ListView>
+
 
         <Image x:Name="Add" HorizontalAlignment="Left" Height="57" Cursor="Hand" Margin="451,544,0,0" VerticalAlignment="Top" Width="174" Source="/Add a station.png" MouseLeftButtonDown="Add_Click" />
         <Image x:Name="Exit" HorizontalAlignment="Left" Height="37" Cursor="Hand" Margin="194,545,0,0" VerticalAlignment="Top" Width="114" Source="/Exit.png" MouseLeftButtonDown="Exit_Click" />
+        <CheckBox x:Name="checkBox" Content="Groping" IsChecked="{Binding Path = GroupingMode}" HorizontalAlignment="Left" Margin="348,552,0,0" VerticalAlignment="Top" Height="18" Width="62" Click="groupingModeChanged"/>
 
     </Grid>
 </Window>
