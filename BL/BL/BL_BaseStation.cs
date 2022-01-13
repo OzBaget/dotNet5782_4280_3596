@@ -58,8 +58,8 @@ namespace BL
             }
             return stations;
         }
+        
         [MethodImpl(MethodImplOptions.Synchronized)]
-
         public void UpdateStation(int stationId, string name, string input)
         {
             try

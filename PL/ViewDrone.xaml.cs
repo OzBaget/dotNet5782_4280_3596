@@ -39,10 +39,9 @@ namespace PL
             Cdrone.CurrentLocation = new();
             this.DataContext = Cdrone;
             InitializeComponent();
-            this.db = BlFactory.GetBl();            
+            this.db = BlFactory.GetBl();         
             AddMaxWeight.ItemsSource = Enum.GetValues(typeof(WeightCategories));
             AddMaxWeight.SelectedIndex = 0;
-            work = new();
 
             StationCombo.ItemsSource = db.GetStationsWithFreeSlots();
             StationCombo.SelectedIndex = 0;
@@ -74,8 +73,7 @@ namespace PL
             work.RunWorkerCompleted += SimulatorComplete;
             work.DoWork += startSimulator;
             work.ProgressChanged += UpdateView;
-
-             AddMaxWeight.IsEnabled = false;
+            AddMaxWeight.IsEnabled = false;
 
             StatusCombo.ItemsSource = Enum.GetValues(typeof(DroneStatus));
             AddMaxWeight.ItemsSource = Enum.GetValues(typeof(WeightCategories));
@@ -91,7 +89,6 @@ namespace PL
             PickUpButton.Visibility = Visibility.Collapsed;
             LinkButton.Visibility = Visibility.Collapsed;
             DeliverButton.Visibility = Visibility.Collapsed;
-            updateTextBoxs();
 
             switch (Cdrone.Status)
             {
@@ -131,30 +128,10 @@ namespace PL
                     break;
             }
 
+          
         }
 
-        /// <summary>
-        /// update all textboxs to the currnt status of Cdrone
-        /// </summary>
-        private void updateTextBoxs()
-        {
-          /*  Cdrone = db.GetDrone(Cdrone.Id);
-            StatusBox.Text = Cdrone.Status.ToString();
-            MaxWeighBox.Text = Cdrone.MaxWeight.ToString();
-            BatteryBox.Text = Cdrone.Battery.ToString() + "%";
-            LocationBox.Text = Cdrone.CurrentLocation.ToString();
-            IdBox.Text = Cdrone.Id.ToString();
-            ModelBox.Text = Cdrone.Model;*/
-            /*if (Cdrone.Parcel.Id != 0)
-            {
-                ParcelBox.Visibility = Visibility.Visible;
-                ParcelBox.Text = Cdrone.Parcel.ToString();
-            }
-            else
-                ParcelBox.Visibility = Visibility.Collapsed;*/
 
-        }
-        
         /// <summary>
         /// Close window
         /// </summary>
@@ -167,26 +144,7 @@ namespace PL
         }
 
 
-
-        /// <summary>
-        /// Show parcel detaitls
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void PacelDetaitls_Click(object sender, RoutedEventArgs e)
-        {
-            if (Cdrone.Parcel.Id != 0) 
-            {
-                //TODO: show parcel ditalis
-                MessageBox.Show(Cdrone.Parcel.ToString(), "Parcel ditalis", MessageBoxButton.OK);
-            }
-            else
-            {
-                MessageBox.Show("Drone is not linked to parcel", "Error!",MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
-                
+           
        
         /// <summary>
         /// Add new Drone to db
@@ -239,7 +197,6 @@ namespace PL
             {
                 db.UpdateDrone(Cdrone.Id, ModelBox.Text);
                 MessageBox.Show("The drone was updated successfully!", "success!", MessageBoxButton.OK, MessageBoxImage.Information);
-                updateTextBoxs();
                 updateButton.Visibility = Visibility.Hidden;
 
             }
@@ -276,7 +233,6 @@ namespace PL
             {
                 db.ParcelToCustomer(Cdrone.Id);
                 MessageBox.Show("The parcel deliverd successfully!", "success!", MessageBoxButton.OK, MessageBoxImage.Information);
-                updateTextBoxs();
                 DeliverButton.Visibility = Visibility.Hidden;
                 LinkButton.Visibility = Visibility.Visible;
                 ChargeButton.Visibility = Visibility.Visible;
@@ -305,7 +261,6 @@ namespace PL
             {
                 int stationId = db.DroneToStation(Cdrone.Id);
                 MessageBox.Show($"The drone sent to charge at station #{stationId} successfully!", "success!", MessageBoxButton.OK, MessageBoxImage.Information);
-                updateTextBoxs();
                 ChargeButton.Visibility = Visibility.Hidden;
                 ReleaseButton.Visibility = Visibility.Visible;
                 LinkButton.Visibility = Visibility.Hidden;
@@ -335,7 +290,6 @@ namespace PL
             {
                 double newBattery = db.FreeDrone(Cdrone.Id);
                 MessageBox.Show("The drone released successfully!", "Success!", MessageBoxButton.OK, MessageBoxImage.Information);
-                updateTextBoxs();
                 ReleaseButton.Visibility = Visibility.Hidden;
                 ChargeButton.Visibility = Visibility.Visible;
                 LinkButton.Visibility = Visibility.Visible;
@@ -364,7 +318,6 @@ namespace PL
             {
                 db.PickParcel(Cdrone.Id);
                 MessageBox.Show("The parcel picked-up successfully!", "success!", MessageBoxButton.OK, MessageBoxImage.Information);
-                updateTextBoxs();
                 PickUpButton.Visibility = Visibility.Hidden;
                 DeliverButton.Visibility = Visibility.Visible;
                 Cdrone = db.GetDrone(Cdrone.Id);
@@ -392,7 +345,6 @@ namespace PL
             {
                 db.linkParcel(Cdrone.Id);
                 MessageBox.Show("The drone linked successfully!", "success!", MessageBoxButton.OK, MessageBoxImage.Information);
-                updateTextBoxs();
                 LinkButton.Visibility = Visibility.Hidden;
                 ChargeButton.Visibility = Visibility.Hidden;
                 PickUpButton.Visibility = Visibility.Visible;
@@ -457,7 +409,7 @@ namespace PL
             {
                 exit = true;
                 work.CancelAsync();
-            }                                       
+            }                  
         }
 
         private void SimulatorButton_Checked(object sender, RoutedEventArgs e)
@@ -467,11 +419,13 @@ namespace PL
         }
         private void SimulatorButton_UnChecked(object sender, RoutedEventArgs e)
         {
+
             work.CancelAsync();
         }
+
         private void startSimulator(object? sender, DoWorkEventArgs e)
         {
-            db.StartSimulator(Cdrone.Id, () => work.ReportProgress(0), () => work.CancellationPending);
+            db.StartSimulator(Cdrone.Id, () => work.ReportProgress(1), () => work.CancellationPending);
         }
         private void SimulatorComplete(object? sender, RunWorkerCompletedEventArgs e)
         {
@@ -480,7 +434,7 @@ namespace PL
         }
         private void UpdateView(object? sender, ProgressChangedEventArgs e)
         {
-            Cdrone = db.GetDrone(Cdrone.Id);
+            Cdrone=db.GetDrone(Cdrone.Id);
             this.DataContext = Cdrone;
         }
         private void Exit_Click(object sender, MouseButtonEventArgs e)

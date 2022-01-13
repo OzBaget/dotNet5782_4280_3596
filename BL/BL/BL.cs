@@ -1,9 +1,11 @@
-﻿using System;
+﻿using BlApi;
+using BO;
+using DalApi;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using BO;
-using BlApi;
-using DalApi;
+using System.Runtime.CompilerServices;
+
 
 namespace BL
 {
@@ -17,8 +19,8 @@ namespace BL
         double chargingRate;
         internal IDal DalObject = DalFactory.GetDal();
 
-        static readonly IBL instance = new BL();
-        public static IBL Instance { get => instance; }
+        static readonly BL instance = new BL();
+        public static BL Instance { get => instance; }
 
         BL()
         {
@@ -66,7 +68,7 @@ namespace BL
                     {
                         DO.DroneCharge dc = DalObject.GetAllDroneCharge().First(charger => charger.Droneld == myDrone.Id);
                         myDrone.Status = DroneStatus.UnderMaintenance;
-                        myDrone.Battery= new Random().Next(0, 21);
+                        myDrone.Battery = new Random().Next(0, 21);
                         myDrone.CurrentLocation = GetStation(dc.Stationld).Location;
                     }
                     else
@@ -102,7 +104,7 @@ namespace BL
             }
         }
 
-        
+
         /// <summary>
         /// get the closest station of spasific location
         /// </summary>
@@ -121,6 +123,7 @@ namespace BL
         /// <param name="lat2">latituse of point 2</param>
         /// <param name="lng2">longtude of point 2</param>
         /// <returns>the distance bitween the two coords in meters</returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public double calculateDist(Location loc1, Location loc2)
         {
             const double Radios = 6371000;//meters

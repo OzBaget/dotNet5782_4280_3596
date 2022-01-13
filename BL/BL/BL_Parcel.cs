@@ -11,7 +11,6 @@ namespace BL
     sealed partial class BL : IBL
     {
         [MethodImpl(MethodImplOptions.Synchronized)]
-
         public void AddParcel(Parcel parcel)
         {        
             try
@@ -29,7 +28,6 @@ namespace BL
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
-
         public Parcel GetParcel(int parcelId)
         {
             try
@@ -70,8 +68,8 @@ namespace BL
                 throw new IdNotFoundException(ex.Message, ex.Id);
             }
         }
-        [MethodImpl(MethodImplOptions.Synchronized)]
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void DeleteParcel(int parcelId)
         {
             try
@@ -88,8 +86,8 @@ namespace BL
                 throw new IdNotFoundException(ex.Message, ex.Id);
             }
         }
-        [MethodImpl(MethodImplOptions.Synchronized)]
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<ParcelToList> GetAllParcels()
         {
             lock (DalObject)
@@ -125,8 +123,8 @@ namespace BL
                 parcel.Status = ParcelStatus.Deliverd;
             return parcel;
         }
-        [MethodImpl(MethodImplOptions.Synchronized)]
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public IEnumerable<ParcelToList> GetUnassignedParcels()
         {
             List<ParcelToList> filterdParcel = new();
@@ -136,8 +134,8 @@ namespace BL
             }
             return filterdParcel;        
         }
+        
         [MethodImpl(MethodImplOptions.Synchronized)]
-
         public IEnumerable<ParcelToList> GetFilterdParcels(Customer customer, DateTime? startDate, DateTime? endDate, Priorities? priority, WeightCategories? weight, ParcelStatus? status)
         {
             IEnumerable<DO.Parcel> filterdParcel = DalObject.GetAllParcels();
@@ -175,8 +173,8 @@ namespace BL
             return from parcel in filterdParcel
                    select doParcelToParcelToList(parcel);
         }
+        
         [MethodImpl(MethodImplOptions.Synchronized)]
-
         public int linkParcel(int droneId)
         {
             int droneIndex = Drones.FindIndex(drone => drone.Id == droneId);
@@ -218,8 +216,8 @@ namespace BL
             DalObject.linkParcel(myParcels.First().Id, myDrone.Id);
             return myParcels.First().Id;
         }
+        
         [MethodImpl(MethodImplOptions.Synchronized)]
-
         public void PickParcel(int droneId)
         {
             int droneIndex = Drones.FindIndex(drone => drone.Id == droneId);
@@ -240,8 +238,8 @@ namespace BL
 
             
         }
+        
         [MethodImpl(MethodImplOptions.Synchronized)]
-
         public void ParcelToCustomer(int droneId)
         {
             int droneIndex = Drones.FindIndex(drone => drone.Id == droneId);
@@ -269,8 +267,5 @@ namespace BL
             myDrone.ParcelId = null;
             DalObject.ParcelToCustomer(myParcel.Id.Value);
         }
-
-        
-        
     }
 }

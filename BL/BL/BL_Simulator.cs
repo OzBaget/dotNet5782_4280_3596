@@ -1,56 +1,49 @@
-﻿using System;
+﻿using BlApi;
 using BO;
-using BlApi;
+using System;
 using System.Threading;
-using static BL.BL;
-using System.Linq;
 
 
 namespace BL
 {
-
-
     class Simulator
     {
         const int EMPTY = 0;
-        const int LIGHT = 1;
-        const int MIDDLE = 2;
-        const int HEAVY = 3;
-        const double SPPED = 10000;// M/S
-        const double DELAY = 500;// MS
+        const double SPPED = 5000;// M/S
+        const double DELAY = 1000;// MS
         public Simulator(BL db, int droneId, Action updteDrone, Func<bool> checkStop)
         {
             Drone myDrone;
             double tripReminning = 0; //meters
-            bool droneIsWaitnig = false;
+            bool droneIsWaitnigForCharging = false;
             while (!checkStop())
             {
                 myDrone = db.GetDrone(droneId);
                 switch (myDrone.Status)
                 {
                     case DroneStatus.Available:
-                        if (droneIsWaitnig)
+                        if (droneIsWaitnigForCharging)
                             try
                             {
                                 int stationId = db.DroneToStation(droneId);
-                                droneIsWaitnig = false;
+                                droneIsWaitnigForCharging = false;
                                 tripReminning = db.calculateDist(myDrone.CurrentLocation, db.GetStation(stationId).Location);
                             }
                             catch (CantSendDroneToChargeException)
                             {
-                                droneIsWaitnig = true;
+                                droneIsWaitnigForCharging = true;
                             }
                         else
                             try
                             {
-                                int parcelId = db.linkParcel(droneId);
+                                db.linkParcel(droneId);
                                 myDrone = db.GetDrone(droneId);
                                 tripReminning = db.calculateDist(myDrone.CurrentLocation, myDrone.Parcel.PickupLocation);
                             }
                             catch (CantLinkParcelException)
                             {
                                 //GOTO CLOOSETS STATION//
-                                droneIsWaitnig = true;
+                                droneIsWaitnigForCharging = true;
                             }
                         break;
                     case DroneStatus.UnderMaintenance:
@@ -78,34 +71,33 @@ namespace BL
                             {
                                 if (tripReminning > 0)
                                 {
-                                    double newBattery = myDrone.Battery - (DELAY / 1000) * db.DalObject.GetPowerUse()[EMPTY];
+                                    double newBattery = myDrone.Battery - (DELAY / 1000) * SPPED * db.DalObject.GetPowerUse()[EMPTY];
                                     db.UpdateDrone(droneId, myDrone.Model, newBattery);
                                     tripReminning -= (DELAY / 1000) * SPPED;
                                     tripReminning = tripReminning < 0 ? 0 : tripReminning;// dont get underflow
                                 }
                                 else
                                 {
+                                    db.UpdateDrone(droneId, myDrone.Model, null, myDrone.Parcel.PickupLocation);
                                     db.PickParcel(droneId);
-                                    tripReminning = db.calculateDist(myDrone.CurrentLocation, myDrone.Parcel.TargetLocation);
+                                    tripReminning = db.calculateDist(myDrone.Parcel.PickupLocation, myDrone.Parcel.TargetLocation);
                                 }
-
                             }
                             else//drone is on the way to reciver
                             {
                                 if (tripReminning > 0)
                                 {
-                                    double newBattery = myDrone.Battery - (DELAY / 1000) * db.DalObject.GetPowerUse()[(int)myDrone.Parcel.Weight + 1];
+                                    double newBattery = myDrone.Battery - (DELAY / 1000) * SPPED * db.DalObject.GetPowerUse()[(int)myDrone.Parcel.Weight + 1];
                                     db.UpdateDrone(droneId, myDrone.Model, newBattery);
                                     tripReminning -= (DELAY / 1000) * SPPED;
                                     tripReminning = tripReminning < 0 ? 0 : tripReminning;// dont get underflow
                                 }
                                 else
                                 {
+                                    db.UpdateDrone(droneId, myDrone.Model, null, myDrone.Parcel.TargetLocation);
                                     db.ParcelToCustomer(droneId);
-                                    updteDrone();
                                 }
                             }
-
                             break;
                         }
                     default:
@@ -113,7 +105,6 @@ namespace BL
                 }
                 updteDrone();
                 Thread.Sleep((int)DELAY);
-                
             }
         }
     }

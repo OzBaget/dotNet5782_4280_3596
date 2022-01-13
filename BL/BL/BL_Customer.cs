@@ -8,7 +8,6 @@ namespace BL
     sealed partial class BL : IBL
     {
         [MethodImpl(MethodImplOptions.Synchronized)]
-
         public void AddCustomer(Customer customer)
         {
             try
@@ -20,13 +19,13 @@ namespace BL
                 throw new IdAlreadyExistsException(ex.Message, ex.Id);
             }
         }
-        [MethodImpl(MethodImplOptions.Synchronized)]
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public Customer GetCustomer(int customerId)
         {
             try
             {
-                lock (DalObject)
+                //lock (DalObject)
                 {
                     DO.Customer tmpCustomer = DalObject.GetCustomer(customerId);
                     Customer newCustomer = new();
@@ -82,8 +81,8 @@ namespace BL
                 throw new IdNotFoundException(ex.Message, ex.Id);
             }
         }
+        
         [MethodImpl(MethodImplOptions.Synchronized)]
-
         public IEnumerable<CustomerToList> GetAllCustomers()
         {
             lock (DalObject)
@@ -116,6 +115,8 @@ namespace BL
                 return customers;
             }
         }
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void UpdateCustomer(int customerId, string name, string phone)
         {
             try
