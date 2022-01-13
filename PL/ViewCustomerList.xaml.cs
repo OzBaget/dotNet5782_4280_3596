@@ -12,6 +12,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Media;
+
 
 namespace PL
 {
@@ -21,6 +23,8 @@ namespace PL
     public partial class ViewCustomerList : Window
     {
         IBL db = BlFactory.GetBl();
+        bool exit = false;
+
         public ViewCustomerList()
         {
             InitializeComponent();
@@ -35,7 +39,7 @@ namespace PL
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            new ViewCustomer    ().ShowDialog();
+            new ViewCustomer().ShowDialog();
             ResetList();
         }
 
@@ -45,7 +49,16 @@ namespace PL
         }
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
+            exit = true;
             this.Close();
+        }
+        private void CloseWindow(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (!exit)
+            {
+                e.Cancel = true;
+                SystemSounds.Beep.Play();
+            }
         }
     }
 }

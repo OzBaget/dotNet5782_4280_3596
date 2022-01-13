@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
+        ResizeMode="NoResize"
         mc:Ignorable="d"
-        Title="LogWindow" Height="640" Width="800">
+        Title="LogWindow" Height="640" Width="800" Closing="CloseWindow">
     <Grid Margin="0,4,0,-4">
         <Grid.Background>
             <ImageBrush ImageSource="/Design/LogWindow/Bacground.png" Stretch="UniformToFill"/>
@@ -14,6 +15,8 @@
         <TextBlock x:Name="errorBox" HorizontalAlignment="Left" Margin="260,312,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="238" Height="15" FontSize="10" Foreground="Red" />
         <Image x:Name="Admin" Cursor="Hand" Source="/Design/LogWindow/Admin.png" MouseLeftButtonDown="loginAdmin" Margin="-103,179,-95,383"  />
         <Image x:Name="Login" Cursor="Hand" Margin="287,340,291,220"  Source="/Design/LogWindow/Log in.png" MouseLeftButtonDown="logIn"/>
-        <Image x:Name="register" Cursor="Hand" Margin="288,507,302,57"    Source="/Design/LogWindow/Register.png" MouseLeftButtonDown="Register"/>
+        <Image x:Name="register" Cursor="Hand" Margin="288,467,302,97"    Source="/Design/LogWindow/Register.png" MouseLeftButtonDown="Register"/>
+        <Image x:Name="Exit" HorizontalAlignment="Left" Height="37" Cursor="Hand" Margin="336,560,0,0" VerticalAlignment="Top" Width="114" Source="/Exit.png" MouseLeftButtonDown="Exit_Click" />
+
     </Grid>
 </Window>

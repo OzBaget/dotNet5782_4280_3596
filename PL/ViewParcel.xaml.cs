@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BlApi;
 using BO;
+using System.Media;
+
 
 namespace PL
 {
@@ -242,6 +244,14 @@ namespace PL
         {
             exit = true;
             Close();
+        }
+        private void CloseWindow(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (!exit)
+            {
+                e.Cancel = true;
+                SystemSounds.Beep.Play();
+            }
         }
     }
 }

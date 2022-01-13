@@ -16,6 +16,7 @@ using System.Media;
 using System.Collections.ObjectModel;
 
 
+
 namespace PL
 {
     /// <summary>
@@ -96,15 +97,8 @@ namespace PL
             updateFilters(null, null);
         }
 
-        
-        private void CloseWindow(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            if (!exit)
-            {
-                e.Cancel = true;
-                SystemSounds.Beep.Play();
-            }
-        }
+
+       
 
         private void groupingModeChanged(object sender, RoutedEventArgs e)
         {
@@ -119,6 +113,14 @@ namespace PL
             {
                 view.GroupDescriptions.Clear();
 
+            }
+        }
+        private void CloseWindow(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (!exit)
+            {
+                e.Cancel = true;
+                SystemSounds.Beep.Play();
             }
         }
     }

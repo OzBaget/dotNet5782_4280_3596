@@ -14,6 +14,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Navigation;
+using System.Media;
+
 
 namespace PL
 {
@@ -25,6 +27,7 @@ namespace PL
         
         public BaseStation station { get; set; }
         IBL db;
+        bool exit = false;
         public ViewStation(BaseStation Cstation)
         {
             station = Cstation;
@@ -85,6 +88,7 @@ namespace PL
 
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
+            exit = true;
             this.Close();
         }
         private void AddStationToDb(object sender, RoutedEventArgs e)
@@ -193,6 +197,14 @@ namespace PL
             new ViewDrone(db.GetDrone(((sender as ListView).SelectedItem as BO.DroneInCharging).Id)).ShowDialog();
             station = db.GetStation(station.Id);
             this.DataContext = station;
+        }
+        private void CloseWindow(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (!exit)
+            {
+                e.Cancel = true;
+                SystemSounds.Beep.Play();
+            }
         }
     }
 }

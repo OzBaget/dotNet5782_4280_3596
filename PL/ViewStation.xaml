@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="ViewStation" x:Name ="ViewStationName" Height="640" Width="800">
+        ResizeMode="NoResize"
+        Title="ViewStation" x:Name ="ViewStationName" Height="640" Width="800" Closing="CloseWindow">
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/Design/LogWindow/Bacground.png" Stretch="UniformToFill"/>
