@@ -91,7 +91,6 @@ namespace PL
             PickUpButton.Visibility = Visibility.Collapsed;
             LinkButton.Visibility = Visibility.Collapsed;
             DeliverButton.Visibility = Visibility.Collapsed;
-            updateTextBoxs();
 
             switch (Cdrone.Status)
             {
@@ -136,24 +135,7 @@ namespace PL
         /// <summary>
         /// update all textboxs to the currnt status of Cdrone
         /// </summary>
-        private void updateTextBoxs()
-        {
-          /*  Cdrone = db.GetDrone(Cdrone.Id);
-            StatusBox.Text = Cdrone.Status.ToString();
-            MaxWeighBox.Text = Cdrone.MaxWeight.ToString();
-            BatteryBox.Text = Cdrone.Battery.ToString() + "%";
-            LocationBox.Text = Cdrone.CurrentLocation.ToString();
-            IdBox.Text = Cdrone.Id.ToString();
-            ModelBox.Text = Cdrone.Model;*/
-            /*if (Cdrone.Parcel.Id != 0)
-            {
-                ParcelBox.Visibility = Visibility.Visible;
-                ParcelBox.Text = Cdrone.Parcel.ToString();
-            }
-            else
-                ParcelBox.Visibility = Visibility.Collapsed;*/
-
-        }
+        
         
         /// <summary>
         /// Close window
@@ -208,9 +190,6 @@ namespace PL
                 return;
             }
 
-            /*myDrone.Id =id ;
-            myDrone.Model = AddModel.Text;
-            myDrone.MaxWeight = (WeightCategories)AddMaxWeight.SelectedItem;*/
             try
             {
                 db.AddDrone(Cdrone, (StationCombo.SelectedItem as BaseStationToList).Id);
@@ -239,7 +218,6 @@ namespace PL
             {
                 db.UpdateDrone(Cdrone.Id, ModelBox.Text);
                 MessageBox.Show("The drone was updated successfully!", "success!", MessageBoxButton.OK, MessageBoxImage.Information);
-                updateTextBoxs();
                 updateButton.Visibility = Visibility.Hidden;
 
             }
@@ -276,7 +254,6 @@ namespace PL
             {
                 db.ParcelToCustomer(Cdrone.Id);
                 MessageBox.Show("The parcel deliverd successfully!", "success!", MessageBoxButton.OK, MessageBoxImage.Information);
-                updateTextBoxs();
                 DeliverButton.Visibility = Visibility.Hidden;
                 LinkButton.Visibility = Visibility.Visible;
                 ChargeButton.Visibility = Visibility.Visible;
@@ -305,7 +282,6 @@ namespace PL
             {
                 int stationId = db.DroneToStation(Cdrone.Id);
                 MessageBox.Show($"The drone sent to charge at station #{stationId} successfully!", "success!", MessageBoxButton.OK, MessageBoxImage.Information);
-                updateTextBoxs();
                 ChargeButton.Visibility = Visibility.Hidden;
                 ReleaseButton.Visibility = Visibility.Visible;
                 LinkButton.Visibility = Visibility.Hidden;
@@ -335,7 +311,6 @@ namespace PL
             {
                 double newBattery = db.FreeDrone(Cdrone.Id);
                 MessageBox.Show("The drone released successfully!", "Success!", MessageBoxButton.OK, MessageBoxImage.Information);
-                updateTextBoxs();
                 ReleaseButton.Visibility = Visibility.Hidden;
                 ChargeButton.Visibility = Visibility.Visible;
                 LinkButton.Visibility = Visibility.Visible;
@@ -364,7 +339,6 @@ namespace PL
             {
                 db.PickParcel(Cdrone.Id);
                 MessageBox.Show("The parcel picked-up successfully!", "success!", MessageBoxButton.OK, MessageBoxImage.Information);
-                updateTextBoxs();
                 PickUpButton.Visibility = Visibility.Hidden;
                 DeliverButton.Visibility = Visibility.Visible;
                 Cdrone = db.GetDrone(Cdrone.Id);
@@ -392,7 +366,6 @@ namespace PL
             {
                 db.linkParcel(Cdrone.Id);
                 MessageBox.Show("The drone linked successfully!", "success!", MessageBoxButton.OK, MessageBoxImage.Information);
-                updateTextBoxs();
                 LinkButton.Visibility = Visibility.Hidden;
                 ChargeButton.Visibility = Visibility.Hidden;
                 PickUpButton.Visibility = Visibility.Visible;

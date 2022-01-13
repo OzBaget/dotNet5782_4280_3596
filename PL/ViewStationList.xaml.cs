@@ -21,10 +21,13 @@ namespace PL
     public partial class ViewStationList : Window
     {
         IBL db = BlFactory.GetBl();
+        public bool GroupingMode { get; set; }
+
         public ViewStationList()
         {
             InitializeComponent();
             listViewStations.ItemsSource = db.GetAllStations();
+            this.DataContext = this;
         }
 
         private void listViewStations_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -49,6 +52,21 @@ namespace PL
             listViewStations.ItemsSource = null;
             listViewStations.ItemsSource = db.GetAllStations();
 
+        }
+        private void groupingModeChanged(object sender, RoutedEventArgs e)
+        {
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(listViewStations.ItemsSource);
+            if (GroupingMode)
+            {
+                view.GroupDescriptions.Clear();
+                PropertyGroupDescription groupDescription = new PropertyGroupDescription("NumFreeChragers");
+                view.GroupDescriptions.Add(groupDescription);
+            }
+            else
+            {
+                view.GroupDescriptions.Clear();
+
+            }
         }
     }
 }

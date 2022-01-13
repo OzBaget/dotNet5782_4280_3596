@@ -33,7 +33,7 @@ namespace PL
             this.DataContext = customer;
             InitializeComponent();
             db = BlFactory.GetBl();
-            showCustomer();
+            ViewACustomer(null, null);
         }
         public ViewCustomer()
         {
@@ -44,17 +44,7 @@ namespace PL
             db = BlFactory.GetBl();
             GoAddView();
         }
-        private void showCustomer()
-        {
-            ViewACustomer(null, null);
-           /* NameBox.Text = customer.Name;
-            PhoneBox.Text = customer.Phone;
-            IdBox.Text = customer.Id.ToString();
-            LocationBox.Text = customer.Location.ToString();*/
-            
-            
-
-        }
+       
 
         private void IsChanged(object sender, TextChangedEventArgs e)
         {
@@ -142,14 +132,7 @@ namespace PL
             if (error)
                 return;
 
-            /*BO.Customer tmpCustomer = new BO.Customer();
-            tmpCustomer.Name = NameBox.Text;
-            tmpCustomer.Id = int.Parse(IdBox.Text);
-            tmpCustomer.Phone = PhoneBox.Text;
-            tmpCustomer.Location = new();
-            tmpCustomer.Location.Latitude = double.Parse(LatBox.Text);
-            tmpCustomer.Location.Longitude = double.Parse(LongBox.Text);*/
-
+         
             try
             {
                 BlApi.BlFactory.GetBl().AddCustomer(customer);
@@ -180,18 +163,12 @@ namespace PL
             AddButton.Visibility = Visibility.Collapsed;
             AddImage.Visibility = Visibility.Collapsed;
 
-            /*NameBox.Text = customer.Name;
-            IdBox.Text = customer.Id.ToString();
-            LocationBox.Text = customer.Location.ToString();
-            PhoneBox.TextChanged += IsChanged;
-            NameBox.TextChanged += IsChanged;*/
-            IntilaizeList();
+           
 
 
         }
         private void GoAddView()
         {
-            initializationBoxes();
             IdBox.IsReadOnly = false;
             LocationBox.Visibility = Visibility.Collapsed;
             LocationLable.Visibility = Visibility.Collapsed;
@@ -203,8 +180,7 @@ namespace PL
             LatLable.Visibility = Visibility.Visible;
             LongLable.Visibility = Visibility.Visible;
 
-            /*PhoneBox.TextChanged -= IsChanged;
-            NameBox.TextChanged -= IsChanged;*/
+       
 
             AddImage.Visibility = Visibility.Visible;
             CancelButton.Visibility = Visibility.Visible;
@@ -213,40 +189,13 @@ namespace PL
             UpdateButton.Visibility = Visibility.Collapsed;
             ExitButton.Visibility = Visibility.Collapsed;
         }
-        private void initializationBoxes()
-        {
-           /* IdBox.Text = "";
-            NameBox.Text = "";
-            PhoneBox.Text = "";
-            LocationBox.Text = "";
-            LatBox.Text = "";
-            LongBox.Text = "";
-            NameErrorBox.Text = "";
-            IdErrorBox.Text = "";
-            LatErrorBox.Text = "";
-            LongErrorBox.Text = "";*/
-        }
-
-        private void IntilaizeList()
-        {
-          /*  midList = customer.ReceivedParcels;
-            midList.AddRange(customer.SentParcels);
-            ParcelList.ItemsSource = midList;*/
-        }
-
-
+      
         private void ParcelList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            if (db.GetParcel(((sender as ListView).SelectedItem as BO.ParcelInCustomer).Id) == null)
+                return;
             new ViewParcel(db.GetParcel(((sender as ListView).SelectedItem as BO.ParcelInCustomer).Id), customer).ShowDialog();
-            /* try
-             {
-                 db.GetParcel(((sender as ListView).SelectedItem as BO.ParcelInCustomer).Id);
-             }
-
-             catch (BlApi.IdNotFoundException ex)
-             {
-                 this.Close();
-             }*/
+       
             customer = db.GetCustomer(customer.Id);
             this.DataContext = customer;
 

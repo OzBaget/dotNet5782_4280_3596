@@ -16,7 +16,7 @@ namespace BL
         const int LIGHT = 1;
         const int MIDDLE = 2;
         const int HEAVY = 3;
-        const double SPPED = 10000;// M/S
+        const double SPPED = 1000;// M/S
         const double DELAY = 500;// MS
         public Simulator(BL db, int droneId, Action updteDrone, Func<bool> checkStop)
         {

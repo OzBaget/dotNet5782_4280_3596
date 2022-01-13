@@ -25,8 +25,6 @@
 
             <ComboBox x:Name="StatusSelector" FontFamily="Fonts/#KG Red Hands" HorizontalAlignment="Left" VerticalAlignment="Center" Width="166" SelectionChanged="updateFilters" FontSize="14  " Padding="5,10,0,0" Height="43" Grid.ColumnSpan="2" Margin="221,0,0,0"  />
             <ComboBox x:Name="WeightSelector" FontFamily="Fonts/#KG Red Hands" HorizontalAlignment="Left" VerticalAlignment="Top" Width="168" SelectionChanged="updateFilters" Grid.Column="1" FontSize="20" Margin="214,12,0,0" Height="43"  Padding="50,0,0,0" VerticalContentAlignment="Center" Grid.ColumnSpan="2"/>
-
-            <Label x:Name="TextSelector" Content="Filters:"  RenderTransformOrigin="0.586,0.567" FontSize="48" FontFamily="Fonts/#Cotton Butter" Margin="30,-10,0,0" Padding="0,0,0,0" Width="131" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Center" Foreground="White" ></Label>
             <Image x:Name="WeightKg" Margin="161,-4,0,2" Width="48" Grid.Column="1" HorizontalAlignment="Left" Source="Images\WeightKg.png"/>
             <Image x:Name="ClockSelector" Margin="158,-4,24,4" Width="68" Source="/Images/ClockSelector.png"/>
 
@@ -36,12 +34,38 @@
 
         </Grid>
 
+        <CheckBox x:Name="checkBox" Content="Groping" IsChecked="{Binding Path = GroupingMode}" HorizontalAlignment="Left" Margin="42,0,0,0" VerticalAlignment="Center" Height="18" Width="62" Click="groupingModeChanged"/>
 
         <ListView x:Name="ListViewDrones" FontFamily="Fonts/#KG Red Hands"  FontSize="17" MouseDoubleClick="ListViewDrones_MouseDoubleClick" Margin="0,66,0,3" Grid.RowSpan="2" Foreground="Black" >
             <ListView.Background>
                 <ImageBrush ImageSource="/OnlyTriangels.png" Stretch="Fill" ViewboxUnits="RelativeToBoundingBox" TileMode="None">
                 </ImageBrush>
             </ListView.Background>
+            <ListView.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.ContainerStyle>
+                        <Style TargetType="{x:Type GroupItem}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <Expander IsExpanded="True">
+                                            <Expander.Header>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="{Binding Name}" FontWeight="Bold" Foreground="Gray" FontSize="22" VerticalAlignment="Bottom" />
+                                                    <TextBlock Text="{Binding ItemCount}" FontSize="22" Foreground="Green" FontWeight="Bold" FontStyle="Italic" Margin="10,0,0,0" VerticalAlignment="Bottom" />
+                                                    <TextBlock Text=" item(s)" FontSize="22" Foreground="Silver" FontStyle="Italic" VerticalAlignment="Bottom" />
+                                                </StackPanel>
+                                            </Expander.Header>
+                                            <ItemsPresenter />
+                                        </Expander>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </GroupStyle.ContainerStyle>
+
+                </GroupStyle>
+            </ListView.GroupStyle>
         </ListView>
     </Grid>
 </Window>
